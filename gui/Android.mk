@@ -117,6 +117,9 @@ endif
 ifeq ($(AB_OTA_UPDATER),true)
     LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
 endif
+ifeq ($(TW_SCREEN_BLANK_ON_BOOT), true)
+    LOCAL_CFLAGS += -DTW_SCREEN_BLANK_ON_BOOT
+endif
 
 #SHRP Build Flags
 ifeq ($(SHRP_CUSTOM_FLASHLIGHT),true)
