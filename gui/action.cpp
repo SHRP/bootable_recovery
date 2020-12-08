@@ -2736,7 +2736,6 @@ int GUIAction::c_repack(std::string arg __unused){
 	Express::updateSHRPBasePath();
 	Express::shrpResExp("/twres/",DataManager::GetStrValue("shrpBasePath")+"/etc/shrp/");
 #else
-	int ret = 0;
 	string sync = "sync_all.sh;";
 	if(TWFunc::Path_Exists("/twres/images/")){
 		LOGINFO("c_repack : /twres/images/ found\n");
