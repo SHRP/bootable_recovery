@@ -185,6 +185,7 @@
 				<text>{@c_flash=Flash}</text>
 				<action function="set">isShrpZip=0</action>
 				<action function="set">c_queue_enabled=0</action>
+				<action function="overlay"/>
 				<action function="flash">flash_zip</action>
 			</button>
 
