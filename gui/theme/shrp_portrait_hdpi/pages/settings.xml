@@ -375,7 +375,7 @@
 			</text>
 
 			<listbox style="scrolllist">
-				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="%settings_main_list_h%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="%revPos100%"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
 				<listitem name="{@c_show_lc=Show date on lockscreen}">
 					<data variable="c_dateview"/>
