@@ -218,7 +218,7 @@
 				<placement x="%c_hawk_base_column%" y="%rPos50%" w="%file_selector_default_w%" h="650"/>
 				<icon selected="installSign" unselected="installSign"/>
 				<listitem name="{@editFile=Edit file}">
-					<condition var1="is_textFile" op="=" var2="1"/>
+					<condition var1="isTextFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
