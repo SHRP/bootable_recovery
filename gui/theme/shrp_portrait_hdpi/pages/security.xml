@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="securityDashboard">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<checkbox>
+				<condition var1="recLockStatus" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="warningSign" unchecked="warningSign"/>
+				<text>No protection enabled</text>
+				<data variable="dummy"/>
+			</checkbox>
+			<checkbox>
+				<condition var1="recLockStatus" op="!=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="goodSign" unchecked="goodSign"/>
+				<text>Recovery is protected</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+			
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@currProtection=Current protection}</text>
+			</text>
+			<text>
+				<condition var1="recLockStatus" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos31%" yop="+"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>{@c_none=None}</text>
+			</text>
+			<text>
+				<condition var1="recLockStatus" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos31%" yop="+"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>{@c_password=Password}</text>
+			</text>
+			<text>
+				<condition var1="recLockStatus" op="=" var2="2"/>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos31%" yop="+"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>{@c_pattern=Pattern}</text>
+			</text>
+
+
+			<button>
+				<condition var1="recLockStatus" op="=" var2="0"/>
+				<placement x="860" y="%rndPos93%"/>
+				<image resource="c_lock_patt"/>
+				<action function="page">pattP1</action>
+			</button>
+			<button>
+				<condition var1="recLockStatus" op="=" var2="0"/>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_lock_pass"/>
+				<action function="page">passwordP1</action>
+			</button>
+			<button>
+				<condition var1="recLockStatus" op="=" var2="1"/>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_reset_lock"/>
+				<action function="page">passwordReset</action>
+			</button>
+			<button>
+				<condition var1="recLockStatus" op="=" var2="2"/>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_reset_lock"/>
+				<action function="page">pattReset</action>
+			</button>
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+		<!--
+			passwordP1
+			passwordConfirm
+			passwordReset
+			pattP1
+			pattConfirm
+			pattReset
+
+			verifyLock
+			lockDone
+		-->
+		<page name="passwordP1">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_password=Password}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@c_enter_pass=Enter Password}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text></text>
+				<data name="lockVal1" mask="*"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="page">passwordConfirm</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">lockVal1;passwordP1</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="lockVal_notMatched" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@pass_not_match=Passwords do not match!}</text>
+			</text>
+
+			<template name="keyboardtemplate"/>
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">securityDashboard</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="passwordConfirm">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_password=Password}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@enter_pass_again=Enter Password Again}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text></text>
+				<data name="lockVal2" mask="*"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="set">lockReset=0</action>
+				<action function="set">lockType=1</action>
+				<action function="page">verifyLock</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">lockVal2;passwordConfirm</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal2=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">passwordP1</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal2=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="passwordReset">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_password=Password}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@enter_pass_old=Enter your old Password}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text></text>
+				<data name="lockVal1" mask="*"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="set">lockReset=1</action>
+				<action function="set">lockType=1</action>
+				<action function="page">verifyLock</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">lockVal1;passwordReset</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="lockVal_notMatched" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@pass_not_match=Passwords do not match!}</text>
+			</text>
+
+			<template name="keyboardtemplate"/>
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">securityDashboard</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="pattP1">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_patt_new_info=Enter your new Pattern}</text>
+			</text>
+			<text style="warnInfoText">
+				<condition var1="lockVal_notMatched" var2="1"/>
+				<placement x="60" y="-20" yref="%rPos19%" yop="+"/>
+				<text>{@c_failed_same_info_patt=Both patterns do not match}</text>
+			</text>
+			<patternpassword>
+				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
+				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
+				<line color="%secondaryColor%" width="%pattern_line_w%"/>
+				<data name="lockVal1"/>
+				<action function="page">pattConfirm</action>
+			</patternpassword>
+
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">securityDashboard</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="pattConfirm">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_patt_new_info_2=Enter your new Pattern again}</text>
+			</text>
+			<patternpassword>
+				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
+				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
+				<line color="%secondaryColor%" width="%pattern_line_w%"/>
+				<data name="lockVal2"/>
+				<action function="set">lockReset=0</action>
+				<action function="set">lockType=2</action>
+				<action function="page">verifyLock</action>
+			</patternpassword>
+
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal2=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">pattP1</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal2=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="pattReset">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_security=Security}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@enter_patt_old=Enter your old Pattern}</text>
+			</text>
+			<text style="warnInfoText">
+				<condition var1="lockVal_notMatched" var2="1"/>
+				<placement x="60" y="-20" yref="%rPos19%" yop="+"/>
+				<text>{@c_failed_same_info_patt=Both patterns do not match}</text>
+			</text>
+			<patternpassword>
+				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
+				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
+				<line color="%secondaryColor%" width="%pattern_line_w%"/>
+				<data name="lockVal1"/>
+				<action function="set">lockReset=1</action>
+				<action function="set">lockType=2</action>
+				<action function="page">verifyLock</action>
+			</patternpassword>
+
+			<action>
+				<touch key="back"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">securityDashboard</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">lockVal1=</action>
+				<action function="set">lockVal_notMatched=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="verifyLock">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_file_busy=Please Wait}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_file_busy_info=Processing}</text>
+			</text>
+
+            <action>
+				<condition var1="lockReset" var2="0"/>
+				<actions>
+					<action function="set_lock">%lockType%</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="lockReset" var2="1"/>
+				<actions>
+					<action function="reset_lock"/>
+				</actions>
+			</action>
+		</page>
+
+		<page name="lockDone">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@successful=Successful}</text>
+			</text>
+			<text style="pageSubTitle">
+				<conditions>
+					<condition var1="lockType" op="=" var2="1"/>
+					<condition var1="lockReset" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_passed_info=You have successfully set your password}</text>
+			</text>
+			<text style="pageSubTitle">
+				<conditions>
+					<condition var1="lockType" op="=" var2="2"/>
+					<condition var1="lockReset" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_passed_patt_info=You have successfully set your pattern}</text>
+			</text>
+			<text style="pageSubTitle">
+				<condition var1="lockReset" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_passed_reset_info=Reset Successful}</text>
+			</text>
+			<button>
+				<placement x="860" y="1628"/>
+				<image resource="c_reboot"/>
+				<actions>
+					<action function="set">tw_back=reboot</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+		</page>
+	</pages>
+</recovery>

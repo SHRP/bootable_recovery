@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="button_check">
+			<action>
+				<condition var1="recLockStatus" op="=" var2="1"/>
+				<actions>
+					<action function="stopmtp"/>
+					<action function="page">c_pass_capture</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="recLockStatus" op="=" var2="2"/>
+				<actions>
+					<action function="stopmtp"/>
+					<action function="page">c_patt_capture</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="recLockStatus" op="=" var2="0"/>
+				<actions>
+					<action function="page">main2</action>
+				</actions>
+			</action>
+		</page>
+		<page name="c_patt_capture">
+			<template name="navSecure"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_patt_ask=Enter Pattern}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@patt_info=Your recovery is pattern protected}</text>
+			</text>
+			<text style="warnInfoText">
+				<condition var1="passNotMatched" var2="1"/>
+				<placement x="60" y="-20" yref="%rPos19%" yop="+"/>
+				<text>{@c_patt_failed_info=Incorrect Pattern.Try again.}</text>
+			</text>
+			<patternpassword>
+				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
+				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
+				<line color="%secondaryColor%" width="%pattern_line_w%"/>
+				<data name="password"/>
+				<action function="unlock">%password%</action>
+			</patternpassword>
+		</page>
+
+		<page name="c_pass_capture">
+			<template name="navSecure"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_enter_pass=Enter Password}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@pass_info=Your recovery is password protected}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@c_enter_pass=Enter Password}</text>
+			</text>
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text></text>
+				<data name="password" mask="*"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="unlock">%password%</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">password;c_pass_capture</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="passNotMatched" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@c_failed_same_info=Passwords did not match!}</text>
+			</text>
+
+			<template name="keyboardtemplate"/>
+		</page>
+		<page name="c_recBlocked">
+			<template name="navSecure"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitleOPFailed">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_failed=Failed}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_failed_info_blocked=Something went wrong}</text>
+			</text>
+		</page>
+	</pages>
+</recovery>

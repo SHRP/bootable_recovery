@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="advanced">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<template name="dashBatt"/>
+			<image>
+				<placement x="560" y="120"/>
+				<image resource="SKYHAWK"/>
+			</image>
+
+
+
+			<text style="dashboardHeader">
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<text>{@advanced_btn=Advanced}</text>
+			</text>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="99" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+
+			<button>
+				<placement x="99" y="%rPos25%"/>
+				<image resource="c_log"/>
+				<action function="page">copylog</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="69" y="%rPos35%" w="205" h="70"/>
+				<text>{@copy_log_btn=Copy Log}</text>
+				<action function="page">copylog</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="69" y="%rPos35%" w="205" h="70"/>
+				<text>{@copy_log_btn=Copy Log}</text>
+				<action function="page">copylog</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<condition var1="tw_has_data_media" var2="1"/>
+				<placement x="343" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+
+			<button>
+				<condition var1="tw_has_data_media" var2="1"/>
+				<placement x="343" y="%rPos25%"/>
+				<image resource="c_selinux"/>
+				<action function="page">fixcontexts</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<condition var1="tw_has_data_media" var2="1"/>
+				<placement x="313" y="%rPos35%" w="205" h="70"/>
+				<text>{@fix_context_btn=Fix Contexts}</text>
+				<action function="page">fixcontexts</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<condition var1="tw_has_data_media" var2="1"/>
+				<placement x="313" y="%rPos35%" w="205" h="70"/>
+				<text>{@fix_context_btn=Fix Contexts}</text>
+				<action function="page">fixcontexts</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="587" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="587" y="%rPos25%"/>
+				<image resource="c_adb"/>
+				<action function="page">sideload</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="557" y="%rPos35%" w="205" h="70"/>
+				<text>{@c_adb_side_load=Sideload}</text>
+				<action function="page">sideload</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="557" y="%rPos35%" w="205" h="70"/>
+				<text>{@c_adb_side_load=Sideload}</text>
+				<action function="page">sideload</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="831" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="831" y="%rPos25%"/>
+				<image resource="c_sd_part"/>
+				<actions>
+					<action function="set">partitionlisterror=0</action>
+					<action function="page">partsdcardsel</action>
+				</actions>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="801" y="%rPos35%" w="205" h="70"/>
+				<text>{@swipe_part_sd_s=Partition}</text>
+				<actions>
+					<action function="set">partitionlisterror=0</action>
+					<action function="page">partsdcardsel</action>
+				</actions>
+			</button>
+
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="801" y="%rPos35%" w="205" h="70"/>
+				<text>{@swipe_part_sd_s=Partition}</text>
+				<actions>
+					<action function="set">partitionlisterror=0</action>
+					<action function="page">partsdcardsel</action>
+				</actions>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="99" y="%rPos43%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="99" y="%rPos43%"/>
+				<image resource="c_dashboard_userFbe"/>
+				<actions>
+					<action function="set">tw_crypto_user_id=</action>
+					<action function="page">decrypt_users</action>
+				</actions>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="69" y="%rPos53%" w="205" h="70"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+				<actions>
+					<action function="set">tw_crypto_user_id=</action>
+					<action function="page">decrypt_users</action>
+				</actions>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="69" y="%rPos53%" w="205" h="70"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+				<actions>
+					<action function="set">tw_crypto_user_id=</action>
+					<action function="page">decrypt_users</action>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+        <page name="sideload">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@advanced_btn=Advanced}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@adb_sideload_btn=ADB Sideload}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@wipe_btn=Wipe} {@options_hdr=Options}</text>
+			</text>
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos24%" w="%file_selector_default_w%" h="300"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@sideload_wipe_dalvik_chk=Wipe Dalvik Cache}">
+					<data variable="tw_wipe_dalvik"/>
+				</listitem>
+				<listitem name="{@sideload_wipe_cache_chk=Wipe Cache}">
+					<data variable="tw_wipe_cache"/>
+				</listitem>
+			</listbox>
+
+
+			<button>
+				<image resource="c_ok"/>
+				<placement x="860" y="%rndPos105%"/>
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=adbsideload</action>
+					<action function="set">tw_action_text1={@sideload_confirm=ADB Sideload}</action>
+					<action function="set">tw_action_text2={@sideload_usage=Usage: adb sideload filename.zip}</action>
+					<action function="set">tw_complete_text1={@sideload_complete=ADB Sideload Complete}</action>
+					<action function="set">tw_has_cancel=1</action>
+					<action function="set">tw_show_reboot=1</action>
+					<action function="set">tw_cancel_action=adbsideloadcancel</action>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+		</page>
+
+		<page name="fixcontexts">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@advanced_btn=Advanced}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fix_context_btn=Fix Contexts}</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="500"/>
+				<text>{@fix_contexts_note1=Note: Fixing contexts is rarely needed.} {@c_file_context=Fixing SELinux Contexts may cause your device to not boot properly.}</text>
+			</textbox>
+
+
+			<button>
+				<image resource="c_ok"/>
+				<placement x="860" y="1628"/>
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=fixcontexts</action>
+					<action function="set">tw_action_text1={@fixing_contexts=Fixing Contexts...}</action>
+					<action function="set">tw_complete_text1={@fix_contexts_complete=Fix Contexts Complete}</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="set">tw_show_reboot=1</action>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+		</page>
+		<!--MultiUserDecryptPage-->
+		<page name="decrypt_users">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@decrypt_users_selection=Select a user ID to decrypt}</text>
+			</text>
+			<listbox>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="%revPos97%"/>
+				<icon selected="c_usersRadioOn" unselected="c_usersRadioOff" />
+				<data name="tw_crypto_user_id" />
+			</listbox>
+
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="set">tw_crypto_password=</action>
+					<action function="set">tw_password_fail=0</action>
+					<action function="page">decrypt</action>
+				</actions>
+			</button>
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+	</pages>
+</recovery>

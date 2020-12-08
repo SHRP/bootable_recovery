@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="reboot">
+			<template name="c_reboot_page"/>
+			<template name="slotPanel"/>
+			<action>
+				<touch key="home"/>
+				<action function="overlay"/>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="overlay"/>
+			</action>
+		</page>
+		<page name="c_advanced_reboot">
+			<template name="c_advanced_reboot_page"/>
+			<template name="slotPanel"/>
+			<action>
+				<touch key="home"/>
+				<action function="overlay"/>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="overlay"/>
+				<action function="overlay">reboot</action>
+			</action>
+		</page>
+		<page name="changeSlotConfirm">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@changeSlot=Change Slot}</text>
+			</text>
+
+			<text style="textbox">
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@changeSlotQuestion=Want to change the slot to }%tw_action_param%?</text>
+			</text>
+
+			<button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@shrpBaseYes=Yes}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="overlay"/>
+					<action function="overlay">action_page</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+	</pages>
+</recovery>

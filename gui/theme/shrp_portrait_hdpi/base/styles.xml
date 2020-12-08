@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<recovery>
+    <details>
+		<resolution width="1080" height="1920"/>
+		<author>TeamSHRP</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>None</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+	<styles>
+		<style name="checkbox">
+			<font resource="small" color="%secondaryColor%"/>
+			<image checked="checkbox_true" unchecked="checkbox_false"/>
+		</style>
+		<!--epicX_button/text_style_start-->
+		<style name="c_reboot_text">
+			<font resource="c_dashboard_text" color="%secondaryColor%"/>
+		</style>
+		<style name="c_circle4">
+			<highlight color="%highlight_color%"/>
+			<font resource="c_menu" color="%secondaryColor%"/>
+			<image resource="c_circle4"/>
+		</style>
+		<style name="c_queue">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_l" color="%text_button_color%"/>
+			<image resource="c_queue"/>
+		</style>
+		<!--style name="c_about_shrp_bg">
+			<font resource="c_list" color="%secondaryColor%"/>
+			<image resource="c_about_tile"/>
+		</style-->
+		<!--epicX_button/text_style_end-->
+
+		<style name="fab">
+			<highlight color="%highlight_color%"/>
+			<font resource="font_m" color="%button_text_color%"/>
+		</style>
+
+		<style name="terminal">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="c_console_font" spacing="3" color="%secondaryColor%"/>
+		</style>
+		<style name="fileselector">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<ico type=".." icon="folderUp" />
+			<ico type=".zip" icon="fileArchive" />
+			<ico type=".ozip" icon="fileArchive" />
+			<ico type=".img" icon="fileImg" />
+			<ico type=".stheme" icon="fileTheme" />
+			<icon folder="folder" file="file" />
+			<font resource="font_s" color="%secondaryColor%" />
+		</style>
+        <style name="c_restore">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%" />
+			<icon folder="backup" file="backup" />
+			<font resource="font_s" color="%secondaryColor%" />
+		</style>
+
+		<style name="listbox">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%" />
+			<icon selected="radio_true" unselected="radio_false" />
+			<font resource="font_s" color="%secondaryColor%"/>
+		</style>
+		<style name="console">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="c_console_font" color="%secondaryColor%"/>
+		</style>
+
+		<style name="scrolllist">
+			<background color="%backgroundColor%"/>
+			<font resource="font_s" color="%secondaryColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+		</style>
+
+		<style name="partitionlist">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<icon selected="checkbox_true" unselected="checkbox_false"/>
+			<font resource="font_s" color="%secondaryColor%"/>
+		</style>
+
+		<style name="partitionlist_storage">
+			<background color="%backgroundColor%"/>
+			<placement x="50" y="%c_hawk_base_second_header%" w="970" h="1500"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<icon selected="radio_true" unselected="radio_false"/>
+			<font resource="font_s" color="%secondaryColor%"/>
+		</style>
+
+		<style name="slidervalue">
+			<resource handle="sliderDot"/>
+			<font resource="c_hider" color="%backgroundColor%"/>
+			<colors line="%accentColor%"/>
+			<dimensions lineh="8" linepadding="0" sliderw="41" sliderh="41"/>
+		</style>
+
+		<style name="patternpassword">
+			<size name="tw_gui_pattern_grid_size" default="3"/>
+		</style>
+
+		<!--New Styles-->
+		<style name="pageTitle">
+			<font resource="bigTitle" color="%primaryColor%"/>
+		</style>
+		<style name="pageTitleOPFailed">
+			<font resource="bigTitle" color="#FF0000"/>
+		</style>
+
+		<style name="pageSubTitle">
+			<font resource="subTitle" color="%secondaryColor%"/>
+		</style>
+
+		<style name="subOptionTitle">
+			<font resource="midBold" color="%accentColor%"/>
+		</style>
+
+		<style name="subOptionTitle2">
+			<font resource="midBold" color="%secondaryColor%"/>
+		</style>
+
+		<style name="simpleText">
+			<font resource="normal" color="%secondaryColor%"/>
+		</style>
+
+		<style name="smallSimpleText">
+			<font resource="normal" color="%secondaryColor%"/>
+		</style>
+
+		<style name="warnInfoText">
+			<font resource="paragraph" color="#FF0000"/>
+		</style>
+		
+		<style name="textbox">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="paragraph" color="%secondaryColor%"/>
+		</style>
+		<style name="editorStyles">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="c_console_font" color="%secondaryColor%"/>
+		</style>
+		<style name="input">
+			<background color="%subBackgroundColor%"/>
+			<cursor color="%secondaryColor%" hasfocus="1" width="%input_line_width%"/>
+			<font resource="normal" color="%secondaryColor%"/>
+		</style>
+		<style name="buttonList">
+			<background color="%backgoundColor%"/>
+			<font resource="normal" color="%secondaryColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+		</style>
+		<style name="customListbox">
+			<background color="%backgroundColor%"/>
+			<fastscroll rectcolor="%accentColor%" w="%fastscroll_w%" rectw="%fastscroll_rectw%" recth="%fastscroll_recth%"/>
+			<font resource="paragraph" color="%secondaryColor%"/>
+		</style>
+
+		<style name="cnfrmHeadTitle">
+			<font resource="largeBold" color="%accentColor%"/>
+		</style>
+		<style name="cnfrmBtn">
+			<highlight color="%highlight_color%"/>
+			<font resource="midBold" color="%accentColor%"/>
+		</style>
+		<style name="symbolBtn">
+			<highlight color="%highlight_color%"/>
+			<font resource="extraLargeBold" color="%accentColor%"/>
+		</style>
+
+
+		
+		<style name="permBtnEnabled">
+			<font resource="largeBold" color="%backgroundColor%"/>
+			<image resource="permButton"/>
+		</style>
+		<style name="permBtnDisabled">
+			<font resource="largeBold" color="%secondaryColor%"/>
+		</style>
+
+		<style name="dashboardText">
+			<font resource="dashboardText" color="%dashboardTextColor%"/>
+			<fill color="%transparent%"/>
+		</style>
+		<style name="dashboardText2">
+			<font resource="dashboardText" color="%secondaryColor%"/>
+			<fill color="%transparent%"/>
+		</style>
+		<style name="dashboardHeader">
+			<font resource="largeBold" color="%accentColor%"/>
+		</style>
+
+	</styles>
+</recovery>
+

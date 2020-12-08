@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="main2">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<template name="dashBatt"/>
+			<image>
+				<placement x="560" y="%rPos8%"/>
+				<image resource="SKYHAWK"/>
+			</image>
+
+
+
+			<text style="dashboardHeader">
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<text>{@c_essentials=Essentials}</text>
+			</text>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="99" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+
+			<button>
+				<placement x="99" y="%rPos25%"/>
+				<image resource="c_dashboard_flash"/>
+				<actions>
+					<action function="queueclear"/>
+					<action function="set">tw_selectimage=0</action>
+					<action function="page">install</action>
+				</actions>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="69" y="%rPos35%" w="205" h="70"/>
+				<text>{@c_flash=Flash}</text>
+				<actions>
+					<action function="queueclear"/>
+					<action function="set">tw_selectimage=0</action>
+					<action function="page">install</action>
+				</actions>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="69" y="%rPos35%" w="205" h="70"/>
+				<text>{@c_flash=Flash}</text>
+				<actions>
+					<action function="queueclear"/>
+					<action function="set">tw_selectimage=0</action>
+					<action function="page">install</action>
+				</actions>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="343" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+
+			<button>
+				<placement x="343" y="%rPos25%"/>
+				<image resource="c_dashboard_wipe"/>
+				<action function="page">wipe</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="313" y="%rPos35%" w="205" h="70"/>
+				<text>{@wipe_btn=Wipe}</text>
+				<action function="page">wipe</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="313" y="%rPos35%" w="205" h="70"/>
+				<text>{@wipe_btn=Wipe}</text>
+				<action function="page">wipe</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="587" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="587" y="%rPos25%"/>
+				<image resource="c_dashboard_backup"/>
+				<action function="page">backup</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="557" y="%rPos35%" w="205" h="70"/>
+				<text>{@backup_btn=Backup}</text>
+				<action function="page">backup</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="557" y="%rPos35%" w="205" h="70"/>
+				<text>{@backup_btn=Backup}</text>
+				<action function="page">backup</action>
+			</button>
+
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="831" y="%rPos25%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="831" y="%rPos25%"/>
+				<image resource="c_dashboard_restore"/>
+				<action function="page">restore</action>
+			</button>
+
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="801" y="%rPos35%" w="205" h="70"/>
+				<text>{@restore_btn=Restore}</text>
+				<action function="page">restore</action>
+			</button>
+
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="801" y="%rPos35%" w="205" h="70"/>
+				<text>{@restore_btn=Restore}</text>
+				<action function="page">restore</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="99" y="%rPos43%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="99" y="%rPos43%"/>
+				<image resource="c_dashboard_mount"/>
+				<action function="page">mount</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="69" y="%rPos53%" w="205" h="70"/>
+				<text>{@mount_btn=Mount}</text>
+				<action function="page">mount</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="69" y="%rPos53%" w="205" h="70"/>
+				<text>{@mount_btn=Mount}</text>
+				<action function="page">mount</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="343" y="%rPos43%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="343" y="%rPos43%"/>
+				<image resource="c_dashboard_filemanager"/>
+				<action function="page">fileManager</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="313" y="%rPos53%" w="205" h="70"/>
+				<text>{@files_btn=Files}</text>
+				<action function="page">fileManager</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="313" y="%rPos53%" w="205" h="70"/>
+				<text>{@files_btn=Files}</text>
+				<action function="page">fileManager</action>
+			</button>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="587" y="%rPos43%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="587" y="%rPos43%"/>
+				<image resource="c_dashboard_terminal"/>
+				<action function="page">terminalcommand</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="557" y="%rPos53%" w="205" h="70"/>
+				<text>{@terminal_btn=Terminal}</text>
+				<action function="page">terminalcommand</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="557" y="%rPos53%" w="205" h="70"/>
+				<text>{@terminal_btn=Terminal}</text>
+				<action function="page">terminalcommand</action>
+			</button>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="831" y="%rPos43%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="831" y="%rPos43%"/>
+				<image resource="c_dashboard_advanced"/>
+				<action function="page">advanced</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="801" y="%rPos53%" w="205" h="70"/>
+				<text>{@advanced_hdr=Advanced}</text>
+				<action function="page">advanced</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="801" y="%rPos53%" w="205" h="70"/>
+				<text>{@advanced_hdr=Advanced}</text>
+				<action function="page">advanced</action>
+			</button>
+
+
+
+
+
+
+
+
+
+
+			<text style="dashboardHeader">
+				<placement x="%c_hawk_base_column%" y="%rPos60%"/>
+				<text>{@c_tools=Tools}</text>
+			</text>
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="99" y="%rPos68%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="99" y="%rPos68%"/>
+				<image resource="c_dashboard_magisk"/>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_magisk</action>
+				</actions>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="69" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_magisk=Magisk}</text>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_magisk</action>
+				</actions>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="69" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_magisk=Magisk}</text>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_magisk</action>
+				</actions>
+			</button>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="343" y="%rPos68%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="343" y="%rPos68%"/>
+				<image resource="c_mod"/>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_theme</action>
+				</actions>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="313" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_theme=Theme}</text>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_theme</action>
+				</actions>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="313" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_theme=Theme}</text>
+				<actions>
+					<action function="shrp_init"/>
+					<action function="page">c_splash_theme</action>
+				</actions>
+			</button>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="587" y="%rPos68%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="587" y="%rPos68%"/>
+				<image resource="c_dashboard_addon"/>
+				<action function="page">c_addons</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="557" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_tweaks=Tweaks}</text>
+				<action function="page">c_addons</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="557" y="%rPos78%" w="205" h="70"/>
+				<text>{@c_tweaks=Tweaks}</text>
+				<action function="page">c_addons</action>
+			</button>
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="831" y="%rPos68%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="831" y="%rPos68%"/>
+				<image resource="c_dashboard_settings"/>
+				<action function="page">settings</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="801" y="%rPos78%" w="205" h="70"/>
+				<text>{@settings_btn=Settings}</text>
+				<action function="page">settings</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="801" y="%rPos78%" w="205" h="70"/>
+				<text>{@settings_btn=Settings}</text>
+				<action function="page">settings</action>
+			</button>
+
+
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="99" y="%rPos86%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="99" y="%rPos86%"/>
+				<image resource="c_dashboard_lock"/>
+				<action function="page">securityDashboard</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="69" y="%rPos96%" w="205" h="70"/>
+				<text>{@c_security=Security}</text>
+				<action function="page">c_lock_ui</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="69" y="%rPos96%" w="205" h="70"/>
+				<text>{@c_security=Security}</text>
+				<action function="page">c_lock_ui</action>
+			</button>
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="343" y="%rPos86%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="343" y="%rPos86%"/>
+				<image resource="c_dashboard_lang"/>
+				<action function="page">settings_language</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="313" y="%rPos96%" w="205" h="70"/>
+				<text>{@settings_language_btn=Language}</text>
+				<action function="page">settings_language</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="313" y="%rPos96%" w="205" h="70"/>
+				<text>{@settings_language_btn=Language}</text>
+				<action function="page">settings_language</action>
+			</button>
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="587" y="%rPos86%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="587" y="%rPos86%"/>
+				<image resource="c_dashboard_reboot"/>
+				<action function="overlay">reboot</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="557" y="%rPos96%" w="205" h="70"/>
+				<text>{@reboot_btn=Reboot}</text>
+				<action function="overlay">reboot</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="557" y="%rPos96%" w="205" h="70"/>
+				<text>{@reboot_btn=Reboot}</text>
+				<action function="overlay">reboot</action>
+			</button>
+
+
+			<button>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<placement x="831" y="%rPos86%"/>
+				<image resource="dashboardBackground"/>
+			</button>
+			<button>
+				<placement x="831" y="%rPos86%"/>
+				<image resource="c_dashboard_about"/>
+				<action function="page">my_info</action>
+			</button>
+			<button style="dashboardText">
+				<condition var1="dashboardTextColorEnabled" var2="1"/>
+				<placement x="801" y="%rPos96%" w="205" h="70"/>
+				<text>{@c_about=About}</text>
+				<action function="page">my_info</action>
+			</button>
+			<button style="dashboardText2">
+				<condition var1="dashboardTextColorEnabled" var2="0"/>
+				<placement x="801" y="%rPos96%" w="205" h="70"/>
+				<text>{@c_about=About}</text>
+				<action function="page">my_info</action>
+			</button>
+		</page>
+	</pages>
+</recovery>

@@ -1,0 +1,404 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="mount">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@mount_hdr=Mount}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@storage_hdr=Storage: %tw_storage_display_name% (%tw_storage_free_size% MB)}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@partitions=Partitions:}</text>
+			</text>
+			<partitionlist>
+				<placement x="50" y="%rPos24%" w="%file_selector_default_w%" h="%rndPos47%"/>
+				<listtype name="mount"/>
+			</partitionlist>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos77%"/>
+				<text>{@options=Options:}</text>
+			</text>
+			<button>
+				<condition var1="tw_mount_system_ro" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
+				<font resource="small" color="%secondaryColor%"/>
+				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
+				<image resource="checkbox_false"/>
+				<actions>
+					<action function="mountsystemtoggle">1</action>
+				</actions>
+			</button>
+			<button>
+				<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
+				<font resource="small" color="%secondaryColor%"/>
+				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
+				<image resource="checkbox_true"/>
+				<actions>
+					<action function="set">tw_lifetime_writes=2</action>
+					<action function="page">system_readonly_check</action>
+				</actions>
+			</button>
+
+			<button>
+			  <placement x="860" y="%rndPos69%"/>
+				<conditions>
+					<condition var1="tw_is_encrypted" var2="1"/>
+					<condition var1="tw_is_decrypted" var2="0"/>
+				</conditions>
+			  <image resource="c_backup_encryption"/>
+			  <actions>
+			    <action function="set">tw_crypto_user_id=0</action>
+				<action function="set">tw_crypto_password=</action>
+				<action function="set">tw_password_fail=0</action>
+				<action function="set">tw_crypto_pwtype=%tw_crypto_pwtype_0%</action>
+				<action function="page">decrypt</action>
+			  </actions>
+			</button>
+
+			<button>
+				<condition var1="tw_has_usb_storage" var2="1"/>
+				<placement x="860" y="%rndPos81%"/>
+				<image resource="c_usb_disabled"/>
+				<action function="page">usb_mount</action>
+			</button>
+			
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_mtp" var2="1"/>
+					<condition var1="tw_mtp_enabled" var2="0"/>
+				</conditions>
+				<placement x="860" y="%rndPos93%"/>
+				<image resource="c_mtp_disabled"/>
+				<action function="startmtp"/>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_mtp" var2="1"/>
+					<condition var1="tw_mtp_enabled" var2="1"/>
+				</conditions>
+				<placement x="860" y="%rndPos93%"/>
+				<image resource="c_mtp_enabled"/>
+				<action function="stopmtp"/>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_storage"/>
+				<actions>
+					<action function="set">tw_back=mount</action>
+					<action function="overlay">select_storage</action>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="usb_mount">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@usb_storage_hdr=USB Storage}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@usb_stor_mnt1=USB Storage Mounted}</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="200"/>
+				<text>{@c_usb_last=Be sure to safely remove your device from your computer before unmounting!}</text>
+			</textbox>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_usb"/>
+				<action function="page">usb_umount</action>
+			</button>
+
+
+			<action>
+				<action function="mount">usb</action>
+				<action function="set">tw_busy=1</action>
+			</action>
+		</page>
+
+		<page name="usb_umount">
+			<action>
+				<action function="unmount">usb</action>
+			</action>
+
+			<action>
+				<action function="page">mount</action>
+				<action function="set">tw_busy=0</action>
+			</action>
+		</page>
+
+		<page name="system_readonly_check">
+			<action>
+				<action function="checkpartitionlifetimewrites">/system</action>
+			</action>
+
+			<action>
+				<condition var1="tw_lifetime_writes" var2="1"/>
+				<actions>
+					<action function="mountsystemtoggle">0</action>
+					<action function="page">mount</action>
+				</actions>
+			</action>
+
+			<action>
+				<condition var1="tw_lifetime_writes" var2="0"/>
+				<actions>
+					<action function="set">tw_back=mount</action>
+					<action function="page">system_readonly</action>
+				</actions>
+			</action>
+		</page>
+
+        <page name="system_readonly">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@sys_ro_keep=Keep System Read only?}</text>
+			</text>
+
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%c_console_width%" h="400"/>
+				<text>{@sys_rop1=TWRP can leave your system partition unmodified} {@sys_rop2=to make it easier for you to take official updates.} </text>
+				<text>{@sys_rop3=TWRP will be unable to prevent the stock ROM from} {@sys_rop4=replacing TWRP and will not offer to root your device.}</text>
+				<text>{@sys_rop5=Installing zips or performing adb operations may still} {@sys_rop6=modify the system partition.}</text>
+			</textbox>
+
+			<checkbox>
+				<condition var1="tw_is_encrypted" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos38%"/>
+				<text>{@sys_ro_never_show_chk=Never show this screen during boot again}</text>
+				<data variable="tw_never_show_system_ro_page"/>
+			</checkbox>
+
+			
+
+			
+			<button>
+				<placement x="860" y="%rndPos93%"/>
+				<image resource="c_cancel"/>
+				<actions>
+					<action function="mountsystemtoggle">0</action>
+					<action function="set">tw_page_done=1</action>
+					<action function="page">%tw_back%</action>
+				</actions>
+			</button>
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="mountsystemtoggle">1</action>
+					<action function="set">tw_page_done=1</action>
+					<action function="page">%tw_back%</action>
+				</actions>
+			</button>
+		</page>
+		<page name="decrypt">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<action>
+				<condition var1="tw_crypto_pwtype" var2="2"/>
+				<action function="page">decrypt_pattern</action>
+			</action>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@mount_btn=Mount}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@decrypt_data_btn=Decrypt Data}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<conditions>
+					<condition var1="tw_password_fail" op="!=" var2="1"/>
+					<condition var1="tw_is_fbe" op="!=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@c_enter_pass=Enter Password}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<conditions>
+					<condition var1="tw_password_fail" op="!=" var2="1"/>
+					<condition var1="tw_is_fbe" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@decrypt_data_enter_pass_fbe=Enter Password for User [%tw_crypto_user_id%]}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_crypto_display%</text>
+				<data name="tw_crypto_password" mask="*" maskvariable="tw_crypto_display"/>
+				<restrict minlen="1" maxlen="254"/>
+				<action function="page">trydecrypt</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_crypto_password;decrypt</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="tw_password_fail" op="=" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@restore_dec_fail=Password failed, please try again!}</text>
+			</text>
+
+
+			<button>
+				<placement x="860" y="915"/>
+				<image resource="c_cancel"/>
+				<actions>
+					<action function="page">button_check</action>
+				</actions>
+			</button>
+			<template name="keyboardtemplate"/>
+
+		</page>
+
+		<page name="decrypt_pattern">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@decrypt_data_btn=Decrypt Data}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<condition var1="tw_is_fbe" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@decrypt_data_enter_pattern=Enter Pattern.}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<condition var1="tw_is_fbe" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@decrypt_data_enter_pattern_fbe=Enter Pattern for User [%tw_crypto_user_id%]}</text>
+			</text>
+
+
+			<text style="warnInfoText">
+				<condition var1="tw_password_fail" var2="1"/>
+				<placement x="60" y="-20" yref="%rPos19%" yop="+"/>
+				<text>{@decrypt_data_failed_pattern=Pattern failed, please try again!}</text>
+			</text>
+			<patternpassword>
+				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
+				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
+				<line color="%secondaryColor%" width="%pattern_line_w%"/>
+				<data name="lockVal1"/>
+				<action function="page">trydecrypt</action>
+			</patternpassword>
+
+
+			<button style="c_circle4">
+				<placement x="680" y="%rndPos105%"/>
+				<text>3x3</text>
+				<action function="set">tw_gui_pattern_grid_size=3</action>
+			</button>
+
+			<button style="c_circle4">
+				<placement x="500" y="%rndPos105%"/>
+				<text>4x4</text>
+				<action function="set">tw_gui_pattern_grid_size=4</action>
+			</button>
+
+			<button style="c_circle4">
+				<placement x="320" y="%rndPos105%"/>
+				<text>5x5</text>
+				<action function="set">tw_gui_pattern_grid_size=5</action>
+			</button>
+
+			<button style="c_circle4">
+				<placement x="140" y="%rndPos105%"/>
+				<text>6x6</text>
+				<action function="set">tw_gui_pattern_grid_size=6</action>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_cancel"/>
+				<actions>
+					<action function="page">button_check</action>
+				</actions>
+			</button>
+		</page>
+
+		<page name="trydecrypt">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@mount_btn=Mount}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@restore_try_decrypt_s=Trying Decryption}</text>
+			</text>
+
+			<template name="c_console_custom"/>
+			<template name="progress_bar"/>
+
+			<action>
+				<action function="decrypt"/>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_operation_state" var2="1"/>
+					<condition var1="tw_operation_status" op="!=" var2="0"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_password_fail=1</action>
+					<action function="page">decrypt</action>
+				</actions>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_operation_state" var2="1"/>
+					<condition var1="tw_operation_status" op="=" var2="0"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_page_done=1</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+	</pages>
+</recovery>

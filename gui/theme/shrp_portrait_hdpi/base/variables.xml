@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<recovery>
+    <details>
+		<resolution width="1080" height="1920"/>
+		<author>TeamSHRP</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>None</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+    <variables>
+		<variable name="c_status" value=""/>
+		<variable name="tw_samsung_navbar" value="0" persist="1"/>
+		<variable name="tw_hide_kb" value="0"/>
+		<variable name="screen_width" value="1080"/>
+		<variable name="screen_height" value="1920"/>
+		<variable name="status_height" value="72"/>
+		<variable name="header_height" value="256"/>
+		<variable name="navbar_height" value="130"/>
+		<variable name="content_width" value="1008"/>
+		<variable name="content_overlay_width" value="936"/>
+		<variable name="dialog_height" value="704"/>
+		<variable name="back_button_x" value="240"/>
+		<variable name="console_button_x" value="840"/>
+		<variable name="indent" value="36"/>
+		<variable name="col1_x_left" value="72"/>
+		<variable name="col1_x_header" value="184"/>
+		<variable name="center_x" value="540"/>
+		<variable name="col1_x_right" value="576"/>
+		<variable name="indent_right" value="1044"/>
+		<variable name="row2_y" value="320"/>
+		<variable name="row2_input_y" value="381"/>
+		<variable name="navbar_y" value="1792"/>
+		<variable name="navbar_btn_y" value="1850"/>
+		<variable name="keyboard_y" value="1149"/>
+		<variable name="keyboard_terminal_y" value="1053"/>
+		<variable name="background_color" value="#010101"/>
+		<variable name="text_color" value="#EEEEEE"/>
+		<variable name="text_button_color" value="#EEEEEE"/>
+		<variable name="text_success_color" value="#76FF03"/>
+		<variable name="text_fail_color" value="#E53935"/>
+		<variable name="highlight_color" value="#00000080"/>
+		<variable name="caps_highlight_color" value="#22222280"/>
+		<variable name="transparent" value="#00000000"/>
+		<variable name="semi_transparent" value="#00000080"/>
+		<variable name="warning" value="#FD0F60"/>
+		<variable name="error" value="#E53935"/>
+		<variable name="highlight" value="#00000080"/>
+		<variable name="fileselector_linecolor" value="#00000000"/>
+		<variable name="fileselector_highlight_color" value="#555555"/>
+		<variable name="fileselector_separatorheight" value="2"/>
+		<variable name="fileselector_spacing" value="0"/>
+		<variable name="fileselector_install_height" value="1152"/>
+		<variable name="fileselector_filemanager_height" value="1770"/>
+		<variable name="partitionlist_spacing" value="0"/>
+		<variable name="partitionlist_storage_height" value="544"/>
+		<variable name="partitionlist_flashimage_height" value="544"/>
+		<variable name="partitionlist_wipe_height" value="1088"/>
+		<variable name="partitionlist_mount_height" value="832"/>
+		<variable name="partitionlist_backup_height" value="768"/>
+		<variable name="listbox_timezone_height" value="756"/>
+		<variable name="listbox_settings_height" value="960"/>
+		<variable name="fastscroll_w" value="30"/>
+		<variable name="fastscroll_linew" value="2"/>
+		<variable name="fastscroll_rectw" value="8"/>
+		<variable name="fastscroll_recth" value="80"/>
+		<variable name="slidervalue_lineh" value="3"/>
+		<variable name="slidervalue_padding" value="0"/>
+		<variable name="slidervalue_sliderw" value="30"/>
+		<variable name="slidervalue_sliderh" value="30"/>
+		<variable name="slideout_height" value="1686"/>
+		<variable name="slideout_bg_height" value="1800"/>
+		<variable name="input_height" value="64"/>
+		<variable name="input_line_width" value="3"/>
+		<variable name="console_height" value="960"/>
+		<variable name="console_terminal_height" value="1040"/>
+		<variable name="dialog_button_x" value="696"/>
+		<variable name="pattern_x" value="235"/>
+		<variable name="pattern_dot_dia" value="20"/>
+		<variable name="pattern_line_w" value="8"/>
+		<variable name="pattern_size" value="600"/>
+
+
+		<variable name="file_selector_default_w" value="980"/>
+		<variable name="c_console_width" value="970"/>
+		<variable name="c_hawk_base_column" value="55"/>
+	</variables>
+</recovery>
