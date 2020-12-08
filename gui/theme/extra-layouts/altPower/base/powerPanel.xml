@@ -19,9 +19,22 @@
 				<placement x="744" y="315" />
 				<image resource="c_power_menu_bg"/>
 			</image>
-			<button style="c_reboot_text">
+			<button>
 				<placement x="744" y="495" w="315" h="60"/>
 				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
+				<text>{@rb_poweroff_btn=Power Off}</text>
+				<actions>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=poweroff</action>
+					<action function="set">tw_reboot_param=poweroff</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<placement x="744" y="739" w="315" h="60"/>
+				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@reboot_hdr=Reboot}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
@@ -30,21 +43,10 @@
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-			<button style="c_reboot_text">
-				<condition var1="tw_reboot_recovery" var2="1"/>
-				<placement x="744" y="739" w="315" h="60"/>
-				<fill color="%transparent%"/>
-				<text>{@rb_recovery_btn=Recovery}</text>
-				<actions>
-					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=recovery</action>
-					<action function="set">tw_reboot_param=recovery</action>
-					<action function="reboot">%tw_reboot_param%</action>
-				</actions>
-			</button>
-			<button style="c_reboot_text">
+			<button>
 				<placement x="744" y="975" w="315" h="60"/>
 				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@advanced_btn=Advanced}</text>
 				<actions>
 					<action function="overlay"/>
@@ -53,23 +55,23 @@
 			</button>
 			<button>
 				<placement x="748" y="360" />
+				<condition var1="tw_reboot_poweroff" var2="1"/>
+				<image resource="c_power_off"/>
+				<actions>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=poweroff</action>
+					<action function="set">tw_reboot_param=poweroff</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<placement x="748" y="604" />
 				<condition var1="tw_reboot_system" var2="1"/>
 				<image resource="c_reboot_to_system"/>
 				<actions>
 					<action function="set">tw_action=reboot</action>
 					<action function="set">tw_action_param=system</action>
 					<action function="set">tw_reboot_param=system</action>
-					<action function="reboot">%tw_reboot_param%</action>
-				</actions>
-			</button>
-			<button>
-				<placement x="748" y="604" />
-				<condition var1="tw_reboot_recovery" var2="1"/>
-				<image resource="c_reboot_to_recovery"/>
-				<actions>
-					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=recovery</action>
-					<action function="set">tw_reboot_param=recovery</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
@@ -81,85 +83,7 @@
 					<action function="overlay">c_advanced_reboot</action>
 				</actions>
 			</button>
-			<text style="c_sub_slot">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%c_hawk_base_column%" y="1645"/>
-				<text>{@current_boot_slot=Current Slot: %tw_active_slot%}</text>
-			</text>
 
-			<button style="c_circle4">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="860" y="1450"/>
-				<text>{@boot_slot_a=Slot A}</text>
-				<actions>
-					<action function="overlay"/>
-					<action function="set">tw_back=c_refresh</action>
-					<action function="set">tw_action=setbootslot</action>
-					<action function="set">tw_action_param=A</action>
-					<action function="set">tw_has_action2=0</action>
-					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
-					<action function="set">tw_action_text2=</action>
-					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
-					<action function="page">action_page</action>
-				</actions>
-			</button>
-
-			<button style="c_circle4">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="860" y="1628"/>
-				<text>{@boot_slot_b=Slot B}</text>
-				<actions>
-					<action function="overlay"/>
-					<action function="set">tw_back=c_refresh</action>
-					<action function="set">tw_action=setbootslot</action>
-					<action function="set">tw_action_param=B</action>
-					<action function="set">tw_has_action2=0</action>
-					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
-					<action function="set">tw_action_text2=</action>
-					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
-					<action function="page">action_page</action>
-				</actions>
-			</button>
-
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">back</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="home"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">home</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">back</action>
-			</button>
 
 			<action>
 				<touch key="power"/>
@@ -181,21 +105,24 @@
 				<placement x="744" y="315" />
 				<image resource="c_power_menu_bg"/>
 			</image>
-			<button style="c_reboot_text">
+			<button>
+				<condition var1="tw_reboot_recovery" var2="1"/>
 				<placement x="744" y="495" w="315" h="60"/>
 				<fill color="%transparent%"/>
-				<text>{@rb_poweroff_btn=Power Off}</text>
+				<font resource="moreSmall" color="%secondaryColor%"/>
+				<text>{@rb_recovery_btn=Recovery}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=poweroff</action>
-					<action function="set">tw_reboot_param=poweroff</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-			<button style="c_reboot_text">
+			<button>
 				<placement x="744" y="739" w="315" h="60"/>
 				<condition var1="tw_reboot_bootloader" var2="1"/>
 				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@rb_bootloader_btn=Bootloader}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
@@ -204,13 +131,14 @@
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-			<button style="c_reboot_text">
+			<button>
 				<conditions>
 					<condition var1="has_edl_mode" op="=" var2="1"/>
 					<condition var1="tw_download_mode" op="!=" var2="1"/>
 				</conditions>
 				<placement x="744" y="975" w="315" h="60"/>
 				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@c_edl_mode=Edl Mode}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
@@ -219,10 +147,11 @@
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-			<button style="c_reboot_text">
+			<button>
 				<condition var1="tw_download_mode" op="=" var2="1"/>
 				<placement x="744" y="975" w="315" h="60"/>
 				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@rb_download_btn=Download}</text>
 				<actions>
 					<action function="set">tw_back=c_refresh</action>
@@ -234,12 +163,12 @@
 			</button>
 			<button>
 				<placement x="748" y="360" />
-				<condition var1="tw_reboot_poweroff" var2="1"/>
-				<image resource="c_power_off"/>
+				<condition var1="tw_reboot_recovery" var2="1"/>
+				<image resource="c_reboot_to_recovery"/>
 				<actions>
 					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=poweroff</action>
-					<action function="set">tw_reboot_param=poweroff</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
@@ -280,85 +209,6 @@
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
-			<text style="c_sub_slot">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="%c_hawk_base_column%" y="1645"/>
-				<text>{@current_boot_slot=Current Slot: %tw_active_slot%}</text>
-			</text>
-
-			<button style="c_circle4">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="860" y="1450"/>
-				<text>{@boot_slot_a=Slot A}</text>
-				<actions>
-					<action function="overlay"/>
-					<action function="set">tw_back=c_refresh</action>
-					<action function="set">tw_action=setbootslot</action>
-					<action function="set">tw_action_param=A</action>
-					<action function="set">tw_has_action2=0</action>
-					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
-					<action function="set">tw_action_text2=</action>
-					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
-					<action function="page">action_page</action>
-				</actions>
-			</button>
-
-			<button style="c_circle4">
-				<condition var1="tw_has_boot_slots" var2="1"/>
-				<placement x="860" y="1628"/>
-				<text>{@boot_slot_b=Slot B}</text>
-				<actions>
-					<action function="overlay"/>
-					<action function="set">tw_back=c_refresh</action>
-					<action function="set">tw_action=setbootslot</action>
-					<action function="set">tw_action_param=B</action>
-					<action function="set">tw_has_action2=0</action>
-					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
-					<action function="set">tw_action_text2=</action>
-					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
-					<action function="page">action_page</action>
-				</actions>
-			</button>
-
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">back</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="home"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">home</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="console"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="overlay">slideout</action>
-			</button>
-
-			<button>
-				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
-				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
-				<image resource="back"/>
-				<condition var1="tw_busy" var2="0"/>
-				<action function="key">back</action>
-			</button>
 
 			<action>
 				<touch key="power"/>
@@ -369,6 +219,120 @@
 				<touch key="power+voldown"/>
 				<action function="screenshot"/>
 			</action>
+		</template>
+
+		<template name="slotPanel">
+			<image>
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<placement x="744" y="1126"/>
+				<image resource="slotPanel"/>
+			</image>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" var2="A"/>
+				</conditions>
+				<placement x="744" y="1150" w="158" h="106"/>
+				<fill color="%transparent%"/>
+				<font resource="extraLargeBold" color="%accentColor%"/>
+				<text>A</text>
+				<actions>
+					<action function="set">tw_back=c_refresh</action>
+					<action function="set">tw_action=setbootslot</action>
+					<action function="set">tw_action_param=A</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
+					<action function="overlay">changeSlotConfirm</action>
+				</actions>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" op="!=" var2="A"/>
+				</conditions>
+				<placement x="744" y="1150" w="158" h="106"/>
+				<fill color="%transparent%"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>A</text>
+				<actions>
+					<action function="set">tw_back=c_refresh</action>
+					<action function="set">tw_action=setbootslot</action>
+					<action function="set">tw_action_param=A</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
+					<action function="overlay">changeSlotConfirm</action>
+				</actions>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" var2="A"/>
+				</conditions>
+				<placement x="744" y="1250" w="158" h="50"/>
+				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%accentColor%"/>
+				<text>{@shrpBaseActive=Active}</text>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" var2="B"/>
+				</conditions>
+				<placement x="902" y="1150" w="158" h="106"/>
+				<fill color="%transparent%"/>
+				<font resource="extraLargeBold" color="%accentColor%"/>
+				<text>B</text>
+				<actions>
+					<action function="set">tw_back=c_refresh</action>
+					<action function="set">tw_action=setbootslot</action>
+					<action function="set">tw_action_param=B</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
+					<action function="overlay">changeSlotConfirm</action>
+				</actions>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" op="!=" var2="B"/>
+				</conditions>
+				<placement x="902" y="1150" w="158" h="106"/>
+				<fill color="%transparent%"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>B</text>
+				<actions>
+					<action function="set">tw_back=c_refresh</action>
+					<action function="set">tw_action=setbootslot</action>
+					<action function="set">tw_action_param=B</action>
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action_text1={@changing_boot_slot=Changing Boot Slot}</action>
+					<action function="set">tw_action_text2=</action>
+					<action function="set">tw_complete_text1={@changing_boot_slot_complete=Change Boot Slot Complete}</action>
+					<action function="overlay">changeSlotConfirm</action>
+				</actions>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_active_slot" var2="B"/>
+				</conditions>
+				<placement x="902" y="1250" w="158" h="50"/>
+				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%accentColor%"/>
+				<text>{@shrpBaseActive=Active}</text>
+			</button>
 		</template>
 	</templates>
 </recovery>
