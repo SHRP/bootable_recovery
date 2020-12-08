@@ -215,7 +215,7 @@ void Express::init(){
 		mkdir("/system", 0755);
 	}
 }
-#endif
+
 
 
 bool Express::expBackup(){
@@ -331,6 +331,8 @@ void Express::expRestore(bool f){
 	}
 	LOGINFO("ExpressRestore Func() Ended.--------\nExiting...\n");
 }
+
+#endif
 
 bool Express::is_backupped(){
 	string tmpPath = "/tmp/shrp";
