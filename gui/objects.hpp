@@ -814,30 +814,6 @@ protected:
 	bool lastCondition; // to track if the condition became true and we might need to resize the terminal engine
 };
 
-// GUIAnimation - Used for animations
-class GUIAnimation : public GUIObject, public RenderObject
-{
-public:
-	GUIAnimation(xml_node<>* node);
-
-public:
-	// Render - Render the full object to the GL surface
-	//  Return 0 on success, <0 on error
-	virtual int Render(void);
-
-	// Update - Update any UI component animations (called <= 30 FPS)
-	//  Return 0 if nothing to update, 1 on success and contiue, >1 if full render required, and <0 on error
-	virtual int Update(void);
-
-protected:
-	AnimationResource* mAnimation;
-	int mFrame;
-	int mFPS;
-	int mLoop;
-	int mRender;
-	int mUpdateCount;
-};
-
 class GUIProgressBar : public GUIObject, public RenderObject, public ActionObject
 {
 public:
@@ -869,36 +845,6 @@ protected:
 
 protected:
 	virtual int RenderInternal(void);	   // Does the actual render
-};
-
-class GUISlider : public GUIObject, public RenderObject, public ActionObject
-{
-public:
-	GUISlider(xml_node<>* node);
-	virtual ~GUISlider();
-
-public:
-	// Render - Render the full object to the GL surface
-	//  Return 0 on success, <0 on error
-	virtual int Render(void);
-
-	// Update - Update any UI component animations (called <= 30 FPS)
-	//  Return 0 if nothing to update, 1 on success and contiue, >1 if full render required, and <0 on error
-	virtual int Update(void);
-
-	// NotifyTouch - Notify of a touch event
-	//  Return 0 on success, >0 to ignore remainder of touch, and <0 on error
-	virtual int NotifyTouch(TOUCH_STATE state, int x, int y);
-
-protected:
-	GUIAction* sAction;
-	GUIText* sSliderLabel;
-	ImageResource* sSlider;
-	ImageResource* sSliderUsed;
-	ImageResource* sTouch;
-	int sTouchW, sTouchH;
-	int sCurTouchX;
-	int sUpdate;
 };
 
 // these are ASCII codes reported via NotifyCharInput

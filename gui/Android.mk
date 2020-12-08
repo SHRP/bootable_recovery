@@ -16,9 +16,7 @@ LOCAL_SRC_FILES := \
     checkbox.cpp \
     fileselector.cpp \
     progressbar.cpp \
-    animation.cpp \
     object.cpp \
-    slider.cpp \
     slidervalue.cpp \
     listbox.cpp \
     keyboard.cpp \
