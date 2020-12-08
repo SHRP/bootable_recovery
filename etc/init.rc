@@ -112,13 +112,13 @@ service adbd /sbin/adbd --root_seclabel=u:r:su:s0 --device_banner=recovery
     seclabel u:r:adbd:s0
 
 # Always start adbd on userdebug and eng builds
-on property:ro.debuggable=1
+on property:ro.debuggable=1 && property:shrp.lock=0
     #write /sys/class/android_usb/android0/enable 1
     #start adbd
     setprop service.adb.root 1
 
 # Restart adbd so it can run as root
-on property:service.adb.root=1
+on property:service.adb.root=1 && property:shrp.lock=0
     write /sys/class/android_usb/android0/enable 0
     restart adbd
     write /sys/class/android_usb/android0/enable 1

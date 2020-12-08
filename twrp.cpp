@@ -43,6 +43,8 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
+#include "SHRPINIT.hpp"
+#include "SHRPMAIN.hpp"
 
 #if SDK_VERSION >= 24
 #include <android-base/strings.h>
@@ -144,6 +146,11 @@ int main(int argc, char **argv) {
 #endif
 
 		if(SarPartitionManager.Mount_By_Path("/s", false)) {
+#if defined(SHRP_NO_SAR_AUTOMOUNT) && !defined(BOARD_BUILD_SYSTEM_ROOT_IMAGE)
+            LOGINFO("SAR-DETECT: SAR detection disabled \n");
+            property_set("ro.twrp.sar", "false");
+            rmdir("/system_root");
+#else
 			if (TWFunc::Path_Exists("/s/build.prop")) {
 				LOGINFO("SAR-DETECT: Non-SAR System detected\n");
 				property_set("ro.twrp.sar", "false");
@@ -155,6 +162,7 @@ int main(int argc, char **argv) {
 				LOGINFO("SAR-DETECT: No build.prop found, falling back to %s\n", fallback_sar ? "SAR" : "Non-SAR");
 				property_set("ro.twrp.sar", fallback_sar ? "true" : "false");
 			}
+#endif
 
 // We are doing this here during SAR-detection, since we are mounting the system-partition anyway
 // This way we don't need to remount it later, just for overriding properties
@@ -201,8 +209,14 @@ int main(int argc, char **argv) {
 		return -1;
 	}
 	PartitionManager.Output_Partition_Logging();
+	Express::updateSHRPBasePath();
+#ifdef SHRP_EXPRESS
+	Express::init();
+#endif
 	// Load up all the resources
 	gui_loadResources();
+	//SHRP_initial_funcs
+	SHRP::INIT();
 
 	bool Shutdown = false;
 	string Send_Intent = "";
@@ -291,6 +305,7 @@ int main(int argc, char **argv) {
 	TWFunc::check_and_run_script("/sbin/runatboot.sh", "boot");
 	TWFunc::check_and_run_script("/sbin/postrecoveryboot.sh", "boot");
 
+/*
 #ifdef TW_INCLUDE_INJECTTWRP
 	// Back up TWRP Ramdisk if needed:
 	TWPartition* Boot = PartitionManager.Find_Partition_By_Path("/boot");
@@ -303,6 +318,7 @@ int main(int argc, char **argv) {
 	}
 	LOGINFO("Backup of TWRP ramdisk done.\n");
 #endif
+*/
 
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
@@ -325,6 +341,9 @@ int main(int argc, char **argv) {
 		}
 	}
 
+	//Save JSON
+	JSON::storeShrpInfo();
+
 	// Fixup the RTC clock on devices which require it
 	if (crash_counter == 0) TWFunc::Fixup_Time_On_Boot();
 
@@ -346,9 +365,11 @@ int main(int argc, char **argv) {
 	}
 
 #ifdef TW_HAS_MTP
-	char mtp_crash_check[PROPERTY_VALUE_MAX];
-	property_get("mtp.crash_check", mtp_crash_check, "0");
-	if (DataManager::GetIntValue("tw_mtp_enabled")
+	if(DataManager::GetIntValue("recLockStatus") == 0) {
+	    LOGINFO("SHRP is unlocked; processing MTP now.\n");
+	    char mtp_crash_check[PROPERTY_VALUE_MAX];
+	    property_get("mtp.crash_check", mtp_crash_check, "0");
+	    if (DataManager::GetIntValue("tw_mtp_enabled")
 			&& !strcmp(mtp_crash_check, "0") && !crash_counter
 			&& (!DataManager::GetIntValue(TW_IS_ENCRYPTED) || DataManager::GetIntValue(TW_IS_DECRYPTED))) {
 		property_set("mtp.crash_check", "1");
@@ -358,13 +379,16 @@ int main(int argc, char **argv) {
 		else
 			gui_msg("mtp_enabled=MTP Enabled");
 		property_set("mtp.crash_check", "0");
-	} else if (strcmp(mtp_crash_check, "0")) {
+	    } else if (strcmp(mtp_crash_check, "0")) {
 		gui_warn("mtp_crash=MTP Crashed, not starting MTP on boot.");
 		DataManager::SetValue("tw_mtp_enabled", 0);
 		PartitionManager.Disable_MTP();
-	} else if (crash_counter == 1) {
+	    } else if (crash_counter == 1) {
 		LOGINFO("TWRP crashed; disabling MTP as a precaution.\n");
 		PartitionManager.Disable_MTP();
+	    }
+	}else{
+	    LOGINFO("SHRP is locked; MTP is not allowing to start.\n");
 	}
 #endif
 
@@ -412,6 +436,10 @@ int main(int argc, char **argv) {
 	gui_msg(Msg("rebooting=Rebooting..."));
 	string Reboot_Arg;
 	DataManager::GetValue("tw_reboot_arg", Reboot_Arg);
+
+	//Save JSON
+	JSON::storeShrpInfo();
+	
 	if (Reboot_Arg == "recovery")
 		TWFunc::tw_reboot(rb_recovery);
 	else if (Reboot_Arg == "poweroff")

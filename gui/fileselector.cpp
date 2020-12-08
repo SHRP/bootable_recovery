@@ -20,15 +20,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <algorithm>
-#ifdef __ANDROID_API_M__
-#include <vector>
-#ifdef __ANDROID_API_N__
-#include <android-base/strings.h>
-#else
-#include <base/strings.h>
-#endif
-#else
-#endif
+
 extern "C" {
 #include "../twcommon.h"
 }
@@ -39,6 +31,8 @@ extern "C" {
 #include "../data.hpp"
 #include "../twrp-functions.hpp"
 #include "../adbbu/libtwadbbu.hpp"
+#include "../SHRPTOOLS.hpp"
+#include "../SHRPGUI.hpp"
 
 int GUIFileSelector::mSortOrder = 0;
 
@@ -58,7 +52,7 @@ GUIFileSelector::GUIFileSelector(xml_node<>* node) : GUIScrollList(node)
 	if (child) {
 		attr = child->first_attribute("extn");
 		if (attr)
-			mExtn = attr->value();
+			mExtn = fetchExtn(attr->value());
 		attr = child->first_attribute("folders");
 		if (attr)
 			mShowFolders = atoi(attr->value());
@@ -68,7 +62,37 @@ GUIFileSelector::GUIFileSelector(xml_node<>* node) : GUIScrollList(node)
 		attr = child->first_attribute("nav");
 		if (attr)
 			mShowNavFolders = atoi(attr->value());
+		//Getting conditional data from XML for selectable fileSelector<SHRP>
+		attr = child->first_attribute("selectable");
+		if (attr)
+			mSelectable = atoi(attr->value());
+		//Getting Id of FileSelector for TouchHold EventActions
+		attr = child->first_attribute("id");
+		if (attr)
+			mId = attr->value();
+
+		//Getting 
+		attr = child->first_attribute("searchable");
+		if (attr)
+			mSearchable = atoi(attr->value());
+		//</SHRP>
 	}
+/*
+XML Template of multiple selection implementation.
+<filter folders="x" files="x" selectable="1"/>
+<select folderSelected="xx" folderUnselected="xx" fileSelected="xx" fileUnselected="xx"/>
+*/
+	//Fetching icons if Selectable true <SHRP>
+	if(mSelectable){
+		child = FindNode(node, "select");
+		if (child) {
+			mFolderSelected = LoadAttrImage(child, "folderSelected");
+			mFolderUnselected = LoadAttrImage(child, "folderUnselected");
+			mFileSelected = LoadAttrImage(child, "fileSelected");
+			mFileUnselected = LoadAttrImage(child, "fileUnselected");
+		}
+	}
+	//</SHRP>
 
 	// Handle the path variable
 	child = FindNode(node, "path");
@@ -107,6 +131,30 @@ GUIFileSelector::GUIFileSelector(xml_node<>* node) : GUIScrollList(node)
 		DataManager::GetValue(mSortVariable, mSortOrder);
 	}
 
+	//Fetch the multipleSelection handler <SHRP>
+	child = FindNode(node,"multiSelection");
+	if (child)
+		attr = child->first_attribute("name");
+		if (attr)
+			mSelectModeVar = attr->value();
+			DataManager::GetValue(mSelectModeVar,mSelectModeVal);
+
+	//SelectOn or OFF
+	child = FindNode(node,"mSelectTrigger");
+	if (child)
+		attr = child->first_attribute("name");
+		if (attr)
+			selectEnabledVar = attr->value();
+			DataManager::GetValue(selectEnabledVar,selectEnabled);
+
+	//SelectOn or OFF
+	child = FindNode(node,"search");
+	if (child)
+		attr = child->first_attribute("name");
+		if (attr)
+			mSearchVar = attr->value();
+			DataManager::GetValue(mSearchVar,mSearchVal);
+
 	// Handle the selection variable
 	child = FindNode(node, "selection");
 	if (child && (attr = child->first_attribute("name")))
@@ -114,6 +162,23 @@ GUIFileSelector::GUIFileSelector(xml_node<>* node) : GUIScrollList(node)
 	else
 		mSelection = "0";
 
+/*
+XML Template of multiple extension implementation.
+<ico type=".zip" icon="IconName" />
+<ico type=".img" icon="IconName" />
+*/
+	//Fetching icons from the xml node to vector<IcoData>Icons
+	child = FindNode(node, "ico");
+	while (child) {
+		xml_attribute<>* tmp;
+		IcoData I;
+		tmp=child->first_attribute("type");
+		I.extn=tmp->value();
+		I.icon=LoadAttrImage(child, "icon");
+		Icons.push_back(I);
+
+		child = child->next_sibling("ico");
+	}
 	// Get folder and file icons if present
 	child = FindNode(node, "icon");
 	if (child) {
@@ -184,6 +249,9 @@ int GUIFileSelector::NotifyVarChange(const std::string& varName, const std::stri
 		if (varName == mSortVariable) {
 			DataManager::GetValue(mSortVariable, mSortOrder);
 		} else {
+			if(mSelectable && selectEnabled){
+				mSelectedPaths.clear();
+			}
 			// Reset the list to the top
 			SetVisibleListLocation(0);
 			if (value.empty())
@@ -193,6 +261,26 @@ int GUIFileSelector::NotifyVarChange(const std::string& varName, const std::stri
 		mUpdate = 1;
 		return 0;
 	}
+	//Update the list if user change selection mode <SHRP>
+	else if(varName == mSelectModeVar){
+		DataManager::GetValue(mSelectModeVar,mSelectModeVal);
+		selectHandler();
+		mUpdate = 1;
+	}else if(varName == selectEnabledVar){
+		int tmp = selectEnabled;
+		DataManager::GetValue(selectEnabledVar,selectEnabled);
+		if(selectEnabled != tmp){
+			mSelectedPaths.clear();
+			updateFileList = true;
+			mUpdate = 1;
+		}
+	}else if(varName == mSearchVar){
+		SetVisibleListLocation(0);
+		DataManager::GetValue(mSearchVar, mSearchVal);
+		updateFileList = true;
+		mUpdate = 1;
+	}
+	//</SHRP>
 	return 0;
 }
 
@@ -208,14 +296,14 @@ bool GUIFileSelector::fileSort(FileData d1, FileData d2)
 		return 0;
 
 	switch (mSortOrder) {
-		case 3: // by size largest first
+		/*case 3: // by size largest first
 			if (d1.fileSize == d2.fileSize || d1.fileType == DT_DIR) // some directories report a different size than others - but this is not the size of the files inside the directory, so we just sort by name on directories
 				return (strcasecmp(d1.fileName.c_str(), d2.fileName.c_str()) < 0);
 			return d1.fileSize < d2.fileSize;
 		case -3: // by size smallest first
 			if (d1.fileSize == d2.fileSize || d1.fileType == DT_DIR) // some directories report a different size than others - but this is not the size of the files inside the directory, so we just sort by name on directories
 				return (strcasecmp(d1.fileName.c_str(), d2.fileName.c_str()) > 0);
-			return d1.fileSize > d2.fileSize;
+			return d1.fileSize > d2.fileSize;*/
 		case 2: // by last modified date newest first
 			if (d1.lastModified == d2.lastModified)
 				return (strcasecmp(d1.fileName.c_str(), d2.fileName.c_str()) < 0);
@@ -241,6 +329,8 @@ int GUIFileSelector::GetFileList(const std::string folder)
 	// Clear all data
 	mFolderList.clear();
 	mFileList.clear();
+	mSelectedPaths.clear();//SHRP
+	updateList();//SHRP
 
 	d = opendir(folder.c_str());
 	if (d == NULL) {
@@ -285,33 +375,20 @@ int GUIFileSelector::GetFileList(const std::string folder)
 		}
 		if (data.fileType == DT_DIR) {
 			if (mShowNavFolders || (data.fileName != "." && data.fileName != ".."))
-				mFolderList.push_back(data);
+				if(SearchIt(data.fileName)){mFolderList.push_back(data);}
 		} else if (data.fileType == DT_REG || data.fileType == DT_LNK || data.fileType == DT_BLK) {
-#ifdef __ANDROID_API_M__
-			std::vector<std::string> mExtnResults = android::base::Split(mExtn, ";");
-			for (const std::string& mExtnElement : mExtnResults)
-			{
-				std::string mExtnName = android::base::Trim(mExtnElement);
-				if (mExtnName.empty() || (data.fileName.length() > mExtnName.length() && data.fileName.substr(data.fileName.length() - mExtnName.length()) == mExtnName)) {
-					if (mExtnName == ".ab" && twadbbu::Check_ADB_Backup_File(path))
-						mFolderList.push_back(data);
-					else
-						mFileList.push_back(data);
-			}
-#else //On android 5.1 we can't use android::base::Trim and Split so just use the first extension written in the list
-			std::size_t seppos = mExtn.find_first_of(";");
-			std::string mExtnf;
-			if (seppos!=std::string::npos){
-				mExtnf = mExtn.substr(0, seppos);
-			} else {
-			mExtnf = mExtn;
-			}
-			if (mExtnf.empty() || (data.fileName.length() > mExtnf.length() && data.fileName.substr(data.fileName.length() - mExtnf.length()) == mExtnf)) {
-				if (mExtnf == ".ab" && twadbbu::Check_ADB_Backup_File(path))
-					mFolderList.push_back(data);
-				else
-					mFileList.push_back(data);
-#endif
+			// if(mMode&&data.fileName.length()>4){
+			// 	std::string tmp=data.filesName.substr(data.fileName.length() - 4);
+			// 	if(minUtils::compare(tmp,".zip")||minUtils::compare(tmp,".img")||minUtils::compare(tmp,"ozip")){
+			// 		mFileList.push_back(data);
+			// 	}
+			//}else if (mExtn.empty() || (data.fileName.length() > mExtn.length() && data.fileName.substr(data.fileName.length() - mExtn.length()) == mExtn)) {
+			if (mExtn.empty() || isExtnMatched(mExtn,data.fileName)) {	
+				if (isExtnMatched(mExtn,".ab") && twadbbu::Check_ADB_Backup_File(path)){
+					if(SearchIt(data.fileName)){mFolderList.push_back(data);}
+				}else{
+					if(SearchIt(data.fileName)){mFileList.push_back(data);}
+				}
 			}
 		}
 	}
@@ -353,13 +430,16 @@ void GUIFileSelector::RenderItem(size_t itemindex, int yPos, bool selected)
 	if (itemindex < folderSize) {
 		text = mFolderList.at(itemindex).fileName;
 		icon = mFolderIcon;
-		if (text == "..")
+		if(mSelectable && selectEnabled){fetchIcon(&icon,text,1);}//<SHRP>
+		if (text == ".."){
+			fetchIcon(&icon,text);//<SHRP>
 			text = gui_lookup("up_a_level", "(Up A Level)");
+		}
 	} else {
 		text = mFileList.at(itemindex - folderSize).fileName;
 		icon = mFileIcon;
+		mSelectable && selectEnabled ? fetchIcon(&icon,text,2) : fetchIcon(&icon,minUtils::getExtension(text));//<SHRP>
 	}
-
 	RenderStdItem(yPos, selected, icon, text.c_str());
 }
 
@@ -368,7 +448,7 @@ void GUIFileSelector::NotifySelect(size_t item_selected)
 	size_t folderSize = mShowFolders ? mFolderList.size() : 0;
 	size_t fileSize = mShowFiles ? mFileList.size() : 0;
 
-	if (item_selected < folderSize + fileSize) {
+	if (item_selected < folderSize + fileSize && (!mSelectable || (mSelectable && !selectEnabled))) {//<SHRP> added only && !mSelectable !selectEnabled
 		// We've selected an item!
 		std::string str;
 		if (item_selected < folderSize) {
@@ -395,7 +475,7 @@ void GUIFileSelector::NotifySelect(size_t item_selected)
 				cwd += str;
 			}
 
-			if (mShowNavFolders == 0 && (mShowFiles == 0 || mExtn == ".ab")) {
+			if (mShowNavFolders == 0 && (mShowFiles == 0 || isExtnMatched(mExtn,".ab") )) {
 				// this is probably the restore list and we need to save chosen location to mVariable instead of mPathVar
 				DataManager::SetValue(mVariable, cwd);
 			} else {
@@ -414,5 +494,101 @@ void GUIFileSelector::NotifySelect(size_t item_selected)
 			DataManager::SetValue(mVariable, cwd + str);
 		}
 	}
+	//<SHRP>
+	else if(item_selected < folderSize + fileSize && mSelectable && selectEnabled){
+		std::string str;
+		if (item_selected < folderSize) {
+			str = mFolderList.at(item_selected).fileName;
+		}else if(!mVariable.empty()){
+			str = mFileList.at(item_selected - folderSize).fileName;
+		}
+		if (str == "..") {
+			DataManager::SetValue(selectEnabledVar,0);
+		}else{
+			if(str != "."){
+				actionSelect(str);
+				updateList();
+			}
+		}
+	}
+	//</SHRP>
 	mUpdate = 1;
+}
+void GUIFileSelector::NotifyHold(){
+	if(mId == "fManager"){
+		DataManager::SetValue(selectEnabledVar, 1);
+	}
+	mUpdate = 1;
+}
+
+bool GUIFileSelector::SearchIt(string str){
+	if(!mSearchable){return true;}
+	return (mSearchVal != "" ? minUtils::find(str, mSearchVal, 1) : true);
+}
+//Fetching required icons for exceptional cases like [Multiple selection, Multiple Extension Icon Filtering]
+void GUIFileSelector::fetchIcon(ImageResource** Image,string str){
+	for(vector<IcoData>::iterator ptr=Icons.begin();ptr<Icons.end();ptr++){
+		if(minUtils::compare(ptr->extn,str)){
+			*Image=ptr->icon;
+		}
+	}
+}
+
+void GUIFileSelector::fetchIcon(ImageResource** Image,string str,int mode){
+	for(vector<string>::iterator ptr=mSelectedPaths.begin();ptr<mSelectedPaths.end();ptr++){
+		if(*ptr==str){
+			if(mode==1){
+				*Image=mFolderSelected;
+			}else{
+				*Image=mFileSelected;
+			}
+			return;
+		}
+	}
+	if(mode==1){
+		*Image=mFolderUnselected;
+	}else{
+		*Image=mFileUnselected;
+	}
+	return;
+}
+//Select Unselect Handler
+void GUIFileSelector::actionSelect(string str){
+	for(vector<string>::iterator ptr=mSelectedPaths.begin();ptr<mSelectedPaths.end();ptr++){
+		if(*ptr==str){
+			mSelectedPaths.erase(ptr);
+			return;
+		}
+	}
+	mSelectedPaths.push_back(str);
+	return;
+}
+//Update the variable for further use. SetValue("mSelectedPathList", "");
+void GUIFileSelector::updateList(){
+	string tmp;
+	bool flag=true;
+	for(auto it=mSelectedPaths.begin();it<mSelectedPaths.end();it++){
+		flag ? tmp+=DataManager::GetStrValue(mPathVar)+"/"+*it : tmp+="|"+DataManager::GetStrValue(mPathVar)+"/"+*it;
+		flag=false;
+	}
+	//LOGINFO("Selection Paths - %s\n",tmp.c_str());
+	DataManager::SetValue("mSelectedPathList",tmp.c_str());
+}
+//action for select all and select none
+void GUIFileSelector::selectHandler(){
+	if(mSelectModeVal == 1){
+		mSelectedPaths.clear();
+		for(auto ptr = mFolderList.begin(); ptr < mFolderList.end(); ptr++){
+			if(!(ptr->fileName == "." || ptr->fileName == "..")){
+				mSelectedPaths.push_back(ptr->fileName);
+			}
+		}
+		for(auto ptr = mFileList.begin(); ptr < mFileList.end(); ptr++){
+			mSelectedPaths.push_back(ptr->fileName);
+		}
+	}else if(mSelectModeVal == -1){
+		mSelectedPaths.clear();
+	}
+	updateList();
+	mSelectModeVal = 0;
 }
