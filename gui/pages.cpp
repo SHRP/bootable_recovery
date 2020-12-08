@@ -406,22 +406,9 @@ bool Page::ProcessNode(xml_node<>* page, std::vector<xml_node<>*> *templates, in
 			mRenders.push_back(element);
 			mActions.push_back(element);
 		}
-		else if (type == "animation")
-		{
-			GUIAnimation* element = new GUIAnimation(child);
-			mObjects.push_back(element);
-			mRenders.push_back(element);
-		}
 		else if (type == "progressbar")
 		{
 			GUIProgressBar* element = new GUIProgressBar(child);
-			mObjects.push_back(element);
-			mRenders.push_back(element);
-			mActions.push_back(element);
-		}
-		else if (type == "slider")
-		{
-			GUISlider* element = new GUISlider(child);
 			mObjects.push_back(element);
 			mRenders.push_back(element);
 			mActions.push_back(element);
