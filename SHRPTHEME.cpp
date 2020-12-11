@@ -65,9 +65,10 @@ string ThemeManager::getColor(string str){
             tmp = it->colorName;
             break;
         }
+        tmp = "NULL";
     }
     tmp = ((str == "navbarColor" || str == "dashboardTextColor" || str == "accentColor") && tmp == "black") ? "dark" : tmp;
-    return str == "navbarColor" ? "c_"+ tmp : tmp;
+    return tmp == "NULL" ? tmp : str == "navbarColor" ? "c_"+ tmp : tmp;
 }
 
 string ThemeManager::get_DashboardColor(){
@@ -94,8 +95,10 @@ string ThemeManager::get_subBackgroundColor(){
         return "#242026";
     }else if(bgColor == DataManager::GetStrValue("clrDarkViolate")){
         return "#312d44";
-    }else{
+    }else if(bgColor == DataManager::GetStrValue("clrWhite")){
         return "#fafafa";
+    }else{
+        return DataManager::GetStrValue("subBackgroundColor");
     }
 }
 
@@ -125,7 +128,7 @@ bool ThemeManager::syncDyanmicVar(){
         "export dashboardIconType="+DataManager::GetStrValue("dashboardIconType")+";"+ \
         "export roundedcornerType="+DataManager::GetStrValue("roundedcornerType")+";"+ \
         "cd /twres/scripts/;"+ \
-        "sh syncDynamicVar.sh;") != 0 ? false : true;
+        "sh syncDynamicVar.sh;") == 0 ? true : false;
     return ret;
 }
 
@@ -135,10 +138,10 @@ bool ThemeManager::applyThemeResouces(){
     string box = "/twres/images";
 
 
-    if(DataManager::GetStrValue("extern_accentColor") != DataManager::GetStrValue("accentColor")){
+    if(DataManager::GetStrValue("extern_accentColor") != DataManager::GetStrValue("accentColor") && getColor("accentColor") != "NULL"){
         if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/accentResources/"+getColor("accentColor")+"/*.png "+box+";") != 0){ret=false;}
     }
-    if(DataManager::GetStrValue("extern_backgroundColor") != DataManager::GetStrValue("backgroundColor") && ret){
+    if(DataManager::GetStrValue("extern_backgroundColor") != DataManager::GetStrValue("backgroundColor") && getColor("backgroundColor") != "NULL" && ret){
         if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/backgroundResources/"+getColor("backgroundColor")+"/*.png "+box+";") != 0){ret=false;}
     }
 
@@ -164,7 +167,8 @@ bool ThemeManager::applyThemeResouces(){
                 tmp = "c_custom";
                 break;
         }
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/navigationResources/"+tmp+"/"+getColor("navbarColor")+"/*.png "+box+";") != 0){ret=false;}
+        if(getColor("navbarColor") != "NULL")
+            if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/navigationResources/"+tmp+"/"+getColor("navbarColor")+"/*.png "+box+";") != 0){ret=false;}
     }
 
 
@@ -187,11 +191,15 @@ bool ThemeManager::applyThemeResouces(){
             case 5:
                 tmp = "white";
                 break;
+            default:
+                tmp = "NULL";
         }
-        if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dashboardResources/"+tmp+"/*.png "+box+";") != 0){ret=false;}
+        if(tmp != "NULL"){
+            if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dashboardResources/"+tmp+"/*.png "+box+";") != 0){ret=false;}
+        }
     }
 
-    if(DataManager::GetStrValue("extern_dashboardTextColor") != DataManager::GetStrValue("dashboardTextColor") && ret){
+    if(DataManager::GetStrValue("extern_dashboardTextColor") != DataManager::GetStrValue("dashboardTextColor") && getColor("dashboardTextColor") != "NULL" && ret){
         if(TWFunc::Exec_Cmd("cp -r "+themeBase+"/dashboardResources/dashboardBackground/"+getColor("dashboardTextColor")+"/*.png "+box+";") != 0){ret=false;}
     }
 
