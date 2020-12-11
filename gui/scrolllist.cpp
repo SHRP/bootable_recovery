@@ -521,6 +521,13 @@ int GUIScrollList::NotifyTouch(TOUCH_STATE state, int x, int y)
 		}
 	case TOUCH_REPEAT:
 	case TOUCH_HOLD:
+		//<SHRP>
+		if (selectedItem != NO_ITEM) {
+			// We've selected an item!
+			NotifyHold();
+			mUpdate = 1;
+		}
+		//<SHRP>
 		break;
 	}
 	return 0;
