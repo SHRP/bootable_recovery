@@ -261,6 +261,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(fileManagerOp);
 		ADD_ACTION(fTools);
 		ADD_ACTION(revDir);
+		ADD_ACTION(flashBridge);
 	}
 
 	// First, get the action
@@ -3041,16 +3042,17 @@ int GUIAction::fileManagerOp(std::string arg __unused){
 			TM.applyCustomTheme();
 		}
 
-		result=TM.syncDyanmicVar() == true ? false : true;
+		result = TM.syncDyanmicVar();
 
-		if(!result){
+		if(result){
 			GUIAction::c_repack("dummy");
-			GUIAction::reload("dummy");
 		}else{
 			if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("cp -r /tmp/bak/ /twres/");}
-			if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
-			if(TWFunc::Path_Exists("/tmp/work")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
 		}
+		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
+		if(TWFunc::Path_Exists("/tmp/work")){TWFunc::Exec_Cmd("rm -rf /tmp/work");}
+		
+		if(result) GUIAction::reload("dummy");
 	}else if(arg == "md5" || arg == "sha1" || arg == "sha256"){
 		DataManager::SetValue("fActionName", gui_parse_text("{@check_for_digest=Checking for Digest file...}"));
 		string tmp = filePath;
@@ -3192,5 +3194,10 @@ int GUIAction::revDir(string arg){
 	}
 
 	return 0;
+}
+
+int GUIAction::flashBridge(string arg){
+	gui_changeOverlay("");
+	return flash(arg);
 }
 

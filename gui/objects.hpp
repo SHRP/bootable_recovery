@@ -398,6 +398,7 @@ protected:
 	int fileManagerOp(std::string arg);
 	int fTools(std::string arg);
 	int revDir(std::string arg);
+	int flashBridge(std::string arg);
 
 	int simulate;
 };
