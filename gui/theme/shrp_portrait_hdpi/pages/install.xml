@@ -129,7 +129,6 @@
 				<image resource="c_cancel"/>
 				<actions>
 					<action function="queueclear"/>
-					<action function="set">isShrpZip=0</action>
 					<action function="set">c_queue_enabled=0</action>
 					<action function="page">install</action>
 				</actions>
@@ -146,7 +145,6 @@
 				<touch key="back"/>
 				<actions>
 					<action function="queueclear"/>
-					<action function="set">isShrpZip=0</action>
 					<action function="set">c_queue_enabled=0</action>
 					<action function="page">install</action>
 				</actions>
@@ -156,7 +154,6 @@
 				<touch key="home"/>
 				<actions>
 					<action function="queueclear"/>
-					<action function="set">isShrpZip=0</action>
 					<action function="set">c_queue_enabled=0</action>
 					<action function="page">c_refresh</action>
 				</actions>
@@ -183,10 +180,7 @@
 				<placement x="700" y="%rndPos115%" w="310" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@c_flash=Flash}</text>
-				<action function="set">isShrpZip=0</action>
-				<action function="set">c_queue_enabled=0</action>
-				<action function="overlay"/>
-				<action function="flash">flash_zip</action>
+				<action function="flashBridge">flash_zip</action>
 			</button>
 
 			<button style="cnfrmBtn">
