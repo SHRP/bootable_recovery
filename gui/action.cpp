@@ -3174,7 +3174,7 @@ int GUIAction::fTools(std::string arg __unused){//Just a GUI Interface of FileSy
 
 int GUIAction::revDir(string arg){
 	string path = DataManager::GetStrValue(arg);
-	if(DataManager::GetIntValue("selectEnabled")){
+	if(DataManager::GetIntValue("selectEnabled") && arg == "tw_file_location1"){
 		DataManager::SetValue("selectEnabled", 0);
 		return 0;
 	}
