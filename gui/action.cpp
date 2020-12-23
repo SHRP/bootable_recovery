@@ -2907,9 +2907,7 @@ int GUIAction::applyCustomTheme(std::string arg){
 	GUIAction::themeInit("dummy");
 
 	//Applying custom theme
-	TM.applyCustomTheme();
-
-	err=TM.syncDyanmicVar() == true ? false : true;
+	err=TM.applyCustomTheme() == true ? false : true;
 
 	if(!err){
 		GUIAction::c_repack("dummy");
@@ -3052,16 +3050,12 @@ int GUIAction::fileManagerOp(std::string arg __unused){
 			result = false;
 		}
 		//Creating env for theme patching
-		if(result){
-			GUIAction::themeInit("dummy");
-		}
+		if(result) GUIAction::themeInit("dummy");
 
 		//Applying custom theme
 		if(result){
-			TM.applyCustomTheme();
+			result = TM.applyCustomTheme();
 		}
-
-		result = TM.syncDyanmicVar();
 
 		if(result){
 			GUIAction::c_repack("dummy");
