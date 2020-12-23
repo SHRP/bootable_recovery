@@ -2462,11 +2462,11 @@ int GUIAction::flashlight(std::string arg __unused){
 		DataManager::SetValue("c_flashlight_status","1");
 		cmd="echo " + max_b + " > " + DataManager::GetStrValue("c_flashlight_path_1");
 		TWFunc::Exec_Cmd(cmd);
-		if(p2.size()>3){
+		if(DataManager::GetStrValue("c_flashlight_path_2").size()>3){
 			cmd="echo " + max_b + " > " + DataManager::GetStrValue("c_flashlight_path_2");
 			TWFunc::Exec_Cmd(cmd);
 		}
-		if(p3.size()>3){
+		if(DataManager::GetStrValue("c_flashlight_path_3").size()>3){
 			cmd="echo 1 > " + DataManager::GetStrValue("c_flashlight_path_3");
 			TWFunc::Exec_Cmd(cmd);
 		}
@@ -2474,11 +2474,11 @@ int GUIAction::flashlight(std::string arg __unused){
 		DataManager::SetValue("c_flashlight_status","0");
 		cmd="echo 0 > " + DataManager::GetStrValue("c_flashlight_path_1");
 		TWFunc::Exec_Cmd(cmd);
-		if(p2.size()>3){
+		if(DataManager::GetStrValue("c_flashlight_path_2").size()>3){
 			cmd="echo 0 > " + DataManager::GetStrValue("c_flashlight_path_2");
 			TWFunc::Exec_Cmd(cmd);
 		}
-		if(p3.size()>3){
+		if(DataManager::GetStrValue("c_flashlight_path_3").size()>3){
 			cmd="echo 0 > " + DataManager::GetStrValue("c_flashlight_path_3");
 			TWFunc::Exec_Cmd(cmd);
 		}
