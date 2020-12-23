@@ -255,6 +255,10 @@ bool ThemeManager::initCustomTheme(string path){
 			propData.push_back(tmp);
 		}
 	}else{
+        if(TWFunc::Path_Exists("/tmp/customTheme/dynamic/themeData.xml")){
+            LOGINFO("Theme Data Found\nTheme Verification Successful\n");
+            return true;
+        }
         LOGINFO("Prop missing. Exiting..\n");
         return false;
     }
@@ -321,12 +325,17 @@ bool ThemeManager::verifyColor(string hex){
 void ThemeManager::removeTempData(){
     if(TWFunc::Path_Exists("/tmp/customTheme")) FileManager::removeFolder("/tmp/customTheme");
 }
-void ThemeManager::applyCustomTheme(){
-    DataManager::SetValue("backgroundColor", DataManager::GetStrValue("themeBackgroundColor"));
-    DataManager::SetValue("accentColor", DataManager::GetStrValue("themeAccentColor"));
-    DataManager::SetValue("primaryColor", DataManager::GetStrValue("themeTextColor"));
-    DataManager::SetValue("secondaryColor", DataManager::GetStrValue("themeSecondaryTextColor"));
-    DataManager::SetValue("navbarColor", DataManager::GetStrValue("themeNavColor"));
+bool ThemeManager::applyCustomTheme(){
+    bool TdataExists = TWFunc::Path_Exists("/tmp/customTheme/dynamic/themeData.xml");
+    if(TdataExists){
+        FileManager::copy("/tmp/customTheme/dynamic/themeData.xml", "/twres/dynamic", true);
+    }else{
+        DataManager::SetValue("backgroundColor", DataManager::GetStrValue("themeBackgroundColor"));
+        DataManager::SetValue("accentColor", DataManager::GetStrValue("themeAccentColor"));
+        DataManager::SetValue("primaryColor", DataManager::GetStrValue("themeTextColor"));
+        DataManager::SetValue("secondaryColor", DataManager::GetStrValue("themeSecondaryTextColor"));
+        DataManager::SetValue("navbarColor", DataManager::GetStrValue("themeNavColor"));
+    }
     FileManager::rename("/tmp/customTheme/res", "images", true);
     FileManager::copy("/tmp/customTheme/images", "/twres", true);
     bool darkColor = isColorDark(DataManager::GetStrValue("themeBackgroundColor"));
@@ -334,6 +343,12 @@ void ThemeManager::applyCustomTheme(){
     cmd += darkColor ? "light" : "dark";
     cmd += "/*.png /twres/images;";
     TWFunc::Exec_Cmd(cmd);
+
+    if(TdataExists){
+        return true;
+    }
+    
+    return syncDyanmicVar();
 }
 
 

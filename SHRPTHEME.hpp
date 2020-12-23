@@ -25,7 +25,7 @@ class ThemeManager{
         bool initCustomTheme(string path);
         bool verifyColor(string hex);
         void removeTempData();
-        void applyCustomTheme();
+        bool applyCustomTheme();
 
         //Default Functions
         int hexToInt(string str); //Convert Hex value to int for processing the color val
