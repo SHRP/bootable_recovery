@@ -143,7 +143,12 @@
 			</button>
 
 			
-
+			<action>
+				<actions>
+					<action function="set">selectEnabled=0</action>
+				</actions>
+			</action>
+			
 			<action>
 				<condition var1="tw_filename1" op="modified"/>
 				<actions>
@@ -461,6 +466,7 @@
 			
 			<action>
 				<touch key="home"/>
+				<action function="set">selectEnabled=0</action>
 				<action function="page">c_refresh</action>
 			</action>
 
