@@ -119,8 +119,10 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+#ifndef SHRP_EXPRESS
 	printf("Starting the UI...\n");
 	gui_init();
+#endif
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
@@ -212,6 +214,8 @@ int main(int argc, char **argv) {
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
+	printf("Starting the UI...\n");
+	gui_init();
 #endif
 	// Load up all the resources
 	gui_loadResources();
