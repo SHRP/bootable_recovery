@@ -154,28 +154,6 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 				addons.push_back(aItem);
 			}
 #endif
-#ifndef SHRP_SKIP_DEFAULT_ADDON_5
-			{
-				addonInfo aItem;
-				aItem.name="Enable Camera 2 Api";
-				aItem.info="This will enable camera 2 api in your system. Note - Works only in Qualcomm devices.";
-				aItem.confirmBtnText="Enable";
-				aItem.successfulText="Enabled";
-				aItem.fileName="api2on.zip";
-				addons.push_back(aItem);
-			}
-#endif
-#ifndef SHRP_SKIP_DEFAULT_ADDON_6
-			{
-				addonInfo aItem;
-				aItem.name="Disable Camera 2 Api";
-				aItem.info="This will disable camera 2 api in your system. Note - Works only in Qualcomm devices.";
-				aItem.confirmBtnText="Disable";
-				aItem.successfulText="Disabled";
-				aItem.fileName="api2off.zip";
-				addons.push_back(aItem);
-			}
-#endif
 #endif
 			{
 #ifdef SHRP_EXTERNAL_ADDON_1_NAME
