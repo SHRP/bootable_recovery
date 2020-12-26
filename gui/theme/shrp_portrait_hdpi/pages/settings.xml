@@ -478,7 +478,7 @@
 			<listbox>
 				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%file_selector_default_w%" h="%revPos93%"/>
 				<text>{@select_language=Select Language:}</text>
-				<font resource="c_language" color="%c_black%"/>
+				<font resource="c_language" color="%secondaryColor%"/>
 				<icon selected="radio_true" unselected="radio_false" />
 				<data name="tw_language" />
 			</listbox>
