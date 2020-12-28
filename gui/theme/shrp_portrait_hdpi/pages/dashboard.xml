@@ -31,6 +31,7 @@
 				<actions>
 					<action function="queueclear"/>
 					<action function="set">tw_selectimage=0</action>
+					<action function="set">c_queue_enabled=0</action>
 					<action function="page">install</action>
 				</actions>
 			</button>
@@ -42,6 +43,7 @@
 				<actions>
 					<action function="queueclear"/>
 					<action function="set">tw_selectimage=0</action>
+					<action function="set">c_queue_enabled=0</action>
 					<action function="page">install</action>
 				</actions>
 			</button>
@@ -52,6 +54,7 @@
 				<actions>
 					<action function="queueclear"/>
 					<action function="set">tw_selectimage=0</action>
+					<action function="set">c_queue_enabled=0</action>
 					<action function="page">install</action>
 				</actions>
 			</button>
