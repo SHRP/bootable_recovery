@@ -321,7 +321,7 @@
 				<placement x="%pattern_x%" y="%rPos31%" w="%pattern_size%" h="%pattern_size%"/>
 				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
 				<line color="%secondaryColor%" width="%pattern_line_w%"/>
-				<data name="lockVal1"/>
+				<data name="tw_crypto_password"/>
 				<action function="page">trydecrypt</action>
 			</patternpassword>
 
