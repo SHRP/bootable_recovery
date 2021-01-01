@@ -2740,7 +2740,7 @@ int GUIAction::c_repack(std::string arg __unused){
 	string sync = "sync_all.sh;";
 	if(TWFunc::Path_Exists("/twres/images/")){
 		LOGINFO("c_repack : /twres/images/ found\n");
-		sync = (arg == "lock") ? "sync_lock.sh;" : (arg == "theme") ? "sync.sh;" : sync;
+		sync = (arg == "lock") ? "syncLock.sh;" : (arg == "theme") ? "sync.sh;" : sync;
 
 		if(TWFunc::Exec_Cmd("sh /twres/scripts/" + sync) != 0){
 			LOGINFO("c_repack : Syncing failed\n");
