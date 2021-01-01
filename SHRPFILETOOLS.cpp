@@ -157,7 +157,7 @@ bool FileManager::move(string from, string to, bool overwrite){
     to = to == "/" ? to + objName : to + "/" + objName;
     LOGINFO("Moving From - %s To %s\n",from.c_str(),to.c_str());
     string command = overwrite ? "mv " : "mv -n ";
-    if(!TWFunc::Path_Exists(to)){
+    if(!TWFunc::Path_Exists(to) || overwrite){
         return TWFunc::Exec_Cmd(command + string(1,'"') + from + string(1,'"') + " " + string(1,'"') + to + string(1,'"'), true, true) == 0 ? true : false;
     }else{
         return false;
