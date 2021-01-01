@@ -330,12 +330,14 @@
 				<placement x="0" y="1610"/>
 				<image resource="actionCopy"/>
 				<action function="set">fManagerAction=copy</action>
+				<action function="set">fAction=0</action>
 				<action function="page">fileManager2</action>
 			</button>
 			<button>
 				<placement x="180" y="1610"/>
 				<image resource="actionCut"/>
 				<action function="set">fManagerAction=move</action>
+				<action function="set">fAction=0</action>
 				<action function="page">fileManager2</action>
 			</button>
 			<button>
@@ -572,6 +574,7 @@
 				<data name="newRenameName"/>
 				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
 				<actions>
+					<action function="set">fAction=0</action>
 					<action function="overlay">fActionPage</action>
 				</actions>
 			</input>
@@ -625,6 +628,7 @@
 				<data name="newFolderName"/>
 				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
 				<actions>
+					<action function="set">fAction=0</action>
 					<action function="overlay">fActionPage</action>
 				</actions>
 			</input>
