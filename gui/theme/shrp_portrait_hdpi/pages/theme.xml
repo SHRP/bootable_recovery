@@ -12,6 +12,7 @@
 			</button>
 
 			<button>
+				<condition var1="shrp_lite" op="=" var2="0"/>
 				<placement x="464" y="1496"/>
 				<image resource="c_ok"/>
 				<actions>
