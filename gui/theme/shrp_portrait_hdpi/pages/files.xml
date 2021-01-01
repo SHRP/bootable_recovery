@@ -308,7 +308,10 @@
 					</actions>
 				</listitem>
 				<listitem name="{@c_apply_theme=Apply theme}">
-					<condition var1="isTheme" op="=" var2="1"/>
+					<conditions>
+						<condition var1="isTheme" op="=" var2="1"/>
+						<condition var1="shrp_lite" op="=" var2="0"/>
+					</conditions>
 					<icon resource="actionApplyTheme"/>
 					<data variable="dummy"/>
 					<actions>

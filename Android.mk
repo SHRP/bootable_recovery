@@ -457,6 +457,9 @@ endif
 ifneq ($(SHRP_NO_SAR_AUTOMOUNT),)
 	LOCAL_CFLAGS += -DSHRP_NO_SAR_AUTOMOUNT
 endif
+ifneq ($(SHRP_LITE),)
+	LOCAL_CFLAGS += -DSHRP_LITE
+endif
 
 
 ifneq ($(TW_OVERRIDE_SYSTEM_PROPS),)
