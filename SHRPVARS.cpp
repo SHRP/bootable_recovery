@@ -808,8 +808,8 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     mData->SetValue("objectSize", "");
 
     //FActionSettingVariables
-    mData->SetValue("overwriteExisting", 0);
-    mData->SetValue("useHighCompression", 0);
+    mPersist->SetValue("overwriteExisting", 0);
+    mPersist->SetValue("useHighCompression", 0);
 
     //CustomTheme
     mData->SetValue("themeName", "Theme");
