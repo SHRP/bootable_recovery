@@ -192,6 +192,12 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mConst->SetValue("av_express", 0);
 #endif
 
+#ifdef SHRP_LITE
+    mConst->SetValue("shrp_lite", 1);
+#else
+    mConst->SetValue("shrp_lite", 0);
+#endif
+
 
 #ifndef SHRP_NOTCH
     //Positions variables
