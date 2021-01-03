@@ -4,6 +4,17 @@
 		<page name="backup">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
+			<action>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_multiuser_warning_destination=backup</action>
+					<action function="page">multiuser_warning</action>
+				</actions>
+			</action>
 			<text style="pageTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
 				<text>{@backup_hdr=Backup}</text>
