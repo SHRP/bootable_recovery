@@ -29,6 +29,8 @@
 				<action function="set">tw_show_exclamation=0</action>
 				<action function="set">tw_show_reboot=0</action>
 				<action function="set">tw_crypto_user_id=</action>
+				<action function="set">tw_multiuser_warning_accepted=</action>
+				<action function="set">tw_multiuser_warning_destination=</action>
 				<action function="page">main2</action>
 			</action>
 		</page>
@@ -52,6 +54,8 @@
 				<action function="set">tw_show_exclamation=0</action>
 				<action function="set">tw_show_reboot=0</action>
 				<action function="set">tw_crypto_user_id=</action>
+				<action function="set">tw_multiuser_warning_accepted=</action>
+				<action function="set">tw_multiuser_warning_destination=</action>
 				<action function="page">%tw_clear_destination%</action>
 			</action>
 		</page>

@@ -155,5 +155,56 @@
 				<action function="screenshot" />
 			</action>
 		</page>
+
+		<page name="multiuser_warning">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@multiuser_warning_hdr=Multiuser Warning}</text>
+			</text>
+
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%c_console_width%" h="400"/>
+				<text>{@multiuser_warning1=Not all users decrypted!}</text>
+				<text>{@multiuser_warning2=Backup/restore operations may fail!}</text>
+				<text>{@multiuser_warning_accept=Continue Anyway}</text>
+			</textbox>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
+				<text>{@options_hdr=Options}</text>
+			</text>
+
+			<button>
+				<placement x="55" y="%rPos37%" w="340" h="115"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@decrypt_users=Decrypt Users}</text>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<action function="page">decrypt_users</action>
+			</button>
+
+
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="set">tw_multiuser_warning_accepted=1</action>
+					<action function="page">%tw_multiuser_warning_destination%</action>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
 	</pages>
 </recovery>
