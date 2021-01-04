@@ -72,10 +72,11 @@ class Message
 	const StringLookup& varLookup; // object to resolve any non-numeric insertion strings
 
 	std::string GetFormatString(const std::string& name) const;
+	int z;//SHRP CONSOLE SWITCHER
 
 public:
-	Message(msg::Kind kind, const char* name, const StringLookup& resourceLookup, const StringLookup& varLookup)
-		: kind(kind), name(name), resourceLookup(resourceLookup), varLookup(varLookup) {}
+	Message(msg::Kind kind, const char* name, const StringLookup& resourceLookup, const StringLookup& varLookup,int z)
+		: kind(kind), name(name), resourceLookup(resourceLookup), varLookup(varLookup),z(z) {}
 
 	// Variable insertion.
 	template<typename T>
@@ -92,6 +93,7 @@ public:
 // Utility functions to create messages with standard resource and data manager lookups.
 // Short names to make usage convenient.
 Message Msg(const char* name);
+Message Msg(const char* name, int z);
 Message Msg(msg::Kind kind, const char* name);
 
 #endif

@@ -27,6 +27,7 @@ extern "C" {
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
+#include "../SHRPFILETOOLS.hpp" // SHRP
 
 GUITextBox::GUITextBox(xml_node<>* node) : GUIScrollList(node)
 {
@@ -54,6 +55,10 @@ GUITextBox::GUITextBox(xml_node<>* node) : GUIScrollList(node)
 		mLastValue.push_back(lookup);
 		child = child->next_sibling("text");
 	}
+	//<SHRP>
+	child = FindNode(node, "editorDisplay");
+	textEditor = child ? true : false;
+	//</SHRP>
 }
 
 int GUITextBox::Update(void)
@@ -105,7 +110,7 @@ int GUITextBox::NotifyVarChange(const std::string& varName, const std::string& v
 		return 0;
 
 	// Check to see if the variable exists in mText
-	for (size_t i = 0; i < mText.size(); i++) {
+	for (size_t i = 0; i < mText.size() && !textEditor; i++) { //SHRP && !textEditor
 		string lookup = gui_parse_text(mText.at(i));
 		if (lookup != mText.at(i)) {
 			mLastValue.at(i) = lookup;
@@ -119,5 +124,18 @@ int GUITextBox::NotifyVarChange(const std::string& varName, const std::string& v
 			rText.clear();
 		}
 	}
+	//<SHRP>
+	if(textEditor){
+		SetVisibleListLocation(0);
+		mLastValue.clear();
+		mText.clear();
+		rText.clear();
+		TextTool T;
+		T.getFileData(DataManager::GetStrValue("tw_filename1"), true);
+		mText = mLastValue = T.fileData;
+		mLastCount = 0;
+		mUpdate = 1;
+	}
+	//</SHRP>
 	return 0;
 }

@@ -36,6 +36,7 @@
 #include "set_metadata.h"
 #include "gui/gui.hpp"
 #include "infomanager.hpp"
+#include "SHRPVARS.hpp"
 
 #define DEVID_MAX 64
 #define HWID_MAX 32
@@ -730,6 +731,9 @@ void DataManager::SetDefaultValues()
 #else
 	mConst.SetValue(TW_IS_SUPER, "0");
 #endif
+//SHRP
+initSHRPVars(&mConst, &mData, &mPersist);
+
 #ifdef TW_INCLUDE_CRYPTO
 	mConst.SetValue(TW_HAS_CRYPTO, "1");
 	printf("TW_INCLUDE_CRYPTO := true\n");
@@ -996,6 +1000,33 @@ int DataManager::GetMagicValue(const string& varName, string& value)
 				sprintf(tmp, "%d:%02d", current->tm_hour, current->tm_min);
 			else
 				sprintf(tmp, "%d:%02d AM", current->tm_hour == 0 ? 12 : current->tm_hour, current->tm_min);
+		}
+		value = tmp;
+		return 0;
+	}
+	else if (varName == "tw_ls_time")
+	{
+		char tmp[32];
+
+		struct tm *current;
+		time_t now;
+		int tw_military_time;
+		now = time(0);
+		current = localtime(&now);
+		GetValue(TW_MILITARY_TIME, tw_military_time);
+		if (current->tm_hour >= 12)
+		{
+			if (tw_military_time == 1)
+				sprintf(tmp, "%d:%02d", current->tm_hour, current->tm_min);
+			else
+				sprintf(tmp, "%d:%02d", current->tm_hour == 12 ? 12 : current->tm_hour - 12, current->tm_min);
+		}
+		else
+		{
+			if (tw_military_time == 1)
+				sprintf(tmp, "%d:%02d", current->tm_hour, current->tm_min);
+			else
+				sprintf(tmp, "%d:%02d", current->tm_hour == 0 ? 12 : current->tm_hour, current->tm_min);
 		}
 		value = tmp;
 		return 0;

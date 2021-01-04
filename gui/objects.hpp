@@ -250,6 +250,11 @@ public:
 	//  Return 0 on success, <0 on error
 	virtual int Render(void);
 
+	//<SHRP>
+	virtual int NotifyVarChange(const std::string& varName, const std::string& value);
+	bool dynamic = false;
+	string updateVar;
+	//</SHRP>
 protected:
 	COLOR mColor;
 };
@@ -382,6 +387,30 @@ protected:
 #ifndef TW_EXCLUDE_NANO
 	int editfile(std::string arg);
 #endif
+	int applycustomtwrpfolder(std::string arg);
+
+	int shrp_init(std::string arg);
+	int shrp_magisk_info(std::string arg);
+	int shrp_magisk_mi(std::string arg);
+	int shrp_magisk_um(std::string arg);
+	int flashlight(std::string arg);
+	int sig(std::string arg);
+	int unlock(std::string arg);
+	int set_lock(std::string arg);
+	int reset_lock(std::string arg);
+	int c_repack(std::string arg);
+	int flashOP(std::string arg);
+	int clearInput(std::string arg);
+	int shrp_zip_init(std::string arg);
+	int getFileInfo(std::string arg);
+	int themeInit(std::string arg);
+	int SetColor(std::string arg);
+	int applyDefaultTheme(std::string arg);
+	int applyCustomTheme(std::string arg);
+	int fileManagerOp(std::string arg);
+	int fTools(std::string arg);
+	int revDir(std::string arg);
+	int flashBridge(std::string arg);
 
 	int simulate;
 };
@@ -497,6 +526,10 @@ protected:
 	// an item was selected
 	virtual void NotifySelect(size_t item_selected __unused) {}
 
+	//SHRP
+	virtual void NotifyHold() {}
+	//SHRP
+
 	// render a standard-layout list item with optional icon and text
 	void RenderStdItem(int yPos, bool selected, ImageResource* icon, const char* text, int iconAndTextH = 0);
 
@@ -594,6 +627,13 @@ public:
 	virtual size_t GetItemCount();
 	virtual void RenderItem(size_t itemindex, int yPos, bool selected);
 	virtual void NotifySelect(size_t item_selected);
+	virtual void NotifyHold();//SHRP
+	void fetchIcon(ImageResource** Image,string str); //Fetch Actual icon from vector<IcoData> Icons;
+	void fetchIcon(ImageResource** Image,string str,int mode); //Fetch Actual icon for select unselect;
+	void actionSelect(string str); //Handle Select Unselect
+	void selectHandler(); //Handle Select Unselect
+	void updateList(); //Update the multiselectedList
+	bool SearchIt(string str);
 
 protected:
 	struct FileData {
@@ -607,6 +647,10 @@ protected:
 		time_t lastModified;		// Uses time_t format from stat
 		time_t lastStatChange;	  // Uses time_t format from stat
 	};
+	struct IcoData{
+		std::string extn;//Extension type of the icon
+		ImageResource* icon;//ImageResource Pointer
+	};
 
 protected:
 	virtual int GetFileList(const std::string folder);
@@ -617,8 +661,7 @@ protected:
 	std::vector<FileData> mFileList;
 	std::string mPathVar; // current path displayed, saved in the data manager
 	std::string mPathDefault; // default value for the path if none is set in mPathVar
-	std::string mExtn; // used for filtering the file list, for example, *.zip
-	std::string mPrfx; // used for filtering the file list, for example, Magisk-
+	//std::string mExtn; // used for filtering the file list, for example, *.zip
 	std::string mVariable; // set when the user selects an item, pull path like /path/to/foo
 	std::string mSortVariable; // data manager variable used to change the sorting of files
 	std::string mSelection; // set when the user selects an item without the full path like selecting /path/to/foo would just be set to foo
@@ -628,6 +671,27 @@ protected:
 	ImageResource* mFolderIcon;
 	ImageResource* mFileIcon;
 	bool updateFileList;
+
+	//SHRP
+	vector<string> mExtn; // used for filtering the file list, for example, *.zip
+	vector<string> mSelectedPaths;//Store the selected paths.
+	int mSelectable;//To check if the fileselector 
+	int defaultmShowNavFolders; 
+
+	vector<IcoData> Icons;//List of icon data [Multiple image support]
+	ImageResource* mFolderSelected;
+	ImageResource* mFolderUnselected;
+	ImageResource* mFileSelected;
+	ImageResource* mFileUnselected;
+
+	std::string mSelectModeVar;
+	int mSelectModeVal;
+	std::string selectEnabledVar;
+	int selectEnabled;
+	string mId;
+	int mSearchable;
+	string mSearchVar;
+	string mSearchVal;
 };
 
 class GUIListBox : public GUIScrollList
@@ -659,7 +723,30 @@ protected:
 		unsigned int selected;
 		GUIAction* action;
 		std::vector<Condition> mConditions;
+		//SHRP
+		ImageResource* icon; //For MultipleIcon Implementation. template: <icon resource="resourceName"/> <SHRP>
+		string info = "";
 	};
+	//<SHRP>
+	struct addonInfo{
+		string name; //DisplayNameOfAddon
+		string info; //InfoAbout Addon
+		string fileName; //AddonFileName
+		string confirmBtnText; //ConfirmButtonText
+		string successfulText; //ConfirmButtonText
+	};
+	struct moduleInfo{
+		string name;//Module Name
+		string author;//Author of the module
+		string version;//Version of module
+		string description;//More info about module
+		string modulePath;//Path of the module [Very essential for other operations]
+	};
+	struct colorInfo{
+		string colorName;
+		ImageResource* mColorIcon;
+	};
+	//</SHRP>
 
 protected:
 	std::vector<ListItem> mListItems;
@@ -670,6 +757,12 @@ protected:
 	ImageResource* mIconUnselected;
 	bool isCheckList;
 	bool isTextParsed;
+
+	vector<addonInfo> addons;//<SHRP>
+	vector<moduleInfo> modules;//<SHRP>
+	vector<colorInfo> colors;//<SHRP>
+	string updateVar;//<SHRP>
+	string updateVal;//<SHRP>
 };
 
 class GUIPartitionList : public GUIScrollList
@@ -733,6 +826,10 @@ protected:
 	std::vector<std::string> mLastValue; // Parsed text - parsed for variables but not word wrapped
 	std::vector<std::string> mText;      // Original text - not parsed for variables and not word wrapped
 	std::vector<std::string> rText;      // Rendered text - what we actually see
+	
+	//<SHRP>
+	bool textEditor = false;
+	//</SHRP>
 
 };
 
@@ -827,7 +924,6 @@ protected:
 	bool lastCondition; // to track if the condition became true and we might need to resize the terminal engine
 };
 
-
 class GUIProgressBar : public GUIObject, public RenderObject, public ActionObject
 {
 public:
@@ -860,7 +956,6 @@ protected:
 protected:
 	virtual int RenderInternal(void);	   // Does the actual render
 };
-
 
 // these are ASCII codes reported via NotifyCharInput
 // other special keys (arrows etc.) are reported via NotifyKey
