@@ -1,0 +1,807 @@
+<?xml version="1.0"?>
+<recovery>
+	<templates>
+		<template name="c_page">
+			<background color="%backgroundColor%"/>
+			<fill color="%nav_bg%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="home"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">home</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For Overlay Dialog-->
+		<template name="overlayPage">
+			<button>
+				<placement x="0" y="0" w="1080" h="1920"/>
+				<fill color="%semi_transparent%"/>
+				<action function="overlay"/>
+			</button>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For Overlay Dialog with backgound restriction-->
+		<template name="overlayPageRO">
+			<fill color="%semi_transparent%">
+				<placement x="0" y="0" w="1080" h="1920"/>
+			</fill>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For Common-->
+		<template name="navCommon">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="home"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">home</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For MainConsole-->
+		<template name="navSlideout">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="home"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">home</action>
+			</button>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For secure Cases only where user cannot navigate through nav-->
+		<template name="navSecure">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+		</template>
+		<!--Only Back Button of NAV-->
+		<template name="navBackOnly">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1"/>
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1"/>
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="back"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="key">back</action>
+			</button>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For Common-->
+		<template name="navHome">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="console"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">slideout</action>
+			</button>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<!--For ActionPage-->
+		<template name="navSpecial">
+			<background color="%backgroundColor%"/>
+			<fill color="%subBackgroundColor%">
+				<condition var1="navbarBackgroundEnabled" op="=" var2="1"/>
+				<placement x="0" y="1780" h="140" w="1080"/>
+			</fill>
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4"/>
+				<image resource="actionOption"/>
+				<condition var1="tw_busy" var2="0"/>
+				<action function="overlay">actionOptions</action>
+			</button>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</template>
+		<template name="c_status_bar">
+			<button>
+				<conditions>
+					<condition var1="cpuTempEnabled" op="=" var2="1"/>
+					<condition var1="centeredClockEnabled" op="!=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<fill color="%transparent%"/>
+				<font resource="c_menu" color="%secondaryColor%"/>
+				<placement x="0" y="16" w="1080" h="28"/>
+				<text>%tw_cpu_temp% &#xB0;C</text>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="clockEnabled" op="=" var2="1"/>
+					<condition var1="centeredClockEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<fill color="%transparent%"/>
+				<font resource="c_menu" color="%secondaryColor%"/>
+				<placement x="0" y="16" w="1080" h="28"/>
+				<text>%tw_time%</text>
+			</button>
+
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="clockEnabled" op="=" var2="1"/>
+					<condition var1="centeredClockEnabled" op="=" var2="1"/>
+					<condition var1="cpuTempEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_time_x%" y="8"/>
+				<text>%tw_cpu_temp% &#xB0;C</text>
+			</text>
+
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="clockEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+					<condition var1="centeredClockEnabled" op="!=" var2="1"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_time_x%" y="8"/>
+				<text>%tw_time%</text>
+			</text>
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="99"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText1%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="9"/>
+					<condition var1="tw_battery" op="&lt;" var2="100"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText2%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="10"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText3%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="20"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_low"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="19"/>
+					<condition var1="tw_battery" op="&lt;" var2="30"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_20"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="29"/>
+					<condition var1="tw_battery" op="&lt;" var2="50"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_30"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="49"/>
+					<condition var1="tw_battery" op="&lt;" var2="60"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_50"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="59"/>
+					<condition var1="tw_battery" op="&lt;" var2="80"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_60"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="79"/>
+					<condition var1="tw_battery" op="&lt;" var2="90"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_80"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="89"/>
+					<condition var1="tw_battery" op="&lt;" var2="96"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_90"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="95"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="batteryIconEnabled" op="=" var2="1"/>
+					<condition var1="statusBarEnabled" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_full"/>
+			</image>
+
+			<!--Battery Bar Code Start-->
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="-1"/>
+					<condition var1="tw_battery" op="&lt;" var2="5"/>
+				</conditions>
+				<image resource="c_battery_bar_001"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="4"/>
+					<condition var1="tw_battery" op="&lt;" var2="10"/>
+				</conditions>
+				<image resource="c_battery_bar_005"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="9"/>
+					<condition var1="tw_battery" op="&lt;" var2="15"/>
+				</conditions>
+				<image resource="c_battery_bar_010"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="14"/>
+					<condition var1="tw_battery" op="&lt;" var2="20"/>
+				</conditions>
+				<image resource="c_battery_bar_015"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="19"/>
+					<condition var1="tw_battery" op="&lt;" var2="25"/>
+				</conditions>
+				<image resource="c_battery_bar_020"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="24"/>
+					<condition var1="tw_battery" op="&lt;" var2="30"/>
+				</conditions>
+				<image resource="c_battery_bar_025"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="29"/>
+					<condition var1="tw_battery" op="&lt;" var2="35"/>
+				</conditions>
+				<image resource="c_battery_bar_030"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="34"/>
+					<condition var1="tw_battery" op="&lt;" var2="40"/>
+				</conditions>
+				<image resource="c_battery_bar_035"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="39"/>
+					<condition var1="tw_battery" op="&lt;" var2="45"/>
+				</conditions>
+				<image resource="c_battery_bar_040"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="44"/>
+					<condition var1="tw_battery" op="&lt;" var2="50"/>
+				</conditions>
+				<image resource="c_battery_bar_045"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="49"/>
+					<condition var1="tw_battery" op="&lt;" var2="55"/>
+				</conditions>
+				<image resource="c_battery_bar_050"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="54"/>
+					<condition var1="tw_battery" op="&lt;" var2="60"/>
+				</conditions>
+				<image resource="c_battery_bar_055"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="59"/>
+					<condition var1="tw_battery" op="&lt;" var2="65"/>
+				</conditions>
+				<image resource="c_battery_bar_060"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="64"/>
+					<condition var1="tw_battery" op="&lt;" var2="70"/>
+				</conditions>
+				<image resource="c_battery_bar_065"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="69"/>
+					<condition var1="tw_battery" op="&lt;" var2="75"/>
+				</conditions>
+				<image resource="c_battery_bar_070"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="74"/>
+					<condition var1="tw_battery" op="&lt;" var2="80"/>
+				</conditions>
+				<image resource="c_battery_bar_075"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="79"/>
+					<condition var1="tw_battery" op="&lt;" var2="85"/>
+				</conditions>
+				<image resource="c_battery_bar_080"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="84"/>
+					<condition var1="tw_battery" op="&lt;" var2="90"/>
+				</conditions>
+				<image resource="c_battery_bar_085"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="89"/>
+					<condition var1="tw_battery" op="&lt;" var2="95"/>
+				</conditions>
+				<image resource="c_battery_bar_090"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="94"/>
+					<condition var1="tw_battery" op="&lt;" var2="97"/>
+				</conditions>
+				<image resource="c_battery_bar_095"/>
+			</image>
+			<image>
+				<placement x="0" y="0"/>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="batteryBarEnabled" op="=" var2="1"/>
+					<condition var1="tw_battery" op="&gt;" var2="96"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+				</conditions>
+				<image resource="c_battery_bar_100"/>
+			</image>
+			<!--Battery Bar Code End-->
+
+			<!--Rounded_corner_res_start-->
+			<image>
+				<condition var1="roundedCornerEnabled" op="=" var2="1"/>
+				<placement x="0" y="0"/>
+				<image resource="c_rounded_1"/>
+			</image>
+			<image>
+				<condition var1="roundedCornerEnabled" op="=" var2="1"/>
+				<placement x="1030" y="0"/>
+				<image resource="c_rounded_2"/>
+			</image>
+			<image>
+				<condition var1="roundedCornerEnabled" op="=" var2="1"/>
+				<placement x="1030" y="1873"/>
+				<image resource="c_rounded_3"/>
+			</image>
+			<image>
+				<condition var1="roundedCornerEnabled" op="=" var2="1"/>
+				<placement x="0" y="1873"/>
+				<image resource="c_rounded_4"/>
+			</image>
+		</template>
+
+		<template name="dashBatt">
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="99"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText1%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="9"/>
+					<condition var1="tw_battery" op="&lt;" var2="100"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText2%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<text color="%secondaryColor%">
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="10"/>
+					<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<font resource="c_menu"/>
+				<placement x="%c_batteryText3%" y="8"/>
+				<text>%tw_battery%</text>
+			</text>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="0"/>
+					<condition var1="tw_battery" op="&lt;" var2="20"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_low"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="19"/>
+					<condition var1="tw_battery" op="&lt;" var2="30"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_20"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="29"/>
+					<condition var1="tw_battery" op="&lt;" var2="50"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_30"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="49"/>
+					<condition var1="tw_battery" op="&lt;" var2="60"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_50"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="59"/>
+					<condition var1="tw_battery" op="&lt;" var2="80"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_60"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="79"/>
+					<condition var1="tw_battery" op="&lt;" var2="90"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_80"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="89"/>
+					<condition var1="tw_battery" op="&lt;" var2="96"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_90"/>
+			</image>
+			<image>
+				<conditions>
+					<condition var1="tw_no_battery_percent" var2="0"/>
+					<condition var1="tw_battery" op="&gt;" var2="95"/>
+					<condition var1="tw_battery" op="&lt;" var2="101"/>
+					<condition var1="batteryIconEnabled" op="=" var2="0"/>
+					<condition var1="statusBarEnabled" op="=" var2="0"/>
+				</conditions>
+				<placement x="%c_batteryIco%" y="15"/>
+				<image resource="c_battery_full"/>
+			</image>
+		</template>
+	</templates>
+</recovery>

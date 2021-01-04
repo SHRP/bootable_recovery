@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="main">
+			<action>
+				<actions>
+					<action function="set">tw_clear_destination=%c_target_destination%</action>
+					<action function="page">clear_vars</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="c_refresh">
+			<action>
+				<action function="set">tw_operation_state=0</action>
+				<action function="set">tw_text1=</action>
+				<action function="set">tw_text2=</action>
+				<action function="set">tw_text3=</action>
+				<action function="set">tw_text4=</action>
+				<action function="set">tw_action_text1=</action>
+				<action function="set">tw_action_text2=</action>
+				<action function="set">tw_action_param=</action>
+				<action function="set">tw_has_action2=0</action>
+				<action function="set">tw_action2=</action>
+				<action function="set">tw_action2_param=</action>
+				<action function="set">tw_has_cancel=0</action>
+				<action function="set">tw_cancel_action=</action>
+				<action function="set">tw_cancel_param=</action>
+				<action function="set">tw_show_exclamation=0</action>
+				<action function="set">tw_show_reboot=0</action>
+				<action function="set">tw_crypto_user_id=</action>
+				<action function="page">main2</action>
+			</action>
+		</page>
+
+		<page name="clear_vars">
+			<action>
+				<action function="set">tw_operation_state=0</action>
+				<action function="set">tw_text1=</action>
+				<action function="set">tw_text2=</action>
+				<action function="set">tw_text3=</action>
+				<action function="set">tw_text4=</action>
+				<action function="set">tw_action_text1=</action>
+				<action function="set">tw_action_text2=</action>
+				<action function="set">tw_action_param=</action>
+				<action function="set">tw_has_action2=0</action>
+				<action function="set">tw_action2=</action>
+				<action function="set">tw_action2_param=</action>
+				<action function="set">tw_has_cancel=0</action>
+				<action function="set">tw_cancel_action=</action>
+				<action function="set">tw_cancel_param=</action>
+				<action function="set">tw_show_exclamation=0</action>
+				<action function="set">tw_show_reboot=0</action>
+				<action function="set">tw_crypto_user_id=</action>
+				<action function="page">%tw_clear_destination%</action>
+			</action>
+		</page>
+	</pages>
+</recovery>

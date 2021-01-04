@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="confirm_action">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_confirm=Confirm}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_text1%</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="500"/>
+				<text>%tw_text2%</text>
+				<text>%tw_text3%</text>
+				<text>%tw_text4%</text>
+			</textbox>
+
+
+			<button>
+				<image resource="c_ok"/>
+				<placement x="860" y="%rndPos105%"/>
+				<action function="page">action_page</action>
+			</button>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_clear_destination=%tw_back%</action>
+					<action function="page">clear_vars</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="action_page">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>%tw_action_text1%</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_action_text2%</text>
+			</text>
+
+			<template name="c_console_custom"/>
+			<template name="progress_bar"/>
+
+
+			<button>
+				<condition var1="tw_has_cancel" var2="1"/>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_cancel"/>
+				<action function="%tw_cancel_action%">%tw_cancel_param%</action>
+			</button>
+			<action>
+				<condition var1="tw_operation_state" var2="1"/>
+				<actions>
+					<action function="page">action_complete</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_has_action2" var2="0"/>
+				<actions>
+					<action function="%tw_action%">%tw_action_param%</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_has_action2" var2="1"/>
+				<actions>
+					<action function="%tw_action%">%tw_action_param%</action>
+					<action function="%tw_action2%">%tw_action2_param%</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="singleaction_page">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>%tw_action_text1%</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_action_text2%</text>
+			</text>
+
+			<template name="c_console_custom"/>
+			<template name="progress_bar"/>
+
+
+			<action>
+				<condition var1="tw_operation_state" var2="1"/>
+				<actions>
+					<action function="set">tw_page_done=1</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_has_action2" var2="0"/>
+				<actions>
+					<action function="%tw_action%">%tw_action_param%</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_has_action2" var2="1"/>
+				<actions>
+					<action function="%tw_action%">%tw_action_param%</action>
+					<action function="%tw_action2%">%tw_action2_param%</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="action_complete">
+			<template name="navSpecial"/>
+			<template name="c_status_bar"/>
+			
+			<text style="pageTitleOPFailed">
+				<condition var1="tw_operation_status" op="!=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_failed=Failed}</text>
+			</text>
+			<text style="pageTitle">
+				<condition var1="tw_operation_status" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_passed=Successful}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_complete_text1%</text>
+			</text>
+			<template name="c_console_custom"/>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="set">tw_clear_destination=main2</action>
+					<action function="page">clear_vars</action>
+				</actions>
+			</button>
+		</page>
+
+		<page name="actionOptions">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@options_hdr=Options}</text>
+			</text>
+
+			<button>
+				<placement x="130" y="%rndPos102%"/>
+				<image resource="actionCopyLog"/>
+				<action function="overlay"/>
+				<action function="page">copylog</action>
+			</button>
+			<button>
+				<fill color="%backgroundColor%"/>
+				<placement x="70" y="%rndPos110%" w="220" h="60"/>
+				<font resource="paragraph" color="%secondaryColor%"/>
+				<text>{@c_logs=Logs}</text>
+				<action function="overlay"/>
+				<action function="page">copylog</action>
+			</button>
+
+
+			<button>
+				<placement x="370" y="%rndPos102%"/>
+				<image resource="actionRebootSystem"/>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=system</action>
+					<action function="set">tw_reboot_param=system</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<fill color="%backgroundColor%"/>
+				<placement x="310" y="%rndPos110%" w="220" h="60"/>
+				<font resource="paragraph" color="%secondaryColor%"/>
+				<text>{@rb_system_btn=System}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=system</action>
+					<action function="set">tw_reboot_param=system</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+
+
+			<button>
+				<placement x="610" y="%rndPos102%"/>
+				<image resource="actionRebootRecovery"/>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<fill color="%backgroundColor%"/>
+				<placement x="550" y="%rndPos110%" w="220" h="60"/>
+				<font resource="paragraph" color="%secondaryColor%"/>
+				<text>{@rb_recovery_btn=Recovery}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+
+
+			<button>
+				<placement x="850" y="%rndPos102%"/>
+				<image resource="actionWipe"/>
+				<actions>
+					<action function="set">tw_back=flash_done</action>
+					<action function="set">tw_action=wipe</action>
+					<action function="set">tw_action_param=/cache</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=wipe</action>
+					<action function="set">tw_action2_param=dalvik</action>
+					<action function="set">tw_text1={@wipe_cache_dalvik_confirm=Wipe Cache &amp; Dalvik?}</action>
+					<action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Cache &amp; Dalvik...}</action>
+					<action function="set">tw_complete_text1={@wipe_cache_dalvik_complete=Cache &amp; Dalvik Wipe Complete}</action>
+					<action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
+					<action function="overlay"/>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+			<button>
+				<fill color="%backgroundColor%"/>
+				<placement x="790" y="%rndPos110%" w="220" h="60"/>
+				<font resource="paragraph" color="%secondaryColor%"/>
+				<text>{@wipe_btn=Wipe}</text>
+				<actions>
+					<action function="set">tw_back=flash_done</action>
+					<action function="set">tw_action=wipe</action>
+					<action function="set">tw_action_param=/cache</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=wipe</action>
+					<action function="set">tw_action2_param=dalvik</action>
+					<action function="set">tw_text1={@wipe_cache_dalvik_confirm=Wipe Cache &amp; Dalvik?}</action>
+					<action function="set">tw_action_text1={@wiping_cache_dalvik=Wiping Cache &amp; Dalvik...}</action>
+					<action function="set">tw_complete_text1={@wipe_cache_dalvik_complete=Cache &amp; Dalvik Wipe Complete}</action>
+					<action function="set">tw_slider_text={@swipe_wipe=Swipe to Wipe}</action>
+					<action function="overlay"/>
+					<action function="page">confirm_action</action>
+				</actions>
+			</button>
+
+			<!--button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button-->
+		</page>
+	</pages>
+</recovery>

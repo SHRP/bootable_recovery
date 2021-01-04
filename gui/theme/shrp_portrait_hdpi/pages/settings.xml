@@ -1,0 +1,505 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="settings">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@settings_btn=Settings}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@settings_gen_hdr=General} {@settings_btn=Settings}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="%revPos100%"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@zip_sig_chk=Zip signature verification}">
+					<data variable="tw_signed_zip_verify"/>
+				</listitem>
+				<listitem name="{@install_reboot_chk=Reboot after installation is complete}">
+					<data variable="tw_install_reboot"/>
+				</listitem>
+				<listitem name="{@use_rmrf_chk=Use rm -rf instead of formatting}">
+					<data variable="tw_rm_rf"/>
+				</listitem>
+				<listitem name="{@disable_backup_space_chk=Disable free space check before backup}">
+					<data variable="tw_disable_free_space"/>
+				</listitem>
+				<listitem name="{@skip_digest_backup_chk=Skip Digest generation during backup}">
+					<data variable="tw_skip_digest_generate"/>
+				</listitem>
+				<listitem name="{@restore_enable_digest_chk=Enable Digest verification of backup files}">
+					<data variable="tw_skip_digest_check"/>
+				</listitem>
+				<listitem name="{@use24clock_chk=Use 24-hour clock}">
+					<data variable="tw_military_time"/>
+				</listitem>
+				<listitem name="{@rev_navbar_chk=Reversed navbar layout}">
+					<data variable="tw_samsung_navbar"/>
+				</listitem>
+				<listitem name="{@sha2_chk=Use SHA2 for hashing}">
+					<condition var1="tw_no_sha2" var2="0"/>
+					<data variable="tw_use_sha2"/>
+				</listitem>
+				<listitem name="{@unmount_sys_install=Unmount System before installing a ZIP}">
+					<data variable="tw_unmount_system"/>
+				</listitem>
+			</listbox>
+
+			<button style="cnfrmBtn">
+				<condition var1="av_express" var2="0"/>
+				<placement x="785" y="1480" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>RESET</text>
+				<actions>
+					<action function="set">tw_samsung_navbar=0</action>
+					<action function="set">tw_tab_icons=0</action>
+					<action function="restoredefaultsettings"/>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<condition var1="av_express" var2="1"/>
+				<placement x="785" y="1480" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>RESET</text>
+				<actions>
+					<action function="set">tw_samsung_navbar=0</action>
+					<action function="set">tw_tab_icons=0</action>
+					<action function="restoredefaultsettings">guun</action>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+
+
+
+			<button>
+				<placement x="72" y="1610"/>
+				<image resource="generalSettings"/>
+				<action function="page">settings</action>
+			</button>
+			<button>
+				<placement x="324" y="1610"/>
+				<image resource="timeSettingsDisabled"/>
+				<action function="page">timeSettings</action>
+			</button>
+			<button>
+				<placement x="576" y="1610"/>
+				<image resource="deviceSettingsDisabled"/>
+				<action function="page">deviceSettings</action>
+			</button>
+
+			<button>
+				<placement x="828" y="1610"/>
+				<image resource="shrpSettingsDisabled"/>
+				<action function="page">shrpSettings</action>
+			</button>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+
+		
+
+
+		<page name="timeSettings">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<font resource="extraLargeBoldProPlus" color="%primaryColor%"/>
+				<text>%tw_time%</text>
+			</text>
+
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="0" yop="+" yref="%rPos12%"/>
+				<text>{@use_dst_chk=Use daylight savings time (DST)}</text>
+				<data variable="tw_time_zone_guidst"/>
+				<image checked="checkbox_true" unchecked="checkbox_false"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
+				<text>{@sel_tz_list=Select Time Zone:}</text>
+			</text>
+
+			<listbox>
+				<placement x="%c_hawk_base_column%" y="%rPos28%" w="%file_selector_default_w%" h="%revPos64%"/>
+				<text>{@sel_tz_list=Select Time Zone:}</text>
+				<data name="tw_time_zone_guisel"/>
+				<listitem name="{@utcm11=(UTC -11) Samoa, Midway Island}">BST11;BDT</listitem>
+				<listitem name="{@utcm10=(UTC -10) Hawaii}">HST10;HDT</listitem>
+				<listitem name="{@utcm9=(UTC -9) Alaska}">AST9;ADT</listitem>
+				<listitem name="{@utcm8=(UTC -8) Pacific Time}">PST8;PDT,M3.2.0,M11.1.0</listitem>
+				<listitem name="{@utcm7=(UTC -7) Mountain Time}">MST7;MDT,M3.2.0,M11.1.0</listitem>
+				<listitem name="{@utcm6=(UTC -6) Central Time}">CST6;CDT,M3.2.0,M11.1.0</listitem>
+				<listitem name="{@utcm5=(UTC -5) Eastern Time}">EST5;EDT,M3.2.0,M11.1.0</listitem>
+				<listitem name="{@utcm4=(UTC -4) Atlantic Time}">AST4;ADT</listitem>
+				<listitem name="{@utcm3=(UTC -3) Brazil, Buenos Aires}">GRNLNDST3;GRNLNDDT</listitem>
+				<listitem name="{@utcm2=(UTC -2) Mid-Atlantic}">FALKST2;FALKDT</listitem>
+				<listitem name="{@utcm1=(UTC -1) Azores, Cape Verde}">AZOREST1;AZOREDT</listitem>
+				<listitem name="{@utc0=(UTC  0) London, Dublin, Lisbon}">GMT0;BST,M3.5.0,M10.5.0</listitem>
+				<listitem name="{@utcp1=(UTC +1) Berlin, Brussels, Paris}">CET-1;CEST,M3.5.0,M10.5.0</listitem>
+				<listitem name="{@utcp2=(UTC +2) Athens, Istanbul, South Africa}">WET-2;WET,M3.5.0,M10.5.0</listitem>
+				<listitem name="{@utcp3=(UTC +3) Moscow, Baghdad}">SAUST-3;SAUDT</listitem>
+				<listitem name="{@utcp4=(UTC +4) Abu Dhabi, Tbilisi, Muscat}">WST-4;WDT</listitem>
+				<listitem name="{@utcp5=(UTC +5) Yekaterinburg, Islamabad}">PAKST-5;PAKDT</listitem>
+				<listitem name="{@utcp6=(UTC +6) Almaty, Dhaka, Colombo}">TASHST-6;TASHDT</listitem>
+				<listitem name="{@utcp7=(UTC +7) Bangkok, Hanoi, Jakarta}">THAIST-7;THAIDT</listitem>
+				<listitem name="{@utcp8=(UTC +8) Beijing, Singapore, Hong Kong}">TAIST-8;TAIDT</listitem>
+				<listitem name="{@utcp9=(UTC +9) Tokyo, Seoul, Yakutsk}">JST-9;JSTDT</listitem>
+				<listitem name="{@utcp10=(UTC +10) Eastern Australia, Guam}">EET-10;EETDT</listitem>
+				<listitem name="{@utcp11=(UTC +11) Vladivostok, Solomon Islands}">MET-11;METDT</listitem>
+				<listitem name="{@utcp12=(UTC +12) Auckland, Wellington, Fiji}">NZST-12;NZDT</listitem>
+			</listbox>
+
+			<button style="cnfrmBtn">
+				<placement x="400" y="1480" w="350" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@setTimeOffset=Set time offset}</text>
+				<action function="overlay">setTimeOffset</action>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="785" y="1480" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@apply=Apply}</text>
+				<action function="setguitimezone"/>
+			</button>
+
+
+			<button>
+				<placement x="72" y="1610"/>
+				<image resource="generalSettingsDisabled"/>
+				<action function="page">settings</action>
+			</button>
+			<button>
+				<placement x="324" y="1610"/>
+				<image resource="timeSettings"/>
+				<action function="page">timeSettings</action>
+			</button>
+			<button>
+				<placement x="576" y="1610"/>
+				<image resource="deviceSettingsDisabled"/>
+				<action function="page">deviceSettings</action>
+			</button>
+
+			<button>
+				<placement x="828" y="1610"/>
+				<image resource="shrpSettingsDisabled"/>
+				<action function="page">shrpSettings</action>
+			</button>
+
+
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="deviceSettings">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_device=Device}</text>
+			</text>
+
+			<button>
+				<condition var1="tw_screen_timeout_secs" op="=" var2="0"/>
+				<condition var1="tw_no_screen_timeout" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="0" yop="+" yref="%rPos12%" textplacement="6"/>
+				<font resource="small" color="%secondaryColor%"/>
+				<text>{@enable_timeout_chk=Enable screen timeout}</text>
+				<image resource="checkbox_false"/>
+				<action function="set">tw_screen_timeout_secs=60</action>
+			</button>
+			<button>
+				<condition var1="tw_screen_timeout_secs" op="!=" var2="0"/>
+				<condition var1="tw_no_screen_timeout" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="0" yop="+" yref="%rPos12%" textplacement="6"/>
+				<font resource="small" color="%secondaryColor%"/>
+				<text>{@enable_timeout_chk=Enable screen timeout}</text>
+				<image resource="checkbox_true"/>
+				<action function="set">tw_screen_timeout_secs=0</action>
+			</button>
+
+
+
+			<text style="subOptionTitle2">
+				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
+				<text>{@screen_to_slider_s=Screen timeout in seconds (0=disabled): %tw_screen_timeout_secs%}</text>
+			</text>
+
+			<slidervalue>
+				<condition var1="tw_screen_timeout_secs" op="!=" var2="0"/>
+				<condition var1="tw_no_screen_timeout" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos28%" w="%file_selector_default_w%"/>
+				<text></text>
+				<data variable="tw_screen_timeout_secs" min="15" max="300"/>
+			</slidervalue>
+
+
+
+			<text style="subOptionTitle2">
+				<placement x="%c_hawk_base_column%" y="%rPos38%"/>
+				<text>{@screen_bright_slider=Brightness: %tw_brightness_pct%}</text>
+			</text>
+			<slidervalue>
+				<condition var1="tw_has_brightnesss_file" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos43%" w="%file_selector_default_w%"/>
+				<text></text>
+				<data variable="tw_brightness_pct" min="10" max="100"/>
+				<actions>
+					<action function="set">tw_brightness=%tw_brightness_max%</action>
+					<action function="compute">tw_brightness*%tw_brightness_pct%</action>
+					<action function="compute">tw_brightness/100</action>
+					<action function="setbrightness">%tw_brightness%</action>
+				</actions>
+			</slidervalue>
+
+			<!--Vibration-->
+			<text style="subOptionTitle2">
+				<placement x="%c_hawk_base_column%" y="%rPos53%"/>
+				<text>{@button_vibration=Button Vibration:} %tw_button_vibrate%</text>
+			</text>
+			<slidervalue>
+				<placement x="%c_hawk_base_column%" y="%rPos58%" w="%file_selector_default_w%"/>
+				<text></text>
+				<data variable="tw_button_vibrate" min="0" max="300"/>
+			</slidervalue>
+
+			<text style="subOptionTitle2">
+				<placement x="%c_hawk_base_column%" y="%rPos68%"/>
+				<text>{@kb_vibration=Keyboard Vibration:} %tw_keyboard_vibrate%</text>
+			</text>
+			<slidervalue>
+				<placement x="%c_hawk_base_column%" y="%rPos73%" w="%file_selector_default_w%"/>
+				<text></text>
+				<data variable="tw_keyboard_vibrate" min="0" max="300"/>
+			</slidervalue>
+
+			<text style="subOptionTitle2">
+				<placement x="%c_hawk_base_column%" y="%rPos83%"/>
+				<text>{@act_vibration=Action Vibration:} %tw_action_vibrate%</text>
+			</text>
+			<slidervalue>
+				<placement x="%c_hawk_base_column%" y="%rPos88%" w="%file_selector_default_w%"/>
+				<text></text>
+				<data variable="tw_action_vibrate" min="0" max="500"/>
+			</slidervalue>
+
+
+
+			<button>
+				<placement x="72" y="1610"/>
+				<image resource="generalSettingsDisabled"/>
+				<action function="page">settings</action>
+			</button>
+			<button>
+				<placement x="324" y="1610"/>
+				<image resource="timeSettingsDisabled"/>
+				<action function="page">timeSettings</action>
+			</button>
+			<button>
+				<placement x="576" y="1610"/>
+				<image resource="deviceSettings"/>
+				<action function="page">deviceSettings</action>
+			</button>
+
+			<button>
+				<placement x="828" y="1610"/>
+				<image resource="shrpSettingsDisabled"/>
+				<action function="page">shrpSettings</action>
+			</button>
+
+
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="shrpSettings">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>S H R P</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>S H R P  {@settings_btn=Settings}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="%settings_main_list_h%"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@c_show_lc=Show date on lockscreen}">
+					<data variable="c_dateview"/>
+				</listitem>
+				<listitem name="{@c_dev_mode=Dev mode}">
+					<data variable="c_devMode"/>
+				</listitem>
+				<listitem name="{@c_disable_theme_survival=Disable SHRP theme survival}">
+					<condition var1="av_express" op="=" var2="1"/>
+					<data variable="c_shrpUpdate"/>
+				</listitem>
+				<listitem name="{@c_disable_auto_reboot_ota=Prevent auto reboot after OTA}">
+					<data variable="rebootota_disabled"/>
+				</listitem>
+				<listitem name="{@c_magisk_install_after_ota=Install Magisk automatically after OTA}">
+					<data variable="installmagisk_ota"/>
+				</listitem>
+			</listbox>
+
+
+
+			<button>
+				<placement x="72" y="1610"/>
+				<image resource="generalSettingsDisabled"/>
+				<action function="page">settings</action>
+			</button>
+			<button>
+				<placement x="324" y="1610"/>
+				<image resource="timeSettingsDisabled"/>
+				<action function="page">timeSettings</action>
+			</button>
+			<button>
+				<placement x="576" y="1610"/>
+				<image resource="deviceSettingsDisabled"/>
+				<action function="page">deviceSettings</action>
+			</button>
+
+			<button>
+				<placement x="828" y="1610"/>
+				<image resource="shrpSettings"/>
+				<action function="page">shrpSettings</action>
+			</button>
+
+
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="setTimeOffset">
+			<template name="overlayPage"/>
+			<button>
+				<placement x="0" y="%rndPos84%" w="1080" h="%rndPos45%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos88%"/>
+				<text>{@sel_tz_offset=Select Offset (usually 0): %tw_time_zone_guioffset%}</text>
+			</text>
+
+			<listbox>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%" w="%c_console_width%" h="400"/>
+				<text></text>
+				<data name="tw_time_zone_guioffset"/>
+				<listitem name="{@tz_offset_none=None}">0</listitem>
+				<listitem name="{@tz_offset_15=15}">15</listitem>
+				<listitem name="{@tz_offset_30=30}">30</listitem>
+				<listitem name="{@tz_offset_45=45}">45</listitem>
+			</listbox>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+
+
+
+		<page name="settings_language">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@settings_language_btn=Language}</text>
+			</text>
+
+			<listbox>
+				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%file_selector_default_w%" h="%revPos93%"/>
+				<text>{@select_language=Select Language:}</text>
+				<font resource="c_language" color="%c_black%"/>
+				<icon selected="radio_true" unselected="radio_false" />
+				<data name="tw_language" />
+			</listbox>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<action function="setlanguage"/>
+			</button>
+
+
+			<action>
+				<touch key="home" />
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back" />
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+		
+	</pages>
+</recovery>

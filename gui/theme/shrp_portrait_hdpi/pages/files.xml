@@ -1,0 +1,1672 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<!--
+			FileManager Pages
+			Contains,
+
+			mainPage
+			subPage [For Pasting]
+
+			folderInfo [actions included]
+			fileInfo	[actions included]
+
+			renameFile/Folder
+
+			createZip [options also included]
+			renameZip
+
+			permissionPage
+			setPermission As Text page
+
+			customTheme Page
+			TextEditor [soon]
+			
+
+			sideBar [1]
+			beforeAction1
+			beforeAction2
+
+
+
+		-->
+		<page name="fileManager">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<template name="c_simple_sort"/>
+			
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@files_btn=Files}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_file_location1%</text>
+			</text>
+
+			<fileselector>
+				<placement x="48" y="%rPos18%" w="%file_selector_default_w%" h="%revPos88%"/>
+				<sort name="tw_gui_sort_order"/>
+				<filter folders="1" files="1" selectable="1" searchable="1" id="fManager"/>
+				<select folderSelected="folderSelected" folderUnselected="folderUnselected" fileSelected="fileSelected" fileUnselected="fileUnselected"/>
+				<path name="tw_file_location1" default="/"/>
+				<data name="tw_filename1"/>
+				<selection name="tw_selection1"/>
+				<multiSelection name="selectionHandle"/>
+				<mSelectTrigger name="selectEnabled"/>
+				<search name="searchText"/>
+			</fileselector>
+			<image>
+				<placement x="0" y="%rPos18%"/>
+				<image resource="c_shadow"/>
+			</image>
+			<image>
+				<placement x="0" y="1593"/>
+				<image resource="c_shadow_invert"/>
+			</image>
+			<!--1610
+				Have to Implement Buttons for Folder Actions
+			-->
+			<button>
+				<placement x="0" y="1610"/>
+				<image resource="actionCopy"/>
+				<action function="set">fManagerAction=copy</action>
+				<action function="set">extenPathList=%mSelectedPathList%</action>
+				<action function="page">fileManager2</action>
+			</button>
+			<button>
+				<placement x="180" y="1610"/>
+				<image resource="actionCut"/>
+				<action function="set">fManagerAction=move</action>
+				<action function="set">extenPathList=%mSelectedPathList%</action>
+				<action function="page">fileManager2</action>
+			</button>
+			<button>
+				<placement x="360" y="1610"/>
+				<image resource="actionRename"/>
+				<action function="set">fManagerAction=rename</action>
+				<action function="set">tw_back=fileManager</action>
+				<action function="fTools">getFolderName;%tw_file_location1%;newRenameName</action>
+				<action function="page">fileRename</action>
+			</button>
+
+			<button>
+				<condition var1="selectEnabled" var2="1"/>
+				<placement x="360" y="1610" h="180" w="180"/>
+				<fill color="%semi_transparent%"/>
+				<!--NullAction-->
+			</button>
+
+			<button>
+				<placement x="540" y="1610"/>
+				<image resource="actionDelete"/>
+				<action function="set">fManagerAction=remove</action>
+				<action function="overlay">deleteConfirm</action>
+			</button>
+			<button>
+				<placement x="720" y="1610"/>
+				<image resource="actionFolderInfo"/>
+				<action function="set">selectEnabled=0</action>
+				<action function="getFileInfo">%tw_file_location1%</action>
+				<action function="page">objectInfoAction</action>
+			</button>
+
+			<button>
+				<condition var1="selectEnabled" op="!=" var2="1"/>
+				<placement x="900" y="1610"/>
+				<image resource="openSideBar"/>
+				<action function="set">sideBarDes=fileM1</action>
+				<action function="sig"/>
+				<action function="overlay">fileManager_sideBar</action>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="selectEnabled" op="=" var2="1"/>
+					<condition var1="selectionHandle" op="&lt;" var2="1"/>
+				</conditions>
+				<placement x="900" y="1610"/>
+				<image resource="actionUnselectMultipleFile"/>
+				<action function="set">selectionHandle=1</action>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="selectEnabled" op="=" var2="1"/>
+					<condition var1="selectionHandle" op="=" var2="1"/>
+				</conditions>
+				<placement x="900" y="1610"/>
+				<image resource="actionSelectMultipleFile"/>
+				<action function="set">selectionHandle=-1</action>
+			</button>
+
+			
+
+			<action>
+				<condition var1="tw_filename1" op="modified"/>
+				<actions>
+					<action function="getFileInfo">%tw_filename1%</action>
+					<action function="page">objectInfoAction</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="set">selectEnabled=0</action>
+				<action function="page">c_refresh</action>
+			</action>
+			<action>
+				<touch key="back"/>
+				<action function="revDir">tw_file_location1</action>
+			</action>
+		</page>
+
+		<page name="objectInfoAction">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+
+
+			<text style="pageTitle">
+				<condition var1="isFile" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@fileInfo=File info}</text>
+			</text>
+			<text style="pageTitle">
+				<condition var1="isFile" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@folderInfo=Folder info}</text>
+			</text>
+			<text style="pageSubTitle">
+				<condition var1="isFile" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_file_location1%</text>
+			</text>
+			<text style="pageSubTitle">
+				<condition var1="isFile" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_filename1%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>Size</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos24%"/>
+				<text>%objectSize%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
+				<text>{@fm_perms=Permissions:}</text>
+			</text>
+
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos36%"/>
+				<text>%permText%</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos45%"/>
+				<text>{@options_hdr=Options}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos50%" w="%file_selector_default_w%" h="650"/>
+				<icon selected="installSign" unselected="installSign"/>
+				<listitem name="{@editFile=Edit file}">
+					<condition var1="is_textFile" op="=" var2="1"/>
+					<icon resource="editFile"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">refresh=1</action>
+						<action function="fTools">getFileName;%tw_filename1%;textFileName</action>
+						<action function="page">textEditorPanel</action>
+					</actions>
+				</listitem>
+				<listitem name="{@md5CheckSum=Verify MD5 checksum}">
+					<condition var1="isFile" op="=" var2="1"/>
+					<icon resource="editFile"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=md5</action>
+						<action function="set">fAction=0</action>
+						<action function="overlay">fActionPage</action>
+					</actions>
+				</listitem>
+				<listitem name="{@sha1CheckSum=Verify SHA1 checksum}">
+					<condition var1="isFile" op="=" var2="1"/>
+					<icon resource="editFile"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=sha1</action>
+						<action function="set">fAction=0</action>
+						<action function="overlay">fActionPage</action>
+					</actions>
+				</listitem>
+				<listitem name="{@sha256CheckSum=Verify SHA256 checksum}">
+					<condition var1="isFile" op="=" var2="1"/>
+					<icon resource="editFile"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=sha256</action>
+						<action function="set">fAction=0</action>
+						<action function="overlay">fActionPage</action>
+					</actions>
+				</listitem>
+				<listitem name="{@fm_set_perms_hdr=Set Permissions}">
+					<icon resource="editPermissions"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="page">setPermissionOly</action>
+					</actions>
+				</listitem>
+				<listitem name="{@compress=Compress}">
+					<condition var1="isFile" op="=" var2="0"/>
+					<icon resource="actionArchive"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=compress</action>
+						<action function="fTools">getFolderName;%tw_file_location1%;archiveName</action>
+						<action function="set">tw_back=objectInfoAction</action>
+						<action function="page">zipNamePanel</action>
+					</actions>
+				</listitem>
+				<listitem name="{@compressDiff=Compress in different location}">
+					<condition var1="isFile" op="=" var2="0"/>
+					<icon resource="actionArchive"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=compressByLocation</action>
+						<action function="page">fileManager2</action>
+					</actions>
+				</listitem>
+				<listitem name="{@extract=Extract}">
+					<condition var1="isZip" op="=" var2="1"/>
+					<icon resource="actionArchive"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=extract</action>
+						<action function="overlay">archiveActionConfirm</action>
+					</actions>
+				</listitem>
+				<listitem name="{@extractDiff=Extract in different location}">
+					<condition var1="isZip" op="=" var2="1"/>
+					<icon resource="actionArchive"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=extractByLocation</action>
+						<action function="page">fileManager2</action>
+					</actions>
+				</listitem>
+				<listitem name="{@c_apply_theme=Apply theme}">
+					<condition var1="isTheme" op="=" var2="1"/>
+					<icon resource="actionApplyTheme"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">fManagerAction=applyCustomTheme</action>
+						<action function="overlay">customThemeConfirm</action>
+					</actions>
+				</listitem>
+			</listbox>
+
+
+
+
+
+
+			<button>
+				<placement x="0" y="1610"/>
+				<image resource="actionCopy"/>
+				<action function="set">fManagerAction=copy</action>
+				<action function="page">fileManager2</action>
+			</button>
+			<button>
+				<placement x="180" y="1610"/>
+				<image resource="actionCut"/>
+				<action function="set">fManagerAction=move</action>
+				<action function="page">fileManager2</action>
+			</button>
+			<button>
+				<condition var1="isFile" var2="1"/>
+				<placement x="360" y="1610"/>
+				<image resource="actionRename"/>
+				<action function="set">tw_back=objectInfoAction</action>
+				<action function="set">fManagerAction=rename</action>
+				<action function="fTools">getFolderName;%tw_filename1%;newRenameName</action>
+				<action function="page">fileRename</action>
+			</button>
+
+			<button>
+				<condition var1="isFile" var2="0"/>
+				<placement x="360" y="1610"/>
+				<image resource="actionRename"/>
+				<action function="set">tw_back=objectInfoAction</action>
+				<action function="set">fManagerAction=rename</action>
+				<action function="fTools">getFolderName;%tw_file_location1%;newRenameName</action>
+				<action function="page">fileRename</action>
+			</button>
+
+
+
+			<button>
+				<placement x="540" y="1610"/>
+				<image resource="actionDelete"/>
+				<action function="set">fManagerAction=remove</action>
+				<action function="overlay">deleteConfirm</action>
+			</button>
+
+
+			<button>
+				<condition var1="isFile" var2="0"/>
+				<placement x="720" y="1610"/>
+				<image resource="actionCreateFolder"/>
+				<action function="set">fManagerAction=createFolder</action>
+				<action function="set">newFolderName=NewFolder</action>
+				<action function="page">createFolder</action>
+			</button>
+
+
+			<action>
+				<touch key="back"/>
+				<action function="page">fileManager</action>
+			</action>
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+
+		<page name="fileManager2">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<template name="c_simple_sort"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@files_btn=Files}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_file_location2%</text>
+			</text>
+
+			<fileselector>
+				<placement x="48" y="%rPos18%" w="%file_selector_default_w%" h="%revPos88%"/>
+				<sort name="tw_gui_sort_order"/>
+				<filter folders="1" files="0"/>
+				<path name="tw_file_location2" default="/"/>
+				<data name="tw_filename2"/>
+				<selection name="tw_selection2"/>
+			</fileselector>
+			<image>
+				<placement x="0" y="%rPos18%"/>
+				<image resource="c_shadow"/>
+			</image>
+			<image>
+				<placement x="0" y="1593"/>
+				<image resource="c_shadow_invert"/>
+			</image>
+
+			<button>
+				<conditions>
+					<condition var1="fManagerAction" op="!=" var2="extractByLocation"/>
+					<condition var1="fManagerAction" op="!=" var2="compressByLocation"/>
+				</conditions>
+				<placement x="0" y="1610"/>
+				<image resource="actionPaste"/>
+				<action function="set">fAction=0</action>
+				<action function="set">mSelectedPathList=%extenPathList%</action>
+				<action function="overlay">fActionPage</action>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="fManagerAction" op="!=" var2="copy"/>
+					<condition var1="fManagerAction" op="!=" var2="move"/>
+					<condition var1="fManagerAction" op="=" var2="extractByLocation"/>
+				</conditions>
+				<placement x="0" y="1610"/>
+				<image resource="actionZipOperation"/>
+				<action function="set">fAction=0</action>
+				<action function="set">mSelectedPathList=%extenPathList%</action>
+				<action function="overlay">archiveActionConfirm</action>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="fManagerAction" op="!=" var2="copy"/>
+					<condition var1="fManagerAction" op="!=" var2="move"/>
+					<condition var1="fManagerAction" op="=" var2="compressByLocation"/>
+				</conditions>
+				<placement x="0" y="1610"/>
+				<image resource="actionZipOperation"/>
+				<action function="set">fAction=0</action>
+				<action function="fTools">getFolderName;%tw_file_location1%;archiveName</action>
+				<action function="set">tw_back=fileManager2</action>
+				<action function="page">zipNamePanel</action>
+			</button>
+
+
+			<button>
+				<placement x="900" y="1610"/>
+				<image resource="openSideBar"/>
+				<action function="set">sideBarDes=fileM2</action>
+				<action function="sig"/>
+				<action function="overlay">fileManager_sideBar</action>
+			</button>
+			
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="revDir">tw_file_location2</action>
+			</action>
+		</page>
+
+		<page name="fActionPage">
+			<template name="overlayPageRO"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<condition var1="fAction" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<font resource="largeBold" color="%secondaryColor%"/>
+				<text>%fActionName%</text>
+			</text>
+
+			<text style="cnfrmHeadTitle">
+				<condition var1="fAction" op="=" var2="-1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<font resource="largeBold" color="#FF0000"/>
+				<text>{@fOperationF=Operation failed}</text>
+			</text>
+
+			<text style="cnfrmHeadTitle">
+				<condition var1="fAction" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@fOperationS=Operation successful}</text>
+			</text>
+
+			<button>
+				<condition var1="fAction" op="!=" var2="0"/>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="%primaryColor%"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@ok_btn=OK}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="page">fileManager</action>
+				</actions>
+			</button>
+			<action>
+				<actions>
+					<action function="fileManagerOp">%fManagerAction%</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="fileRename">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@fm_rename_btn=Rename}</text>
+			</text>
+			<text style="pageSubTitle">
+				<condition var1="isFile" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fm_rename_file_btn=Rename File}</text>
+			</text>
+			<text style="pageSubTitle">
+				<condition var1="isFile" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fm_rename_folder_btn=Rename Folder}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%newRenameName%</text>
+				<data name="newRenameName"/>
+				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
+				<actions>
+					<action function="overlay">fActionPage</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">newRenameName;fileRename</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">%tw_back%</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="createFolder">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_create=Create}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_create=Create} {@fm_type_folder=Folder}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%newFolderName%</text>
+				<data name="newFolderName"/>
+				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
+				<actions>
+					<action function="overlay">fActionPage</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">newFolderName;createFolder</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">objectInfoAction</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="zipNamePanel">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@compress=Compress}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@zipName=Zip name}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%archiveName%</text>
+				<data name="archiveName"/>
+				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
+				<actions>
+					<action function="page">objectInfoAction</action>
+					<action function="overlay">archiveActionConfirm</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">archiveName;zipNamePanel</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">%tw_back%</action>
+				</actions>
+			</action>
+		</page>
+
+
+
+		<page name="deleteConfirm">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@c_confirm=Confirm}</text>
+			</text>
+
+			<text style="textbox">
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@fDeleteInfo=Do you really want to delete? This process cannot be undone.}</text>
+			</text>
+
+			<button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<font resource="midBold" color="#FF0000"/>
+				<text>{@fm_delete_btn=Delete}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">fAction=0</action>
+					<action function="overlay">fActionPage</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+
+
+		<page name="customThemeConfirm">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@c_confirm=Confirm}</text>
+			</text>
+
+			<text style="textbox">
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@fApplyCustomThemeConfirm=Do you really want to apply custom theme?}</text>
+			</text>
+
+			<button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@confirm_hdr=Confirm}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="overlay">fActionPage</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+
+		<page name="archiveActionConfirm">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@c_confirm=Confirm}</text>
+			</text>
+
+			<text style="textbox">
+				<condition var1="fManagerAction" var2="compress"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@compressConfirmInfo=Do you really want to compress this folder?}</text>
+			</text>
+
+			<text style="textbox">
+				<condition var1="fManagerAction" var2="extract"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@extractConfirmInfo=Do you really want to extract this zip?}</text>
+			</text>
+
+			<text style="textbox">
+				<condition var1="fManagerAction" var2="extractByLocation"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%"/>
+				<text>{@extractConfirmInfo=Do you really want to extract this zip?}</text>
+			</text>
+
+			<button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@confirm_hdr=Confirm}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="set">fAction=0</action>
+					<action function="overlay">fActionPage</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+
+
+		<page name="setPermissionOly">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<condition var1="isFile" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@fileInfo=File info}</text>
+			</text>
+			<text style="pageTitle">
+				<condition var1="isFile" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@folderInfo=Folder info}</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fm_set_perms_hdr=Set Permissions}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@fm_perms=Permissions:}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos24%"/>
+				<text>%permText%</text>
+			</text>
+
+
+
+
+			<!--Permission Section-->
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="50" yref="%rPos28%" yop="+"/>
+				<text>{@fowner=Owner}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="50" yref="%rPos42%" yop="+"/>
+				<text>{@fgroup=Group}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="50" yref="%rPos56%" yop="+"/>
+				<text>{@fglobal=Global}</text>
+			</text>
+
+			<!--text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="65" yref="%rPos28%" yop="+"/>
+				<text>{@fowner=Owner}</text>
+			</text>
+
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="65" yref="%rPos42%" yop="+"/>
+				<text>{@fgroup=Group}</text>
+			</text>
+
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="65" yref="%rPos56%" yop="+"/>
+				<text>{@fglobal=Global}</text>
+			</text-->
+
+			<button style="permBtnEnabled">
+				<condition var1="NewpermOwnerR" var2="1"/>
+				<placement x="230" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<text>R</text>
+				<action function="set">NewpermOwnerR=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermOwnerR" var2="0"/>
+				<placement x="230" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>R</text>
+				<action function="set">NewpermOwnerR=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnEnabled">
+				<condition var1="NewpermOwnerW" var2="1"/>
+				<placement x="440" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<text>W</text>
+				<action function="set">NewpermOwnerW=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermOwnerW" var2="0"/>
+				<placement x="440" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>W</text>
+				<action function="set">NewpermOwnerW=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnEnabled">
+				<condition var1="NewpermOwnerX" var2="1"/>
+				<placement x="650" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<text>X</text>
+				<action function="set">NewpermOwnerX=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermOwnerX" var2="0"/>
+				<placement x="650" yop="+" y="75" yref="%rPos28%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>X</text>
+				<action function="set">NewpermOwnerX=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+
+
+
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGroupR" var2="1"/>
+				<placement x="230" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<text>R</text>
+				<action function="set">NewpermGroupR=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGroupR" var2="0"/>
+				<placement x="230" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>R</text>
+				<action function="set">NewpermGroupR=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGroupW" var2="1"/>
+				<placement x="440" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<text>W</text>
+				<action function="set">NewpermGroupW=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGroupW" var2="0"/>
+				<placement x="440" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>W</text>
+				<action function="set">NewpermGroupW=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGroupX" var2="1"/>
+				<placement x="650" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<text>X</text>
+				<action function="set">NewpermGroupX=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGroupX" var2="0"/>
+				<placement x="650" yop="+" y="75" yref="%rPos42%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>X</text>
+				<action function="set">NewpermGroupX=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+
+
+
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGlobalR" var2="1"/>
+				<placement x="230" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<text>R</text>
+				<action function="set">NewpermGlobalR=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGlobalR" var2="0"/>
+				<placement x="230" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>R</text>
+				<action function="set">NewpermGlobalR=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGlobalW" var2="1"/>
+				<placement x="440" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<text>W</text>
+				<action function="set">NewpermGlobalW=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGlobalW" var2="0"/>
+				<placement x="440" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>W</text>
+				<action function="set">NewpermGlobalW=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+
+			<button style="permBtnEnabled">
+				<condition var1="NewpermGlobalX" var2="1"/>
+				<placement x="650" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<text>X</text>
+				<action function="set">NewpermGlobalX=0</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+			<button style="permBtnDisabled">
+				<condition var1="NewpermGlobalX" var2="0"/>
+				<placement x="650" yop="+" y="75" yref="%rPos56%" w="200" h="200"/>
+				<fill color="%transparent%"/>
+				<text>X</text>
+				<action function="set">NewpermGlobalX=1</action>
+				<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+			</button>
+
+
+
+			<button style="cnfrmBtn">
+				<conditions>
+					<condition var1="permChanged" var2="1"/>
+					<condition var1="isFile" var2="1"/>
+				</conditions>
+				<placement x="400" y="%rPos74%" w="350" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@apply=Apply} %fPerm%</text>
+				<action function="fileManagerOp">setPermGui</action>
+				<action function="getFileInfo">%tw_filename1%</action>
+			</button>
+
+			<button style="cnfrmBtn">
+				<conditions>
+					<condition var1="permChanged" var2="1"/>
+					<condition var1="isFile" var2="0"/>
+				</conditions>
+				<placement x="400" y="%rPos74%" w="350" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@apply=Apply} %fPerm%</text>
+				<action function="fileManagerOp">setPermGui</action>
+				<action function="getFileInfo">%tw_file_location1%</action>
+			</button>
+
+			<button style="cnfrmBtn">
+				<condition var1="permChanged" var2="1"/>
+				<placement x="785" y="%rPos74%" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@c_dc_default=Default}</text>
+				<actions>
+					<action function="set">NewpermOwnerR=%permOwnerR%</action>
+					<action function="set">NewpermOwnerW=%permOwnerW%</action>
+					<action function="set">NewpermOwnerX=%permOwnerX%</action>
+					<action function="set">NewpermGroupR=%permGroupR%</action>
+					<action function="set">NewpermGroupW=%permGroupW%</action>
+					<action function="set">NewpermGroupX=%permGroupX%</action>
+					<action function="set">NewpermGlobalR=%permGlobalR%</action>
+					<action function="set">NewpermGlobalW=%permGlobalW%</action>
+					<action function="set">NewpermGlobalX=%permGlobalX%</action>
+					<action function="fTools">getGuiPermStatus;permChanged;fPerm</action>
+				</actions>
+			</button>
+
+
+
+			
+
+			<button style="cnfrmBtn">
+				<condition var1="isFile" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rPos74%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@setManually=Set manually}</text>
+				<action function="fTools">getTextPermStatus;%tw_file_location1%</action>
+				<action function="page">setPermission</action>
+			</button>
+
+			<button style="cnfrmBtn">
+				<condition var1="isFile" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos74%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@setManually=Set manually}</text>
+				<action function="fTools">getTextPermStatus;%tw_filename1%</action>
+				<action function="page">setPermission</action>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">objectInfoAction</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="setPermission">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@fm_hdr=File Manager}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fm_set_perms_hdr=Set Permissions}</text>
+			</text>
+
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@fm_perms=Permissions:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%newChmod%</text>
+				<data name="newChmod"/>
+				<restrict minlen="3" maxlen="4" allow="0123456789"/>
+				<actions>
+					<action function="fileManagerOp">setPermText</action>
+					<action function="page">fileManager</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">newChmod;setPermission</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">setPermissionOly</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="textEditorPanel">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@editFile=Edit file}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%textFileName%</text>
+			</text>
+
+			<textbox style="editorStyles">
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%c_console_width%" h="1000"/>
+				<text>%refresh%</text>
+				<editorDisplay>dummy</editorDisplay>
+			</textbox>
+
+
+			<button style="cnfrmBtn">
+				<placement x="55" y="1300" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@c_add_line=Add line}</text>
+				<actions>
+					<action function="set">fManagerAction=addLine</action>
+					<action function="fTools">getTextFileMaxLine;%tw_filename1%;maxLine</action>
+					<action function="page">editorLinenoInputPanel</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="385" y="1300" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@c_replace_line=Replace line}</text>
+				<actions>
+					<action function="set">fManagerAction=replaceLine</action>
+					<action function="fTools">getTextFileMaxLine;%tw_filename1%;maxLine</action>
+					<action function="page">editorLinenoInputPanel</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="715" y="1300" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@c_remove_line=Remove line}</text>
+				<actions>
+					<action function="set">fManagerAction=removeLine</action>
+					<action function="fTools">getTextFileMaxLine;%tw_filename1%;maxLine</action>
+					<action function="page">editorLinenoRemoveLine</action>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">objectInfoAction</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="editorLinenoInputPanel">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@editFile=Edit file}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_enter_line_no=Enter Line No.}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@c_line_no=Line No.} 0 - %maxLine%</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%selectedLineNo%</text>
+				<data name="selectedLineNo"/>
+				<restrict minlen="1" maxlen="7" allow="1234567890"/>
+				<actions>
+					<action function="fTools">getTextFileLine;%tw_filename1%;selectedLine</action>
+					<action function="page">editorTextInputPanel</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">selectedLineNo;editorLinenoInputPanel</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">textEditorPanel</action>
+				</actions>
+			</action>
+		</page>
+		
+
+
+		<page name="editorTextInputPanel">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@editFile=Edit file}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_enter_text=Enter your text}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%selectedLine%</text>
+				<data name="selectedLine"/>
+				<actions>
+					<action function="fileManagerOp">%fManagerAction%</action>
+					<action function="page">textEditorPanel</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">selectedLine;editorTextInputPanel</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">refresh=1</action>
+					<action function="page">textEditorPanel</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="editorLinenoRemoveLine">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@editFile=Edit file}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_enter_line_no=Enter Line No.}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@c_line_no=Line No.} 0 - %maxLine%</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text></text>
+				<data name="selectedLineNo"/>
+				<restrict minlen="1" maxlen="7" allow="1234567890"/>
+				<actions>
+					<action function="fileManagerOp">%fManagerAction%</action>
+					<action function="page">textEditorPanel</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">selectedLineNo;editorLinenoRemoveLine</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">textEditorPanel</action>
+				</actions>
+			</action>
+		</page>
+
+
+
+
+
+
+
+
+		<page name="searchPanel">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rPos0%" w="1080" h="%rndPos17%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="-20" yref="%rPos5%" yop="+"/>
+				<text>{@fSearch=Search}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos9%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos10%" w="800" h="64"/>
+				<text>%searchText%</text>
+				<data name="searchText"/>
+				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
+				<actions>
+					<action function="overlay"/>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos9%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="set">searchText=</action>
+				<action function="overlay"/>
+				<action function="overlay">searchPanel</action>
+			</button>
+
+			<template name="keyboardtemplate"/>
+		</page>
+
+
+
+		<page name="fileManager_sideBar">
+			<background color="%semi_transparent%"/>
+			<fill color="%backgroundColor%">
+				<placement x="0" y="0" w="700" h="1920"/>
+			</fill>
+			<button>
+				<placement x="770" y="0" w="310" h="1920"/>
+				<fill color="%transparent%"/>
+				<action function="overlay"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="50" y="230"/>
+				<text>{@c_side_bar_head=Storages}</text>
+			</text>
+			<button>
+				<placement x="546" y="246"/>
+				<image resource="c_reload"/>
+				<actions>
+					<action function="refreshsizes"/>
+					<action function="sig"/>
+				</actions>
+			</button>
+
+
+			<image>
+				<placement x="59" y="363"/>
+				<image resource="fileLocRoot"/>
+			</image>
+			<text>
+				<placement x="188" y="355"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@c_side_bar_root=Root}</text>
+			</text>
+			<text style="c_reboot_text">
+				<placement x="188" y="427"/>
+				<text>/</text>
+			</text>
+			<fill color="%subBackgroundColor%">
+				<placement x="185" y="415" w="440" h="7"/>
+			</fill>
+
+			<button>
+				<placement x="59" y="363" w="590" h="100"/>
+				<fill color="%transparent%"/>
+				<action function="fTools">setDestination;%sideBarDes%;/</action>
+				<action function="overlay"/>
+			</button>
+
+
+
+
+
+
+			<image>
+				<placement x="59" y="363" yop="+" yref="160"/>
+				<image resource="fileLocSystem"/>
+			</image>
+			<text>
+				<placement x="188" y="355" yop="+" yref="160"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@system=System}</text>
+			</text>
+			<text style="c_reboot_text">
+				<placement x="188" y="437" yop="+" yref="150"/>
+				<text>%c_s_status%</text>
+			</text>
+			<fill color="%subBackgroundColor%">
+				<placement x="185" y="415" w="440" h="7" yop="+" yref="160"/>
+			</fill>
+
+			<fill color="%accentColor%">
+				<placement x="185" y="415" w="250" h="7" yop="+" yref="160"/>
+				<update name="c_s_p"/>
+			</fill>
+
+			<button>
+				<placement x="59" y="363" w="590" h="100" yop="+" yref="160"/>
+				<fill color="%transparent%"/>
+				<action function="fTools">setDestination;%sideBarDes%;%shrpBasePath%</action>
+				<action function="overlay"/>
+			</button>
+
+
+
+
+
+
+
+			<image>
+				<placement x="59" y="363" yop="+" yref="320"/>
+				<image resource="fileLocInternal"/>
+			</image>
+			<text>
+				<placement x="188" y="355" yop="+" yref="320"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@c_side_bar_internal=Internal Storage}</text>
+			</text>
+			<text style="c_reboot_text">
+				<placement x="188" y="437" yop="+" yref="310"/>
+				<text>%c_i_status%</text>
+			</text>
+			<fill color="%subBackgroundColor%">
+				<placement x="185" y="415" w="440" h="7" yop="+" yref="320"/>
+			</fill>
+
+			<fill color="%accentColor%">
+				<placement x="185" y="415" w="110" h="7" yop="+" yref="320"/>
+				<update name="c_i_p"/>
+			</fill>
+
+			<button>
+				<placement x="59" y="363" w="590" h="100" yop="+" yref="320"/>
+				<fill color="%transparent%"/>
+				<action function="fTools">setDestination;%sideBarDes%;%internal_storage_location%</action>
+				<action function="overlay"/>
+			</button>
+
+
+
+
+
+
+
+			<image>
+				<placement x="59" y="363" yop="+" yref="480"/>
+				<image resource="fileLocExternal"/>
+			</image>
+			<text>
+				<placement x="188" y="355" yop="+" yref="480"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@c_side_bar_external=External Storage}</text>
+			</text>
+			<text style="c_reboot_text">
+				<placement x="188" y="437" yop="+" yref="470"/>
+				<text>%c_e_status%</text>
+			</text>
+			<fill color="%subBackgroundColor%">
+				<placement x="185" y="415" w="440" h="7" yop="+" yref="480"/>
+			</fill>
+
+			<fill color="%accentColor%">
+				<placement x="185" y="415" w="300" h="7" yop="+" yref="480"/>
+				<update name="c_e_p"/>
+			</fill>
+
+			<button>
+				<placement x="59" y="363" w="590" h="100" yop="+" yref="480"/>
+				<fill color="%transparent%"/>
+				<action function="fTools">setDestination;%sideBarDes%;%external_storage_location%</action>
+				<action function="overlay"/>
+			</button>
+
+
+
+
+
+			<image>
+				<placement x="59" y="363" yop="+" yref="640"/>
+				<image resource="fileLocOtg"/>
+			</image>
+			<text>
+				<placement x="188" y="355" yop="+" yref="640"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@c_side_bar_otg=OTG}</text>
+			</text>
+			<text style="c_reboot_text">
+				<placement x="188" y="437" yop="+" yref="630"/>
+				<text>%c_o_status%</text>
+			</text>
+			<fill color="%subBackgroundColor%">
+				<placement x="185" y="415" w="440" h="7" yop="+" yref="640"/>
+			</fill>
+
+			<fill color="%accentColor%">
+				<placement x="185" y="415" w="10" h="7" yop="+" yref="640"/>
+				<update name="c_o_p"/>
+			</fill>
+
+			<button>
+				<placement x="59" y="363" w="590" h="100" yop="+" yref="640"/>
+				<fill color="%transparent%"/>
+				<action function="fTools">setDestination;%sideBarDes%;%usb_otg_location%</action>
+				<action function="overlay"/>
+			</button>
+
+
+			<button>
+				<placement x="550" y="1800"/>
+				<image resource="fileMangerSettings"/>
+				<action function="overlay">fSettings</action>
+			</button>
+
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+
+
+		<page name="fSettings">
+			<template name="overlayPage"/>
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@fSettings=Preferences}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="400"/>
+				<icon selected="toggleOn" unselected="toggleOff"/>
+				<listitem name="{@useHighCompression=Use high compression for repacking zip}">
+					<data variable="useHighCompression"/>
+				</listitem>
+				<listitem name="{@overwriteExisting=Overwrite existing files & folders}">
+					<data variable="overwriteExisting"/>
+				</listitem>
+			</listbox>
+
+			<button>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="%primaryColor%"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@shrpBaseClose=Close}</text>
+				<actions>
+					<action function="overlay"/>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+	</pages>
+</recovery>

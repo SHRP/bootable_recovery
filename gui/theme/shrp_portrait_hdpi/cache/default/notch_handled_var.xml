@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<recovery>
+	<details>
+		<resolution width="1080" height="1920"/>
+		<author>Teamwin | epicX</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>Sky_hawK_notch_handled_variable</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+	<variables>
+		<variable name="file_selector_default_y" value="260"/>
+		<variable name="file_selector_default_w" value="980"/>
+		<variable name="file_selector_default_h" value="1460"/>
+		<variable name="file_manager_file_selector_default_y" value="270"/>
+		<!--variable name="file_manager_file_selector_default_w" value="980"/-->
+		<variable name="file_manager_file_selector_default_h" value="1320"/>
+		<variable name="magisk_manager_file_selector_default_y" value="430"/>
+		<!--variable name="magisk_manager_file_selector_default_w" value="980"/-->
+		<variable name="magisk_manager_file_selector_default_h" value="1000"/>
+		<variable name="magisk_manager_core_txt_y" value="275"/>
+		<!--variable name="magisk_manager_switch_y" value="295"/-->
+		<variable name="magisk_manager_list_txt_y" value="380"/>
+		<!--variable name="magisk_splash_icon" value="750"/-->
+		<!--variable name="magisk_splash_txt" value="1100"/-->
+		<!--variable name="magisk_splash_button" value="1620"/-->
+		<variable name="c_hawk_base_column" value="55"/><!--NOoooooooooo Change-->
+		<variable name="c_hawk_base_first_header" value="24"/>
+		<variable name="c_hawk_base_second_header" value="153"/>
+		<variable name="c_text_sub_y" value="235"/>
+		<variable name="c_text_sub_y2" value="280"/>
+		<variable name="c_text_sub_y3" value="325"/>
+		<variable name="c_text_sub_y4" value="370"/>
+		<variable name="c_text_sub_y5" value="415"/>
+		<!--variable name="c_text_sub_y6" value="460"/-->
+		<!--Custom_pos_start-->
+		<variable name="c_custom_pos" value="520"/>
+		<variable name="c_custom_pos_1" value="350"/>
+		<variable name="c_custom_pos_2" value="420"/>
+		<variable name="c_custom_pos_3" value="490"/>
+		<variable name="c_custom_pos_4" value="263"/>
+		<!--Custom_pos_end-->
+		<variable name="c_console_width" value="970"/>
+		<variable name="c_text_sub_y_spec" value="250"/>
+		<variable name="c_backup_partition_list_y" value="320"/>
+		<variable name="c_backup_partition_list_h" value="1270"/>
+		<!--variable name="c_restore_partition_list_y" value="400"/-->
+		<!--variable name="bak_1" value="260"/-->
+		<!--variable name="bak_2" value="330"/-->
+		<!--variable name="bak_3" value="400"/-->
+		<variable name="backup_tab_y" value="50"/>
+		<!--variable name="backup_ecry_y" value="300"/-->
+		<variable name="restore_ecry_y" value="413"/>
+		<!--Theme_page_supporting_pos-->
+		<variable name="t_sub_txt" value="170"/>
+		<variable name="t_1st_heading" value="300"/>
+		<variable name="t_1st_row" value="375"/>
+		<variable name="t_2nd_heading" value="550"/>
+		<variable name="t_2nd_row" value="625"/>
+		<variable name="t_3rd_row" value="785"/>
+		<variable name="t_4th_row" value="945"/>
+		<variable name="t_3rd_heading" value="1120"/>
+		<variable name="t_5th_row" value="1195"/>
+		<variable name="t_6th_row" value="1355"/>
+		<variable name="t_7th_row" value="1515"/>
+		<!--Bottom_additional Options(No Change)-->
+		<!--variable name="ist_row" value="1575"/>
+		<variable name="end_row" value="1650"/-->
+		<!--Wipe_section-->
+		<variable name="input_format_data_y" value="470"/>
+		<!--variable name="advanced_wipe_partition_list_h" value="700"/-->
+		<!--variable name="i_row" value="300"/-->
+		<!--variable name="ii_row" value="370"/-->
+		<variable name="iii_row" value="440"/>
+		<variable name="iv_row" value="510"/>
+		<!--variable name="v_row" value="580"/-->
+		<variable name="vi_row" value="650"/>
+		<variable name="vii_row" value="720"/>
+		<variable name="viii_row" value="790"/>
+		<variable name="ix_row" value="860"/>
+		<!--variable name="repair_row_1" value="350"/-->
+		<variable name="repair_row_2" value="395"/>
+		<!--Settings_section-->
+		<variable name="settings_main_list_h" value="1500"/>
+		<variable name="c_tab_row" value="153"/>
+		<!--variable name="settings_slider_info_1_y" value="250"/-->
+		<!--variable name="settings_slider_info_2_y" value="350"/-->
+		<!--variable name="settings_slider_info_3_y" value="560"/-->
+		<!--variable name="settings_slider_info_4_y" value="800"/-->
+		<!--variable name="settings_1st_slider_y" value="420"/-->
+		<variable name="settings_2nd_slider_y" value="640"/>
+		<!--variable name="settings_3rd_slider_y" value="900"/-->
+		<!--Indivisual_list_box_section-->
+		<variable name="list_box_time_location_h" value="780"/>
+		<variable name="list_box_language_location_h" value="1390"/>
+		<!--Sort_button_y-->
+		<variable name="sort_button_y" value="26"/>
+		<!--Grid_var-->
+		<variable name="main_head" value="35"/>
+		<variable name="sub_head" value="200"/>
+		<variable name="dash_ico_1st_row" value="315"/>
+		<variable name="dash_txt_1st_row" value="460"/>
+		<variable name="dash_ico_2nd_row" value="560"/>
+		<variable name="dash_txt_2nd_row" value="705"/>
+		<variable name="sub_head2" value="825"/>
+		<variable name="dash_ico_3rd_row" value="940"/>
+		<variable name="dash_txt_3rd_row" value="1085"/>
+		<variable name="dash_ico_4th_row" value="1185"/>
+		<variable name="dash_txt_4th_row" value="1329"/>
+		<!--Patt_input_y-->
+		<variable name="row5_y" value="512"/>
+		<!--Pass_input_y-->
+		<!--variable name="pass_input_y" value="250"/-->
+		<variable name="input_default_y" value="295"/>
+		<variable name="input_file_manager_y" value="330"/>
+		<!--Terminal-->
+		<!--variable name="default_terminal_y" value="300"/-->
+		<variable name="default_terminal_h" value="710"/>
+		<!--variable name="default_terminal_h2" value="1460"/-->
+		<!--Console-->
+		<variable name="slideout_console_y" value="155"/>
+		<variable name="slideout_console_h" value="1175"/>
+		<!--variable name="default_console_c_y" value="300"/-->
+		<variable name="default_console_c_h" value="1165"/>
+		<variable name="c_console_height" value="1315"/>
+		<!--variable name="lock_icon_y" value="810"/-->
+		<!--File Manager-->
+		<variable name="file_head" value="20"/>
+		<variable name="file_sub" value="145"/>
+		<variable name="file_up_shadow" value="230"/>
+		<!--variable name="file_delete_dialog_y" value="710"/>
+		<variable name="file_delete_dialog_h" value="520"/>
+		<variable name="file_delete_head" value="770"/>
+		<variable name="file_delete_button_y" value="1060"/-->
+		<!--Theme_extra_pos-->
+		<variable name="t_1st_radio_pos" value="380"/>
+		<variable name="t_1st_radio_text_pos" value="400"/>
+		<variable name="t_2nd_radio_pos" value="480"/>
+		<variable name="t_2nd_radio_text_pos" value="500"/>
+		<variable name="t_3rd_radio_pos" value="580"/>
+		<variable name="t_3rd_radio_text_pos" value="600"/>
+		<variable name="t_4th_radio_pos" value="680"/>
+		<variable name="t_4th_radio_text_pos" value="700"/>
+		<variable name="t_5th_radio_pos" value="780"/>
+		<variable name="sub_head_mid" value="800"/>
+		<variable name="t_5th_checkbox_pos" value="880"/>
+		<variable name="t_5th_checkbox_text_pos" value="900"/>
+		<variable name="t_6th_radio_pos" value="980"/>
+		<variable name="t_6th_radio_text_pos" value="1000"/>
+		<variable name="t_7th_radio_pos" value="1080"/>
+		<variable name="t_7th_radio_text_pos" value="1100"/>
+		<!--c_addon-->
+		<!--variable name="ca_2" value="320"/-->
+		<variable name="ca_3" value="410"/>
+		<!--variable name="ca_4" value="400"/-->
+		<variable name="ca_5" value="635"/>
+		<variable name="ca_6" value="725"/>
+		<variable name="ca_7" value="715"/>
+		<variable name="ca_8" value="865"/>
+		<variable name="ca_9" value="950"/>
+		<variable name="ca_10" value="1040"/>
+		<variable name="ca_11" value="1030"/>
+		<variable name="ca_12" value="1180"/>
+		<variable name="ca_13" value="1265"/>
+		<variable name="ca_14" value="1345"/>
+		<variable name="c_cleanInputYpos" value="340"/>
+	</variables>
+</recovery>

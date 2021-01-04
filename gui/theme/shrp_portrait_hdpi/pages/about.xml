@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="my_info">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_shrp_about=S H R P}</text>
+			</text>
+
+			<checkbox>
+				<conditions>
+					<condition var1="shrpBuild" var2="1"/>
+					<condition var1="shrp_ver_status" op="=" var2="Stable"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="officialBuild" unchecked="officialBuild"/>
+				<text>{@offcialBuild=Official build}</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+			<checkbox>
+				<conditions>
+					<condition var1="shrpBuild" var2="0"/>
+					<condition var1="shrp_ver_status" op="=" var2="Stable"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="unofficialBuild" unchecked="unofficialBuild"/>
+				<text>{@unoffcialBuild=Unofficial build}</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+
+			<checkbox>
+				<condition var1="shrp_ver_status" op="=" var2="Beta"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="betaBuild" unchecked="betaBuild"/>
+				<text>{@betaBuild=Beta Release}</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>%shrp_ver_status%</text>
+			</text>
+			<text>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos29%" yop="+"/>
+				<font resource="superExtraLargeBold" color="%secondaryColor%"/>
+				<text>%shrp_ver%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos48%" yop="+"/>
+				<text>{@c_twrp_ver=TWRP Version}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos53%" yop="+"/>
+				<text>%tw_version%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos62%"/>
+				<text>{@additionalInfo=Additional Info}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos67%" w="%file_selector_default_w%" h="600"/>
+				<icon selected="deviceIco" unselected="deviceIco"/>
+				<listitem name="%device_code_name%">
+					<icon resource="deviceIco"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="%device_maintainer_name%">
+					<icon resource="c_usersRadioOn"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_moreInfo=More Info}">
+					<icon resource="shrpCredits"/>
+					<data variable="dummy"/>
+					<action function="page">shrpCredits</action>
+				</listitem>
+			</listbox>
+			
+			
+			
+			
+			
+			<!--image>
+				<placement x="135" y="75"/>
+				<image resource="c_logo"/>
+			</image>
+			<button style="c_text_dashboard">
+				<placement x="105" y="1440" w="221" h="170"/>
+				<fill color="%transparent%"/>
+				<text>%shrp_rec_type%</text>
+			</button>
+			<button style="c_text_dashboard">
+				<placement x="430" y="1440" w="221" h="170"/>
+				<fill color="%transparent%"/>
+				<text>%shrp_device_type%</text>
+			</button-->
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+
+
+		<page name="shrpCredits">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_moreInfo=More Info}</text>
+			</text>
+
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="deviceIco" unchecked="deviceIco"/>
+				<text>%shrp_rec_type%</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>Device Type</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos33%"/>
+				<text>%shrp_device_type%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos41%"/>
+				<text>{@c_credits=Credits}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos45%" w="%file_selector_default_w%" h="750"/>
+				<icon selected="shrpCredits" unselected="shrpCredits"/>
+				<listitem name="epicX">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="Giovix92">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="Dni9">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="steadfasterX">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="Corsicanu">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="Teamwin">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="osmOsis">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="Topjohnwu">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="VR25">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="DarthJabba9">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@Tcredit=None}">
+					<icon resource="globeIco"/>
+					<data variable="dummy"/>
+				</listitem>
+			</listbox>
+
+
+			<action>
+				<touch key="back"/>
+				<action function="page">my_info</action>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+	</pages>
+</recovery>

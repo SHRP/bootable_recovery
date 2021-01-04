@@ -1,0 +1,988 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+        <page name="c_splash_theme">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<button>
+				<placement x="0" y="%rndPos58%" w="1080" h="100"/>
+				<font resource="extraLargeBoldPlus" color="%primaryColor%"/>
+				<fill color="%transparent%"/>
+				<text>{@c_theme=Theme}</text>
+			</button>
+
+			<button>
+				<placement x="464" y="1496"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="set">themeProcessErr=0</action>
+					<action function="overlay">processTheme</action>
+					<action function="themeInit"/>
+				</actions>
+			</button>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+		<!--List of pages
+			processTheme
+			colorPanel
+			bgColorPanel
+
+
+		-->
+		<page name="processTheme">
+			<template name="overlayPageRO"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<condition var1="themeProcessErr" op="=" var2="-1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@c_file_busy=Please Wait}</text>
+			</text>
+			<text style="cnfrmHeadTitle">
+				<condition var1="themeProcessErr" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<font resource="largeBold" color="#FF0000"/>
+				<text>{@c_init_failed=Initialization Failed}</text>
+			</text>
+			<text style="cnfrmHeadTitle">
+				<condition var1="themeProcessErr" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@initSuccess=Initialization completed}</text>
+			</text>
+			<textbox>
+				<condition var1="themeProcessErr" op="=" var2="-1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="200"/>
+				<text>{@c_init=Initializing}</text>
+			</textbox>
+			<textbox>
+				<condition var1="themeProcessErr" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="200"/>
+				<text>{@themePatchErr=Error occurred while processing. Reflash recovery or contact with you device maintainer with logs.}</text>
+			</textbox>
+			<textbox>
+				<condition var1="themeProcessErr" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="200"/>
+				<text>{@openHelp=Press open to continue}</text>
+			</textbox>
+			<button>
+				<condition var1="themeProcessErr" op="=" var2="1"/>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="%primaryColor%"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@back_btn=Back}</text>
+				<actions>
+					<action function="set">themeProcessErr=-1</action>
+					<action function="overlay"/>
+				</actions>
+			</button>
+			<button>
+				<condition var1="themeProcessErr" op="=" var2="0"/>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="%primaryColor%"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@OpenTxt=Open}</text>
+				<actions>
+					<action function="overlay"/>
+					<action function="page">dashboardTheme</action>
+				</actions>
+			</button>
+		</page>
+		<page name="applyTheme">
+			<template name="overlayPageRO"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<condition var1="themeProcessErr" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@c_file_busy=Please Wait}</text>
+			</text>
+			<text style="cnfrmHeadTitle">
+				<condition var1="themeProcessErr" op="!=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<font resource="largeBold" color="#FF0000"/>
+				<text>{@c_failed=Failed}</text>
+			</text>
+			<textbox>
+				<condition var1="themeProcessErr" op="=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="200"/>
+				<text>{@c_repacking=Repacking}</text>
+			</textbox>
+			<textbox>
+				<condition var1="themeProcessErr" op="!=" var2="0"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="200"/>
+				<text>{@themePatchErr=Error occurred while processing. Reflash recovery or contact with your device maintainer with logs.}</text>
+			</textbox>
+			<button>
+				<condition var1="themeProcessErr" op="!=" var2="0"/>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="%primaryColor%"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@ok_btn=OK}</text>
+				<actions>
+					<action function="set">themeProcessErr=0</action>
+					<action function="reload"/>
+				</actions>
+			</button>
+		</page>
+		<page name="dashboardTheme">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_customization=Customization}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="goodSign" unchecked="goodSign"/>
+				<text>All good :)</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@clrs=Colors}</text>
+			</text>
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="listcolorBlack" unselected="listcolorBlack"/>
+				<data name="colorList" />
+				<color name="clrBlack" resource="listcolorBlack"/>
+				<color name="clrDeepBlue" resource="listcolorDeepBlue"/>
+				<color name="clrDark" resource="listcolorDark"/>
+				<color name="clrDarkBlue" resource="listcolorDarkBlue"/>
+				<color name="clrDarkGreen" resource="listcolorDarkGreen"/>
+				<color name="clrDarkPurple" resource="listcolorDarkPurple"/>
+				<color name="clrDarkViolate" resource="listcolorDarkViolate"/>
+				<color name="clrWhite" resource="listcolorWhite"/>
+				<color name="clrBlue" resource="listcolorBlue"/>
+				<color name="clrCyan" resource="listcolorCyan"/>
+				<color name="clrIndigo" resource="listcolorIndigo"/>
+				<color name="clrGreen" resource="listcolorGreen"/>
+				<color name="clrTeal" resource="listcolorTeal"/>
+				<color name="clrBrown" resource="listcolorBrown"/>
+				<color name="clrYellow" resource="listcolorYellow"/>
+				<color name="clrOrange" resource="listcolorOrange"/>
+				<color name="clrRed" resource="listcolorRed"/>
+				<color name="clrLred" resource="listcolorLred"/>
+				<color name="clrPink" resource="listcolorPink"/>
+				<color name="clrRpink" resource="listcolorRpink"/>
+				<color name="clrPurple" resource="listcolorPurple"/>
+				<color name="customColor" resource="listcolorRandom"/>
+
+				<colorType name="{@backgoundClr=Background color}" colorVar="backgroundColor"/>
+				<colorType name="{@accentClr=Accent color}" colorVar="accentColor"/>
+				<colorType name="{@primaryTextClr=Primary text color}" colorVar="primaryColor"/>
+				<colorType name="{@secondaryTextClr=Secondary text color}" colorVar="secondaryColor"/>
+				<colorType name="{@dashboardTextClr=Dashboard text color}" colorVar="dashboardTextColor"/>
+				<colorType name="{@navIcoClr=Navigation key color}" colorVar="navbarColor"/>
+			</listbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos77%"/>
+				<text>{@options=Options:}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos82%" w="%file_selector_default_w%" h="300"/>
+				<icon selected="moreCustomization" unselected="moreCustomization"/>
+				<listitem name="{@showHideComponents=Show/Hide components}">
+					<icon resource="showComponent"/>
+					<data variable="dummy"/>
+					<action function="page">showHidePanel</action>
+				</listitem>
+				<listitem name="{@moreCustomizations=More customizations}">
+					<icon resource="moreCustomization"/>
+					<data variable="dummy"/>
+					<action function="page">moreCustomizations</page>
+				</listitem>
+			</listbox>
+
+
+
+			<button>
+				<placement x="860" y="1450"/>
+				<condition var1="av_express" var2="1"/>
+				<image resource="c_restoreDefault"/>
+				<action function="restoredefaultsettings">theme</action>
+				<action function="set">tw_action=reboot</action>
+				<action function="set">tw_action_param=recovery</action>
+				<action function="set">tw_reboot_param=recovery</action>
+				<action function="reboot">%tw_reboot_param%</action>
+			</button>
+
+			<button>
+				<placement x="860" y="1628"/>
+				<text></text>
+				<image resource="c_apply_theme"/>
+				<actions>
+					<action function="overlay">applyTheme</action>
+					<action function="applyDefaultTheme"/>
+				</actions>
+			</button>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="cmd">
+cp -r /tmp/bak/* /twres/;
+rm -r /tmp/work;
+rm -r /tmp/bak;
+					</action>
+					<action function="reload"/>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="cmd">
+cp -r /tmp/bak/* /twres/;
+rm -r /tmp/work;
+rm -r /tmp/bak;
+					</action>
+					<action function="reload"/>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="colorPanel">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@chooseClr=Choose color}</text>
+			</text>
+
+			<!--
+				8 >>  y=1518    x=53, 177, 302, 427, 552, 677, 801, 927 
+				8 >>  y=1642	x=53, 177, 302, 427, 552, 677, 801, 927 
+			-->
+			<button>
+				<placement x="53" y="1518"/>
+				<image resource="colorBlack"/>
+				<action function="SetColor">%clrBlack%</action>
+			</button>
+			<button>
+				<condition var1="clrBlack" var2="colorHolder"/>
+				<placement x="53" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="177" y="1518"/>
+				<image resource="colorWhite"/>
+				<action function="SetColor">%clrWhite%</action>
+			</button>
+			<button>
+				<condition var1="clrWhite" var2="colorHolder"/>
+				<placement x="177" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="302" y="1518"/>
+				<image resource="colorBlue"/>
+				<action function="SetColor">%clrBlue%</action>
+			</button>
+			<button>
+				<condition var1="clrBlue" var2="colorHolder"/>
+				<placement x="302" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="427" y="1518"/>
+				<image resource="colorCyan"/>
+				<action function="SetColor">%clrCyan%</action>
+			</button>
+			<button>
+				<condition var1="clrCyan" var2="colorHolder"/>
+				<placement x="427" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="552" y="1518"/>
+				<image resource="colorIndigo"/>
+				<action function="SetColor">%clrIndigo%</action>
+			</button>
+			<button>
+				<condition var1="clrIndigo" var2="colorHolder"/>
+				<placement x="552" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="677" y="1518"/>
+				<image resource="colorGreen"/>
+				<action function="SetColor">%clrGreen%</action>
+			</button>
+			<button>
+				<condition var1="clrGreen" var2="colorHolder"/>
+				<placement x="677" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="801" y="1518"/>
+				<image resource="colorTeal"/>
+				<action function="SetColor">%clrTeal%</action>
+			</button>
+			<button>
+				<condition var1="clrTeal" var2="colorHolder"/>
+				<placement x="801" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="927" y="1518"/>
+				<image resource="colorBrown"/>
+				<action function="SetColor">%clrBrown%</action>
+			</button>
+			<button>
+				<condition var1="clrBrown" var2="colorHolder"/>
+				<placement x="927" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+
+
+
+
+			<button>
+				<placement x="53" y="1642"/>
+				<image resource="colorYellow"/>
+				<action function="SetColor">%clrYellow%</action>
+			</button>
+			<button>
+				<condition var1="clrYellow" var2="colorHolder"/>
+				<placement x="53" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="177" y="1642"/>
+				<image resource="colorOrange"/>
+				<action function="SetColor">%clrOrange%</action>
+			</button>
+			<button>
+				<condition var1="clrOrange" var2="colorHolder"/>
+				<placement x="177" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="302" y="1642"/>
+				<image resource="colorRed"/>
+				<action function="SetColor">%clrRed%</action>
+			</button>
+			<button>
+				<condition var1="clrRed" var2="colorHolder"/>
+				<placement x="302" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="427" y="1642"/>
+				<image resource="colorLred"/>
+				<action function="SetColor">%clrLred%</action>
+			</button>
+			<button>
+				<condition var1="clrLred" var2="colorHolder"/>
+				<placement x="427" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="552" y="1642"/>
+				<image resource="colorPink"/>
+				<action function="SetColor">%clrPink%</action>
+			</button>
+			<button>
+				<condition var1="clrPink" var2="colorHolder"/>
+				<placement x="552" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="677" y="1642"/>
+				<image resource="colorRpink"/>
+				<action function="SetColor">%clrRpink%</action>
+			</button>
+			<button>
+				<condition var1="clrRpink" var2="colorHolder"/>
+				<placement x="677" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="801" y="1642"/>
+				<image resource="colorPurple"/>
+				<action function="SetColor">%clrPurple%</action>
+			</button>
+			<button>
+				<condition var1="clrPurple" var2="colorHolder"/>
+				<placement x="801" y="1642"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="927" y="1642"/>
+				<image resource="colorWhite"/>
+			</button>
+
+
+
+
+
+			<!--button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@shrpBaseYes=Yes}</text>
+				<action function="overlay"/>
+			</button-->
+		</page>
+
+		<page name="bgColorPanel">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@chooseClr=Choose color}</text>
+			</text>
+
+			<!--
+				8 >>  y=1518    x=53, 177, 302, 427, 552, 677, 801, 927 
+				8 >>  y=1642	x=53, 177, 302, 427, 552, 677, 801, 927 
+			-->
+			<button>
+				<placement x="53" y="1518"/>
+				<image resource="colorBlack"/>
+				<action function="SetColor">%clrBlack%</action>
+			</button>
+			<button>
+				<condition var1="clrBlack" var2="colorHolder"/>
+				<placement x="53" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="177" y="1518"/>
+				<image resource="colorDark"/>
+				<action function="SetColor">%clrDark%</action>
+			</button>
+			<button>
+				<condition var1="clrDark" var2="colorHolder"/>
+				<placement x="177" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="302" y="1518"/>
+				<image resource="colorDeepBlue"/>
+				<action function="SetColor">%clrDeepBlue%</action>
+			</button>
+			<button>
+				<condition var1="clrDeepBlue" var2="colorHolder"/>
+				<placement x="302" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="427" y="1518"/>
+				<image resource="colorDarkBlue"/>
+				<action function="SetColor">%clrDarkBlue%</action>
+			</button>
+			<button>
+				<condition var1="clrDarkBlue" var2="colorHolder"/>
+				<placement x="427" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="552" y="1518"/>
+				<image resource="colorDarkGreen"/>
+				<action function="SetColor">%clrDarkGreen%</action>
+			</button>
+			<button>
+				<condition var1="clrDarkGreen" var2="colorHolder"/>
+				<placement x="552" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="677" y="1518"/>
+				<image resource="colorDarkPurple"/>
+				<action function="SetColor">%clrDarkPurple%</action>
+			</button>
+			<button>
+				<condition var1="clrDarkPurple" var2="colorHolder"/>
+				<placement x="677" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="801" y="1518"/>
+				<image resource="colorDarkViolate"/>
+				<action function="SetColor">%clrDarkViolate%</action>
+			</button>
+			<button>
+				<condition var1="clrDarkViolate" var2="colorHolder"/>
+				<placement x="801" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+			<button>
+				<placement x="927" y="1518"/>
+				<image resource="colorWhite"/>
+				<action function="SetColor">%clrWhite%</action>
+			</button>
+			<button>
+				<condition var1="clrWhite" var2="colorHolder"/>
+				<placement x="927" y="1518"/>
+				<image resource="colorEnabled"/>
+				<action function="overlay"/>
+			</button>
+		</page>
+
+
+
+		<page name="showHidePanel">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@showHide=Show/Hide}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@c_status_bar=Status bar}</text>
+				<data variable="statusBarEnabled"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@showHideComponents=Show/Hide components}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="showComponent" unselected="hideComponent"/>
+				<listitem name="{@clock=Clock}">
+					<data variable="clockEnabled"/>
+				</listitem>
+				<listitem name="{@centeredClock=Centered clock}">
+					<condition var1="clockEnabled" var2="1"/>
+					<data variable="centeredClockEnabled"/>
+				</listitem>
+				<listitem name="{@cpuTemp=Cpu temparature}">
+					<data variable="cpuTempEnabled"/>
+				</listitem>
+				<listitem name="{@c_batt_bar=Battery Bar}">
+					<data variable="batteryBarEnabled"/>
+				</listitem>
+				<listitem name="{@c_batt_icon=Battery Icon}">
+					<data variable="batteryIconEnabled"/>
+				</listitem>
+				<listitem name="{@c_batt_per=Battery Percentage}">
+					<data variable="batteryPercentageEnabled"/>
+				</listitem>
+				<listitem name="{@c_rounded_corner=Rounded Corner}">
+					<data variable="roundedCornerEnabled"/>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">dashboardTheme</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="moreCustomizations">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_more=More}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@c_show_lc=Show date on lockscreen}</text>
+				<data variable="c_dateview"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@moreCustomizations=More customizations}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="showComponent" unselected="hideComponent"/>
+				<listitem name="{@navTxt=Nav-bar}">
+					<icon resource="moreCustomization"/>
+					<data variable="dummy"/>
+					<action function="page">navBarPanel</action>
+				</listitem>
+				<listitem name="{@batteryTxt=Battery}">
+					<icon resource="batteryList"/>
+					<data variable="dummy"/>
+					<action function="page">batteryPanel</action>
+				</listitem>
+				<listitem name="{@dashboardTxt=Dashboard}">
+					<icon resource="dashboardList"/>
+					<data variable="dummy"/>
+					<action function="page">dashboardPanel</action>
+				</listitem>
+				<listitem name="{@c_rounded_corner=Rounded Corner}">
+					<icon resource="moreCustomization"/>
+					<data variable="dummy"/>
+					<action function="page">roundedCornerPanel</action>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">dashboardTheme</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="navBarPanel">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@navTxt=Nav-bar}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@c_nav_bg=Nav-Bar Background}</text>
+				<data variable="navbarBackgroundEnabled"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@c_nav_s=Nav-bar style}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="radio_true" unselected="radio_true"/>
+				<listitem name="{@c_dc_default=Default}">
+					<condition var1="navbarType" var2="1"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_dc_default=Default}">
+					<condition var1="navbarType" op="!=" var2="1"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">navbarType=1</action>
+				</listitem>
+
+				<listitem name="{@c_nav_nxt=Nxt-bit}">
+					<condition var1="navbarType" var2="2"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_nav_nxt=Nxt-bit}">
+					<condition var1="navbarType" op="!=" var2="2"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">navbarType=2</action>
+				</listitem>
+
+				<listitem name="{@c_nav_samsung=Samsung}">
+					<condition var1="navbarType" var2="3"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_nav_samsung=Samsung}">
+					<condition var1="navbarType" op="!=" var2="3"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">navbarType=3</action>
+				</listitem>
+
+				<listitem name="{@c_custom=Custom}">
+					<condition var1="navbarType" var2="4"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_custom=Custom}">
+					<condition var1="navbarType" op="!=" var2="4"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">navbarType=4</action>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">moreCustomizations</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="batteryPanel">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@batteryTxt=Battery}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@c_batt_per=Battery Percentage}</text>
+				<data variable="batteryPercentageEnabled"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@c_batt_type=Battery Icon Type}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="radio_true" unselected="radio_true"/>
+				<listitem name="{@c_batt_type_two=Portrait}">
+					<condition var1="batteryType" var2="1"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_batt_type_two=Portrait}">
+					<condition var1="batteryType" op="!=" var2="1"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">batteryType=1</action>
+				</listitem>
+
+				<listitem name="{@c_batt_type_one=Circle}">
+					<condition var1="batteryType" var2="2"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_batt_type_one=Circle}">
+					<condition var1="batteryType" op="!=" var2="2"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">batteryType=2</action>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">moreCustomizations</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="dashboardPanel">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@dashboardTxt=Dashboard}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@dashboardTextClr=Dashboard text color}</text>
+				<data variable="dashboardTextColorEnabled"/>
+			</checkbox>
+
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@dashboardSubTint=Dashboard sub tint}</text>
+				<data variable="dashboardSubTintEnabled"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
+				<text>{@c_dashboard_icon=Dashboard icon}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos36%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="radio_true" unselected="radio_true"/>
+				<listitem name="{@c_dc_default=Default}">
+					<condition var1="dashboardIconType" var2="1"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_dc_default=Default}">
+					<condition var1="dashboardIconType" op="!=" var2="1"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">dashboardIconType=1</action>
+				</listitem>
+
+				<listitem name="{@c_stock_dashboard_ico=Stock}">
+					<condition var1="dashboardIconType" var2="2"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_stock_dashboard_ico=Stock}">
+					<condition var1="dashboardIconType" op="!=" var2="2"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">dashboardIconType=2</action>
+				</listitem>
+
+				<listitem name="{@c_dc_aex=Aex Style}">
+					<condition var1="dashboardIconType" var2="3"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_dc_aex=Aex Style}">
+					<condition var1="dashboardIconType" op="!=" var2="3"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">dashboardIconType=3</action>
+				</listitem>
+
+				<listitem name="{@c_dc_black=Black (Recommended for white background)}">
+					<condition var1="dashboardIconType" var2="4"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_dc_black=Black (Recommended for white background)}">
+					<condition var1="dashboardIconType" op="!=" var2="4"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">dashboardIconType=4</action>
+				</listitem>
+
+				<listitem name="{@c_dc_white=White (Recommended for black background)}">
+					<condition var1="dashboardIconType" var2="5"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_dc_white=White (Recommended for black background)}">
+					<condition var1="dashboardIconType" op="!=" var2="5"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">dashboardIconType=5</action>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">moreCustomizations</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="roundedCornerPanel">
+			<template name="navBackOnly"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_rounded_corner=Rounded Corner}</text>
+			</text>
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="toggleOn" unchecked="toggleOff"/>
+				<text>{@toggle=Toggle}</text>
+				<data variable="roundedCornerEnabled"/>
+			</checkbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@c_radius=Radius}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
+				<icon selected="radio_true" unselected="radio_true"/>
+				<listitem name="{@c_small=Small}">
+					<condition var1="roundedcornerType" var2="1"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_small=Small}">
+					<condition var1="roundedcornerType" op="!=" var2="1"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">roundedcornerType=1</action>
+				</listitem>
+
+				<listitem name="{@c_medium=Medium}">
+					<condition var1="roundedcornerType" var2="2"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_medium=Medium}">
+					<condition var1="roundedcornerType" op="!=" var2="2"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">roundedcornerType=2</action>
+				</listitem>
+
+				<listitem name="{@c_big=Big}">
+					<condition var1="roundedcornerType" var2="3"/>
+					<icon resource="radio_true"/>
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="{@c_big=Big}">
+					<condition var1="roundedcornerType" op="!=" var2="3"/>
+					<icon resource="radio_false"/>
+					<data variable="dummy"/>
+					<action function="set">roundedcornerType=3</action>
+				</listitem>
+			</listbox>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">moreCustomizations</action>
+				</actions>
+			</action>
+		</page>
+
+	</pages>
+</recovery>

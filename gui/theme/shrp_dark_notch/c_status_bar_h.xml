@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<recovery>
+	<details>
+		<resolution width="1080" height="1920"/>
+		<author>Teamwin | epicX</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>Sky_hawK_theme_handler</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+	<variables>
+		<variable name="c_battery_bar_triger" value="0" persist="0"/>
+		<variable name="c_status_bar_triger" value="0" persist="0"/>
+		<variable name="c_battery_icon_triger" value="0" persist="0"/>
+		<variable name="c_battery_portrait_icon_triger" value="1" persist="0"/>
+		<variable name="c_battery_circle_icon_triger" value="0" persist="0"/>
+		<variable name="c_battery_txt_triger" value="0" persist="0"/>
+		<variable name="c_time_txt_triger" value="0" persist="0"/>
+		<variable name="c_rounded_corner_trigger" value="0" persist="0"/>
+		<variable name="c_rounded_corner_type" value="0" persist="0"/>
+		<variable name="c_dash_ico" value="0" persist="0"/>
+		<variable name="c_nav_type" value="0" persist="0"/>
+		<variable name="c_nav_bg" value="0" persist="0"/>
+		<variable name="c_bgc" value="4" persist="0"/>
+		<variable name="c_text_color" value="0" persist="0"/>
+		<variable name="c_acc_color" value="0" persist="0"/>
+		<variable name="c_acc_color_val" value="#0088ff" persist="0"/>
+		<variable name="c_notch_mode" value="1" persist="0"/>
+		<variable name="c_scolor_status" value="0" persist="0"/>
+	</variables>
+</recovery>
