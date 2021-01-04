@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<recovery>
+	<details>
+		<resolution width="1080" height="1920"/>
+		<author>TeamSHRP</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>None</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+    <resources>
+		<!--BatteryBar Resources-->
+		<image name="c_battery_bar_001" filename="c_battery_bar_001"/>
+		<image name="c_battery_bar_005" filename="c_battery_bar_005"/>
+		<image name="c_battery_bar_010" filename="c_battery_bar_010"/>
+		<image name="c_battery_bar_015" filename="c_battery_bar_015"/>
+		<image name="c_battery_bar_020" filename="c_battery_bar_020"/>
+		<image name="c_battery_bar_025" filename="c_battery_bar_025"/>
+		<image name="c_battery_bar_030" filename="c_battery_bar_030"/>
+		<image name="c_battery_bar_035" filename="c_battery_bar_035"/>
+		<image name="c_battery_bar_040" filename="c_battery_bar_040"/>
+		<image name="c_battery_bar_045" filename="c_battery_bar_045"/>
+		<image name="c_battery_bar_050" filename="c_battery_bar_050"/>
+		<image name="c_battery_bar_055" filename="c_battery_bar_055"/>
+		<image name="c_battery_bar_060" filename="c_battery_bar_060"/>
+		<image name="c_battery_bar_065" filename="c_battery_bar_065"/>
+		<image name="c_battery_bar_070" filename="c_battery_bar_070"/>
+		<image name="c_battery_bar_075" filename="c_battery_bar_075"/>
+		<image name="c_battery_bar_080" filename="c_battery_bar_080"/>
+		<image name="c_battery_bar_085" filename="c_battery_bar_085"/>
+		<image name="c_battery_bar_090" filename="c_battery_bar_090"/>
+		<image name="c_battery_bar_095" filename="c_battery_bar_095"/>
+		<image name="c_battery_bar_100" filename="c_battery_bar_100"/>
+		<!-- For_dashboard_icon_start-->
+		<image name="c_dashboard_about" filename="c_dashboard_about" retainaspect="1"/>
+		<image name="c_dashboard_advanced" filename="c_dashboard_advanced" retainaspect="1"/>
+		<image name="c_dashboard_backup" filename="c_dashboard_backup" retainaspect="1"/>
+		<image name="c_dashboard_filemanager" filename="c_dashboard_filemanager" retainaspect="1"/>
+		<image name="c_dashboard_flash" filename="c_dashboard_flash" retainaspect="1"/>
+		<image name="c_dashboard_magisk" filename="c_dashboard_magisk" retainaspect="1"/>
+		<image name="c_dashboard_mount" filename="c_dashboard_mount" retainaspect="1"/>
+		<image name="c_dashboard_reboot" filename="c_dashboard_reboot" retainaspect="1"/>
+		<image name="c_dashboard_restore" filename="c_dashboard_restore" retainaspect="1"/>
+		<image name="c_dashboard_settings" filename="c_dashboard_settings" retainaspect="1"/>
+		<image name="c_dashboard_terminal" filename="c_dashboard_terminal" retainaspect="1"/>
+		<image name="c_dashboard_wipe" filename="c_dashboard_wipe" retainaspect="1"/>
+		<image name="c_dashboard_addon" filename="c_dashboard_addon" retainaspect="1"/>
+		<!-- For_dashboard_icon_end-->
+		<image name="c_dash_text_box" filename="c_dash_text_box" retainaspect="0"/>
+		<image name="c_storage" filename="c_storage" retainaspect="1"/>
+		<image name="c_flash" filename="c_flash" retainaspect="1"/>
+		<image name="c_queue" filename="c_queue" retainaspect="1"/>
+		<image name="c_line" filename="c_line" retainaspect="1"/>
+		<image name="c_line_t" filename="c_line_t" retainaspect="1"/>
+		<image name="c_reboot" filename="c_reboot" retainaspect="1"/>
+		<image name="c_repair" filename="c_repair" retainaspect="1"/>
+		<image name="c_ok" filename="c_ok" retainaspect="1"/>
+		<image name="c_cancel" filename="c_cancel" retainaspect="1"/>
+		<image name="c_delete" filename="c_delete" retainaspect="1"/>
+		<image name="c_refresh" filename="c_refresh" retainaspect="1"/>
+		<image name="c_circle4" filename="c_circle4" retainaspect="1"/>
+		<image name="c_mtp_enabled" filename="c_mtp_enabled" retainaspect="1"/>
+		<image name="c_mtp_disabled" filename="c_mtp_disabled" retainaspect="1"/>
+		<image name="c_usb" filename="c_usb" retainaspect="1"/>
+		<image name="c_usb_disabled" filename="c_usb_disabled" retainaspect="1"/>
+		<image name="c_on_tap_unlock" filename="c_on_tap_unlock" retainaspect="1"/>
+		<image name="c_on_tap_unlock_pressed" filename="c_on_tap_unlock_pressed" retainaspect="1"/>
+		<image name="c_tab_backup_bg" filename="c_tab_backup_bg" retainaspect="1"/>
+		<image name="c_reboot_to_bootloader" filename="c_reboot_to_bootloader" retainaspect="1"/>
+		<image name="c_power_off" filename="c_power_off" retainaspect="1"/>
+		<image name="c_reboot_to_recovery" filename="c_reboot_to_recovery" retainaspect="1"/>
+		<image name="c_reboot_to_system" filename="c_reboot_to_system" retainaspect="1"/>
+		<image name="c_selinux" filename="c_selinux" retainaspect="1"/>
+		<image name="c_log" filename="c_log" retainaspect="1"/>
+		<image name="c_adb" filename="c_adb" retainaspect="1"/>
+		<image name="c_dashboard_lang" filename="c_dashboard_lang" retainaspect="1"/>
+		<image name="c_logo" filename="c_logo" retainaspect="1"/>
+		<image name="c_format_data" filename="c_format_data" retainaspect="1"/>
+		<image name="c_shadow" filename="c_shadow" retainaspect="1"/>
+		<image name="c_shadow_invert" filename="c_shadow_invert" retainaspect="1"/>
+		<image name="bt" filename="bt"/>
+		<image name="c_power_menu_bg" filename="c_power_menu_bg"/>
+		<image name="c_flashlight_off" filename="c_flashlight_off" retainaspect="1"/>
+		<image name="c_flashlight_on" filename="c_flashlight_on" retainaspect="1"/>
+		<image name="c_epicxsort" filename="c_epicxsort" retainaspect="1"/>
+		<image name="c_dateSort" filename="c_dateSort" retainaspect="1"/>
+		<image name="c_lock_pass" filename="c_lock_pass" retainaspect="1"/>
+		<image name="c_lock_patt" filename="c_lock_patt" retainaspect="1"/>
+		<image name="c_battery_low" filename="c_battery_low" retainaspect="1"/>
+		<image name="c_battery_20" filename="c_battery_20" retainaspect="1"/>
+		<image name="c_battery_30" filename="c_battery_30" retainaspect="1"/>
+		<image name="c_battery_50" filename="c_battery_50" retainaspect="1"/>
+		<image name="c_battery_60" filename="c_battery_60" retainaspect="1"/>
+		<image name="c_battery_80" filename="c_battery_80" retainaspect="1"/>
+		<image name="c_battery_90" filename="c_battery_90" retainaspect="1"/>
+		<image name="c_battery_full" filename="c_battery_full" retainaspect="1"/>
+		<image name="c_clear_input" filename="c_clear_input" retainaspect="1"/>
+		<image name="c_dashboard_lock" filename="c_dashboard_lock" retainaspect="1"/>
+		<image name="c_mod" filename="c_mod" retainaspect="1"/>
+		<image name="c_reset_lock" filename="c_reset_lock" retainaspect="1"/>
+		<image name="c_rounded_1" filename="c_rounded_1" retainaspect="0"/>
+		<image name="c_rounded_2" filename="c_rounded_2" retainaspect="0"/>
+		<image name="c_rounded_3" filename="c_rounded_3" retainaspect="0"/>
+		<image name="c_rounded_4" filename="c_rounded_4" retainaspect="0"/>
+		<image name="c_sd_part" filename="c_sd_part" retainaspect="1"/>
+		<image name="c_apply_theme" filename="c_apply_theme" retainaspect="1"/>
+		<image name="c_advanced" filename="c_advanced" retainaspect="1"/>
+		<image name="c_download_mode" filename="c_download_mode" retainaspect="1"/>
+		<image name="c_edl_mode" filename="c_edl_mode" retainaspect="1"/>
+        <image name="backup" filename="backup" retainaspect="1"/>
+		<image name="c_reload" filename="c_reload" retainaspect="1"/>
+		<image name="c_backup_encryption" filename="c_backup_encryption" retainaspect="1"/>
+		<!--epicX_image_resources_end-->
+		<image name="file" filename="file" retainaspect="1"/>
+		<image name="folder" filename="folder" retainaspect="1"/>
+		<image name="home" filename="home" retainaspect="1"/>
+		<image name="back" filename="back" retainaspect="1"/>
+		<image name="console" filename="console" retainaspect="1"/>
+		<image name="kb_show" filename="kb_show" retainaspect="1"/>
+		<image name="checkbox_false" filename="checkbox_false" retainaspect="1"/>
+		<image name="checkbox_true" filename="checkbox_true" retainaspect="1"/>
+		<image name="radio_false" filename="radio_false" retainaspect="1"/>
+		<image name="radio_true" filename="radio_true" retainaspect="1"/>
+		<image name="handle" filename="handle"/>
+		<image name="cursor" filename="cursor" retainaspect="1"/>
+		<image name="backspace" filename="backspace" retainaspect="1"/>
+		<image name="enter" filename="enter" retainaspect="1"/>
+		<image name="shift" filename="shift" retainaspect="1"/>
+		<image name="shift_fill" filename="shift_fill" retainaspect="1"/>
+		<image name="space" filename="space" retainaspect="1"/>
+		<image name="kb_arrow_left" filename="kb_arrow_left" retainaspect="1"/>
+		<image name="kb_arrow_right" filename="kb_arrow_right" retainaspect="1"/>
+		<image name="kb_arrow_up" filename="kb_arrow_up" retainaspect="1"/>
+		<image name="kb_arrow_down" filename="kb_arrow_down" retainaspect="1"/>
+		<image name="c_restoreDefault" filename="c_restoreDefault" retainaspect="1"/>
+		<image name="c_dashboard_userFbe" filename="c_dashboard_userFbe" retainaspect="1"/>
+		<image name="c_usersRadioOn" filename="c_usersRadioOn" retainaspect="1"/>
+		<image name="c_usersRadioOff" filename="c_usersRadioOff" retainaspect="1"/>
+
+
+
+		<!--New Images-->
+		<image name="actionCopyLog" filename="actionCopyLog" retainaspect="1"/>
+		<image name="actionWipe" filename="actionWipe" retainaspect="1"/>
+		<image name="actionRebootRecovery" filename="actionRebootRecovery" retainaspect="1"/>
+		<image name="actionRebootSystem" filename="actionRebootSystem" retainaspect="1"/>
+		<image name="actionOption" filename="actionOption" retainaspect="1"/>
+
+		<image name="fileArchive" filename="fileArchive" retainaspect="1"/>
+		<image name="fileImg" filename="fileImg" retainaspect="1"/>
+		<image name="fileImg2" filename="fileImg2" retainaspect="1"/>
+		<image name="fileTheme" filename="fileTheme" retainaspect="1"/>
+
+
+		<image name="controlFlashOff" filename="controlFlashOff" retainaspect="1"/>
+		<image name="controlFlashOn" filename="controlFlashOn" retainaspect="1"/>
+		<image name="controlLock" filename="controlLock" retainaspect="1"/>
+		<image name="sliderDot" filename="sliderDot" retainaspect="1"/>
+
+
+		<image name="goodSign" filename="goodSign" retainaspect="1"/>
+		<image name="warningSign" filename="warningSign" retainaspect="1"/>
+		<image name="installSign" filename="installSign" retainaspect="1"/>
+		<image name="uninstallSign" filename="uninstallSign" retainaspect="1"/>
+		<image name="magiskModule" filename="magiskModule" retainaspect="1"/>
+
+		<image name="toggleOn" filename="toggleOn" retainaspect="1"/>
+		<image name="toggleOff" filename="toggleOff" retainaspect="1"/>
+
+		<!--For Color panel-->
+		<image name="colorBlack" filename="colorBlack" retainaspect="1"/>
+		<image name="colorDark" filename="colorDark" retainaspect="1"/>
+		<image name="colorDarkBlue" filename="colorDarkBlue" retainaspect="1"/>
+		<image name="colorDarkGreen" filename="colorDarkGreen" retainaspect="1"/>
+		<image name="colorDarkPurple" filename="colorDarkPurple" retainaspect="1"/>
+		<image name="colorDarkViolate" filename="colorDarkViolate" retainaspect="1"/>
+		<image name="colorDeepBlue" filename="colorDeepBlue" retainaspect="1"/>
+
+		<image name="colorWhite" filename="colorWhite" retainaspect="1"/>
+		<image name="colorBlue" filename="colorBlue" retainaspect="1"/>
+		<image name="colorCyan" filename="colorCyan" retainaspect="1"/>
+		<image name="colorIndigo" filename="colorIndigo" retainaspect="1"/>
+		<image name="colorGreen" filename="colorGreen" retainaspect="1"/>
+		<image name="colorTeal" filename="colorTeal" retainaspect="1"/>
+		<image name="colorBrown" filename="colorBrown" retainaspect="1"/>
+		<image name="colorYellow" filename="colorYellow" retainaspect="1"/>
+		<image name="colorOrange" filename="colorOrange" retainaspect="1"/>
+		<image name="colorRed" filename="colorRed" retainaspect="1"/>
+		<image name="colorLred" filename="colorLred" retainaspect="1"/>
+		<image name="colorPink" filename="colorPink" retainaspect="1"/>
+		<image name="colorRpink" filename="colorRpink" retainaspect="1"/>
+		<image name="colorPurple" filename="colorPurple" retainaspect="1"/>
+		
+		<image name="colorEnabled" filename="colorEnabled" retainaspect="1"/>
+		<!--For Color lists-->
+		<image name="listcolorBlack" filename="listcolorBlack" retainaspect="1"/>
+		<image name="listcolorDark" filename="listcolorDark" retainaspect="1"/>
+		<image name="listcolorDarkBlue" filename="listcolorDarkBlue" retainaspect="1"/>
+		<image name="listcolorDarkGreen" filename="listcolorDarkGreen" retainaspect="1"/>
+		<image name="listcolorDarkPurple" filename="listcolorDarkPurple" retainaspect="1"/>
+		<image name="listcolorDarkViolate" filename="listcolorDarkViolate" retainaspect="1"/>
+		<image name="listcolorDeepBlue" filename="listcolorDeepBlue" retainaspect="1"/>
+		<image name="listcolorWhite" filename="listcolorWhite" retainaspect="1"/>
+		<image name="listcolorBlue" filename="listcolorBlue" retainaspect="1"/>
+		<image name="listcolorCyan" filename="listcolorCyan" retainaspect="1"/>
+		<image name="listcolorIndigo" filename="listcolorIndigo" retainaspect="1"/>
+		<image name="listcolorGreen" filename="listcolorGreen" retainaspect="1"/>
+		<image name="listcolorTeal" filename="listcolorTeal" retainaspect="1"/>
+		<image name="listcolorBrown" filename="listcolorBrown" retainaspect="1"/>
+		<image name="listcolorYellow" filename="listcolorYellow" retainaspect="1"/>
+		<image name="listcolorOrange" filename="listcolorOrange" retainaspect="1"/>
+		<image name="listcolorRed" filename="listcolorRed" retainaspect="1"/>
+		<image name="listcolorLred" filename="listcolorLred" retainaspect="1"/>
+		<image name="listcolorPink" filename="listcolorPink" retainaspect="1"/>
+		<image name="listcolorRpink" filename="listcolorRpink" retainaspect="1"/>
+		<image name="listcolorPurple" filename="listcolorPurple" retainaspect="1"/>
+		<image name="listcolorRandom" filename="listcolorRandom" retainaspect="1"/>
+
+		<!--More Theme List Resources-->
+		<image name="moreCustomization" filename="moreCustomization" retainaspect="1"/>
+		<image name="showComponent" filename="showComponent" retainaspect="1"/>
+		<image name="hideComponent" filename="hideComponent" retainaspect="1"/>
+		<image name="batteryList" filename="batteryList" retainaspect="1"/>
+		<image name="dashboardList" filename="dashboardList" retainaspect="1"/>
+		<image name="deviceIco" filename="deviceIco" retainaspect="1"/>
+		<image name="globeIco" filename="globeIco" retainaspect="1"/>
+
+
+		<image name="actionCopy" filename="actionCopy" retainaspect="1"/>
+		<image name="actionCreateFolder" filename="actionCreateFolder" retainaspect="1"/>
+		<image name="actionCut" filename="actionCut" retainaspect="1"/>
+		<image name="actionDelete" filename="actionDelete" retainaspect="1"/>
+		<image name="actionFolderInfo" filename="actionFolderInfo" retainaspect="1"/>
+		<image name="actionPaste" filename="actionPaste" retainaspect="1"/>
+		<image name="actionRename" filename="actionRename" retainaspect="1"/>
+		<image name="actionSelectMultipleFile" filename="actionSelectMultipleFile" retainaspect="1"/>
+		<image name="actionUnselectMultipleFile" filename="actionUnselectMultipleFile" retainaspect="1"/>
+		<image name="actionZipOperation" filename="actionZipOperation" retainaspect="1"/>
+		<image name="openSideBar" filename="openSideBar" retainaspect="1"/>
+		<image name="search" filename="search" retainaspect="1"/>
+
+		<image name="editPermissions" filename="editPermissions" retainaspect="1"/>
+		<image name="actionArchive" filename="actionArchive" retainaspect="1"/>
+		<image name="editFile" filename="editFile" retainaspect="1"/>
+		<image name="fileSelected" filename="fileSelected" retainaspect="1"/>
+		<image name="fileUnselected" filename="fileUnselected" retainaspect="1"/>
+		<image name="folderSelected" filename="folderSelected" retainaspect="1"/>
+		<image name="folderUnselected" filename="folderUnselected" retainaspect="1"/>
+		<image name="folderUp" filename="folderUp" retainaspect="1"/>
+		<image name="fileArchive" filename="fileArchive" retainaspect="1"/>
+		<image name="actionApplyTheme" filename="actionApplyTheme" retainaspect="1"/>
+		<image name="permButton" filename="permButton" retainaspect="1"/>
+
+		<image name="fileLocRoot" filename="fileLocRoot" retainaspect="1"/>
+		<image name="fileLocSystem" filename="fileLocSystem" retainaspect="1"/>
+		<image name="fileLocInternal" filename="fileLocInternal" retainaspect="1"/>
+		<image name="fileLocExternal" filename="fileLocExternal" retainaspect="1"/>
+		<image name="fileLocOtg" filename="fileLocOtg" retainaspect="1"/>
+		<image name="fileMangerSettings" filename="fileMangerSettings" retainaspect="1"/>
+		<image name="slotPanel" filename="slotPanel" retainaspect="1"/>
+
+
+		<image name="officialBuild" filename="officialBuild" retainaspect="1"/>
+		<image name="unofficialBuild" filename="unofficialBuild" retainaspect="1"/>
+		<image name="betaBuild" filename="betaBuild" retainaspect="1"/>
+
+		<image name="generalSettings" filename="generalSettings" retainaspect="1"/>
+		<image name="generalSettingsDisabled" filename="generalSettingsDisabled" retainaspect="1"/>
+		<image name="timeSettings" filename="timeSettings" retainaspect="1"/>
+		<image name="timeSettingsDisabled" filename="timeSettingsDisabled" retainaspect="1"/>
+		<image name="deviceSettings" filename="deviceSettings" retainaspect="1"/>
+		<image name="deviceSettingsDisabled" filename="deviceSettingsDisabled" retainaspect="1"/>
+		<image name="shrpSettings" filename="shrpSettings" retainaspect="1"/>
+		<image name="shrpSettingsDisabled" filename="shrpSettingsDisabled" retainaspect="1"/>
+
+		
+		<image name="shrpCredits" filename="shrpCredits" retainaspect="1"/>
+		<image name="dashboardBackground" filename="dashboardBackground" retainaspect="1"/>
+		<image name="SKYHAWK" filename="SKYHAWK" retainaspect="1"/>
+	</resources>
+</recovery>

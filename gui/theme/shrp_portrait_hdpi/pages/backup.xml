@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="backup">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@backup_hdr=Backup}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@storage_hdr=Storage: %tw_storage_display_name% (%tw_storage_free_size% MB)}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@backup_hdr=Backup} {@name=Name:}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos24%"/>
+				<text>%tw_backup_name%</text>
+			</text>
+			<button>
+				<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos24%" w="%file_selector_default_w%" h="45"/>
+				<fill color="%transparent%"/>
+				<actions>
+					<action function="set">tw_fileexists=0</action>
+					<action function="page">backupname1</action>
+				</actions>
+			</button>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
+				<text>{@partitions=Partitions:}</text>
+			</text>
+
+			<partitionlist>
+				<placement x="55" y="%rPos36%" w="%file_selector_default_w%" h="%rndPos37%"/>
+				<data name="tw_backup_list"/>
+				<listtype name="backup"/>
+			</partitionlist>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos77%"/>
+				<text>{@options=Options:}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos82%" w="%file_selector_default_w%" h="300"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@enable_backup_comp_chk=Enable compression}">
+					<data variable="tw_use_compression"/>
+				</listitem>
+				<listitem name="{@skip_digest_backup_chk=Skip Digest generation during backup}">
+					<data variable="tw_skip_digest_generate"/>
+				</listitem>
+				<listitem name="{@disable_backup_space_chk=Disable free space check before backup}">
+					<data variable="tw_disable_free_space"/>
+				</listitem>
+			</listbox>
+
+			<button>
+			  <placement x="860" y="%rndPos69%"/>
+				<conditions>
+					<condition var1="tw_include_encrypted_backup" var2="1"/>
+					<condition var1="tw_encrypt_backup" var2="0"/>
+					<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
+				</conditions>
+			  <image resource="c_backup_encryption"/>
+			  <actions>
+			    <action function="set">tw_password_not_match=0</action>
+			    <action function="page">backupencryption</action>
+			  </actions>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos81%"/>
+				<image resource="c_refresh"/>
+				<actions>
+					<action function="refreshsizes"/>
+					<action function="page">backup</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
+				<placement x="860" y="%rndPos93%"/>
+				<image resource="c_storage"/>
+				<actions>
+					<action function="set">tw_back=backup</action>
+					<action function="overlay">select_storage</action>
+				</actions>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<action function="page">backup_run</action>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="backupname1">
+			<action>
+				<condition var1="tw_backup_name" op="=" var2="{@auto_generate=(Auto Generate)}"/>
+				<action function="generatebackupname"/>
+			</action>
+
+			<action>
+				<action function="page">backupname2</action>
+			</action>
+		</page>
+
+		<page name="backupname2">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@fm_rename_btn=Rename}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@rename_backup_confirm=Rename Backup?}</text>
+			</text>
+			<!--template name="c_tab_backup"/-->
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@backup_hdr=Backup} {@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_backup_name%</text>
+				<data name="tw_backup_name"/>
+				<restrict minlen="1" maxlen="64" allow=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.{}[]"/>
+				<actions>
+					<action function="set">tw_filecheck=%tw_backups_folder%/%tw_backup_name%</action>
+					<action function="set">tw_existpage=backupname2</action>
+					<action function="set">tw_notexistpage=backup</action>
+					<action function="page">filecheck</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_backup_name;backupname1</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="tw_fileexists" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@backup_name_exists=A backup with that name already exists!}</text>
+			</text>
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="set">tw_backup_name={@auto_generate=(Auto Generate)}</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_backup_name={@auto_generate=(Auto Generate)}</action>
+					<action function="page">backup</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="backupencryption">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@encryption_tab=Encryption}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_encrypt_ques=Encrypt your Backup?}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@enter_pass=Enter Password:}</text>
+			</text>
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_backup_encrypt_display%</text>
+				<data name="tw_backup_password" mask="*" maskvariable="tw_backup_encrypt_display"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="page">backupencryption2</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_backup_password;backupencryption</action>
+			</button>
+			<text style="warnInfoText">
+				<condition var1="tw_password_not_match" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@c_failed_same_info=Passwords did not match!}</text>
+			</text>
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_encrypt_backup=0</action>
+					<action function="set">tw_backup_password=</action>
+					<action function="set">tw_backup_password2=</action>
+					<action function="set">tw_backup_encrypt_display=</action>
+					<action function="set">tw_backup_encrypt_display2=</action>
+					<action function="page">backup</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="backupencryption2">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@encryption_tab=Encryption}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_encrypt_ques=Encrypt your Backup?}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@enter_pass_again=Enter Password again: }</text>
+			</text>
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_backup_encrypt_display2%</text>
+				<data name="tw_backup_password2" mask="*" maskvariable="tw_backup_encrypt_display2"/>
+				<restrict minlen="1" maxlen="32" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"/>
+				<action function="page">checkbackuppassword</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_backup_password2;backupencryption2</action>
+			</button>
+			
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_encrypt_backup=0</action>
+					<action function="set">tw_backup_password=</action>
+					<action function="set">tw_backup_password2=</action>
+					<action function="set">tw_backup_encrypt_display=</action>
+					<action function="set">tw_backup_encrypt_display2=</action>
+					<action function="page">backup</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="checkbackuppassword">
+			<action>
+				<condition var1="tw_backup_password2" var2="tw_backup_password"/>
+				<actions>
+					<action function="set">tw_encrypt_backup=1</action>
+					<action function="page">backup</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_backup_password2" op="!=" var2="tw_backup_password"/>
+				<actions>
+					<action function="set">tw_encrypt_backup=0</action>
+					<action function="set">tw_password_not_match=1</action>
+					<action function="set">tw_backup_password=</action>
+					<action function="set">tw_backup_password2=</action>
+					<action function="set">tw_backup_encrypt_display=</action>
+					<action function="set">tw_backup_encrypt_display2=</action>
+					<action function="page">backupencryption</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="backup_run">
+			<template name="c_page"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>%tw_operation%</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_partition% Partition</text>
+			</text>
+			<template name="c_console_custom"/>
+
+			<template name="progress_bar"/>
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="1430"/>
+				<text>{@progress=Progress:} %tw_size_progress%</text>
+			</text>
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_cancel"/>
+				<action function="cancelbackup"/>
+			</button>
+
+			<action>
+				<action function="nandroid">backup</action>
+			</action>
+			<action>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_cancel_backup" var2="0"/>
+				<actions>
+					<action function="set">tw_back=backup</action>
+					<action function="set">tw_complete_text1={@backup_complete=Backup Complete}</action>
+					<action function="set">tw_show_reboot=1</action>
+					<action function="page">action_complete</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_cancel_backup" var2="1"/>
+				<actions>
+					<action function="set">tw_back=backup</action>
+					<action function="set">tw_complete_text1={@backup_cancel=Backup Cancelled}</action>
+					<action function="set">tw_show_reboot=1</action>
+					<action function="page">action_complete</action>
+				</actions>
+			</action>
+		</page>
+	</pages>
+</recovery>

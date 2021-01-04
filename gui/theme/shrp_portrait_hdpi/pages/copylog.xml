@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="copylog">
+			<template name="c_page"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_logs=Logs}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@copying_log=Copy Logs to SD Card}</text>
+			</text>
+
+			<checkbox>
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@include_kernel_log=Include Kernel Log}</text>
+				<data variable="tw_include_kernel_log" value="1"/>
+			</checkbox>
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="set">tw_back=advanced</action>
+					<action function="set">tw_action=copylog</action>
+					<action function="set">tw_action_text1={@copying_log=Copy Logs to SD Card}</action>
+					<action function="set">tw_complete_text1={@copy_log_complete=Logs Copy Completed}</action>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">advanced</action>
+				</actions>
+			</action>
+		</page>
+	</pages>
+</recovery>

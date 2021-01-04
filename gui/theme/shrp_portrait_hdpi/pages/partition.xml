@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="partsdcardsel">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@part_sd_btn=Partition SD Card}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@invalid_partsd_sel=You must select a removable device}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@select_storage_hdr=Select Storage}</text>
+			</text>
+			<partitionlist style="partitionlist_storage">
+				<placement x="50" y="%rPos24%" w="%file_selector_default_w%" h="%rndPos47%"/>
+				<data name="tw_storage_path"/>
+				<listtype name="storage"/>
+			</partitionlist>
+
+			<button>
+				<image resource="c_ok"/>
+				<placement x="860" y="%rndPos105%"/>
+				<actions>
+					<action function="getpartitiondetails">tw_storage_path</action>
+					<action function="page">partsdcardcheck</action>
+				</actions>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">advanced</action>
+			</action>
+		</page>
+
+		<page name="partsdcardcheck">
+			<action>
+				<condition var1="tw_partition_removable" op="=" var2="1"/>
+				<actions>
+					<action function="set">partitionlisterror=0</action>
+					<action function="page">partsdcard</action>
+				</actions>
+			</action>
+
+			<action>
+				<condition var1="tw_partition_removable" op="!=" var2="1"/>
+				<actions>
+					<action function="set">partitionlisterror=1</action>
+					<action function="page">partsdcardsel</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="partsdcard">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@part_sd_btn=Partition SD Card}</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%c_console_width%" h="300"/>
+				<font resource="paragraph" color="#FF0000"/>
+				<text>{@part_sd_lose=You will lose all files on your SD card!}</text>
+				<text>{@part_sd_undo=This action cannot be undone!}</text>
+			</textbox>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
+				<text>{@file_system=File System:}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>%tw_sdpart_file_system%</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos37%"/>
+				<text>{@part_sd_ext_sz=EXT Size:}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos42%"/>
+				<text>%tw_sdext_size%</text>
+			</text>
+
+			<button style="symbolBtn">
+				<placement x="585" y="-20" yref="%rPos42%" yop="+" w="150" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>-</text>
+				<action function="addsubtract">tw_sdext_size-256</action>
+			</button>
+
+			<button style="symbolBtn">
+				<placement x="785" y="-20" yref="%rPos42%" yop="+" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>+</text>
+				<action function="addsubtract">tw_sdext_size+256</action>
+			</button>
+
+			
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos50%"/>
+				<text>{@part_sd_swap_sz=Swap Size:}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos55%"/>
+				<text>%tw_swap_size%</text>
+			</text>
+
+
+
+			<button style="symbolBtn">
+				<placement x="585" y="-20" yref="%rPos55%" yop="+" w="150" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>-</text>
+				<action function="addsubtract">tw_swap_size-256</action>
+			</button>
+
+			<button style="symbolBtn">
+				<placement x="785" y="-20" yref="%rPos55%" yop="+" w="240" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>+</text>
+				<action function="addsubtract">tw_swap_size+256</action>
+			</button>
+
+
+			<button style="c_circle4">
+				<placement x="860" y="%rndPos81%"/>
+				<text>EXT3</text>
+				<action function="set">tw_sdpart_file_system=ext3</action>
+			</button>
+
+			<button style="c_circle4">
+				<placement x="860" y="%rndPos93%"/>
+				<text>EXT4</text>
+				<action function="set">tw_sdpart_file_system=ext4</action>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<action function="page">partsdcardaction</action>
+				<actions>
+					<action function="set">tw_back=partsdcard</action>
+					<action function="set">tw_action=partitionsd</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=set</action>
+					<action function="set">tw_action2_param=tw_zip_location=/sdcard</action>
+					<action function="set">tw_action_text1={@partitioning_sd=Partitioning SD Card...}</action>
+					<action function="set">tw_action_text2={@partitioning_sd2=This will take a few minutes.}</action>
+					<action function="set">tw_complete_text1={@part_sd_complete=Partitioning Complete}</action>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">partitionlisterror=0</action>
+					<action function="page">partsdcardsel</action>
+				</actions>
+			</action>
+		</page>
+	</pages>
+</recovery>

@@ -1,0 +1,39 @@
+#!/sbin/sh
+# Magisk Manager for Recovery Mode (mm)
+# Copyright (C) 2017-2019, VR25 @ xda-developers
+# License: GPLv3+
+# We are adding this file in Skyhawk Recovery Project to extend the Recovery Feature.
+# Thank You VR25.
+
+main() {
+
+tmpDir=/dev/_mm
+tmpf=$tmpDir/tmpf
+tmpf2=$tmpDir/tmpf2
+mountPath=/_magisk
+img=/data/adb/magisk.img
+[ -f $img ] || img=/data/adb/modules
+
+trap 'exit $?' EXIT
+
+umask 022
+set -euo pipefail
+
+mount /data 2>/dev/null || :
+mount /cache 2>/dev/null || :
+
+if [ ! -d /data/adb/magisk ]; then
+  echo -e "(!)Mount Failed\n"
+  exit 1
+fi
+
+mkdir -p $tmpDir
+mount -o remount,rw /
+mkdir -p $mountPath
+
+[ -f $img ] && e2fsck -fy $img 2>/dev/null 1>&2 || :
+mount -o rw $img $mountPath
+cd $mountPath
+exit 0;
+}
+main

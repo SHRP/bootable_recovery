@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="select_storage">
+			<template name="overlayPage"/>
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@autostorage=Storage}</text>
+			</text>
+
+			<partitionlist style="partitionlist_storage">
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="400"/>
+				<data name="tw_storage_path"/>
+				<listtype name="storage"/>
+			</partitionlist>
+
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+        <page name="slideout">
+			<template name="navSlideout"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_slideout=Main Console}</text>
+			</text>
+			<console>
+				<placement x="%c_hawk_base_column%" y="%rPos12%" w="%c_console_width%" h="%revPos64%"/>
+			</console>
+
+
+			<fill color="%subBackgroundColor%">
+				<placement x="48" y="1160" h="610" w="980"/>
+			</fill>
+
+			<text style="cnfrmHeadTitle">
+				<placement x="113" y="1230"/>
+				<text>Controls</text>
+			</text>
+
+
+			<button>
+				<placement x="113" y="1327"/>
+				<image resource="controlLock"/>
+				<action function="togglebacklight"/>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_mtp" var2="1"/>
+					<condition var1="tw_mtp_enabled" var2="0"/>
+				</conditions>
+				<placement x="417" y="1327" h="240" w="240"/>
+				<fill color="%subBackgroundColor%"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<text>MTP</text>
+				<action function="startmtp"/>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="tw_has_mtp" var2="1"/>
+					<condition var1="tw_mtp_enabled" var2="1"/>
+				</conditions>
+				<placement x="417" y="1327" h="240" w="240"/>
+				<fill color="%subBackgroundColor%"/>
+				<font resource="extraLargeBold" color="%accentColor%"/>
+				<text>MTP</text>
+				<action function="stopmtp"/>
+			</button>
+
+			<button>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="1"/>
+				</conditions>
+				<placement x="717" y="1327"/>
+				<image resource="controlFlashOn"/>
+				<action function="flashlight"/>
+			</button>
+			<button>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="0"/>
+				</conditions>
+				<placement x="717" y="1327"/>
+				<image resource="controlFlashOff"/>
+				<action function="flashlight"/>
+			</button>
+
+
+			<slidervalue>
+				<condition var1="tw_has_brightnesss_file" var2="1"/>
+				<placement x="131" y="1600" w="806"/>
+				<text></text>
+				<data variable="tw_brightness_pct" min="10" max="100"/>
+				<actions>
+					<action function="set">tw_brightness=%tw_brightness_max%</action>
+					<action function="compute">tw_brightness*%tw_brightness_pct%</action>
+					<action function="compute">tw_brightness/100</action>
+					<action function="setbrightness">%tw_brightness%</action>
+				</actions>
+			</slidervalue>
+			
+			<action>
+				<touch key="home"/>
+				<action function="overlay"/>
+			</action>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+		</page>
+	</pages>
+</recovery>

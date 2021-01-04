@@ -1,0 +1,9 @@
+#!/sbin/sh
+# SHRP Magisk Manager extra file
+# Giovix92
+if [ -d "/_magisk/.core" ]; then
+	mv /_magisk/.core /tmp/
+fi
+if [ -d "/_magisk/lost+found/" ]; then
+	mv /_magisk/lost+found /tmp/
+fi

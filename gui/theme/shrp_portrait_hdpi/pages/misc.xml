@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="filecheck">
+			<action>
+				<action function="fileexists">%tw_filecheck%</action>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_operation_state" var2="1"/>
+					<condition var1="tw_operation_status" var2="0"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_fileexists=1</action>
+					<action function="page">%tw_existpage%</action>
+				</actions>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_operation_state" var2="1"/>
+					<condition var1="tw_operation_status" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_fileexists=0</action>
+					<action function="page">%tw_notexistpage%</action>
+				</actions>
+			</action>
+		</page>
+        <page name="terminalcommand">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@terminal_btn=Terminal}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_terminal_info=Type Terminal Command}</text>
+			</text>
+
+			<terminal>
+				<condition var1="tw_hide_kb" var2="0"/>
+				<placement x="55" y="285" w="1032" h="700"/>
+			</terminal>
+
+			<terminal>
+				<condition var1="tw_hide_kb" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="1032" h="1400"/>
+			</terminal>
+
+			<template name="keyboardterminaltemplate"/>
+			<template name="keyboardtemplate"/>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1" />
+				<placement x="%back_button_x%" y="%navbar_btn_y%" placement="4" />
+				<image resource="back" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="key">back</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1" />
+				<condition var1="tw_hide_kb" op="=" var2="0" />
+				<placement x="895" y="980"/>
+				<image resource="kb_show" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=1</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1" />
+				<condition var1="tw_hide_kb" op="=" var2="1" />
+				<placement x="895" y="1678"/>
+				<image resource="kb_show" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
+			<button>
+				<placement x="%center_x%" y="%navbar_btn_y%" placement="4" />
+				<image resource="home" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="key">home</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1" />
+				<condition var1="tw_hide_kb" op="=" var2="0" />
+				<placement x="895" y="980"/>
+				<image resource="kb_show" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=1</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="!=" var2="1" />
+				<condition var1="tw_hide_kb" op="=" var2="1" />
+				<placement x="895" y="1678"/>
+				<image resource="kb_show" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="page">terminalcommand</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_samsung_navbar" op="=" var2="1" />
+				<placement x="%console_button_x%" y="%navbar_btn_y%" placement="4" />
+				<image resource="back" />
+				<condition var1="tw_busy" var2="0" />
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="key">back</action>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="set">tw_hide_kb=0</action>
+					<action function="page">main2</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="power+voldown" />
+				<action function="screenshot" />
+			</action>
+		</page>
+	</pages>
+</recovery>

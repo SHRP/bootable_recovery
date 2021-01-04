@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="c_addons">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_tweaks=Tweaks}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@c_tweaks_info=Collection of tweaks}</text>
+			</text>
+
+
+			<listbox style="customListbox">
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="1100"/>
+				<icon selected="fileImg2" unselected="fileImg2"/>
+				<data name="shrpTweaks"/>
+			</listbox>
+
+
+			<action>
+				<actions>
+					<action function="set">shrpTweakName=</action>
+					<action function="set">shrpTweakInfo=</action>
+					<action function="set">shrpFileName=</action>
+				</actions>
+			</action>
+			<action>
+				<conditions>
+					<condition var1="shrpTweakName" op="modified"/>
+				</conditions>
+				<actions>
+					<action function="overlay">tweakConfirm</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="tweakConfirm">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>%shrpTweakName%</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="400"/>
+				<text>%shrpTweakInfo%</text>
+			</textbox>
+
+			<button style="cnfrmBtn">
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>%shrpTweakConfirm%</text>
+				<actions>
+					<action function="set">tw_back=c_addons</action>
+					<action function="set">tw_filename=%shrpTweakFileName%</action>
+					<action function="set">tw_action=queuezip</action>
+					<action function="set">tw_has_action2=1</action>
+					<action function="set">tw_action2=flash</action>
+					<action function="set">tw_action2_param=flash_zip</action>
+					<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+					<action function="set">tw_complete_text1=%shrpTweakFinish%</action>
+					<action function="overlay"/>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+	</pages>
+</recovery>
