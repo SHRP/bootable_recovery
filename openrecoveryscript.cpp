@@ -57,6 +57,10 @@ extern "C" {
 	#include "cutils/properties.h"
 }
 
+#include "SHRPMAIN.hpp"
+
+int IS_MAGISK_FLASHED=0;
+
 OpenRecoveryScript::VoidFunction OpenRecoveryScript::call_after_cli_command;
 
 #define SCRIPT_COMMAND_SIZE 512
@@ -345,18 +349,33 @@ int OpenRecoveryScript::run_script_file(void) {
 					ret_val = 1;
 				}
 			} else if (strcmp(command, "reboot") == 0) {
-				if (strlen(value) && strcmp(value, "recovery") == 0)
-					TWFunc::tw_reboot(rb_recovery);
-				else if (strlen(value) && strcmp(value, "poweroff") == 0)
-					TWFunc::tw_reboot(rb_poweroff);
-				else if (strlen(value) && strcmp(value, "bootloader") == 0)
-					TWFunc::tw_reboot(rb_bootloader);
-				else if (strlen(value) && strcmp(value, "download") == 0)
-					TWFunc::tw_reboot(rb_download);
-				else if (strlen(value) && strcmp(value, "edl") == 0)
-					TWFunc::tw_reboot(rb_edl);
-				else
-					TWFunc::tw_reboot(rb_system);
+				// Magisk flash, firstly
+				if (IS_MAGISK_FLASHED == 0 && DataManager::GetIntValue(INSTALLMAGISK_OTA) == 1){
+					DataManager::SetValue("tw_action_text2", "Installing Zip");
+					if(FlashManager::injectMagisk(INSTALLMAGISK_OTA) != 0){
+						gui_msg(Msg("Magisk Flashing Failed",0));
+						gui_msg(Msg("Reflash the SHRP Zip to fix the issue",0));
+					}
+					IS_MAGISK_FLASHED = 1;
+				}
+				if(DataManager::GetIntValue(REBOOTOTA_DISABLED) == 0){
+					if (strlen(value) && strcmp(value, "recovery") == 0){
+						TWFunc::tw_reboot(rb_recovery);
+					}else if (strlen(value) && strcmp(value, "poweroff") == 0){
+						TWFunc::tw_reboot(rb_poweroff);
+					}else if (strlen(value) && strcmp(value, "bootloader") == 0){
+						TWFunc::tw_reboot(rb_bootloader);
+					}else if (strlen(value) && strcmp(value, "download") == 0){
+						TWFunc::tw_reboot(rb_download);
+					}else if (strlen(value) && strcmp(value, "edl") == 0){
+						TWFunc::tw_reboot(rb_edl);
+					}else{
+						TWFunc::tw_reboot(rb_system);
+					}
+				}else{
+					gui_msg(Msg("[i] Reboot disabled. Returning back to main page.",0));
+					DataManager::SetValue("tw_page_done", 1);
+				}
 			} else if (strcmp(command, "cmd") == 0) {
 				DataManager::SetValue("tw_action_text2", gui_parse_text("{@running_command}"));
 				if (cindex != 0) {
@@ -654,7 +673,16 @@ int OpenRecoveryScript::Run_OpenRecoveryScript_Action() {
 			op_status = 0;
 		}
 	}
-	if (reboot) {
+	// Magisk flash, firstly
+	if (IS_MAGISK_FLASHED == 0 && DataManager::GetIntValue(INSTALLMAGISK_OTA) == 1) {
+		DataManager::SetValue("tw_action_text2", "Installing Zip");
+		if(FlashManager::injectMagisk(INSTALLMAGISK_OTA) != 0){
+			gui_msg(Msg("Magisk Flashing Failed",0));
+			gui_msg(Msg("Reflash the SHRP Zip to fix the issue",0));
+		}
+		IS_MAGISK_FLASHED = 1;
+	}
+	if (reboot && DataManager::GetIntValue(REBOOTOTA_DISABLED) == 0) {
 		// Disable stock recovery reflashing
 		TWFunc::Disable_Stock_Recovery_Replace();
 		usleep(2000000); // Sleep for 2 seconds before rebooting

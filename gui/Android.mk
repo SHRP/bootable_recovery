@@ -112,6 +112,146 @@ ifeq ($(TW_ROUND_SCREEN), true)
     LOCAL_CFLAGS += -DTW_ROUND_SCREEN
 endif
 
+#SHRP Build Flags
+ifeq ($(SHRP_CUSTOM_FLASHLIGHT),true)
+    LOCAL_CFLAGS += -DSHRP_CUSTOM_FLASHLIGHT
+endif
+ifeq ($(SHRP_LITE),true)
+    LOCAL_CFLAGS += -DSHRP_LITE
+endif
+ifeq ($(SHRP_AB),true)
+    LOCAL_CFLAGS += -DSHRP_AB
+endif
+ifeq ($(SHRP_EXPRESS),true)
+	LOCAL_CFLAGS += -DSHRP_EXPRESS
+endif
+#Default Addon Disabler
+ifeq ($(SHRP_EXCLUDE_DEFAULT_ADDONS),true)
+	LOCAL_CFLAGS += -DSHRP_EXCLUDE_DEFAULT_ADDON
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_1),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_1
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_2),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_2
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_3),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_3
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_4),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_4
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_5),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_5
+endif
+ifeq ($(SHRP_SKIP_DEFAULT_ADDON_6),true)
+	LOCAL_CFLAGS += -DSHRP_SKIP_DEFAULT_ADDON_6
+endif
+#SHRP External Addon Integration
+#FirstAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_1_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_1_NAME=$(SHRP_EXTERNAL_ADDON_1_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_1_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_1_INFO=$(SHRP_EXTERNAL_ADDON_1_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_1_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_1_FILENAME=$(SHRP_EXTERNAL_ADDON_1_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_1_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_1_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_1_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT)
+endif
+#SecondAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_2_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_2_NAME=$(SHRP_EXTERNAL_ADDON_2_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_2_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_2_INFO=$(SHRP_EXTERNAL_ADDON_2_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_2_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_2_FILENAME=$(SHRP_EXTERNAL_ADDON_2_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_2_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_2_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_2_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT)
+endif
+#ThirdAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_3_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_3_NAME=$(SHRP_EXTERNAL_ADDON_3_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_3_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_3_INFO=$(SHRP_EXTERNAL_ADDON_3_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_3_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_3_FILENAME=$(SHRP_EXTERNAL_ADDON_3_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_3_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_3_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_3_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT)
+endif
+#ForthAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_4_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_4_NAME=$(SHRP_EXTERNAL_ADDON_4_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_4_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_4_INFO=$(SHRP_EXTERNAL_ADDON_4_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_4_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_4_FILENAME=$(SHRP_EXTERNAL_ADDON_4_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_4_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_4_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_4_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT)
+endif
+#FifthAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_5_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_5_NAME=$(SHRP_EXTERNAL_ADDON_5_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_5_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_5_INFO=$(SHRP_EXTERNAL_ADDON_5_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_5_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_5_FILENAME=$(SHRP_EXTERNAL_ADDON_5_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_5_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_5_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_5_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT)
+endif
+#SixthAddon
+ifneq ($(SHRP_EXTERNAL_ADDON_6_NAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_6_NAME=$(SHRP_EXTERNAL_ADDON_6_NAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_6_INFO),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_6_INFO=$(SHRP_EXTERNAL_ADDON_6_INFO)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_6_FILENAME),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_6_FILENAME=$(SHRP_EXTERNAL_ADDON_6_FILENAME)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_6_BTN_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_6_BTN_TEXT=$(SHRP_EXTERNAL_ADDON_6_BTN_TEXT)
+endif
+ifneq ($(SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT=$(SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT)
+endif
+#Addon Flags Ended
+ifeq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_ENCRYPTED_BACKUPS
+endif
+ifeq ($(TW_USE_TOOLBOX), true)
+    LOCAL_CFLAGS += -DTW_USE_TOOLBOX
+endif
+
 LOCAL_C_INCLUDES += \
     bionic \
     system/core/base/include \
@@ -156,66 +296,18 @@ define TW_CUSTOM_THEME_WARNING_MSG
 ****************************************************************************
 endef
 
-TWRP_RES := $(LOCAL_PATH)/theme/common/fonts
-TWRP_RES += $(LOCAL_PATH)/theme/common/languages
+TWRP_RES := $(LOCAL_PATH)/theme/shrp_portrait_hdpi/fonts
+TWRP_RES += $(LOCAL_PATH)/theme/shrp_portrait_hdpi/languages
 ifeq ($(TW_EXTRA_LANGUAGES),true)
     TWRP_RES += $(LOCAL_PATH)/theme/extra-languages/fonts
     TWRP_RES += $(LOCAL_PATH)/theme/extra-languages/languages
 endif
 
-ifeq ($(TW_CUSTOM_THEME),)
-    ifeq ($(TW_THEME),)
-        ifeq ($(DEVICE_RESOLUTION),)
-            GUI_WIDTH := $(TARGET_SCREEN_WIDTH)
-            GUI_HEIGHT := $(TARGET_SCREEN_HEIGHT)
-        else
-            SPLIT_DEVICE_RESOLUTION := $(subst x, ,$(DEVICE_RESOLUTION))
-            GUI_WIDTH := $(word 1, $(SPLIT_DEVICE_RESOLUTION))
-            GUI_HEIGHT := $(word 2, $(SPLIT_DEVICE_RESOLUTION))
-        endif
 
-        # Minimum resolution of 100x100
-        # This also ensures GUI_WIDTH and GUI_HEIGHT are numbers
-        ifeq ($(shell test $(GUI_WIDTH) -ge 100; echo $$?),0)
-        ifeq ($(shell test $(GUI_HEIGHT) -ge 100; echo $$?),0)
-            ifeq ($(shell test $(GUI_WIDTH) -gt $(GUI_HEIGHT); echo $$?),0)
-                ifeq ($(shell test $(GUI_WIDTH) -ge 1280; echo $$?),0)
-                    TW_THEME := landscape_hdpi
-                else
-                    TW_THEME := landscape_mdpi
-                endif
-            else ifeq ($(shell test $(GUI_WIDTH) -lt $(GUI_HEIGHT); echo $$?),0)
-                ifeq ($(shell test $(GUI_WIDTH) -ge 720; echo $$?),0)
-                    TW_THEME := portrait_hdpi
-                else
-                    TW_THEME := portrait_mdpi
-                endif
-            else ifeq ($(shell test $(GUI_WIDTH) -eq $(GUI_HEIGHT); echo $$?),0)
-                # watch_hdpi does not yet exist
-                TW_THEME := watch_mdpi
-            endif
-        endif
-        endif
-    endif
+TW_THEME := shrp_portrait_hdpi
 
-    TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)
-    ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
-        $(warning $(TW_THEME_WARNING_MSG))
-        $(error Theme selection failed; exiting)
-    endif
 
-    TWRP_RES += $(LOCAL_PATH)/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
-    # for future copying of used include xmls and fonts:
-    # UI_XML := $(TWRP_THEME_LOC)/ui.xml
-    # TWRP_INCLUDE_XMLS := $(shell xmllint --xpath '/recovery/include/xmlfile/@name' $(UI_XML)|sed -n 's/[^\"]*\"\([^\"]*\)\"[^\"]*/\1\n/gp'|sort|uniq)
-    # TWRP_FONTS_TTF := $(shell xmllint --xpath '/recovery/resources/font/@filename' $(UI_XML)|sed -n 's/[^\"]*\"\([^\"]*\)\"[^\"]*/\1\n/gp'|sort|uniq)niq)
-else
-    TWRP_THEME_LOC := $(TW_CUSTOM_THEME)
-    ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
-        $(warning $(TW_CUSTOM_THEME_WARNING_MSG))
-        $(error Theme selection failed; exiting)
-    endif
-endif
+TWRP_THEME_LOC := $(LOCAL_PATH)/theme/$(TW_THEME)
 
 TWRP_RES += $(TW_ADDITIONAL_RES)
 

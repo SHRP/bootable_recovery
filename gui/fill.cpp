@@ -52,6 +52,17 @@ GUIFill::GUIFill(xml_node<>* node) : GUIObject(node)
 		return;
 	}
 
+	//<SHRP>
+	xml_node<>* child = FindNode(node, "update");
+	if(child){
+		dynamic = true;
+		updateVar = child->first_attribute("name")->value();
+	}else{
+		dynamic = false;
+		updateVar = "";
+	}
+	//</SHRP>
+
 	// Load the placement
 	LoadPlacement(FindNode(node, "placement"), &mRenderX, &mRenderY, &mRenderW, &mRenderH);
 
@@ -67,4 +78,18 @@ int GUIFill::Render(void)
 	gr_fill(mRenderX, mRenderY, mRenderW, mRenderH);
 	return 0;
 }
+
+//<SHRP>
+int GUIFill::NotifyVarChange(const std::string& varName __unused, const std::string& value __unused)
+{
+	GUIObject::NotifyVarChange(varName, value);
+	if(!dynamic) return 0;
+	int tmp = scale_theme_x(DataManager::GetIntValue(updateVar.c_str()));
+	if(mRenderW == tmp) return 0;
+	mRenderW = tmp;
+	Render();
+
+	return 0;
+}
+//</SHRP>
 

@@ -31,6 +31,7 @@
 #include "twrpDigest/twrpDigest.hpp"
 #include "twrpDigest/twrpMD5.hpp"
 #include "twrpDigest/twrpSHA.hpp"
+#include "SHRPTOOLS.hpp"
 
 
 bool twrpDigestDriver::Check_File_Digest(const string& Filename) {
@@ -70,7 +71,7 @@ bool twrpDigestDriver::Check_File_Digest(const string& Filename) {
 
 	if (!TWFunc::Path_Exists(digestfile)) {
 		delete digest;
-		if (Filename.find(".zip") == std::string::npos && Filename.find(".map") == std::string::npos) {
+		if (!minUtils::find(Filename,".zip",1) && Filename.find(".map") == std::string::npos) {
 			gui_msg(Msg(msg::kError, "no_digest_found=No digest file found for '{1}'. Please unselect Enable Digest verification to restore.")(Filename));
 		} else {
 			return true;

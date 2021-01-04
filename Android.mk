@@ -15,6 +15,19 @@
 LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
+###SHRP###
+OFFICIAL := $(hide) $(shell oc=0; \
+hello=$(shell curl -s https://raw.githubusercontent.com/SHRP-Devices/device_data/master/devices.raw); \
+IFS=','; \
+read -a devices <<< "$$hello"; \
+for device in "$${devices[@]}"; \
+do \
+if [ $$device == $(SHRP_DEVICE_CODE) ]; then \
+oc=1; \
+fi; \
+done;echo $$oc;)
+###/SHRP###
+
 ifneq ($(project-path-for),)
     ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
         PROJECT_PATH_AGREES := true
@@ -58,6 +71,13 @@ endif
 LOCAL_CFLAGS += -DPLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
 
 LOCAL_SRC_FILES := \
+    SHRPMAIN.cpp \
+    SHRPTOOLS.cpp \
+    SHRPGUI.cpp \
+    SHRPVARS.cpp \
+    SHRPTHEME.cpp \
+    SHRPINIT.cpp \
+    SHRPFILETOOLS.cpp \
     twrp.cpp \
     fixContexts.cpp \
     twrpTar.cpp \
@@ -362,6 +382,83 @@ endif
 ifneq ($(TW_CLOCK_OFFSET),)
 	LOCAL_CFLAGS += -DTW_CLOCK_OFFSET=$(TW_CLOCK_OFFSET)
 endif
+
+
+ifeq ($(TW_SKIP_COMPATIBILITY_CHECK), true)
+    LOCAL_CFLAGS += -DTW_SKIP_COMPATIBILITY_CHECK
+endif
+#SHRP Build Flags
+ifeq ($(SHRP_CUSTOM_FLASHLIGHT),true)
+    LOCAL_CFLAGS += -DSHRP_CUSTOM_FLASHLIGHT
+endif
+ifeq ($(SHRP_NOTCH),true)
+    LOCAL_CFLAGS += -DSHRP_NOTCH
+endif
+ifeq ($(SHRP_AB),true)
+    LOCAL_CFLAGS += -DSHRP_AB
+endif
+ifneq ($(SHRP_MAINTAINER),)
+	LOCAL_CFLAGS += -DSHRP_MAINTAINER=$(SHRP_MAINTAINER)
+endif
+ifneq ($(SHRP_DEVICE_CODE),)
+	LOCAL_CFLAGS += -DSHRP_DEVICE_CODE=$(SHRP_DEVICE_CODE)
+endif
+ifneq ($(SHRP_EDL_MODE),)
+	LOCAL_CFLAGS += -DSHRP_EDL_MODE=$(SHRP_EDL_MODE)
+endif
+ifneq ($(SHRP_EXTERNAL),)
+	LOCAL_CFLAGS += -DSHRP_EXTERNAL=$(SHRP_EXTERNAL)
+endif
+ifneq ($(SHRP_INTERNAL),)
+	LOCAL_CFLAGS += -DSHRP_INTERNAL=$(SHRP_INTERNAL)
+endif
+ifneq ($(SHRP_OTG),)
+	LOCAL_CFLAGS += -DSHRP_OTG=$(SHRP_OTG)
+endif
+ifneq ($(SHRP_FLASH),)
+	LOCAL_CFLAGS += -DSHRP_FLASH=$(SHRP_FLASH)
+endif
+ifneq ($(SHRP_FONP_1),)
+	LOCAL_CFLAGS += -DSHRP_FONP_1=$(SHRP_FONP_1)
+endif
+ifneq ($(SHRP_FONP_2),)
+	LOCAL_CFLAGS += -DSHRP_FONP_2=$(SHRP_FONP_2)
+endif
+ifneq ($(SHRP_FONP_3),)
+	LOCAL_CFLAGS += -DSHRP_FONP_3=$(SHRP_FONP_3)
+endif
+ifneq ($(SHRP_FLASH_MAX_BRIGHTNESS),)
+	LOCAL_CFLAGS += -DSHRP_FLASH_MAX_BRIGHTNESS=$(SHRP_FLASH_MAX_BRIGHTNESS)
+endif
+ifneq ($(SHRP_REC),)
+	LOCAL_CFLAGS += -DSHRP_REC=$(SHRP_REC)
+endif
+ifneq ($(SHRP_REC_TYPE),)
+	LOCAL_CFLAGS += -DSHRP_REC_TYPE=$(SHRP_REC_TYPE)
+endif
+ifneq ($(SHRP_DEVICE_TYPE),)
+	LOCAL_CFLAGS += -DSHRP_DEVICE_TYPE=$(SHRP_DEVICE_TYPE)
+endif
+ifeq ($(SHRP_EXPRESS), true)
+	LOCAL_CFLAGS += -DSHRP_EXPRESS
+endif
+ifeq ($(SHRP_OFFICIAL)$(OFFICIAL), true@ 1)
+	LOCAL_CFLAGS += -DSHRP_OFFICIAL
+endif
+ifneq ($(SHRP_STATUSBAR_RIGHT_PADDING),)
+	LOCAL_CFLAGS += -DSHRP_STATUSBAR_RIGHT_PADDING=$(SHRP_STATUSBAR_RIGHT_PADDING)
+endif
+ifneq ($(SHRP_STATUSBAR_LEFT_PADDING),)
+	LOCAL_CFLAGS += -DSHRP_STATUSBAR_LEFT_PADDING=$(SHRP_STATUSBAR_LEFT_PADDING)
+endif
+ifneq ($(SHRP_BUILD_DATE),)
+	LOCAL_CFLAGS += -DSHRP_BUILD_DATE=$(SHRP_BUILD_DATE)
+endif
+ifneq ($(SHRP_NO_SAR_AUTOMOUNT),)
+	LOCAL_CFLAGS += -DSHRP_NO_SAR_AUTOMOUNT
+endif
+
+
 ifneq ($(TW_OVERRIDE_SYSTEM_PROPS),)
     TW_INCLUDE_LIBRESETPROP := true
     LOCAL_CFLAGS += -DTW_OVERRIDE_SYSTEM_PROPS=$(TW_OVERRIDE_SYSTEM_PROPS)

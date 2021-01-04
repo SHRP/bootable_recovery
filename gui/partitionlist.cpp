@@ -263,6 +263,7 @@ void GUIPartitionList::NotifySelect(size_t item_selected)
 					mUpdate = 1;
 					DataManager::SetValue(mVariable, str);
 				}
+				gui_changeOverlay("");//SHRP
 			} else {
 				if (ListType == "flashimg") { // only one item can be selected for flashing images
 					for (int i=0; i<listSize; i++)
