@@ -460,6 +460,19 @@
 				<action function="page">zipNamePanel</action>
 			</button>
 
+			<button>
+				<placement x="240" y="1670"/>
+				<image resource="fileMangerSettings"/>
+				<action function="overlay">fSettings</action>
+			</button>
+			<button>
+				<placement x="430" y="1680"/>
+				<image resource="c_clear_input"/>
+				<action function="set">selectEnabled=0</action>
+				<action function="set">tw_clear_destination=fileManager</action>
+				<action function="page">clear_vars</action>
+			</button>
+
 
 			<button>
 				<placement x="900" y="1610"/>
