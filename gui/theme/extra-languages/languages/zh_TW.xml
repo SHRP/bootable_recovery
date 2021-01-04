@@ -9,6 +9,26 @@
 		<resource name="font_m" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
 		<resource name="font_s" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
 		<resource name="fixed" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="c_console_font" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="c_list" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="c_menu" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="c_dashboard_text" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+		<resource name="c_lock_clock" type="fontoverride" filename="DroidSansFallback.ttf" scale="100" />
+
+
+		<resource name="bigTitle" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="subTitle" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="paragraph" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="midBold" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="largeBold" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="extraLargeBold" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="normal" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="small" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="moreSmall" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="extraLargeBoldPlus" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="extraLargeBoldProPlus" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="superExtraLargeBold" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
+		<resource name="dashboardText" filename="DroidSansFallback.ttf" scale="90" type="fontoverride"/>
 
 		<!-- Partition display names -->
 		<string name="system">System</string>
@@ -751,5 +771,273 @@
 		<string name="rescue_party2"> 2. 格式化 Data 分區；</string>
 		<string name="rescue_party3"> 3. 重新刷入您的 ROM。</string>
 		<string name="rescue_party4">報告的問題為：</string>
+		<!--Change All The strings from here-->
+		<string name="Tcredit">TipzTeam</string>
+		<string name="c_enter_pass">輸入密碼</string>
+		<string name="enter_pass_old">輸入舊密碼</string>
+		<string name="enter_pass_again">重新輸入密碼</string>
+		<string name="pass_info">recovery受到密碼保護</string>
+		<string name="patt_info">recovery受到圖案保護</string>
+		<string name="enter_patt_old">輸入舊圖案</string>
+		<string name="wipe_enc_confirm">是否清除 Data 分區加密？</string>
+		<string name="c_confirm_info">按確定確認</string>
+		<string name="c_failed">失敗</string>
+		<string name="c_failed_info">您輸入了錯誤的密碼, 點擊重試。</string>
+		<string name="c_patt_failed_info">格式不正確, 請重試。</string>
+		<string name="c_failed_same_info">兩個密碼不匹配</string>
+		<string name="c_failed_same_info_patt">兩種模式都不匹配</string>
+		<string name="c_passed">成功</string>
+		<string name="c_passed_info">您已成功设置密码</string>
+		<string name="c_passed_patt_info">您已成功設置密碼</string>
+		<string name="c_passed_reset_info">重置成功</string>
+		<string name="c_flash_img">刷入 Image</string>
+		<string name="c_flashing_img">正在刷入 Image</string>
+		<string name="c_flash_zip">刷入 Zip</string>
+		<string name="c_flashing_zip">正在刷入 Zip</string>
+		<string name="c_flash_finished">刷入完成</string>
+		<string name="c_fact_last">大多數時候這是你需要清楚的。</string>
+		<string name="c_action_cancel">按後退按鈕取消。</string>
+		<string name="c_format_data">格式化 Data</string>
+		<string name="c_format_data2">刪除加密</string>
+		<string name="c_format_data_info">確定?</string>
+		<string name="c_format_data_info2">格式化Data將清除內部存儲上的所有內容</string>
+		<string name="c_format_data_info3">刪除內部存儲上的加密。</string>
+		<string name="c_partition_head">修改文件系統</string>
+		<string name="c_warning_head_info">小心</string>
+		<string name="c_encrypt_ques">加密備份?</string>
+		<string name="c_name">名稱:</string>
+		<string name="c_usb_last">卸載之前，請務必從計算機中安全移除設備!</string>
+		<string name="c_logs">日誌</string>
+		<string name="c_file_rename">重新命名 %tw_fm_type%</string>
+		<string name="c_terminal_info">輸入終端命令</string>
+		<string name="c_file_context">修復SELinux上下文可能會導致設備無法正常啟動.</string>
+		<string name="c_slideout">主控制台</string>
+		<string name="c_root">安裝Root</string>
+		<string name="c_unroot">卸載root</string>
+		<string name="c_reset">你想重置你的手機嗎?</string>
+		<string name="c_theme_busy">安裝主題</string>
+		<string name="c_theme_busy_info">不要觸摸屏幕上的任何地方</string>
+		<string name="c_side_bar_head">手機自帶內存</string>
+		<string name="c_side_bar_root">Root</string>
+		<string name="c_side_bar_internal">內部存儲器</string>
+		<string name="c_side_bar_external">外部存儲器</string>
+		<string name="c_side_bar_otg">OTG</string>
+		<string name="c_file_busy">請稍候</string>
+		<string name="c_file_busy_info">處理中</string>
+		<string name="c_theme_head">主題</string>
+		<string name="c_theme_head_info">選擇主題</string>
+		<string name="c_patt_ask">輸入圖案</string>
+		<string name="c_patt_new_info">輸入新圖案</string>
+		<string name="c_patt_new_info_2">再輸入一次新圖?</string>
+		<string name="c_essentials">必不可少的</string>
+		<string name="c_flash_img">刷入 Image</string>
+		<string name="c_tools">工具箱</string>
+		<string name="c_magisk">Magisk</string>
+		<string name="c_magisk_info">啟用、禁用或刪除Magisk模塊</string>
+		<string name="c_theme_busy">安裝主題</string>
+		<string name="c_tweaks">系統優化</string>
+		<string name="c_security">安全</string>
+		<string name="c_about">關於TWRP</string>
+		<string name="c_password">密碼</string>
+		<string name="c_pattern">圖案</string>
+		<string name="c_none">無</string>
+		<string name="enc_disabled">已禁用 - 設置密碼以啟用</string>
+		<string name="enc_enabled">已啟用</string>
+		<string name="c_clear">清除</string>
+		<string name="c_credit">Credit - </string>
+		<string name="c_tweaks_info_ex">SHRP的系統優化</string>
+		<string name="c_subs">Substratum Overlay</string>
+		<string name="c_cfp">清除指紋</string>
+		<string name="c_fc">強制加密</string>
+		<string name="c_c2api">Camera 2 Api</string>
+		<string name="c_tweaks">系統優化</string>
+		<string name="c_others">其他</string>
+		<string name="c_navb">導航欄</string>
+		<string name="c_dashboard_icon">Dashboard 圖標</string>
+		<string name="c_status_bar">狀態欄</string>
+		<string name="c_color">顏色</string>
+		<string name="c_dc_aex">Aex樣式</string>
+		<string name="c_dc_white">白色（推薦用於黑色背景）</string>
+		<string name="c_dc_black">黑色（建議用於白色背景）</string>
+		<string name="c_dc_default">默認</string>
+		<string name="c_dc_c">Dashboard 自定義圖標</string>
+		<string name="c_icons">圖標</string>
+		<string name="c_big">大</string>
+		<string name="c_medium">中等</string>
+		<string name="c_small">小</string>
+		<string name="c_radius">半徑</string>
+		<string name="c_rounded_corner">圓角</string>
+		<string name="c_batt_type_one">中心</string>
+		<string name="c_batt_type_two">肖像</string>
+		<string name="c_batt_type_one">中心</string>
+		<string name="c_show">顯示</string>
+		<string name="c_time">時間</string>
+		<string name="c_batt_icon">電池圖標</string>
+		<string name="c_batt_per">電池百分比</string>
+		<string name="c_batt_bar">電池條</string>
+		<string name="c_customize_rec">自定義 Recovery</string>
+		<string name="c_customization">定制</string>
+		<string name="c_magisk_m">Magisk Manager</string>
+		<string name="c_nav_bg">導航欄背景</string>
+		<string name="c_nav_nxt">Nxt-bit</string>
+		<string name="c_nav_samsung">三星</string>
+		<string name="c_nav_samsung">三星</string>
+		<string name="c_accent">Accent</string>
+		<string name="c_text">文本</string>
+		<string name="c_bg">背景</string>
+		<string name="c_more">更多</string>
+		<string name="c_module_info_main">模塊信息</string>
+		<string name="c_module_name">模塊名</string>
+		<string name="enc_enabled">已啟用</string>
+		<string name="enc_disabled">已禁用 - 設置密碼以啟用</string>
+		<string name="c_module_list">模塊列表</string>
+		<string name="c_module_core_only_mode">僅核心模式</string>
+		<string name="c_adb_side_load">Sideload</string>
+		<string name="c_spec_thanks">特別感謝</string>
+		<string name="c_credits">Credits</string>
+		<string name="c_device">Device</string>
+		<string name="c_twrp_ver">TWRP Version</string>
+		<string name="c_maintainer">維護者 -</string>
+		<string name="c_shrp_about">S H R P</string>
+		<string name="c_edl_mode">Edl Mode</string>
+		<string name="c_appling">應用</string>
+		<string name="c_a_done">差不多完成了</string>
+		<string name="c_init">正在初始化</string>
+		<string name="c_init_failed">初始化失敗</string>
+		<string name="c_dashboard_list">Listview Dashboard</string>
+		<string name="c_rm_o_files">刪除舊文件</string>
+		<string name="c_flashing_img">正在刷入 Image</string>
+		<string name="c_repacking">Repacking</string>
+		<string name="substratum_overlay">Substratum Overlay 禁用</string>
+		<string name="c_fpc">從系統中刪除指紋鎖</string>
+		<string name ="c_rfe">從設備中刪除強制加密</string>
+		<string name="c_c2api">Camera 2 Api</string>
+		<string name="cache_dalvik_done">-- Dalvik Cache 目錄清除完成！</string>
+		<string name ="active_slot_install">安裝在活動插槽中</string>
+		<string name ="remount_system_rw"> [i]將系統重新安裝為R/W！</string>
+		<string name="unpacking_image">正在解包 {1}…</string>
+		<string name="repacking_image">正在打包 {1}…</string>
+		<string name ="c_moreInfo">更多信息</string>
+		<string name ="c_recType">記錄類型</string>
+		<string name ="c_deviceType">設備類型</string>
+		<string name ="c_section">部分</string>
+		<string name ="c_translation">翻譯</string>
+		<string name ="c_zip">郵政編碼</string>
+		<string name ="c_create">創建</string>
+		<string name ="c_version">版本</string>
+		<string name ="c_author">作者</string>
+		<string name ="c_magiskNull"> Magisk未安裝</string>
+		<string name ="c_normal">正常</string>
+		<string name ="c_legacy">舊版</string>
+		<string name ="c_unavailable">不可用</string>
+		<string name ="c_show_lc">在鎖屏上顯示日期</string>
+		<string name ="c_dev_mode">開發模式</string>
+		<string name ="c_stock_dashboard_ico">Stock</string>
+		<string name ="ozip_decrypt_decryption">正在解密ozip文件... </string>
+		<string name ="ozip_decrypt_finish">解密ozip文件成功</string>
+		<string name="available_space"> * 可用空間：{1}MB</string>
+		<string name="use24clock_chk">使用 24 小時制</string>
+		<string name="compression_on">壓縮選項已開啟</string>
+		<!--Pending Strings-->
+		<string name="c_format_data_info4">Type "yes" to confirm.</string>
+		<string name="c_failed_info_blocked">Something went wrong</string>
+		<string name="c_line">Line</string>
+		<string name="c_line_no">Line No.</string>
+		<string name="c_enter_line_no">Enter Line No.</string>
+		<string name="c_enter_text">Enter your text</string>
+		<string name="c_apply_theme">Apply theme</string>
+		<string name="c_add_line">Add line</string>
+		<string name="c_replace_line">Replace line</string>
+		<string name="c_remove_line">Remove line</string>
+		<string name="c_secondary">Secondary Text Color</string>
+		<string name="partitionName">Partition Name:</string>
+		<string name="partitionMountPoint">Mount Point:</string>
+		<string name="partitionPresent">Present:</string>
+		<string name="partitionFileSystem">File system:</string>
+		<string name="partitionRemovable">Removable:</string>
+		<string name="partitionStorageInfo">Storage info:</string>
+		<string name="partitionBackupSize">Backup Size:</string>
+		<string name="partitionSizeInfo">%tw_partition_free%MB free out of %tw_partition_size%</string>
+		<string name="shrpBaseYes">Yes</string>
+		<string name="shrpBaseNo">No</string>
+		<string name="shrpBaseClose">Close</string>
+		<string name="shrpBaseActive">Active</string>
+		<string name="currMagiskVersion">Current Magisk Version</string>
+		<string name="moduleUninstall">Uninstall module</string>
+		<string name="installMagisk">Install Magisk</string>
+		<string name="updateMagisk">Update Magisk</string>
+		<string name="moduleEnable">Enable module</string>
+		<string name="moduleNull">No magisk module installed</string>
+		<string name="moduleDisable">Disable module</string>
+		<string name="magiskModules">Magisk modules</string>
+		<string name="currProtection">Current protection</string>
+		<string name="themePatchErr">Error occurred while processing. Reflash recovery or contact with your device maintainer with logs.</string>
+		<string name="OpenTxt">Open</string>
+		<string name="initSuccess">Initialization completed</string>
+		<string name="openHelp">Press open to continue</string>
+		<string name="primaryTextClr">Primary text color</string>
+		<string name="secondaryTextClr">Secondary text color</string>
+		<string name="accentClr">Accent color</string>
+		<string name="navIcoClr">Navigation key color</string>
+		<string name="backgoundClr">Background color</string>
+		<string name="dashboardTextClr">Dashboard text color</string>
+		<string name="dashboardSubTint">Dashboard sub tint</string>
+		<string name="clrs">Colors</string>
+		<string name="chooseClr">Choose color</string>
+		<string name="showHideComponents">Show/Hide components</string>
+		<string name="moreCustomizations">More customizations</string>
+		<string name="showHide">Show/Hide</string>
+		<string name="batteryTxt">Battery</string>
+		<string name="navTxt">Nav-bar</string>
+		<string name="dashboardTxt">Dashboard</string>
+		<string name="toggle">Toggle</string>
+		<string name="centeredClock">Centered clock</string>
+		<string name="cpuTemp">Cpu temparature</string>
+		<string name="offcialBuild">Official build</string>
+		<string name="unoffcialBuild">Unofficial build</string>
+		<string name="betaBuild">Beta Release</string>
+		<string name="currentVersion">Current version</string>
+		<string name="additionalInfo">Additional Info</string>
+		<string name="fCopy">Copying</string>
+		<string name="fMove">Moving</string>
+		<string name="fCompressing">Compressing</string>
+		<string name="fDeleteInfo">Do you really want to delete? This process cannot be undone.</string>
+		<string name="fUpack">Unpacking</string>
+		<string name="fInfoBusy">Gathering Infomation</string>
+		<string name="fApplyCustomTheme">Applying custom theme</string>
+		<string name="fApplyCustomThemeConfirm">Do you really want to apply custom theme?</string>
+		<string name="fOperationS">Operation successful</string>
+		<string name="fOperationF">Operation failed</string>
+		<string name="fExists">Same name file or folder exists</string>
+		<string name="setManually">Set manually</string>
+		<string name="apply">Apply</string>
+		<string name="fowner">Owner</string>
+		<string name="fgroup">Group</string>
+		<string name="fglobal">Global</string>
+		<string name="extract">Extract</string>
+		<string name="extractDiff">Extract in different location</string>
+		<string name="extractConfirmInfo">Do you really want to extract this zip?</string>
+		<string name="compressDiff">Compress in different location</string>
+		<string name="zipName">Zip name</string>
+		<string name="compressConfirmInfo">Do you really want to compress this folder?</string>
+		<string name="editFile">Edit file</string>
+		<string name="md5CheckSum">Verify MD5 checksum</string>
+		<string name="sha1CheckSum">Verify SHA1 checksum</string>
+		<string name="sha256CheckSum">Verify SHA256 checksum</string>
+		<string name="fileInfo">File info</string>
+		<string name="folderInfo">Folder info</string>
+		<string name="fSettings">Preferences</string>
+		<string name="fSearch">Search</string>
+		<string name="useHighCompression">Use high compression for repacking zip</string>
+		<string name="overwriteExisting">Overwrite existing files & folders</string>
+		<string name="changeSlot">Change Slot</string>
+		<string name="changeSlotQuestion">Want to change the slot to </string>
+		<string name="setTimeOffset">Set time offset</string>
+		<string name="c_disable_theme_survival">Disable SHRP theme survival</string>
+		<string name="c_disable_auto_reboot_ota">Prevent auto reboot after OTA</string>
+		<string name="c_magisk_install_after_ota">Install Magisk automatically after OTA</string>
+		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
+		<string name="unmount_system">Unmounting System...</string>
+		<string name="unmount_system_err">Failed unmounting System</string>
 	</resources>
 </language>

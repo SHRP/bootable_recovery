@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+        <page name="c_splash_magisk">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<button>
+				<placement x="0" y="%rndPos58%" w="1080" h="100"/>
+				<font resource="extraLargeBoldPlus" color="%primaryColor%"/>
+				<fill color="%transparent%"/>
+				<text>{@c_magisk_m=Magisk Manager}</text>
+			</button>
+
+
+
+			<button>
+				<condition var1="c_magisk_status" op="=" var2="0"/>
+				<placement x="464" y="1496"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/;
+sh mm;
+sh init;
+</action>
+					<action function="shrp_magisk_info"/>
+					<action function="page">magiskDashboard</action>
+				</actions>
+			</button>
+			<button>
+				<condition var1="c_magisk_status" op="!=" var2="0"/>
+				<placement x="464" y="1496"/>
+				<image resource="c_ok"/>
+				<actions>
+					<action function="page">magiskDashboard</action>
+				</actions>
+			</button>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/
+sh exit
+cd /
+umount -l _magisk;
+rm -rf _magisk;
+					</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/
+sh exit
+cd /
+umount -l _magisk;
+rm -rf _magisk;
+					</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+
+		<page name="magiskDashboard">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>{@c_magisk_m=Magisk Manager}</text>
+			</text>
+			<checkbox>
+				<conditions>
+					<condition var1="c_magisk_status" op="!=" var2="1"/>
+					<condition var1="core" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="warningSign" unchecked="warningSign"/>
+				<text>{@c_module_core_only_mode=Core Only Mode} {@c_enabled=Enabled}</text>
+				<data variable="dummy"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/;
+sh c_core_only_disabler;
+					</action>
+					<action function="set">core=0</action>
+				</actions>
+			</checkbox>
+			<checkbox>
+				<conditions>
+					<condition var1="c_magisk_status" op="!=" var2="1"/>
+					<condition var1="core" op="!=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="goodSign" unchecked="goodSign"/>
+				<text>{@c_module_core_only_mode=Core Only Mode} {@c_disabled=Disabled}</text>
+				<data variable="dummy"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/;
+sh c_core_only_enabler;
+					</action>
+					<action function="set">core=1</action>
+				</actions>
+			</checkbox>
+
+			<checkbox>
+				<condition var1="c_magisk_status" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="warningSign" unchecked="warningSign"/>
+				<text>{@c_magiskNull=Magisk Not Installed}.</text>
+				<data variable="dummy"/>
+			</checkbox>
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
+				<text>{@currMagiskVersion=Current Magisk Version}</text>
+			</text>
+			<text>
+				<condition var1="c_magisk_status" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos29%" yop="+"/>
+				<font resource="superExtraLargeBold" color="%secondaryColor%"/>
+				<text>%c_magisk_ver%</text>
+			</text>
+			<text>
+				<condition var1="c_magisk_status" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="10" yref="%rPos29%" yop="+"/>
+				<font resource="superExtraLargeBold" color="%secondaryColor%"/>
+				<text>N/A</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos48%" yop="+"/>
+				<text>{@available=Available} {@c_magisk=Magisk} {@c_version=Version}</text>
+			</text>
+			<text style="simpleText">
+				<placement x="%c_hawk_base_column%" y="-15" yref="%rPos53%" yop="+"/>
+				<text>v%c_magisk_stock_var%</text>
+			</text>
+
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos62%"/>
+				<text>{@c_magisk=Magisk} {@options_hdr=Options}</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos67%" w="%file_selector_default_w%" h="600"/>
+				<icon selected="installSign" unselected="installSign"/>
+				<listitem name="{@c_module_core_only_mode=Core Only Mode}">
+					<conditions>
+						<condition var1="c_magisk_status" op="!=" var2="1"/>
+						<condition var1="core" op="=" var2="1"/>
+					</conditions>
+					<icon resource="toggleOn"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="cmd">
+cd /twres/magisk/;
+sh c_core_only_disabler;
+						</action>
+						<action function="set">core=0</action>
+					</actions>
+				</listitem>
+				<listitem name="{@c_module_core_only_mode=Core Only Mode}">
+					<conditions>
+						<condition var1="c_magisk_status" op="!=" var2="1"/>
+						<condition var1="core" op="!=" var2="1"/>
+					</conditions>
+					<icon resource="toggleOff"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="cmd">
+cd /twres/magisk/;
+sh c_core_only_enabler;
+						</action>
+						<action function="set">core=1</action>
+					</actions>
+				</listitem>
+				<listitem name="{@installMagisk=Install Magisk}">
+					<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+					<icon resource="installSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/sdcard/SHRP/addons/c_magisk.zip</action>
+						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@updateMagisk=Update Magisk}">
+					<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+					<icon resource="installSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/sdcard/SHRP/addons/c_magisk.zip</action>
+						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@c_unroot=Unroot}">
+					<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+					<icon resource="uninstallSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/sdcard/SHRP/addons/unmagisk.zip</action>
+						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@magiskModules=Magisk modules}">
+					<icon resource="magiskModule"/>
+					<data variable="dummy"/>
+					<action function="overlay">magiskModules</action>
+				</listitem>
+			</listbox>
+
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/
+sh exit
+cd /
+umount -l _magisk
+rm -rf _magisk
+					</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/
+sh exit
+cd /
+umount -l _magisk
+rm -rf _magisk
+					</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+		<page name="magiskModules">
+			<template name="overlayPage"/>
+			<button>
+				<placement x="0" y="%rndPos50%" w="1080" h="%rndPos78%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+
+			<text style="cnfrmHeadTitle">
+				<condition var1="magiskModule" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rndPos54%"/>
+				<text>{@magiskModules=Magisk modules}</text>
+			</text>
+
+			<listbox style="customListbox">
+				<placement x="%c_hawk_base_column%" y="%rndPos60%" w="%c_console_width%" h="800"/>
+				<icon selected="magiskModule" unselected="magiskModule" />
+				<data name="magiskModules" />
+				<update name="refreshElement"/>
+			</listbox>
+			<button>
+				<condition var1="magiskModule" op="!=" var2="1"/>
+				<placement x="0" y="1285" w="1080" h="100"/>
+				<font resource="extraLargeBold" color="%secondaryColor%"/>
+				<fill color="%transparent%"/>
+				<text>{@moduleNull=No magisk module installed}</text>
+			</button>
+
+
+			<action>
+				<actions>
+					<action function="set">refreshElement=1</action>
+				</actions>
+			</action>
+		</page>
+		<page name="c_magisk_option">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text>
+				<font resource="extraLargeBoldPlus" color="%secondaryColor%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
+				<text>%moduleName%</text>
+			</text>
+			<checkbox>
+				<condition var1="moduleEnabled" op="=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="goodSign" unchecked="goodSign"/>
+				<text>{@c_enabled=Enabled}</text>
+				<data variable="dummy"/>
+			</checkbox>
+			<checkbox>
+				<condition var1="moduleEnabled" op="!=" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
+				<image checked="warningSign" unchecked="warningSign"/>
+				<text>{@c_disabled=Disabled}</text>
+				<data variable="dummy"/>
+			</checkbox>
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos25%"/>
+				<text>{@c_version=Version}</text>
+			</text>
+			<text style="smallSimpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos30%"/>
+				<text>%moduleVersion%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos37%"/>
+				<text>{@c_author=Author}</text>
+			</text>
+			<text style="smallSimpleText">
+				<placement x="%c_hawk_base_column%" y="%rPos42%"/>
+				<text>%moduleAuthor%</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos50%"/>
+				<text>{@c_module_info_main=Module Info}</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rPos55%" w="%c_console_width%" h="160"/>
+				<font resource="small" color="%secondaryColor%"/>
+				<text>%moduleDesc%</text>
+			</textbox>
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos67%"/>
+				<text>{@options_hdr=Options}</text>
+			</text>
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos72%" w="%file_selector_default_w%" h="400"/>
+				<icon selected="installSign" unselected="installSign"/>
+				<listitem name="{@moduleDisable=Disable module}">
+					<condition var1="moduleEnabled" op="=" var2="1"/>
+					<icon resource="toggleOn"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="cmd">
+cd /twres/magisk/;
+cp -f disable %modulePath%/;
+						</action>
+						<action function="set">moduleEnabled=0</action>
+					</actions>
+				</listitem>
+				<listitem name="{@moduleEnable=Enable module}">
+					<condition var1="moduleEnabled" op="!=" var2="1"/>
+					<icon resource="toggleOff"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="cmd">
+rm -f %modulePath%/disable;
+						</action>
+						<action function="set">moduleEnabled=1</action>
+					</actions>
+				</listitem>
+				<listitem name="{@moduleUninstall=Uninstall module}">
+					<icon resource="uninstallSign"/>
+					<data variable="dummy"/>
+					<action function="overlay">uninstallModule</action>
+				</listitem>
+			</listbox>
+
+
+			<action>
+				<touch key="back"/>
+				<action function="page">magiskDashboard</action>
+			</action>
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="cmd">
+cd /twres/magisk/
+sh exit
+cd /
+umount -l _magisk
+rm -rf _magisk
+					</action>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+		<page name="uninstallModule">
+			<template name="overlayPage"/>
+
+			<button>
+				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
+				<fill color="%backgroundColor%"/>
+			</button>
+			<text style="cnfrmHeadTitle">
+				<placement x="%c_hawk_base_column%" y="%rndPos94%"/>
+				<text>{@moduleUninstall=Uninstall module}</text>
+			</text>
+			<textbox>
+				<placement x="%c_hawk_base_column%" y="%rndPos100%" w="%c_console_width%" h="400"/>
+				<text>{@confirm_action=Confirm Action}</text>
+			</textbox>
+
+			<button>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<font resource="midBold" color="#FF0000"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@shrpBaseYes=Yes}</text>
+				<actions>
+					<action function="shrp_magisk_um"/>
+					<action function="overlay"/>
+					<action function="page">magiskDashboard</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<placement x="360" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%tranparent%"/>
+				<text>{@cancel_btn=Cancel}</text>
+				<action function="overlay"/>
+			</button>
+		</page>
+	</pages>
+</recovery>

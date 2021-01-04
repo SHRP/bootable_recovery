@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<recovery>
+	<pages>
+		<page name="lock">
+			<background color="#000000e0"/>
+			<button>
+				<placement x="0" y="400" w="1080" h="378"/>
+				<fill color="%transparent%"/>
+				<font resource="c_lock_clock" color="#ffffffff"/>
+				<text>%tw_ls_time%</text>
+			</button>
+			<button>
+				<condition var1="c_dateview" var2="1"/>
+				<placement x="0" y="700" w="1080" h="100"/>
+				<fill color="%transparent%"/>
+				<font resource="small" color="#ffffffff"/>
+				<text>%c_lock_screen_date%</text>
+			</button>
+			<button>
+				<condition var1="c_dateview" var2="0"/>
+				<placement x="0" y="700" w="1080" h="100"/>
+				<fill color="%transparent%"/>
+				<font resource="small" color="#ffffffff"/>
+				<text>{@cpu_temp=CPU: %tw_cpu_temp% &#xB0;C} | {@battery_pct=Battery: %tw_battery%}</text>
+			</button>
+			<button>
+				<placement x="414" y="1454"/>
+				<image resource="c_on_tap_unlock" highlightresource="c_on_tap_unlock_pressed"/>
+				<action function="overlay"/>
+			</button>
+
+
+			<template name="c_status_bar"/>
+
+			<!--FlashLight Icon-->
+			<button>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="0"/>
+				</conditions>
+				<placement x="914" y="1754"/>
+				<image resource="c_flashlight_off"/>
+				<actions>
+					<action function="flashlight"/>
+				</actions>
+			</button>
+			<button>
+				<conditions>
+					<condition var1="has_flashlight" op="=" var2="1"/>
+					<condition var1="c_flashlight_status" op="=" var2="1"/>
+				</conditions>
+				<placement x="914" y="1754"/>
+				<image resource="c_flashlight_on"/>
+				<actions>
+					<action function="flashlight"/>
+				</actions>
+			</button>
+
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+		</page>
+	</pages>
+</recovery>

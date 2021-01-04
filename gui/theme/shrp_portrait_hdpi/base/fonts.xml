@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<recovery>
+    <details>
+		<resolution width="1080" height="1920"/>
+		<author>TeamSHRP</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>None</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+    <resources>
+		<font name="font_l" filename="primaryRegular.ttf" size="54"/>
+		<font name="font_m" filename="primaryRegular.ttf" size="42"/>
+		<font name="font_s" filename="primaryRegular.ttf" size="36"/>
+		<font name="fixed" filename="primaryRegular.ttf" size="30"/>
+		<font name="c_console_font" filename="DroidSansMono.ttf" size="30"/>
+		<font name="keylabel" filename="primaryRegular.ttf" size="64"/>
+		<font name="keylabel-small" filename="primaryRegular.ttf" size="46"/>
+		<font name="keylabel-longpress" filename="primaryRegular.ttf" size="32"/>
+
+
+		<!-- epicX_font_styles_start-->
+		<font name="c_list" filename="primaryRegular.ttf" size="75"/>
+		<font name="c_menu" filename="primaryRegular.ttf" size="35"/>
+		<font name="c_dashboard_text" filename="primaryRegular.ttf" size="30"/>
+		<font name="c_lock_clock" filename="primaryRegular.ttf" size="220"/>
+		<font name="c_hider" filename="primaryRegular.ttf" size="0"/>
+		<font name="c_language" filename="RobotoCondensed-Regular.ttf" size="36"/>
+
+
+		<!--New Font styles-->
+		<font name="bigTitle" filename="secondaryRegular.ttf" size="90"/>
+		<font name="subTitle" filename="primaryRegular.ttf" size="50"/>
+		<font name="paragraph" filename="primaryRegular.ttf" size="38"/>
+		<font name="midBold" filename="primaryBold.ttf" size="40"/>
+		<font name="largeBold" filename="primaryBold.ttf" size="44"/>
+		<font name="extraLargeBold" filename="primaryBold.ttf" size="70"/>
+		<font name="normal" filename="primaryRegular.ttf" size="44"/>
+		<font name="small" filename="primaryRegular.ttf" size="40"/>
+		<font name="moreSmall" filename="primaryRegular.ttf" size="32"/>
+
+		<font name="extraLargeBoldPlus" filename="primaryBold.ttf" size="80"/>
+		<font name="extraLargeBoldProPlus" filename="primaryBold.ttf" size="90"/>
+		<font name="superExtraLargeBold" filename="primaryRegular.ttf" size="170"/>
+
+
+		<font name="dashboardText" filename="primaryRegular.ttf" size="37"/>
+    </resources>
+</recovery>

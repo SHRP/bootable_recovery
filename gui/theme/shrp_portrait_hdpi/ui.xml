@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<recovery>
+	<details>
+		<resolution width="1080" height="1920"/>
+		<author>Team SHRP</author>
+		<title>SKY HAWK RECOVERY PROJECT</title>
+		<description>MainUi</description>
+		<preview>preview.png</preview>
+		<themeversion>3</themeversion>
+	</details>
+
+	<include>
+		<xmlfile name="dynamic/themeData.xml"/>
+		<!--xmlfile name="txt_res.xml"/>
+		<xmlfile name="notch_handled_var.xml"/>
+		<xmlfile name="c_status_bar_h.xml"/>
+		<xmlfile name="bg_res.xml"/-->
+		<xmlfile name="base/variables.xml"/>
+		<xmlfile name="base/images.xml"/>
+		<xmlfile name="base/fonts.xml"/>
+		<xmlfile name="base/styles.xml"/>
+		<xmlfile name="base/c_page.xml"/>
+		<xmlfile name="base/powerPanel.xml"/>
+		<xmlfile name="pages/about.xml"/>
+		<xmlfile name="pages/action.xml"/>
+		<xmlfile name="pages/advanced.xml"/>
+		<xmlfile name="pages/backup.xml"/>
+		<xmlfile name="pages/copylog.xml"/>
+		<xmlfile name="pages/dashboard.xml"/>
+		<xmlfile name="pages/essential.xml"/>
+		<xmlfile name="pages/files.xml"/>
+		<xmlfile name="pages/lockscreen.xml"/>
+		<xmlfile name="pages/magisk.xml"/>
+		<xmlfile name="pages/misc.xml"/>
+		<xmlfile name="pages/mount.xml"/>
+		<xmlfile name="pages/partition.xml"/>
+		<xmlfile name="pages/protection.xml"/>
+		<xmlfile name="pages/reboot.xml"/>
+		<xmlfile name="pages/restore.xml"/>
+		<xmlfile name="pages/security.xml"/>
+		<xmlfile name="pages/settings.xml"/>
+		<!--xmlfile name="pages/textEditor.xml"/-->
+		<xmlfile name="pages/theme.xml"/>
+		<xmlfile name="pages/tweaks.xml"/>
+		<xmlfile name="pages/wipe.xml"/>
+		<xmlfile name="pages/install.xml"/>
+		<xmlfile name="portrait.xml"/>
+	</include>
+
+
+	<mousecursor>
+		<placement w="15" h="15"/>
+		<background color="#FFFF00FF" resource="cursor"/>
+		<speed multiplier="2.5"/>
+	</mousecursor>
+
+	<templates>
+		<!--Custom_templates_epicX-->
+		<template name="c_console">
+			<background color="%backgroundColor%"/>
+			<console>
+				<placement x="55" y="%rPos19%" w="%c_console_width%" h="%revPos84%"/>
+			</console>
+		</template>
+		<template name="c_console_custom">
+			<background color="%backgroundColor%"/>
+			<console>
+				<placement x="55" y="%rPos19%" w="%c_console_width%" h="%revPos73%"/>
+			</console>
+		</template>
+		<template name="c_simple_sort">
+			<background color="%backgroundColor%"/>
+			<button>
+				<placement x="632" y="10" yref="%rPos2%" yop="+"/>
+				<image resource="search"/>
+				<action function="overlay">searchPanel</action>
+			</button>
+			<button>
+				<condition var1="tw_gui_sort_order" op="!=" var2="-1"/>
+				<placement x="776" y="10" yref="%rPos2%" yop="+"/>
+				<image resource="c_epicxsort"/>
+				<action function="set">tw_gui_sort_order=-1</action>
+			</button>
+			<button>
+				<condition var1="tw_gui_sort_order" op="!=" var2="1"/>
+				<placement x="776" y="10" yref="%rPos2%" yop="+"/>
+				<image resource="c_epicxsort"/>
+				<action function="set">tw_gui_sort_order=1</action>
+			</button>
+
+			<button>
+				<condition var1="tw_gui_sort_order" op="!=" var2="-2"/>
+				<placement x="920" y="10" yref="%rPos2%" yop="+"/>
+				<image resource="c_dateSort"/>
+				<action function="set">tw_gui_sort_order=-2</action>
+			</button>
+			<button>
+				<condition var1="tw_gui_sort_order" op="!=" var2="2"/>
+				<placement x="920" y="10" yref="%rPos2%" yop="+"/>
+				<image resource="c_dateSort"/>
+				<action function="set">tw_gui_sort_order=2</action>
+			</button>
+		</template>
+		<template name="progress_bar">
+			<progressbar>
+				<placement x="55" y="1500"/>
+				<resource empty="c_line_t" full="c_line"/>
+				<data name="ui_progress"/>
+			</progressbar>
+		</template>
+		<template name="keyboardterminaltemplate">
+			<keyboard>
+				<condition var1="tw_hide_kb" var2="0"/>
+				<placement x="0" y="%keyboard_terminal_y%" w="%screen_width%" h="96"/>
+				<keymargin x="0" y="0"/>
+				<background color="%backgroundColor%"/>
+				<key-alphanumeric color="%backgroundColor%" font="keylabel" textcolor="%secondaryColor%"/>
+				<key-other color="%backgroundColor%" font="keylabel-small" textcolor="%secondaryColor%"/>
+				<longpress font="keylabel-longpress" textcolor="%secondaryColor%" x="12" y="0"/>
+				<keylabel key="0:k:29" text="Ctrl"/>
+				<keylabel key="0:c:27" text="Esc"/>
+				<keylabel key="0:c:9" text="Tab"/>
+				<keylabel key="0:k:105" text="&lt;" resource="kb_arrow_left"/>
+				<keylabel key="0:k:108" text="v" resource="kb_arrow_down"/>
+				<keylabel key="0:k:103" text="^" resource="kb_arrow_up"/>
+				<keylabel key="0:k:106" text="&gt;" resource="kb_arrow_right"/>
+				<highlight color="%highlight_color%"/>
+				<ctrlhighlight color="#0090CA80"/>
+				<layout1>
+					<keysize height="96" width="154"/>
+					<row1 key01="155:k:29" key02="155:c:27" long02=":c:3" key03="154:c:9" key04="154:k:105" key05="154:k:108" key06="154:k:103" key07="154:k:106"/>
+				</layout1>
+			</keyboard>
+		</template>
+
+		<template name="keyboardtemplate">
+			<keyboard>
+				<condition var1="tw_hide_kb" var2="0"/>
+				<placement x="0" y="%keyboard_y%" w="1080" h="644"/>
+				<keymargin x="8" y="8"/>
+				<background color="%backgroundColor%"/>
+				<key-alphanumeric color="%backgroundColor%" font="keylabel" textcolor="%secondaryColor%"/>
+				<key-other color="%backgroundColor%" font="keylabel-small" textcolor="%secondaryColor%"/>
+				<longpress font="keylabel-longpress" textcolor="%secondaryColor%" x="12" y="0"/>
+				<keylabel key="0:c:8" text="Bksp" resource="backspace"/>
+				<keylabel key="0:action" text="Enter" resource="enter"/>
+				<keylabel key=" " text="Space" resource="space"/>
+				<highlight color="%highlight_color%"/>
+				<capshighlight color="%highlight_color%"/>
+				<layout1>
+					<keysize height="161" width="108"/>
+					<row1 key01="q" long01="1" key02="w" long02="2" key03="e" long03="3" key04="r" long04="4" key05="t" long05="5" key06="y" long06="6" key07="u" long07="7" key08="i" long08="8" key09="o" long09="9" key10="p" long10="0"/>
+					<row2 key01="54:" key02="a" long02="@" key03="s" long03="#" key04="d" long04="$" key05="f" long05="%" key06="g" long06="&amp;" key07="h" long07="*" key08="j" long08="-" key09="k" long09="+" key10="l" long10="_" key11="54:"/>
+					<row3 key01="162:layout2" key02="z" long02="!" key03="x" long03="&quot;" key04="c" long04="'" key05="v" long05=":" key06="b" long06=";" key07="n" long07="/" key08="m" long08="?" key09="162:c:8"/>
+					<row4 key01="162:layout3" key02="/" key03="540: " key04="." key05="162:action"/>
+					<keylabel key="0:layout2" text="Shift" resource="shift"/>
+					<keylabel key="0:layout3" text="?123"/>
+				</layout1>
+				<layout2>
+					<keysize height="161" width="108" capslock="0" revert_layout="1"/>
+					<row1 key01="Q" long01="1" key02="W" long02="2" key03="E" long03="3" key04="R" long04="4" key05="T" long05="5" key06="Y" long06="6" key07="U" long07="7" key08="I" long08="8" key09="O" long09="9" key10="P" long10="0"/>
+					<row2 key01="54:" key02="A" long02="@" key03="S" long03="#" key04="D" long04="$" key05="F" long05="%" key06="G" long06="&amp;" key07="H" long07="*" key08="J" long08="-" key09="K" long09="+" key10="L" long10="_" key11="54:"/>
+					<row3 key01="162:layout1" key02="Z" long02="!" key03="X" long03="&quot;" key04="C" long04="'" key05="V" long05=":" key06="B" long06=";" key07="N" long07="/" key08="M" long08="?" key09="162:c:8"/>
+					<row4 key01="162:layout3" key02="/" key03="540: " key04="." key05="162:action"/>
+					<keylabel key="0:layout1" text="Shift" resource="shift_fill"/>
+					<keylabel key="0:layout3" text="?123"/>
+				</layout2>
+				<layout3>
+					<keysize height="161" width="108"/>
+					<row1 key01="1" key02="2" key03="3" key04="4" key05="5" key06="6" key07="7" key08="8" key09="9" key10="0"/>
+					<row2 key01="@" key02="#" key03="$" key04="%" key05="&amp;" key06="*" key07="-" key08="+" key09="(" key10=")"/>
+					<row3 key01="162:layout4" key02="!" key03="108:c:34" key04="'" key05=":" key06=";" key07="/" key08="?" key09="162:c:8"/>
+					<row4 key01="162:layout1" key02="," key03="540: " key04="." key05="162:action"/>
+					<keylabel key="0:layout1" text="ABC"/>
+					<keylabel key="0:layout4" text="~\{"/>
+				</layout3>
+				<layout4>
+					<keysize height="161" width="108"/>
+					<row1 key01="~" key02="`" key03="|" key04="108:" key05="108:" key06="108:" key07="%" key08="108:" key09="{" key10="}"/>
+					<row2 key01="108:" key02="108:" key03="108:" key04="108:" key05="108:" key06="^" key07="_" key08="=" key09="[" key10="]"/>
+					<row3 key01="162:layout3" key02="108:" key03="108:" key04="108:" key05="108:" key06="\" key07="&lt;" key08="&gt;" key09="162:c:8"/>
+					<row4 key01="162:layout1" key02="108:c:34" key03="540: " key04="." key05="162:action"/>
+					<keylabel key="0:layout1" text="ABC"/>
+					<keylabel key="0:layout3" text="?123"/>
+				</layout4>
+			</keyboard>
+		</template>
+	</templates>
+</recovery>
