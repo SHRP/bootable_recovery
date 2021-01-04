@@ -132,6 +132,8 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
+	printf("Starting the UI...\n");
+	gui_init();
 #endif
 	// Load up all the resources
 	gui_loadResources();
@@ -349,10 +351,12 @@ int main(int argc, char **argv) {
 	time_t StartupTime = time(NULL);
 	printf("Starting TWRP %s-%s on %s (pid %d)\n", TW_VERSION_STR, TW_GIT_REVISION, ctime(&StartupTime), getpid());
 
-	// Load default values to set DataManager constants and handle ifdefs
+    // Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+#ifndef SHRP_EXPRESS
 	printf("Starting the UI...\n");
 	gui_init();
+#endif
 
 	// Load up all the resources
 	gui_loadResources();
