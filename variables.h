@@ -148,6 +148,13 @@
 #define TW_UNMOUNT_SYSTEM           "tw_unmount_system"
 #define TW_IS_SUPER                 "tw_is_super"
 
+#define TW_HAS_DEVICEAB             "tw_has_deviceab"
+#define TW_ACTIVE_SLOT_INSTALL	    "tw_active_slot_install"
+#define TW_INJECT_AFTER_ZIP 		"tw_inject_after_zip"
+#define TW_MKINJECT_AFTER_ZIP		"tw_mkinject_after_zip"
+#define REBOOTOTA_DISABLED      "rebootota_disabled"
+#define INSTALLMAGISK_OTA       "installmagisk_ota"
+
 // Also used:
 //   tw_boot_is_mountable
 //   tw_system_is_mountable

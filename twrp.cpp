@@ -45,6 +45,9 @@ extern "C" {
 #include "twrp-functions.hpp"
 #include "data.hpp"
 #include "partitions.hpp"
+#include "SHRPINIT.hpp"
+#include "SHRPMAIN.hpp"
+
 #ifdef __ANDROID_API_N__
 #include <android-base/strings.h>
 #else
@@ -72,6 +75,21 @@ static void Print_Prop(const char *key, const char *name, void *cookie) {
 	printf("%s=%s\n", key, name);
 }
 
+static void Reload_Gui() {
+#ifdef SHRP_EXPRESS_USE_DATA
+	/*
+	Trying to fetch theme and other datas.
+	This is essential because if data is decrpyted then 
+	first init will not able to find shrp path.
+	*/
+	Express::updateSHRPBasePath();
+#ifdef SHRP_EXPRESS
+	Express::init();
+#endif
+#endif
+	gui_loadCustomResources();
+}
+
 static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
@@ -87,11 +105,15 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 			} else {
 				// Check for and load custom theme if present
 				TWFunc::check_selinux_support();
-				gui_loadCustomResources();
+
+				// Reloading Gui
+				Reload_Gui();
 			}
 		}
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
+		// Reloading Gui
+		Reload_Gui();
 		TWFunc::check_selinux_support();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
@@ -127,6 +149,12 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return;
 	}
+	Express::updateSHRPBasePath();
+#ifdef SHRP_EXPRESS
+	Express::init();
+#endif
+	//SHRP_initial_funcs
+	SHRP::INIT();
 
 // We are doing this here to allow super partition to be set up prior to overriding properties
 #if defined(TW_INCLUDE_LIBRESETPROP) && defined(TW_OVERRIDE_SYSTEM_PROPS)
@@ -164,6 +192,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	TWFunc::check_and_run_script("/system/bin/runatboot.sh", "boot");
 	TWFunc::check_and_run_script("/system/bin/postrecoveryboot.sh", "boot");
 
+/*
 #ifdef TW_INCLUDE_INJECTTWRP
 	// Back up TWRP Ramdisk if needed:
 	TWPartition* Boot = PartitionManager.Find_Partition_By_Path("/boot");
@@ -176,15 +205,20 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	}
 	LOGINFO("Backup of TWRP ramdisk done.\n");
 #endif
+*/
 
 	Decrypt_Page(skip_decryption, datamedia);
 	PartitionManager.Output_Partition_Logging();
+
+	//Save JSON
+	JSON::storeShrpInfo();
 
 	// Fixup the RTC clock on devices which require it
 	if (crash_counter == 0)
 		TWFunc::Fixup_Time_On_Boot();
 
 	DataManager::LoadTWRPFolderInfo();
+	// Read the settings file
 	DataManager::ReadSettingsFile();
 
 	// Run any outstanding OpenRecoveryScript
@@ -197,9 +231,11 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	}
 
 #ifdef TW_HAS_MTP
-	char mtp_crash_check[PROPERTY_VALUE_MAX];
-	property_get("mtp.crash_check", mtp_crash_check, "0");
-	if (DataManager::GetIntValue("tw_mtp_enabled")
+	if(DataManager::GetIntValue("recLockStatus") == 0) {
+	    LOGINFO("SHRP is unlocked; processing MTP now.\n");
+	    char mtp_crash_check[PROPERTY_VALUE_MAX];
+	    property_get("mtp.crash_check", mtp_crash_check, "0");
+	    if (DataManager::GetIntValue("tw_mtp_enabled")
 			&& !strcmp(mtp_crash_check, "0") && !crash_counter
 			&& (!DataManager::GetIntValue(TW_IS_ENCRYPTED) || DataManager::GetIntValue(TW_IS_DECRYPTED))) {
 		property_set("mtp.crash_check", "1");
@@ -209,13 +245,16 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		else
 			gui_msg("mtp_enabled=MTP Enabled");
 		property_set("mtp.crash_check", "0");
-	} else if (strcmp(mtp_crash_check, "0")) {
+	    } else if (strcmp(mtp_crash_check, "0")) {
 		gui_warn("mtp_crash=MTP Crashed, not starting MTP on boot.");
 		DataManager::SetValue("tw_mtp_enabled", 0);
 		PartitionManager.Disable_MTP();
-	} else if (crash_counter == 1) {
+	    } else if (crash_counter == 1) {
 		LOGINFO("TWRP crashed; disabling MTP as a precaution.\n");
 		PartitionManager.Disable_MTP();
+	    }
+	}else{
+	    LOGINFO("SHRP is locked; MTP is not allowing to start.\n");
 	}
 #endif
 
@@ -274,6 +313,10 @@ static void reboot() {
 	string Reboot_Arg;
 
 	DataManager::GetValue("tw_reboot_arg", Reboot_Arg);
+
+	//Save JSON
+	JSON::storeShrpInfo();
+	
 	if (Reboot_Arg == "recovery")
 		TWFunc::tw_reboot(rb_recovery);
 	else if (Reboot_Arg == "poweroff")
@@ -327,8 +370,10 @@ int main(int argc, char **argv) {
 	time_t StartupTime = time(NULL);
 	printf("Starting TWRP %s-%s on %s (pid %d)\n", TW_VERSION_STR, TW_GIT_REVISION, ctime(&StartupTime), getpid());
 
-	// Load default values to set DataManager constants and handle ifdefs
+    // Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
+
+
 	printf("Starting the UI...\n");
 	gui_init();
 

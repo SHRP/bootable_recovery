@@ -250,11 +250,25 @@ bool LoadPlacement(xml_node<>* node, int* x, int* y, int* w /* = NULL */, int* h
 	if (!node)
 		return false;
 
+	//<SHRP>
+  	int yref = 0;
+  	if (node->first_attribute("yref")) {
+    	yref = LoadAttrIntScaleY(node, "yref");
+    	bool isPlus = true;
+    	if (node->first_attribute("yop")) {
+      		isPlus = (LoadAttrString(node, "yop", "") == "+");
+    	}
+    	if (!isPlus) {
+      		yref = (yref * -1);
+    	}
+  	}
+  	//</SHRP>
 	if (node->first_attribute("x"))
 		*x = LoadAttrIntScaleX(node, "x") + tw_x_offset;
 
 	if (node->first_attribute("y"))
-		*y = LoadAttrIntScaleY(node, "y") + tw_y_offset;
+		//*y = LoadAttrIntScaleY(node, "y") + tw_y_offset;
+		*y = LoadAttrIntScaleY(node, "y") + tw_y_offset + yref;//SHRP
 
 	if (w && node->first_attribute("w"))
 		*w = LoadAttrIntScaleX(node, "w");

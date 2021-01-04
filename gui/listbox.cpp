@@ -27,8 +27,12 @@ extern "C" {
 #include "objects.hpp"
 #include "../data.hpp"
 #include "../partitions.hpp"
+#include "../twrp-functions.hpp"
 #include "pages.hpp"
 
+//<SHRP>
+#include <dirent.h>
+//</SHRP>
 extern std::vector<language_struct> Language_List;
 
 GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
@@ -103,6 +107,308 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 				}
 			}
 		}
+				//<SHRP>
+		else if(mVariable == "shrpTweaks"){
+#ifndef SHRP_EXCLUDE_DEFAULT_ADDONS
+#ifndef SHRP_SKIP_DEFAULT_ADDON_1
+			{
+				addonInfo aItem;
+				aItem.name="Substratum Overlay Disabler [Normal]";
+				aItem.info="This will disable substratum overlays.";
+				aItem.confirmBtnText="Disable";
+				aItem.successfulText="Disabled";
+				aItem.fileName="s_oms.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#ifndef SHRP_SKIP_DEFAULT_ADDON_2
+			{
+				addonInfo aItem;
+				aItem.name="Substratum Overlay Disabler [Legacy]";
+				aItem.info="This will disable substratum overlays. Note - Legacy Only.";
+				aItem.confirmBtnText="Disable";
+				aItem.successfulText="Disabled";
+				aItem.fileName="s_non_oms.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#ifndef SHRP_SKIP_DEFAULT_ADDON_3
+			{
+				addonInfo aItem;
+				aItem.name="Clear system lock";
+				aItem.info="This addon will remove your android system lock.";
+				aItem.confirmBtnText="Clear";
+				aItem.successfulText="Removed";
+				aItem.fileName="rfp.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#ifndef SHRP_SKIP_DEFAULT_ADDON_4
+			{
+				addonInfo aItem;
+				aItem.name="Disable Force Encryption";
+				aItem.info="This will disable force encryption of your device.";
+				aItem.confirmBtnText="Disable";
+				aItem.successfulText="Disabled";
+				aItem.fileName="c_fixed_encryption.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#ifndef SHRP_SKIP_DEFAULT_ADDON_5
+			{
+				addonInfo aItem;
+				aItem.name="Enable Camera 2 Api";
+				aItem.info="This will enable camera 2 api in your system. Note - Works only in Qualcomm devices.";
+				aItem.confirmBtnText="Enable";
+				aItem.successfulText="Enabled";
+				aItem.fileName="api2on.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#ifndef SHRP_SKIP_DEFAULT_ADDON_6
+			{
+				addonInfo aItem;
+				aItem.name="Disable Camera 2 Api";
+				aItem.info="This will disable camera 2 api in your system. Note - Works only in Qualcomm devices.";
+				aItem.confirmBtnText="Disable";
+				aItem.successfulText="Disabled";
+				aItem.fileName="api2off.zip";
+				addons.push_back(aItem);
+			}
+#endif
+#endif
+			{
+#ifdef SHRP_EXTERNAL_ADDON_1_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_1_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_1_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_1_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_1_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_1_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_1_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_1_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			{
+#ifdef SHRP_EXTERNAL_ADDON_2_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_2_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_2_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_2_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_2_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_2_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_2_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_2_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			{
+#ifdef SHRP_EXTERNAL_ADDON_3_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_3_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_3_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_3_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_3_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_3_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_3_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_3_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			{
+#ifdef SHRP_EXTERNAL_ADDON_4_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_4_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_4_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_4_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_4_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_4_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_4_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_4_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			{
+#ifdef SHRP_EXTERNAL_ADDON_5_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_5_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_5_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_5_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_5_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_5_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_5_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_5_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			{
+#ifdef SHRP_EXTERNAL_ADDON_6_NAME
+				addonInfo aItem;
+				aItem.name=EXPAND(SHRP_EXTERNAL_ADDON_6_NAME);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_6_INFO
+				aItem.info=EXPAND(SHRP_EXTERNAL_ADDON_6_INFO);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_6_BTN_TEXT
+				aItem.confirmBtnText=EXPAND(SHRP_EXTERNAL_ADDON_6_BTN_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT
+				aItem.successfulText=EXPAND(SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT);
+#endif
+#ifdef SHRP_EXTERNAL_ADDON_6_FILENAME
+				aItem.fileName=EXPAND(SHRP_EXTERNAL_ADDON_6_FILENAME);
+				addons.push_back(aItem);
+#endif
+			}
+			mListItems.clear();
+			for(auto ptr=addons.begin(); ptr<addons.end(); ptr++){
+				ListItem data;
+				data.displayName=ptr->name;
+				data.variableName="dummy";
+				data.variableValue = "";
+				data.action = NULL;
+				data.icon = NULL;
+				data.selected = 0;
+				mListItems.push_back(data);
+			}
+		}else if(mVariable == "magiskModules"){
+
+			child = FindNode(node,"update");
+			if (child){
+				attr = child->first_attribute("name");
+			}
+			if (attr){
+				updateVar = attr->value();
+				DataManager::GetValue(updateVar,updateVal);
+			}
+
+			DIR* d;
+			struct dirent* de;
+			string fileName,moduleProp;
+			d = opendir("/_magisk/");
+
+			if(d!=NULL){
+				while((de = readdir(d)) != NULL){
+					if(de->d_type == DT_DIR){
+						fileName=de->d_name;
+						moduleProp="/_magisk/"+fileName+"/module.prop";
+						if(TWFunc::Path_Exists(moduleProp)){//If true that means its a module
+							int i=0;
+							char chr[512];
+							string tmp,name,ver,author,desc;
+							moduleInfo M;
+
+							M.modulePath="/_magisk/"+fileName;
+							FILE *f=std::fopen(moduleProp.c_str(),"r");
+
+							while(i<7){
+								fgets(chr,512,f);
+								tmp=chr;
+								tmp=tmp.substr(0,tmp.find_first_of('='));
+								if(tmp == "name"){
+									name=chr;
+									M.name=name.substr(name.find_first_of('=')+1,name.length());
+									M.name[M.name.length()-1]=' ';
+								}else if(tmp == "version"){
+									ver=chr;
+									M.version=ver.substr(ver.find_first_of('=')+1,ver.length());
+									M.version[M.version.length()-1]=' ';
+								}else if(tmp == "author"){
+									author=chr;
+									M.author=author.substr(author.find_first_of('=')+1,author.length());
+									M.author[M.author.length()-1]=' ';
+								}else if(tmp == "description"){
+									desc=chr;
+									M.description=desc.substr(desc.find_first_of('=')+1,desc.length());
+									M.description[M.description.length()-1]=' ';
+								}
+								i++;
+							}
+							fclose(f);
+
+							modules.push_back(M);
+
+							ListItem data;
+							data.displayName=M.name;
+							data.variableName="dummy";
+							data.variableValue = "";
+							data.action = NULL;
+							data.icon = NULL;
+							data.selected = 0;
+							mListItems.push_back(data);
+						}
+					}
+				}
+			}
+			DataManager::SetValue("magiskModule", mListItems.empty() ? "0" : "1");
+		}else if("colorList"){
+			child = FindNode(node, "color");
+			while (child) {
+				xml_attribute<>* tmp;
+				colorInfo C;
+				tmp=child->first_attribute("name");
+				C.colorName=tmp->value();
+				C.mColorIcon=LoadAttrImage(child, "resource");
+				colors.push_back(C);
+				child = child->next_sibling("color");
+			}
+			child = FindNode(node, "colorType");
+			while (child) {
+				ListItem data;
+				string colorVar;
+				data.displayName=child->first_attribute("name")->value();
+				data.info=child->first_attribute("colorVar")->value();
+				data.variableName = "";
+				data.variableValue = "";
+				data.action = NULL;
+				data.icon = NULL;
+				for(auto it=colors.begin();it<colors.end();it++){
+					if(it->colorName == "customColor"){
+						data.icon = it->mColorIcon;
+					}
+					if(DataManager::GetStrValue(data.info) == DataManager::GetStrValue(it->colorName)){
+						data.icon = it->mColorIcon;
+						break;
+					}
+				}
+				
+				data.selected = 0;
+				mListItems.push_back(data);
+				child = child->next_sibling("colorType");
+			}
+		}
+		//</SHRP>
 	} else
 		allowSelection = false;  // allows using listbox as a read-only list or menu
 
@@ -135,6 +441,16 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 				isCheckList = true;
 			}
 		}
+
+		//Fetching icon from xml <SHRP>
+		xml_node<>* tmp;
+		tmp = FindNode(child, "icon");
+		if (tmp){
+			item.icon = LoadAttrImage(tmp, "resource");
+		}else{
+			item.icon = NULL;
+		}
+		//<SHRP>
 
 		LoadConditions(child, item.mConditions);
 
@@ -180,6 +496,79 @@ int GUIListBox::Update(void)
 		}
 		mUpdate = 1;
 	}
+	//<SHRP>
+	else if(mVariable == "magiskModules"){
+		DIR* d;
+		struct dirent* de;
+		string fileName,moduleProp;
+		d = opendir("/_magisk/");
+		mListItems.clear();
+		modules.clear();
+		if(d!=NULL){
+			while((de = readdir(d)) != NULL){
+				if(de->d_type == DT_DIR){
+					fileName=de->d_name;
+					moduleProp="/_magisk/"+fileName+"/module.prop";
+					if(TWFunc::Path_Exists(moduleProp)){//If true that means its a module
+						int i=0;
+						char chr[512];
+						string tmp,name,ver,author,desc;
+						moduleInfo M;
+
+						M.modulePath="/_magisk/"+fileName;
+						FILE *f=std::fopen(moduleProp.c_str(),"r");
+
+						while(i<7){
+							fgets(chr,512,f);
+							tmp=chr;
+							tmp=tmp.substr(0,tmp.find_first_of('='));
+							if(tmp == "name"){
+								name=chr;
+								M.name=name.substr(name.find_first_of('=')+1,name.length());
+								M.name[M.name.length()-1]=' ';
+							}else if(tmp == "version"){
+								ver=chr;
+								M.version=ver.substr(ver.find_first_of('=')+1,ver.length());
+								M.version[M.version.length()-1]=' ';
+							}else if(tmp == "author"){
+								author=chr;
+								M.author=author.substr(author.find_first_of('=')+1,author.length());
+								M.author[M.author.length()-1]=' ';
+							}else if(tmp == "description"){
+								desc=chr;
+								M.description=desc.substr(desc.find_first_of('=')+1,desc.length());
+								M.description[M.description.length()-1]=' ';
+							}
+							i++;
+						}
+						fclose(f);
+
+						modules.push_back(M);
+
+						ListItem data;
+						data.displayName=M.name;
+						data.variableName="dummy";
+						data.variableValue = "";
+						data.action = NULL;
+						data.icon = NULL;
+						data.selected = 0;
+						mListItems.push_back(data);
+					}
+				}
+			}
+		}
+		DataManager::SetValue("magiskModule", mListItems.empty() ? "0" : "1");
+	}else if(mVariable == "colorList"){
+		string tmp;
+		for(auto it=mListItems.begin(); it<mListItems.end(); it++){
+			for(auto ptr=colors.begin(); ptr<colors.end(); ptr++){
+				if(DataManager::GetStrValue(it->info.c_str()) == DataManager::GetStrValue(ptr->colorName.c_str())){
+					it->icon = ptr->mColorIcon;
+				}
+			}
+		}
+	}
+	//</SHRP>
 
 	GUIScrollList::Update();
 
@@ -203,6 +592,11 @@ int GUIListBox::NotifyVarChange(const std::string& varName, const std::string& v
 		currentValue = value;
 		mUpdate = 1;
 	}
+	//<SHRP>
+	else if(varName == updateVar){
+		mUpdate = 1;
+	}
+	//</SHRP>
 
 	std::vector<size_t> mVisibleItemsOld;
 	std::swap(mVisibleItemsOld, mVisibleItems);
@@ -269,7 +663,15 @@ void GUIListBox::RenderItem(size_t itemindex, int yPos, bool selected)
 	// note: the "selected" parameter above is for the currently touched item
 	// don't confuse it with the more persistent "selected" flag per list item used below
 	ListItem& item = mListItems[mVisibleItems[itemindex]];
-	ImageResource* icon = item.selected ? mIconSelected : mIconUnselected;
+	//ImageResource* icon = item.selected ? mIconSelected : mIconUnselected;
+	//Get Icon Resource if available <SHRP>
+	ImageResource* icon;
+	if(item.icon != NULL){
+		icon = item.icon;
+	}else{
+		icon = item.selected ? mIconSelected : mIconUnselected;
+	}
+	//<SHRP>
 	const std::string& text = item.displayName;
 
 	RenderStdItem(yPos, selected, icon, text.c_str());
@@ -285,6 +687,58 @@ void GUIListBox::NotifySelect(size_t item_selected)
 	}
 
 	ListItem& item = mListItems[mVisibleItems[item_selected]];
+
+	//<SHRP>
+		if(mVariable == "shrpTweaks"){
+			for(auto ptr=addons.begin(); ptr<addons.end(); ptr++){
+				if(item.displayName == ptr->name){
+
+					DataManager::SetValue("shrpTweakName",ptr->name);
+					DataManager::SetValue("shrpTweakInfo",ptr->info == "" ? "Confirm Flash" : ptr->info);
+					DataManager::SetValue("shrpTweakConfirm",ptr->confirmBtnText == "" ? "Flash" : ptr->confirmBtnText);
+					DataManager::SetValue("shrpTweakFinish",ptr->successfulText == "" ? "Successful" : ptr->successfulText);
+
+					if(TWFunc::Path_Exists("/sdcard/SHRP/addons/"+ptr->fileName)){
+						DataManager::SetValue("shrpTweakFileName","/sdcard/SHRP/addons/"+ptr->fileName);
+					}else{
+						DataManager::SetValue("shrpTweakFileName","/twres/addons/"+ptr->fileName);
+					}
+					break;
+				}
+			}
+		}else if(mVariable == "magiskModules"){
+			for(auto ptr=modules.begin(); ptr<modules.end(); ptr++){
+				if(ptr->name == item.displayName){
+
+					DataManager::SetValue("modulePath",ptr->modulePath);
+					DataManager::SetValue("moduleName",ptr->name);
+					DataManager::SetValue("moduleVersion",ptr->version);
+					DataManager::SetValue("moduleAuthor",ptr->author);
+					DataManager::SetValue("moduleDesc",ptr->description);
+					
+					TWFunc::Path_Exists(DataManager::GetStrValue("modulePath")+"/disable") ? DataManager::SetValue("moduleEnabled",0) : DataManager::SetValue("moduleEnabled",1);
+
+					//PageManager::ChangeOverlay("");
+					//PageManager::ChangePage("c_magisk_option");
+
+					gui_changeOverlay("");
+					gui_changePage("c_magisk_option");
+					break;
+				}
+			}
+		}else if(mVariable == "colorList"){
+			DataManager::SetValue("assignVar",item.info);
+			DataManager::SetValue("colorHolder",DataManager::GetStrValue(DataManager::GetStrValue("assignVar")));
+			if(mVisibleItems[item_selected] == 0){
+				//PageManager::ChangeOverlay("bgColorPanel");
+				gui_changeOverlay("bgColorPanel");
+			}else{
+				//PageManager::ChangeOverlay("colorPanel");
+				gui_changeOverlay("colorPanel");
+			}
+
+		}
+	//</SHRP>
 
 	if (isCheckList) {
 		int selected = 1 - item.selected;

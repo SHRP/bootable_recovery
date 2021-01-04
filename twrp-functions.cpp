@@ -84,7 +84,7 @@ int TWFunc::Exec_Cmd(const string& cmd, string &result, bool combine_stderr) {
 	return ret;
 }
 
-int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors) {
+int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors, bool onlyLOGInfo) {
 	pid_t pid;
 	int status;
 	switch(pid = fork())
@@ -98,10 +98,18 @@ int TWFunc::Exec_Cmd(const string& cmd, bool Show_Errors) {
 			break;
 		default:
 		{
-			if (TWFunc::Wait_For_Child(pid, &status, cmd, Show_Errors) != 0)
+			if(onlyLOGInfo){
+				if (TWFunc::Wait_For_Child(pid, &status, cmd, Show_Errors, onlyLOGInfo) != 0){
+					return -1;
+				}else{
+					return 0;
+				}
+			}
+			if (TWFunc::Wait_For_Child(pid, &status, cmd, Show_Errors) != 0){
 				return -1;
-			else
+			}else{
 				return 0;
+			}	
 		}
 	}
 }
@@ -128,20 +136,29 @@ string TWFunc::Get_Path(const string& Path) {
 		return Path;
 }
 
-int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors) {
+int TWFunc::Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors, bool onlyLOGInfo) {
 	pid_t rc_pid;
 
 	rc_pid = waitpid(pid, status, 0);
 	if (rc_pid > 0) {
 		if (WIFSIGNALED(*status)) {
-			if (Show_Errors)
+			if (Show_Errors && !onlyLOGInfo)
 				gui_msg(Msg(msg::kError, "pid_signal={1} process ended with signal: {2}")(Child_Name)(WTERMSIG(*status))); // Seg fault or some other non-graceful termination
+			else if(Show_Errors && onlyLOGInfo)
+			{
+				LOGINFO("%s process ended with signal: %d",(Child_Name).c_str(),(WTERMSIG(*status)));
+			}
+			
 			return -1;
 		} else if (WEXITSTATUS(*status) == 0) {
 			LOGINFO("%s process ended with RC=%d\n", Child_Name.c_str(), WEXITSTATUS(*status)); // Success
 		} else {
-			if (Show_Errors)
+			if (Show_Errors && !onlyLOGInfo)
 				gui_msg(Msg(msg::kError, "pid_error={1} process ended with ERROR: {2}")(Child_Name)(WEXITSTATUS(*status))); // Graceful exit, but there was an error
+			else if(Show_Errors && onlyLOGInfo)
+			{
+				LOGINFO("%s process ended with signal: %d",(Child_Name).c_str(),(WEXITSTATUS(*status)));
+			}
 			return -1;
 		}
 	} else { // no PID returned
