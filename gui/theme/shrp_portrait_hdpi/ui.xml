@@ -2,11 +2,11 @@
 <recovery>
 	<details>
 		<resolution width="1080" height="1920"/>
-		<author>Team SHRP</author>
+		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
 		<title>SKY HAWK RECOVERY PROJECT</title>
 		<description>MainUi</description>
 		<preview>preview.png</preview>
-		<themeversion>3</themeversion>
+		<themeversion>4</themeversion>
 	</details>
 
 	<include>
