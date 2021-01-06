@@ -2,11 +2,11 @@
 <recovery>
     <details>
 		<resolution width="1080" height="1920"/>
-		<author>TeamSHRP</author>
-		<title>SKY HAWK RECOVERY PROJECT</title>
+		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
+		<title>Font resources</title>
 		<description>None</description>
 		<preview>preview.png</preview>
-		<themeversion>3</themeversion>
+		<themeversion>4</themeversion>
 	</details>
     <resources>
 		<font name="font_l" filename="primaryRegular.ttf" size="54"/>
