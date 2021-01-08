@@ -23,11 +23,11 @@ limitations under the License.
 
 void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist){
     //SHRP constant variables
-	mConst->SetValue("shrp_ver", "3.69");
+	mConst->SetValue("shrp_ver", "3.0");
 	mConst->SetValue("buildNo", EXPAND(SHRP_BUILD_DATE));
-	mConst->SetValue("shrp_ver_status", "Beta");
+	mConst->SetValue("shrp_ver_status", "Stable");
 	mConst->SetValue("c_magisk_path", "/_magisk/");
-	mConst->SetValue("c_magisk_stock_var", "20.3");
+	mConst->SetValue("c_magisk_stock_var", "21.2");
 
 	//SHRP SemiConstant variables
 	mData->SetValue("shrpBasePath", "/system");
