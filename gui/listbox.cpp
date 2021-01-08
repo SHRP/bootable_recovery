@@ -150,7 +150,7 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 				aItem.info="This will disable force encryption of your device.";
 				aItem.confirmBtnText="Disable";
 				aItem.successfulText="Disabled";
-				aItem.fileName="c_fixed_encryption.zip";
+				aItem.fileName="Disable_Dm-Verity_ForceEncrypt.zip";
 				addons.push_back(aItem);
 			}
 #endif
