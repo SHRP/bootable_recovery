@@ -461,6 +461,9 @@ ifneq ($(SHRP_LITE),)
 	LOCAL_CFLAGS += -DSHRP_LITE
 endif
 
+ifeq ($(INC_IN_REC_MAGISK), true)
+	LOCAL_CFLAGS += -DMAGISK_IN_REC
+endif
 
 ifneq ($(TW_OVERRIDE_SYSTEM_PROPS),)
     TW_INCLUDE_LIBRESETPROP := true
