@@ -526,8 +526,8 @@ ifneq ($(SHRP_LITE),)
 	LOCAL_CFLAGS += -DSHRP_LITE
 endif
 
-ifneq ($(SHRP_LITE),)
-	LOCAL_CFLAGS += -DSHRP_LITE
+ifeq ($(INC_IN_REC_MAGISK), true)
+	LOCAL_CFLAGS += -DMAGISK_IN_REC
 endif
 #Default Addon Disabler
 ifeq ($(SHRP_EXCLUDE_DEFAULT_ADDONS),true)
