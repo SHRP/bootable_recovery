@@ -31,9 +31,9 @@ bool minUtils::compare(string str1,string str2){
 }
 
 bool minUtils::isFileEditable(string fileExtension){
-	vector<string> extensions = {".txt",".xml",".prop",".sh"};
+	vector<string> extensions = {".txt", ".xml", ".prop", ".sh", ".conf", ".json", ".cfg", ".rc", ".d", ".md"};
 
-    if(fileExtension == "") return true;
+    if(fileExtension == "" || fileExtension == "none") return true;
 
 	for(auto it = extensions.begin(); it < extensions.end(); it++){
 		if(compare(fileExtension, *it)) return true;
