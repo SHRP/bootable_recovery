@@ -181,52 +181,136 @@ sh c_core_only_enabler;
 						<action function="set">core=1</action>
 					</actions>
 				</listitem>
+
+
 				<listitem name="{@installMagisk=Install Magisk}">
-					<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+					<conditions>
+						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="1"/>
+					</conditions>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
 						<action function="set">tw_back=magiskDashboard</action>
-						<action function="set">tw_filename=/sdcard/SHRP/addons/c_magisk.zip</action>
-						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_filename=/twres/addons/c_magisk.zip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
 						<action function="set">tw_has_action2=1</action>
 						<action function="set">tw_action2=flash</action>
 						<action function="set">tw_action2_param=flash_zip</action>
 						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
 						<action function="set">tw_complete_text1={@done=Done}</action>
-						<action function="page">confirm_action</action>
+						<action function="page">magisk_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@installMagisk=Install Magisk}">
+					<conditions>
+						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="0"/>
+					</conditions>
+					<icon resource="installSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/sdcard/SHRP/addons/c_magisk.zip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">magisk_action</action>
+					</actions>
+				</listitem>
+
+
+				<listitem name="{@updateMagisk=Update Magisk}">
+					<conditions>
+						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="1"/>
+					</conditions>
+					<icon resource="installSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/twres/addons/c_magisk.zip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">magisk_action</action>
 					</actions>
 				</listitem>
 				<listitem name="{@updateMagisk=Update Magisk}">
-					<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+					<conditions>
+						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="0"/>
+					</conditions>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
 						<action function="set">tw_back=magiskDashboard</action>
 						<action function="set">tw_filename=/sdcard/SHRP/addons/c_magisk.zip</action>
-						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
 						<action function="set">tw_has_action2=1</action>
 						<action function="set">tw_action2=flash</action>
 						<action function="set">tw_action2_param=flash_zip</action>
 						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
 						<action function="set">tw_complete_text1={@done=Done}</action>
-						<action function="page">confirm_action</action>
+						<action function="page">magisk_action</action>
+					</actions>
+				</listitem>
+
+
+				<listitem name="{@c_unroot=Unroot}">
+					<conditions>
+						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="1"/>
+					</conditions>
+					<icon resource="uninstallSign"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">tw_back=magiskDashboard</action>
+						<action function="set">tw_filename=/twres/addons/unmagisk.zip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
+						<action function="set">tw_has_action2=1</action>
+						<action function="set">tw_action2=flash</action>
+						<action function="set">tw_action2_param=flash_zip</action>
+						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+						<action function="set">tw_complete_text1={@done=Done}</action>
+						<action function="page">magisk_action</action>
 					</actions>
 				</listitem>
 				<listitem name="{@c_unroot=Unroot}">
-					<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+					<conditions>
+						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+						<condition var1="magisk_in_rec" op="=" var2="0"/>
+					</conditions>
 					<icon resource="uninstallSign"/>
 					<data variable="dummy"/>
 					<actions>
 						<action function="set">tw_back=magiskDashboard</action>
 						<action function="set">tw_filename=/sdcard/SHRP/addons/unmagisk.zip</action>
-						<action function="set">tw_action=queuezip</action>
+						<action function="set">tw_action=cmd</action>
+						<action function="set">tw_action_param=cd /twres/magisk/;sh exit;cd /;umount -l _magisk;rm -rf _magisk;</action>
+						<action function="queuezip"/>
 						<action function="set">tw_has_action2=1</action>
 						<action function="set">tw_action2=flash</action>
 						<action function="set">tw_action2_param=flash_zip</action>
 						<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
 						<action function="set">tw_complete_text1={@done=Done}</action>
-						<action function="page">confirm_action</action>
+						<action function="page">magisk_action</action>
 					</actions>
 				</listitem>
 				<listitem name="{@magiskModules=Magisk modules}">

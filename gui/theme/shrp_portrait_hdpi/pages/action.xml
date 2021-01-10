@@ -1,6 +1,58 @@
 <?xml version="1.0"?>
 <recovery>
 	<pages>
+		<page name="magisk_action">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@c_confirm=Confirm}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>%tw_text1%</text>
+			</text>
+
+
+			<button>
+				<condition var1="c_magisk_status" op="=" var2="1"/>
+				<image resource="c_ok"/>
+				<placement x="860" y="%rndPos105%"/>
+				<actions>
+					<action function="set">tw_action=%tw_action2%</action>
+					<action function="set">tw_action_param=%tw_action2_param%</action>
+
+					<action function="set">tw_has_action2=0</action>
+					<action function="set">tw_action2=</action>
+					<action function="set">tw_action2_param=</action>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="c_magisk_status" op="=" var2="0"/>
+				<image resource="c_ok"/>
+				<placement x="860" y="%rndPos105%"/>
+				<action function="page">action_page</action>
+			</button>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="queueclear"/>
+					<action function="set">tw_clear_destination=%tw_back%</action>
+					<action function="page">clear_vars</action>
+				</actions>
+			</action>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="queueclear"/>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
 		<page name="confirm_action">
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>

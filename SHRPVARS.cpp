@@ -198,6 +198,11 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     mConst->SetValue("shrp_lite", 0);
 #endif
 
+#ifdef MAGISK_IN_REC
+    mConst->SetValue("magisk_in_rec", 1);
+#else
+    mConst->SetValue("magisk_in_rec", 0);
+#endif
 
 #ifndef SHRP_NOTCH
     //Positions variables
