@@ -42,7 +42,7 @@
 
 			<terminal>
 				<condition var1="tw_hide_kb" var2="0"/>
-				<placement x="55" y="285" w="1032" h="700"/>
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="1032" h="700"/>
 			</terminal>
 
 			<terminal>
