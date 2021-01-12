@@ -602,7 +602,7 @@ rm -r /tmp/bak;
 					<condition var1="clockEnabled" var2="1"/>
 					<data variable="centeredClockEnabled"/>
 				</listitem>
-				<listitem name="{@cpuTemp=Cpu temparature}">
+				<listitem name="{@cpuTemp=Cpu temperature}">
 					<data variable="cpuTempEnabled"/>
 				</listitem>
 				<listitem name="{@c_batt_bar=Battery Bar}">

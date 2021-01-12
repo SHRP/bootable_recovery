@@ -900,7 +900,7 @@
 		<string name="dashboardTxt">Dashboard</string>
 		<string name="toggle">Toggle</string>
 		<string name="centeredClock">Centered clock</string>
-		<string name="cpuTemp">Cpu temparature</string>
+		<string name="cpuTemp">Cpu temperature</string>
 		<string name="offcialBuild">Official build</string>
 		<string name="unoffcialBuild">Unofficial build</string>
 		<string name="betaBuild">Beta Release</string>
