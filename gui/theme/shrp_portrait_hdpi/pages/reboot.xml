@@ -52,7 +52,7 @@
 				<actions>
 					<action function="overlay"/>
 					<action function="overlay"/>
-					<action function="overlay">action_page</action>
+					<action function="page">action_page</action>
 				</actions>
 			</button>
 
