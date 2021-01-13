@@ -180,7 +180,9 @@
 				<placement x="700" y="%rndPos115%" w="310" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@c_flash=Flash}</text>
-				<action function="flashBridge">flash_zip</action>
+				<action function="overlay"/>
+				<action function="page">flash_confirm</page>
+				<action function="flash">flash_zip</action>
 			</button>
 
 			<button style="cnfrmBtn">
