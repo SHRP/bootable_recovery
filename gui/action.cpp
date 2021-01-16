@@ -59,7 +59,7 @@ extern "C" {
 
 #include "rapidxml.hpp"
 #include "objects.hpp"
-#include "../tw_atomic.hpp"
+#include "tw_atomic.hpp"
 #include "../SHRPMAIN.hpp"
 #include "../SHRPTOOLS.hpp"
 #include "../SHRPTHEME.hpp"
