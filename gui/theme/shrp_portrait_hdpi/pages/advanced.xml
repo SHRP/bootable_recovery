@@ -144,13 +144,19 @@
 
 
 			<button>
-				<condition var1="dashboardSubTintEnabled" var2="1"/>
-				<condition var1="tw_is_fbe" var2="1"/>
+				<conditions>
+					<condition var1="dashboardSubTintEnabled" var2="1"/>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+				</conditions>
 				<placement x="99" y="%rPos43%"/>
 				<image resource="dashboardBackground"/>
 			</button>
 			<button>
-				<condition var1="tw_is_fbe" var2="1"/>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+				</conditions>
 				<placement x="99" y="%rPos43%"/>
 				<image resource="c_dashboard_userFbe"/>
 				<actions>
@@ -159,8 +165,11 @@
 				</actions>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<condition var1="tw_is_fbe" var2="1"/>
+				<conditions>
+					<condition var1="dashboardTextColorEnabled" var2="1"/>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+				</conditions>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@decrypt_users=Decrypt Users}</text>
 				<actions>
@@ -169,8 +178,11 @@
 				</actions>
 			</button>
 			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
-				<condition var1="tw_is_fbe" var2="1"/>
+				<conditions>
+					<condition var1="dashboardTextColorEnabled" var2="0"/>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+				</conditions>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@decrypt_users=Decrypt Users}</text>
 				<actions>
