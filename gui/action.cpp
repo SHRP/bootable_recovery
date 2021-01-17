@@ -2348,7 +2348,7 @@ int GUIAction::shrp_init(std::string arg __unused){
 }
 
 int GUIAction::shrp_magisk_info(std::string arg __unused){
-	TWFunc::Exec_Cmd("sh /twres/scripts/magisk_ver.sh");
+	if (!DataManager::GetIntValue("c_magisk_status")) TWFunc::Exec_Cmd("sh /twres/scripts/magisk_ver.sh");
 	string core_only_1="/cache/.disable_magisk";
 	string core_only_2="/data/cache/.disable_magisk";
 	uint64_t h1=0;

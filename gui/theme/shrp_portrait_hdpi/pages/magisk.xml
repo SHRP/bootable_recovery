@@ -32,6 +32,7 @@ sh init;
 				<placement x="464" y="1496"/>
 				<image resource="c_ok"/>
 				<actions>
+					<action function="shrp_magisk_info"/>
 					<action function="page">magiskDashboard</action>
 				</actions>
 			</button>
