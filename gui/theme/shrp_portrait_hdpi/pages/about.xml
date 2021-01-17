@@ -177,6 +177,12 @@
 				<listitem name="DarthJabba9">
 					<data variable="dummy"/>
 				</listitem>
+				<listitem name="Henloboi">
+					<data variable="dummy"/>
+				</listitem>
+				<listitem name="TechyMinati">
+					<data variable="dummy"/>
+				</listitem>
 				<listitem name="{@Tcredit=None}">
 					<icon resource="globeIco"/>
 					<data variable="dummy"/>
