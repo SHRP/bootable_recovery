@@ -206,5 +206,54 @@
 				<action function="page">c_refresh</action>
 			</action>
 		</page>
+		<page name="fastboot">
+			<template name="navSecure"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>S H R P</text>
+			</text>
+
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@fastboot_button=Fastboot}</text>
+			</text>
+
+			<template name="c_console_custom"/>
+			<template name="progress_bar"/>
+
+			<button>
+				<condition var1="tw_enable_fastboot" op="=" var2="1" />
+				<placement x="55" y="%rndPos105%" w="340" h="115"/>
+				<fill color="%subBackgroundColor%"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@enable_adb=Enable ADB}</text>
+				<actions>
+					<action function="enableadb"/>
+					<action function="set">tw_enable_adb=1</action>
+					<action function="set">tw_enable_fastboot=0</action>
+				</actions>
+			</button>
+
+			<button>
+				<condition var1="tw_enable_adb" op="=" var2="1" />
+				<placement x="55" y="%rndPos105%" w="340" h="115"/>
+				<fill color="%subBackgroundColor%"/>
+				<font resource="midBold" color="%secondaryColor%"/>
+				<text>{@enable_fastboot=Enable Fastboot}</text>
+				<actions>
+					<action function="enablefastboot"/>
+					<action function="set">tw_enable_fastboot=1</action>
+					<action function="set">tw_enable_adb=0</action>
+				</actions>
+			</button>
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_reboot"/>
+				<action function="overlay">reboot</action>
+			</button>
+		</page>
 	</pages>
 </recovery>
