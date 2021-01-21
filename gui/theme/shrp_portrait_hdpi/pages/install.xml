@@ -194,7 +194,7 @@
 		</page>
 
 		<page name="flash_zip">
-			<template name="navSecure"/>
+			<template name="c_page"/>
 			<template name="c_status_bar"/>
 
 			<text style="pageTitle">

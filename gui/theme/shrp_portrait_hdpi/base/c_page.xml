@@ -188,6 +188,11 @@
 				<condition var1="tw_busy" var2="0"/>
 				<action function="overlay">slideout</action>
 			</button>
+
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
 		</template>
 		<!--Only Back Button of NAV-->
 		<template name="navBackOnly">
