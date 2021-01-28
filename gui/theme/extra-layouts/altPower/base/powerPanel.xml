@@ -2,11 +2,11 @@
 <recovery>
 	<details>
 		<resolution width="1080" height="1920"/>
-		<author>Teamwin | epicX</author>
-		<title>SKY HAWK RECOVERY PROJECT</title>
-		<description>SHRP_PowerPanel</description>
+		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
+		<title>Reboot pages</title>
+		<description>None</description>
 		<preview>preview.png</preview>
-		<themeversion>3</themeversion>
+		<themeversion>4</themeversion>
 	</details>
 	<templates>
         <template name="c_reboot_page">
@@ -23,23 +23,24 @@
 				<placement x="744" y="495" w="315" h="60"/>
 				<fill color="%transparent%"/>
 				<font resource="moreSmall" color="%secondaryColor%"/>
-				<text>{@rb_poweroff_btn=Power Off}</text>
-				<actions>
-					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=poweroff</action>
-					<action function="set">tw_reboot_param=poweroff</action>
-					<action function="reboot">%tw_reboot_param%</action>
-				</actions>
-			</button>
-			<button>
-				<placement x="744" y="739" w="315" h="60"/>
-				<fill color="%transparent%"/>
-				<font resource="moreSmall" color="%secondaryColor%"/>
 				<text>{@reboot_hdr=Reboot}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
 					<action function="set">tw_action_param=system</action>
 					<action function="set">tw_reboot_param=system</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<condition var1="tw_reboot_recovery" var2="1"/>
+				<placement x="744" y="739" w="315" h="60"/>
+				<fill color="%transparent%"/>
+				<font resource="moreSmall" color="%secondaryColor%"/>
+				<text>{@rb_recovery_btn=Recovery}</text>
+				<actions>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
@@ -55,23 +56,23 @@
 			</button>
 			<button>
 				<placement x="748" y="360" />
-				<condition var1="tw_reboot_poweroff" var2="1"/>
-				<image resource="c_power_off"/>
-				<actions>
-					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=poweroff</action>
-					<action function="set">tw_reboot_param=poweroff</action>
-					<action function="reboot">%tw_reboot_param%</action>
-				</actions>
-			</button>
-			<button>
-				<placement x="748" y="604" />
 				<condition var1="tw_reboot_system" var2="1"/>
 				<image resource="c_reboot_to_system"/>
 				<actions>
 					<action function="set">tw_action=reboot</action>
 					<action function="set">tw_action_param=system</action>
 					<action function="set">tw_reboot_param=system</action>
+					<action function="reboot">%tw_reboot_param%</action>
+				</actions>
+			</button>
+			<button>
+				<placement x="748" y="604" />
+				<condition var1="tw_reboot_recovery" var2="1"/>
+				<image resource="c_reboot_to_recovery"/>
+				<actions>
+					<action function="set">tw_action=reboot</action>
+					<action function="set">tw_action_param=recovery</action>
+					<action function="set">tw_reboot_param=recovery</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
@@ -106,15 +107,14 @@
 				<image resource="c_power_menu_bg"/>
 			</image>
 			<button>
-				<condition var1="tw_reboot_recovery" var2="1"/>
 				<placement x="744" y="495" w="315" h="60"/>
 				<fill color="%transparent%"/>
 				<font resource="moreSmall" color="%secondaryColor%"/>
-				<text>{@rb_recovery_btn=Recovery}</text>
+				<text>{@rb_poweroff_btn=Power Off}</text>
 				<actions>
 					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=recovery</action>
-					<action function="set">tw_reboot_param=recovery</action>
+					<action function="set">tw_action_param=poweroff</action>
+					<action function="set">tw_reboot_param=poweroff</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
@@ -163,12 +163,12 @@
 			</button>
 			<button>
 				<placement x="748" y="360" />
-				<condition var1="tw_reboot_recovery" var2="1"/>
-				<image resource="c_reboot_to_recovery"/>
+				<condition var1="tw_reboot_poweroff" var2="1"/>
+				<image resource="c_power_off"/>
 				<actions>
 					<action function="set">tw_action=reboot</action>
-					<action function="set">tw_action_param=recovery</action>
-					<action function="set">tw_reboot_param=recovery</action>
+					<action function="set">tw_action_param=poweroff</action>
+					<action function="set">tw_reboot_param=poweroff</action>
 					<action function="reboot">%tw_reboot_param%</action>
 				</actions>
 			</button>
