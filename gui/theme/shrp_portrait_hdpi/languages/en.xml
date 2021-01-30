@@ -1042,5 +1042,10 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+		
+		<string name="fastboot_button">Fastboot</string>
+		<string name="enable_adb">Enable ADB</string>
+		<string name="enable_fastboot">Enable Fastboot</string>
+		<string name="fastboot_console_msg">Entered Fastboot mode...</string>
 	</resources>
 </language>
