@@ -16,7 +16,7 @@
 		</page>
 		<page name="c_advanced_reboot">
 			<template name="c_advanced_reboot_page"/>
-			<template name="slotPanel"/>
+			<template name="fastbootPanel"/>
 			<action>
 				<touch key="home"/>
 				<action function="overlay"/>

@@ -1084,6 +1084,10 @@
 		<string name="remove_dynamic_groups_complete">Unmapped all Super Devices</string>
 		<string name="mount_vab_partitions">Devices on super may not mount until rebooting recovery.</string>
 
+		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
+		<string name="unmount_system">Unmounting System...</string>
+		<string name="unmount_system_err">Failed unmounting System</string>
+
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Enable ADB</string>
 		<string name="enable_fastboot">Enable Fastboot</string>
