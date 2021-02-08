@@ -134,9 +134,9 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::init();
 	printf("Starting the UI...\n");
 	gui_init();
-#endif
 	// Load up all the resources
 	gui_loadResources();
+#endif
 	//SHRP_initial_funcs
 	SHRP::INIT();
 
@@ -356,10 +356,9 @@ int main(int argc, char **argv) {
 #ifndef SHRP_EXPRESS
 	printf("Starting the UI...\n");
 	gui_init();
-#endif
-
 	// Load up all the resources
 	gui_loadResources();
+#endif
 
 	startupArgs startup;
 	startup.parse(&argc, &argv);
