@@ -222,6 +222,14 @@
 			<listbox style="scrolllist">
 				<placement x="%c_hawk_base_column%" y="%rPos50%" w="%file_selector_default_w%" h="650"/>
 				<icon selected="installSign" unselected="installSign"/>
+				<listitem name="{@fm_open_terminal_btn=Open Terminal Here}">
+					<condition var1="isFile" op="=" var2="0"/>
+					<icon resource="shrpCredits"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="changeterminal">%tw_file_location1%</action>
+					</actions>
+				</listitem>
 				<listitem name="{@editFile=Edit file}">
 					<condition var1="isTextFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
