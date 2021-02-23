@@ -111,6 +111,9 @@ endif
 ifeq ($(TW_ROUND_SCREEN), true)
     LOCAL_CFLAGS += -DTW_ROUND_SCREEN
 endif
+ifeq ($(TW_EXCLUDE_NANO), true)
+    LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
+endif
 
 #SHRP Build Flags
 ifeq ($(SHRP_CUSTOM_FLASHLIGHT),true)
