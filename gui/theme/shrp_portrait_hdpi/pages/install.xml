@@ -137,7 +137,7 @@
 			<button>
 				<placement x="860" y="%rndPos105%"/>
 				<image resource="c_ok"/>
-				<action function="overlay">c_flash_zip_confirmer</action>
+				<action function="page">c_flash_zip_confirmer</action>
 			</button>
 
 
@@ -161,7 +161,20 @@
 		</page>
 
 		<page name="c_flash_zip_confirmer">
-			<template name="overlayPage"/>
+			<button>
+				<placement x="0" y="0" w="1080" h="1920"/>
+				<fill color="%semi_transparent%"/>
+				<action function="page">flash_confirm</action>
+			</button>
+			<action>
+				<touch key="power"/>
+				<action function="togglebacklight"/>
+			</action>
+
+			<action>
+				<touch key="power+voldown"/>
+				<action function="screenshot"/>
+			</action>
 
 			<button>
 				<placement x="0" y="%rndPos90%" w="1080" h="%rndPos38%"/>
@@ -180,7 +193,6 @@
 				<placement x="700" y="%rndPos115%" w="310" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@c_flash=Flash}</text>
-				<action function="overlay"/>
 				<action function="page">flash_confirm</page>
 				<action function="flash">flash_zip</action>
 			</button>
@@ -189,7 +201,7 @@
 				<placement x="360" y="%rndPos115%" w="310" h="110"/>
 				<fill color="%tranparent%"/>
 				<text>{@cancel_btn=Cancel}</text>
-				<action function="overlay"/>
+				<action function="page">flash_confirm</action>
 			</button>
 		</page>
 
