@@ -1042,6 +1042,7 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+		<string name="restore_system_context">Unable to get default context for {1} -- Android may not boot.</string>
 		
 		<string name="fastboot_button">Fastboot</string>
 		<string name="enable_adb">Enable ADB</string>
