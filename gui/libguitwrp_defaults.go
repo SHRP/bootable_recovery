@@ -197,6 +197,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_DELAY_TOUCH_INIT_MS="+getMakeVars(ctx, "TW_DELAY_TOUCH_INIT_MS"))
 	}
 
+	if getMakeVars(ctx, "TW_EXCLUDE_NANO") == "true" {
+		cflags = append(cflags, "-DTW_EXCLUDE_NANO")
+	}
+
 	if getMakeVars(ctx, "TW_EVENT_LOGGING") == "true" {
 		cflags = append(cflags, "-D_EVENT_LOGGING")
 	}
