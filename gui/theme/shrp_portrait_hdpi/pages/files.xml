@@ -230,6 +230,19 @@
 						<action function="changeterminal">%tw_file_location1%</action>
 					</actions>
 				</listitem>
+				<listitem name="{@fm_edit_file=Edit File by Nano}">
+					<conditions>
+						<condition var1="isTextFile" op="=" var2="1"/>
+						<condition var1="tw_include_nano" var2="1"/>
+					</conditions>
+					<icon resource="editFile"/>
+					<data variable="dummy"/>
+					<actions>
+						<action function="set">refresh=1</action>
+						<action function="editfile">nano "%tw_filename1%"</action>
+						<action function="page">terminalcommand</action>
+					</actions>
+				</listitem>
 				<listitem name="{@editFile=Edit file}">
 					<condition var1="isTextFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
