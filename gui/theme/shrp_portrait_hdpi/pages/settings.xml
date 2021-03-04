@@ -52,6 +52,14 @@
 			</listbox>
 
 			<button style="cnfrmBtn">
+				<condition var1="tw_is_encrypted" var2="0"/>
+				<placement x="300" y="1480" w="450" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@change_twrp_folder_btn=Change TWRP folder}</text>
+				<action function="page">changeTwrpFolder</action>
+			</button>
+
+			<button style="cnfrmBtn">
 				<condition var1="av_express" var2="0"/>
 				<placement x="785" y="1480" w="240" h="110"/>
 				<fill color="%subBackgroundColor%"/>
