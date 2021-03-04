@@ -335,5 +335,97 @@
 				<action function="page">c_refresh</action>
 			</action>
 		</page>
+
+		<page name="changeTwrpFolder">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@settings_btn=Settings}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@change_twrp_folder_btn=Change TWRP folder}</text>
+			</text>
+			<!--template name="c_tab_backup"/-->
+
+
+			<text style="subOptionTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@name=Name:}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_custom_folder%</text>
+				<data name="tw_custom_folder"/>
+				<restrict minlen="1" maxlen="64" allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"/>
+				<actions>
+					<action function="set">tw_back=changeTwrpFolder</action>
+					<action function="set">tw_action=applycustomtwrpfolder</action>
+					<action function="set">tw_action_param=%tw_custom_folder%</action>
+					<action function="set">tw_text1={@confirm_action=Confirm}</action>
+					<action function="set">tw_text2={@rename_backup_confirm2=This cannot be undone!}</action>
+					<action function="set">tw_action_text1={@change_twrp_folder_on_process=Changing TWRP folder}</action>
+					<action function="set">tw_complete_text1={@change_twrp_folder_after_process=TWRP folder changed to} %tw_custom_folder%</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="set">tw_filecheck=/sdcard/%tw_custom_folder%</action>
+					<action function="set">tw_existpage=changeTwrpFolder</action>
+					<action function="set">tw_notexistpage=confirm_action</action>
+					<action function="page">filecheck</action>
+				</actions>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_custom_folder;changeTwrpFolder</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="tw_fileexists" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@tw_folder_exists=A folder with that name already exists!}</text>
+			</text>
+
+			<button style="cnfrmBtn">
+				<placement x="675" y="950" w="350" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>{@restore_defaults_btn=Restore Defaults}</text>
+				<actions>
+					<action function="set">tw_back=changeTwrpFolder</action>
+					<action function="set">tw_action=applycustomtwrpfolder</action>
+					<action function="set">tw_action_param=TWRP</action>
+					<action function="set">tw_text1={@confirm_action=Confirm}</action>
+					<action function="set">tw_text2={@rename_backup_confirm2=This cannot be undone!}</action>
+					<action function="set">tw_action_text1={@change_twrp_folder_on_process=Changing TWRP folder}</action>
+					<action function="set">tw_complete_text1={@change_twrp_folder_after_process=TWRP folder changed to} TWRP</action>
+					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+					<action function="set">tw_filecheck=/sdcard/TWRP</action>
+					<action function="set">tw_existpage=changeTwrpFolder</action>
+					<action function="set">tw_notexistpage=confirm_action</action>
+					<action function="page">filecheck</action>
+				</actions>
+			</button>
+
+
+			<template name="keyboardtemplate"/>
+
+			<action>
+				<touch key="home"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">settings</action>
+				</actions>
+			</action>
+		</page>
 	</pages>
 </recovery>
