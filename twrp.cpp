@@ -287,7 +287,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		TWFunc::Fixup_Time_On_Boot();
 
 	DataManager::LoadTWRPFolderInfo();
-	// Read the settings file
 	DataManager::ReadSettingsFile();
 
 	// Run any outstanding OpenRecoveryScript
