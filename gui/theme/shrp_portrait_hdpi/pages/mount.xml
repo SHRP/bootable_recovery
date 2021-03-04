@@ -284,7 +284,7 @@
 				<placement x="860" y="915"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="page">button_check</action>
+					<action function="page">canceldecrypt</action>
 				</actions>
 			</button>
 			<template name="keyboardtemplate"/>
@@ -354,7 +354,7 @@
 				<placement x="860" y="%rndPos105%"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="page">button_check</action>
+					<action function="page">canceldecrypt</action>
 				</actions>
 			</button>
 		</page>
@@ -397,6 +397,37 @@
 				<actions>
 					<action function="set">tw_page_done=1</action>
 					<action function="page">c_refresh</action>
+				</actions>
+			</action>
+		</page>
+
+		<page name="canceldecrypt">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@cancel_btn=Cancel}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@refresh_sizes_btn=Refresh Sizes}</text>
+			</text>
+
+			<template name="c_console_custom"/>
+
+			<template name="progress_bar"/>
+
+			<action>
+				<action function="refreshsizes"/>
+			</action>
+
+			<action>
+				<conditions>
+					<condition var1="tw_operation_state" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_page_done=1</action>
+					<action function="page">button_check</action>
 				</actions>
 			</action>
 		</page>
