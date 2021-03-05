@@ -101,6 +101,9 @@ endif
 ifeq ($(TW_EXCLUDE_NANO), true)
     LOCAL_CFLAGS += -DTW_EXCLUDE_NANO
 endif
+ifeq ($(AB_OTA_UPDATER),true)
+    LOCAL_CFLAGS += -DAB_OTA_UPDATER=1
+endif
 
 #SHRP Build Flags
 ifeq ($(SHRP_CUSTOM_FLASHLIGHT),true)
