@@ -40,6 +40,8 @@
 					<condition var1="tw_filename" op="modified"/>
 				</conditions>
 				<actions>
+					<action function="set">tw_is_slot_part=0</action>
+					<action function="set">tw_flash_both_slots=0</action>
 					<action function="flashOP">%tw_filename%</action>
 				</actions>
 			</action>
@@ -244,11 +246,32 @@
 			</text>
 
 			<partitionlist>
-				<placement x="50" y="%rPos19%" w="%file_selector_default_w%" h="%revPos97%"/>
+				<placement x="50" y="%rPos19%" w="%file_selector_default_w%" h="%revPos47%"/>
 				<icon selected="radio_true" unselected="radio_false"/>
 				<data name="tw_flash_partition"/>
 				<listtype name="flashimg"/>
 			</partitionlist>
+
+			<text style="subOptionTitle">
+				<conditions>
+					<condition var1="tw_is_slot_part" op="=" var2="1"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos68%"/>
+				<text>{@c_flash=Flash} {@options_hdr=Options}:</text>
+			</text>
+
+			<listbox style="scrolllist">
+				<conditions>
+					<condition var1="tw_is_slot_part" op="=" var2="1"/>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos73%" w="%file_selector_default_w%" h="600"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@flash_ab_both_slots=Flash to both slots}">
+					<data variable="tw_flash_both_slots"/>
+				</listitem>
+			</listbox>
 
 			<button>
 				<image resource="c_ok"/>

@@ -725,6 +725,7 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+		<string name="flash_ab_both_slots">Flash to both slots</string>
 		<!--Change All The strings from here-->
 		<string name="Tcredit">None</string>
 		<string name="c_enter_pass">Enter Password</string>
