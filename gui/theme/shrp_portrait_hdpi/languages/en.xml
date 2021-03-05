@@ -725,6 +725,8 @@
 		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
 		<string name="unmount_system">Unmounting System...</string>
 		<string name="unmount_system_err">Failed unmounting System</string>
+		<string name="flash_ab_inactive">Flashing A/B zip to inactive slot: {1}</string>
+		<string name="flash_ab_reboot">To flash additional zips, please reboot recovery to switch to the updated slot.</string>
 		<string name="flash_ab_both_slots">Flash to both slots</string>
 		<!--Change All The strings from here-->
 		<string name="Tcredit">None</string>
@@ -1042,9 +1044,6 @@
 		<string name="c_disable_theme_survival">Disable SHRP theme survival</string>
 		<string name="c_disable_auto_reboot_ota">Prevent auto reboot after OTA</string>
 		<string name="c_magisk_install_after_ota">Install Magisk automatically after OTA</string>
-		<string name="unmount_sys_install">Unmount System before installing a ZIP</string>
-		<string name="unmount_system">Unmounting System...</string>
-		<string name="unmount_system_err">Failed unmounting System</string>
 		<string name="restore_system_context">Unable to get default context for {1} -- Android may not boot.</string>
 		<string name="change_twrp_folder_btn">Change TWRP folder</string>
 		<string name="change_twrp_folder_on_process">Changing TWRP folder</string>
