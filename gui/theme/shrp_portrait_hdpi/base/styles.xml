@@ -49,6 +49,7 @@
 			<ico type=".." icon="folderUp" />
 			<ico type=".zip" icon="fileArchive" />
 			<ico type=".ozip" icon="fileArchive" />
+			<ico type=".apk" icon="fileArchive" />
 			<ico type=".img" icon="fileImg" />
 			<ico type=".stheme" icon="fileTheme" />
 			<icon folder="folder" file="file" />

@@ -2876,9 +2876,9 @@ int GUIAction::flashOP(std::string arg){
 
 
 #ifdef SHRP_OZIP_DECRYPT
-	if(minUtils::compare(arg,".zip") || minUtils::compare(arg,".ozip")){
+	if(minUtils::compare(arg, ".zip") || minUtils::compare(arg, ".apk") || minUtils::compare(arg, ".ozip")){
 #else
-	if(minUtils::compare(arg,".zip")){
+	if(minUtils::compare(arg, ".zip") || minUtils::compare(arg, ".apk")){
 #endif
 		GUIAction::queuezip("bappa");
 		DataManager::SetValue("c_queue_enabled","1");

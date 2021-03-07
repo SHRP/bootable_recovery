@@ -18,7 +18,7 @@
 
 			<fileselector>
 				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="1460"/>
-				<filter folders="1" files="1" extn=".zip,.img,.ozip" searchable="1"/>
+				<filter folders="1" files="1" extn=".zip,.img,.ozip,.apk" searchable="1"/>
 				<path name="tw_zip_location" default="/sdcard"/>
 				<sort name="tw_gui_sort_order"/>
 				<data name="tw_filename"/>
