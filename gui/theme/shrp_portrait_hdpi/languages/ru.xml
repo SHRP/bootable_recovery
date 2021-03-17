@@ -65,8 +65,8 @@
 		<string name="tab_language">ЯЗЫК</string>
 		<string name="install_btn">Установка</string>
 		<string name="wipe_btn">Очистка</string>
-		<string name="backup_btn">Резервное коп-ние</string>
-		<string name="restore_btn">Восстановление</string>
+		<string name="backup_btn">Резерв. коп-ние</string>
+		<string name="restore_btn">Восста-ние</string>
 		<string name="mount_btn">Монтирование</string>
 		<string name="settings_btn">Настройки</string>
 		<string name="advanced_btn">Дополнительно</string>
@@ -740,7 +740,7 @@
 		<string name="c_file_context">Исправление SELinux Contexts может привести к тому, что устройство не загрузится должным образом.</string>
 		<string name="c_slideout">Главная консоль</string>
 		<string name="c_root">Root</string>
-		<string name="c_unroot">Unroot</string>
+		<string name="c_unroot">Удалить root</string>
 		<string name="c_reset">Хотите сбросить настройки телефона?</string>
 		<string name="c_theme_busy">Установка темы</string>
 		<string name="c_theme_busy_info">Не трогайте ничего на экране</string>
@@ -777,7 +777,6 @@
 		<string name="c_cfp">Очистить отпечаток пальца</string>
 		<string name="c_fc">Принудительное шифрование</string>
 		<string name="c_c2api">Camera 2 Api</string>
-		<string name="c_tweaks">Дополнительные настройки</string>
 		<string name="c_others">Остальное</string>
 		<string name="c_navb">Панель навигации</string>
 		<string name="c_dashboard_icon">Значок панели</string>
@@ -967,5 +966,13 @@
 		<string name="unmount_sys_install">Размонтировать систему перед установкой ZIP</string>
 		<string name="unmount_system">Размонтирование системы...</string>
 		<string name="unmount_system_err">Ошибка размонтирования системы</string>
+		<string name="available">Доступная</string>
+		<string name="c_flash">Прошивка</strin>
+		<string name="c_theme">Темы</string>
+		<string name="c_tweaks_info">Коллекция твиков</string>
+		<string name="change_twrp_folder_btn">Выбрать папку TWRP</string>
+		<string name="change_twrp_folder_on_process">Применение папки TWRP</string>
+		<string name="change_twrp_folder_after_process">Папка TWRP применена</string>
+		<string name="tw_folder_exists">Папка с таким именем уже существует!</string>
 	</resources>
 </language>
