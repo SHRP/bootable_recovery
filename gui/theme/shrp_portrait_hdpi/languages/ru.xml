@@ -696,6 +696,14 @@
 		<string name="copy_kernel_log">Kernel Log скопирован в {1}</string>
 		<string name="include_kernel_log">Добавить Kernel Log</string>
 		<string name="unable_set_boot_slot">Ошибка смены слота загрузки bootloader на {1}</string>
+		<string name="change_twrp_folder_btn">Изменить папку TWRP</string>
+		<string name="change_twrp_folder_on_process">Изменение папки TWRP</string>
+		<string name="change_twrp_folder_after_process">Папка TWRP изменена на</string>
+		<string name="tw_folder_exists">Папка с таким именем уже существует!</string>
+		<string name="fm_open_terminal_btn">Открыть терминал здесь</string>
+		<string name="fm_edit_file">Изменить файл</string>
+		<string name="flash_ab_both_slots">Прошить на оба слота</string>
+		<string name="restore_system_context">Невозможно получить контекст по умолчанию для {1} -- Android может не загрузиться.</string>
 
 
 		<!--Translated by Kirill-->
@@ -970,9 +978,5 @@
 		<string name="c_flash">Прошивка</strin>
 		<string name="c_theme">Темы</string>
 		<string name="c_tweaks_info">Коллекция твиков</string>
-		<string name="change_twrp_folder_btn">Выбрать папку TWRP</string>
-		<string name="change_twrp_folder_on_process">Применение папки TWRP</string>
-		<string name="change_twrp_folder_after_process">Папка TWRP применена</string>
-		<string name="tw_folder_exists">Папка с таким именем уже существует!</string>
 	</resources>
 </language>
