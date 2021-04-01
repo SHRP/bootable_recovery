@@ -371,6 +371,12 @@ int main(int argc, char **argv) {
 	TWFunc::Clear_Bootloader_Message();
 
 	if (startup.Get_Fastboot_Mode()) {
+#ifdef SHRP_EXPRESS
+		printf("Starting the UI...\n");
+		gui_init();
+		// Load up all the resources
+		gui_loadResources();
+#endif
 		LOGINFO("starting fastboot\n");
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		if (gui_startPage("fastboot", 1, 1) != 0) {
