@@ -118,6 +118,9 @@
 				<listitem name="{@zip_sig_chk=Zip signature verification}">
 					<data variable="tw_signed_zip_verify"/>
 				</listitem>
+				<listitem name="{@skip_digest_zip_chk=Skip Digest check before installing zip}">
+					<data variable="tw_skip_digest_check_zip"/>
+				</listitem>
 			</listbox>
 
 			<button style="c_queue">
