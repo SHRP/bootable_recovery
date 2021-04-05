@@ -89,6 +89,7 @@
 		<string name="swipe_confirm">   Confirm</string>
 		<string name="zip_add_btn">Add more Zips</string>
 		<string name="zip_clear_btn">Clear Zip Queue</string>
+		<string name="zip_compatible_err">Zip Treble compatibility error!</string>
 		<string name="install_zip_count_hdr">Flash Zip %tw_zip_index% of %tw_zip_queue_count%</string>
 		<string name="installing_zip_xml">Installing Zip: %tw_file%</string>
 		<string name="failed">Failed</string>
