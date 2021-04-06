@@ -1,6 +1,6 @@
 #!/bin/sh
 cd /tmp/work
-magiskboot cpio ramdisk.cpio \
+/system/bin/magiskboot cpio ramdisk.cpio \
 "add 750 twres/images/fileTheme.png /twres/images/fileTheme.png" \
 "add 750 twres/images/fileImg.png /twres/images/fileImg.png" \
 "add 750 twres/images/c_dashboard_reboot.png /twres/images/c_dashboard_reboot.png" \

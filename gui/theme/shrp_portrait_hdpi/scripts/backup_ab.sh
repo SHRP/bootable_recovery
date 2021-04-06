@@ -25,7 +25,7 @@ for slot in a b; do
   slot=_$slot;
   cd old$slot;
   dd if=$target$slot of=boot$slot.img;
-  magiskboot unpack -n -h boot$slot.img;
+  /system/bin/magiskboot unpack -n -h boot$slot.img;
   rm -rf header kernel kernel_dtb boot$slot.img;
   cd $tmp;
 done;

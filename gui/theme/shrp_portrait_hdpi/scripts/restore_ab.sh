@@ -11,7 +11,7 @@ target=/dev/block/bootdevice/by-name/boot;
 tmp=/dev/tmp/shrpinj;
 
 # let's copy our own magiskboot binary to our temporary dir
-cp /sbin/magiskboot $tmp;
+cp /system/bin/magiskboot $tmp;
 tool=$tmp/magiskboot;
 
 # also copy magiskboot 19.3 to our temp dir, needed for hexpatches.

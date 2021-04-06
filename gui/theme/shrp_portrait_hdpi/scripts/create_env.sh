@@ -9,4 +9,4 @@ cd tmp/work
 dd if=$recBlock of=recovery.img
 
 #unpacking rec
-magiskboot unpack -h recovery.img
+/system/bin/magiskboot unpack -h recovery.img

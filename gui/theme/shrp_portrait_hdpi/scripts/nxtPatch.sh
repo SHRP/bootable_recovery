@@ -8,4 +8,4 @@ cd tmp/work
 dd if=/dev/block/bootdevice/by-name/boot_b of=recovery.img
 
 #unpacking rec
-magiskboot unpack -h recovery.img
+/system/bin/magiskboot unpack -h recovery.img
