@@ -113,6 +113,7 @@
 					<data variable="tw_inject_after_zip"/>
 				</listitem>
 				<listitem name="{@inject_magisk_chk=Inject Magisk after install}">
+					<condition var1="exclude_magisk_flash" var2="1"/>
 					<data variable="tw_mkinject_after_zip"/>
 				</listitem>
 				<listitem name="{@zip_sig_chk=Zip signature verification}">
