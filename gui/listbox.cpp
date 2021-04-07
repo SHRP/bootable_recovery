@@ -167,6 +167,7 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 			}
 #endif
 #endif
+#ifndef SHRP_EXCLUDE_MAGISK_FLASH
 			{
 				addonInfo aItem;
 				aItem.name = gui_parse_text("{@installMagisk=Install Magisk}");
@@ -185,6 +186,7 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 				aItem.fileName="unmagisk.zip";
 				addons.push_back(aItem);
 			}
+#endif
 			{
 #ifdef SHRP_EXTERNAL_ADDON_1_NAME
 				addonInfo aItem;
