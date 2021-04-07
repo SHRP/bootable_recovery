@@ -204,6 +204,10 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     mConst->SetValue("magisk_in_rec", 0);
 #endif
 
+#ifndef SHRP_EXCLUDE_MAGISK_FLASH
+	mConst->SetValue("exclude_magisk_flash", "1");
+#endif
+
 #ifndef SHRP_NOTCH
     //Positions variables
     mConst->SetValue("rPos0", "0");

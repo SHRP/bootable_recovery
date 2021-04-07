@@ -154,6 +154,7 @@ sh c_core_only_enabler;
 				<icon selected="installSign" unselected="installSign"/>
 				<listitem name="{@c_module_core_only_mode=Core Only Mode}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="c_magisk_status" op="!=" var2="1"/>
 						<condition var1="core" op="=" var2="1"/>
 					</conditions>
@@ -186,6 +187,7 @@ sh c_core_only_enabler;
 
 				<listitem name="{@installMagisk=Install Magisk}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="1"/>
 					</conditions>
@@ -207,6 +209,7 @@ sh c_core_only_enabler;
 				</listitem>
 				<listitem name="{@installMagisk=Install Magisk}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="0"/>
 					</conditions>
@@ -230,6 +233,7 @@ sh c_core_only_enabler;
 
 				<listitem name="{@updateMagisk=Update Magisk}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="1"/>
 					</conditions>
@@ -251,6 +255,7 @@ sh c_core_only_enabler;
 				</listitem>
 				<listitem name="{@updateMagisk=Update Magisk}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="0"/>
 					</conditions>
@@ -274,6 +279,7 @@ sh c_core_only_enabler;
 
 				<listitem name="{@c_unroot=Unroot}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="1"/>
 					</conditions>
@@ -295,6 +301,7 @@ sh c_core_only_enabler;
 				</listitem>
 				<listitem name="{@c_unroot=Unroot}">
 					<conditions>
+					    <condition var1="exclude_magisk_flash" var2="1"/>
 						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
 						<condition var1="magisk_in_rec" op="=" var2="0"/>
 					</conditions>

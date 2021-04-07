@@ -402,6 +402,7 @@
 					<data variable="rebootota_disabled"/>
 				</listitem>
 				<listitem name="{@c_magisk_install_after_ota=Install Magisk automatically after OTA}">
+					<condition var1="exclude_magisk_flash" var2="1"/>
 					<data variable="installmagisk_ota"/>
 				</listitem>
 			</listbox>
