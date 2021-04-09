@@ -533,10 +533,8 @@ ifneq ($(TW_EXCLUDE_BASH), true)
     endif
 endif
 
-ifeq ($(TW_INCLUDE_REPACKTOOLS), true)
 TWRP_REQUIRED_MODULES += \
     magiskboot
-endif
 
 ifeq ($(TW_INCLUDE_RESETPROP), true)
 TWRP_REQUIRED_MODULES += \
