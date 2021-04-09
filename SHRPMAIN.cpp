@@ -343,7 +343,24 @@ bool Express::is_backupped(){
 
 void Express::updateSHRPBasePath(){
 	bool mountStatus = false;
-	string rootPath = PartitionManager.Get_Android_Root_Path();
+	string rootPath;
+	bool pathFound = false;
+
+	if(!TWFunc::Path_Exists("/system_root") && TWFunc::Path_Exists("/system")) {
+		rootPath == "/system";
+		pathFound = true;
+	}
+
+	if(!TWFunc::Path_Exists("/system") && TWFunc::Path_Exists("/system_root")) {
+		rootPath == "/system_root";
+		pathFound = true;
+	}
+
+	if (!pathFound) {
+		LOGINFO("NO Proper BASE PATH FOUND. Using /system as base path.\n");
+		DataManager::SetValue("shrpBasePath", "/system");
+		return;
+	}
 
 
 	if(!PartitionManager.Is_Mounted_By_Path(rootPath)){
