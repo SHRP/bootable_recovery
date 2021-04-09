@@ -347,12 +347,12 @@ void Express::updateSHRPBasePath(){
 	bool pathFound = false;
 
 	if(!TWFunc::Path_Exists("/system_root") && TWFunc::Path_Exists("/system")) {
-		rootPath == "/system";
+		rootPath = "/system";
 		pathFound = true;
 	}
 
 	if(!TWFunc::Path_Exists("/system") && TWFunc::Path_Exists("/system_root")) {
-		rootPath == "/system_root";
+		rootPath = "/system_root";
 		pathFound = true;
 	}
 
