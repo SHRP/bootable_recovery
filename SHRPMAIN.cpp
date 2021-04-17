@@ -343,40 +343,18 @@ bool Express::is_backupped(){
 
 void Express::updateSHRPBasePath(){
 	bool mountStatus = false;
-	string rootPath;
-	bool pathFound = false;
-
-	if(!TWFunc::Path_Exists("/system_root") && TWFunc::Path_Exists("/system")) {
-		rootPath = "/system";
-		pathFound = true;
-	}
-
-	if(!TWFunc::Path_Exists("/system") && TWFunc::Path_Exists("/system_root")) {
-		rootPath = "/system_root";
-		pathFound = true;
-	}
-
-	if (!pathFound) {
-		LOGINFO("NO Proper BASE PATH FOUND. Using /system as base path.\n");
-		DataManager::SetValue("shrpBasePath", "/system");
-		return;
-	}
-
+	string rootPath = "/system_root/system";
 
 	if(!PartitionManager.Is_Mounted_By_Path(rootPath)){
-		TWFunc::Exec_Cmd("mount -w " + rootPath, true);
+		TWFunc::Exec_Cmd("mount -w " + rootPath, true, true);
 	}else{
 		mountStatus = true;
 	}
-	if(TWFunc::Path_Exists(rootPath + "/system") || rootPath == "/system_root"){
-		DataManager::SetValue("shrpBasePath", rootPath + "/system");
-	}else{
-		DataManager::SetValue("shrpBasePath", rootPath);
-	}
+
+	DataManager::SetValue("shrpBasePath", rootPath);
+
 	if(!mountStatus){
 		PartitionManager.UnMount_By_Path(rootPath, false);
-		unlink("/system");
-		mkdir("/system", 0755);
 	}
 	LOGINFO("SHRP CURRENT BASEPATH : %s\n", DataManager::GetStrValue("shrpBasePath").c_str());
 }
