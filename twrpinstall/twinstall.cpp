@@ -425,12 +425,15 @@ int TWinstall_zip(const char* path, int* wipe_cache, bool check_for_digest) {
 	ZipEntry update_binary_entry;
 	if (FindEntry(Zip, update_binary_name, &update_binary_entry) == 0) {
 		LOGINFO("Update binary zip\n");
+#ifndef TW_SKIP_COMPATIBILITY_CHECK
 		// Additionally verify the compatibility of the package.
 		if (!verify_package_compatibility(Zip)) {
 			gui_err("zip_compatible_err=Zip Treble compatibility error!");
 			CloseArchive(Zip);
 			ret_val = INSTALL_CORRUPT;
-		} else {
+		} else 
+#endif
+		{
 			ret_val = Prepare_Update_Binary(Zip);
 			if (ret_val == INSTALL_SUCCESS)
 				ret_val = Run_Update_Binary(path, wipe_cache, UPDATE_BINARY_ZIP_TYPE);
