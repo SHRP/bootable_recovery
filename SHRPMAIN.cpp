@@ -343,7 +343,7 @@ bool Express::is_backupped(){
 
 void Express::updateSHRPBasePath(){
 	bool mountStatus = false;
-	string rootPath = "/system_root/system";
+	string rootPath = PartitionManager.Get_Android_Root_Path();
 
 	if(!PartitionManager.Is_Mounted_By_Path(rootPath)){
 		TWFunc::Exec_Cmd("mount -w " + rootPath, true, true);
@@ -351,7 +351,7 @@ void Express::updateSHRPBasePath(){
 		mountStatus = true;
 	}
 
-	DataManager::SetValue("shrpBasePath", rootPath);
+	DataManager::SetValue("shrpBasePath", rootPath + "/system");
 
 	if(!mountStatus){
 		PartitionManager.UnMount_By_Path(rootPath, false);
