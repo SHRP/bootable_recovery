@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
 #endif
 
 		if(SarPartitionManager.Mount_By_Path("/s", false)) {
-#if defined(SHRP_NO_SAR_AUTOMOUNT) && !defined(BOARD_BUILD_SYSTEM_ROOT_IMAGE)
+#if defined(SHRP_NO_SAR_AUTOMOUNT) || !defined(BOARD_BUILD_SYSTEM_ROOT_IMAGE)
             LOGINFO("SAR-DETECT: SAR detection disabled \n");
             property_set("ro.twrp.sar", "false");
             rmdir("/system_root");
