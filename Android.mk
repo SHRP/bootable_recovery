@@ -15,18 +15,16 @@
 LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
-###SHRP###
-OFFICIAL := $(hide) $(shell oc=0; \
-hello=$(shell curl -s https://raw.githubusercontent.com/SHRP-Devices/device_data/master/devices.raw); \
-IFS=','; \
-read -a devices <<< "$$hello"; \
-for device in "$${devices[@]}"; \
-do \
-if [ $$device == $(SHRP_DEVICE_CODE) ]; then \
+IS_OFFICIAL := $(shell \
+oc=0; \
+raw=`cat $(SHRPRAW) | tr "," " "`; \
+for device in $$raw;do \
+if [ "$$device" == "$(SHRP_DEVICE_CODE)" ]; then \
 oc=1; \
+break; \
 fi; \
-done;echo $$oc;)
-###/SHRP###
+done;echo "$$oc")
+MOO := $(shell echo result:$(SHRP_OFFICIAL)$(IS_OFFICIAL) > out/oof)
 
 ifneq ($(project-path-for),)
     ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
@@ -445,9 +443,10 @@ endif
 ifeq ($(SHRP_EXPRESS), true)
 	LOCAL_CFLAGS += -DSHRP_EXPRESS
 endif
-ifeq ($(SHRP_OFFICIAL)$(OFFICIAL), true@ 1)
+ifeq ($(SHRP_OFFICIAL)$(IS_OFFICIAL), true1)
 	LOCAL_CFLAGS += -DSHRP_OFFICIAL
 endif
+
 ifneq ($(SHRP_STATUSBAR_RIGHT_PADDING),)
 	LOCAL_CFLAGS += -DSHRP_STATUSBAR_RIGHT_PADDING=$(SHRP_STATUSBAR_RIGHT_PADDING)
 endif
