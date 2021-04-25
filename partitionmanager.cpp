@@ -3328,7 +3328,9 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 
     fstab.emplace_back(fstabEntry);
     if (!fs_mgr_update_logical_partition(&fstabEntry)) {
+#ifndef IGNORE_UPDATE_LOGICAL_PARTITION_ERROR
         LOGINFO("unable to update logical partition: %s\n", twrpPart->Get_Mount_Point().c_str());
+#endif
         return false;
     }
 
@@ -3340,7 +3342,11 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 	twrpPart->Update_Size(true);
 	twrpPart->Change_Mount_Read_Only(true);
 	twrpPart->Set_Can_Be_Backed_Up(false);
-	twrpPart->Set_Can_Be_Wiped(false);
+#ifdef ALLOW_LOGICAL_PARTITION_WIPE
+    twrpPart->Set_Can_Be_Wiped(true);
+#else
+    twrpPart->Set_Can_Be_Wiped(false);
+#endif
     return true;
 }
 
@@ -3406,6 +3412,29 @@ void TWPartitionManager::Setup_Super_Partition() {
 	superPartition->Setup_Image();
 	Add_Partition(superPartition);
 	PartitionManager.Output_Partition(superPartition);
+#ifdef BOARD_RW_DYNAMIC_PARTITIONS_LIST
+    char list[128] = BOARD_RW_DYNAMIC_PARTITIONS_LIST;
+    char *partitions = strtok(list, ",");
+    while (partitions != NULL){
+        int fd, i=0;
+        char block[128];
+        strcpy(block, "/dev/block/mapper/");
+        strcat(block, partitions);
+        fd = open(block, O_RDONLY, 0);
+        if (fd < 0){
+            LOGERR("Fatal error: cannot open %s", block);
+            partitions = strtok(NULL, ",");
+            continue;
+        }
+        if(ioctl(fd, _IO(0x12,93), &i) != 0){
+            LOGERR("unable to open %s in r/w mode.", partitions);
+            partitions = strtok(NULL, ",");
+            continue;
+        }
+	    close(fd);
+        partitions = strtok(NULL, ",");
+    }
+#endif
 }
 
 bool TWPartitionManager::Get_Super_Status() {
