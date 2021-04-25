@@ -150,6 +150,20 @@ ifneq ($(wildcard system/core/libsparse/Android.mk),)
 LOCAL_SHARED_LIBRARIES += libsparse
 endif
 
+# Logical Partition hacks
+ifeq ($(IGNORE_UPDATE_LOGICAL_PARTITION_ERROR),true)
+    LOCAL_CFLAGS += -DIGNORE_UPDATE_LOGICAL_PARTITION_ERROR=1
+endif
+
+ifeq ($(ALLOW_LOGICAL_PARTITION_WIPE),true)
+    LOCAL_CFLAGS += -DALLOW_LOGICAL_PARTITION_WIPE=1
+endif
+
+ifneq ($(BOARD_RW_DYNAMIC_PARTITIONS_LIST),)
+	LOCAL_CFLAGS += "-DBOARD_RW_DYNAMIC_PARTITIONS_LIST=\"$(shell echo $(BOARD_RW_DYNAMIC_PARTITIONS_LIST) | sed -r 's/\b(.)/\1/g' | sed -e 's/ \+/,/g')\""
+endif
+# end lp hacks
+
 ifeq ($(TW_OEM_BUILD),true)
     LOCAL_CFLAGS += -DTW_OEM_BUILD
     BOARD_HAS_NO_REAL_SDCARD := true
