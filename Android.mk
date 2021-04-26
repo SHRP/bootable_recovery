@@ -15,7 +15,8 @@
 LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
-IS_OFFICIAL := $(shell \
+define check-offc
+$(shell \
 oc=0; \
 raw=`cat $(SHRPRAW) | tr "," " "`; \
 for device in $$raw;do \
@@ -24,7 +25,8 @@ oc=1; \
 break; \
 fi; \
 done;echo "$$oc")
-MOO := $(shell echo result:$(SHRP_OFFICIAL)$(IS_OFFICIAL) > out/oof)
+endef
+IS_OFFICIAL := $(call check-offc)
 
 ifneq ($(project-path-for),)
     ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
