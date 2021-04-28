@@ -38,29 +38,11 @@ sh init;
 			</button>
 			<action>
 				<touch key="back"/>
-				<actions>
-					<action function="cmd">
-cd /twres/magisk/
-sh exit
-cd /
-umount -l _magisk;
-rm -rf _magisk;
-					</action>
-					<action function="page">c_refresh</action>
-				</actions>
+				<action function="page">c_refresh</action>
 			</action>
 			<action>
 				<touch key="home"/>
-				<actions>
-					<action function="cmd">
-cd /twres/magisk/
-sh exit
-cd /
-umount -l _magisk;
-rm -rf _magisk;
-					</action>
-					<action function="page">c_refresh</action>
-				</actions>
+				<action function="page">c_refresh</action>
 			</action>
 		</page>
 
@@ -335,9 +317,6 @@ sh c_core_only_enabler;
 					<action function="cmd">
 cd /twres/magisk/
 sh exit
-cd /
-umount -l _magisk
-rm -rf _magisk
 					</action>
 					<action function="page">c_refresh</action>
 				</actions>
@@ -348,9 +327,6 @@ rm -rf _magisk
 					<action function="cmd">
 cd /twres/magisk/
 sh exit
-cd /
-umount -l _magisk
-rm -rf _magisk
 					</action>
 					<action function="page">c_refresh</action>
 				</actions>
@@ -490,9 +466,6 @@ rm -f %modulePath%/disable;
 					<action function="cmd">
 cd /twres/magisk/
 sh exit
-cd /
-umount -l _magisk
-rm -rf _magisk
 					</action>
 					<action function="page">c_refresh</action>
 				</actions>
@@ -520,9 +493,8 @@ rm -rf _magisk
 				<fill color="%subBackgroundColor%"/>
 				<text>{@shrpBaseYes=Yes}</text>
 				<actions>
-					<action function="shrp_magisk_um"/>
-					<action function="overlay"/>
 					<action function="page">magiskDashboard</action>
+					<action function="shrp_magisk_um"/>
 				</actions>
 			</button>
 

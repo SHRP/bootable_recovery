@@ -207,6 +207,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(togglebacklight);
 		ADD_ACTION(changeterminal);
 		ADD_ACTION(flashlight);
+		ADD_ACTION(shrp_magisk_um);
 
 		// remember actions that run in the caller thread
 		for (mapFunc::const_iterator it = mf.begin(); it != mf.end(); ++it)
@@ -250,7 +251,6 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(shrp_init);
 		ADD_ACTION(shrp_magisk_info);
 		ADD_ACTION(shrp_magisk_mi);
-		ADD_ACTION(shrp_magisk_um);
 		ADD_ACTION(shrp_zip_init);
 		ADD_ACTION(sig);
 		ADD_ACTION(unlock);
@@ -2555,7 +2555,8 @@ int GUIAction::shrp_magisk_um(std::string arg __unused){//SHRP Magisk Module Uni
 		TWFunc::Exec_Cmd("sh "+uninstallShell);
 	}
 	TWFunc::Exec_Cmd("rm -rf "+modulePath);
-	return 0;
+	
+	return gui_changeOverlay("");
 }
 
 int GUIAction::flashlight(std::string arg __unused){
