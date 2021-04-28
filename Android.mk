@@ -28,6 +28,8 @@ done;echo "$$oc")
 endef
 IS_OFFICIAL := $(call check-offc)
 
+SHRP_DATE := $(shell echo "$(DATE_FROM_FILE)" | cut -d "@" -f 2)
+
 ifneq ($(project-path-for),)
     ifeq ($(LOCAL_PATH),$(call project-path-for,recovery))
         PROJECT_PATH_AGREES := true
@@ -470,7 +472,7 @@ ifneq ($(SHRP_STATUSBAR_LEFT_PADDING),)
 	LOCAL_CFLAGS += -DSHRP_STATUSBAR_LEFT_PADDING=$(SHRP_STATUSBAR_LEFT_PADDING)
 endif
 ifneq ($(SHRP_BUILD_DATE),)
-	LOCAL_CFLAGS += -DSHRP_BUILD_DATE=$(SHRP_BUILD_DATE)
+	LOCAL_CFLAGS += -DSHRP_BUILD_DATE=$(SHRP_DATE)
 endif
 ifneq ($(SHRP_NO_SAR_AUTOMOUNT),)
 	LOCAL_CFLAGS += -DSHRP_NO_SAR_AUTOMOUNT
