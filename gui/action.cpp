@@ -2838,6 +2838,22 @@ int GUIAction::c_repack(std::string arg __unused){
 		}else{
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
 #ifdef SHRP_AB
+#ifdef TW_HAS_RECOVERY_PARTITION
+			string recBlock = DataManager::GetStrValue("shrp_rec");
+			recBlock = recBlock != "N/A" ? recBlock : "/dev/block/bootdevice/by-name/recovery";
+
+			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_a") == 0) {
+				LOGINFO("c_repack : Recovery successfully pushed into slot A\n");
+			} else {
+				LOGERR("c_repack : Error occured while pushing Recovery into slot A\n");
+			}
+
+			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_b") == 0) {
+				LOGINFO("c_repack : Recovery successfully pushed into slot B\n");
+			} else {
+				LOGERR("c_repack : Error occured while pushing Recovery into slot B\n");
+			}
+#else
 			LOGINFO("c_repack : Repacking Successful [boot_a]\n");
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_a");
 			LOGINFO("c_repack : boot_a pushed to the block\n");
@@ -2849,6 +2865,7 @@ int GUIAction::c_repack(std::string arg __unused){
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_b");
 			LOGINFO("c_repack : boot_b pushed to the block\n");
+#endif
 #else
 			LOGINFO("c_repack : Repacking Successful\n");
 			DataManager::SetValue("tw_flash_partition","/recovery;");
