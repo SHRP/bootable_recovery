@@ -138,6 +138,9 @@ endif
 ifeq ($(SHRP_EXPRESS),true)
 	LOCAL_CFLAGS += -DSHRP_EXPRESS
 endif
+ifeq ($(SHRP_DEV_USE_HEX),true)
+	LOCAL_CFLAGS += -DSHRP_DEV_USE_HEX
+endif
 #Default Addon Disabler
 ifeq ($(SHRP_EXCLUDE_DEFAULT_ADDONS),true)
 	LOCAL_CFLAGS += -DSHRP_EXCLUDE_DEFAULT_ADDON
