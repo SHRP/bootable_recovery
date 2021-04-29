@@ -2777,7 +2777,11 @@ int GUIAction::set_lock(std::string arg){
 		}
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
+#ifdef TW_HAS_RECOVERY_PARTITION
+		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;");
+#else
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;");
+#endif		
 #else
 		TWFunc::Exec_Cmd("export recoveryBlock="+DataManager::GetStrValue("shrp_rec")+"; sh /twres/scripts/create_env.sh;");
 #endif
@@ -2805,7 +2809,11 @@ int GUIAction::reset_lock(std::string arg __unused){
 		fclose(f);
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
+#ifdef TW_HAS_RECOVERY_PARTITION
+		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;");
+#else
 		TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;");
+#endif		
 #else
 		TWFunc::Exec_Cmd("export recoveryBlock="+DataManager::GetStrValue("shrp_rec")+"; sh /twres/scripts/create_env.sh;");
 #endif
@@ -2836,8 +2844,28 @@ int GUIAction::c_repack(std::string arg __unused){
 		if(TWFunc::Exec_Cmd("sh /twres/scripts/" + sync) != 0){
 			LOGINFO("c_repack : Syncing failed\n");
 		}else{
+#ifdef SHRP_DEV_USE_HEX
+			TWFunc::Exec_Cmd("sh /twres/scripts/repack_wHEX.sh;");
+#else
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
+#endif	
 #ifdef SHRP_AB
+#ifdef TW_HAS_RECOVERY_PARTITION
+			string recBlock = DataManager::GetStrValue("shrp_rec");
+			recBlock = recBlock != "N/A" ? recBlock : "/dev/block/bootdevice/by-name/recovery";
+
+			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_a") == 0) {
+				LOGINFO("c_repack : Recovery successfully pushed into slot A\n");
+			} else {
+				LOGERR("c_repack : Error occured while pushing Recovery into slot A\n");
+			}
+
+			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_b") == 0) {
+				LOGINFO("c_repack : Recovery successfully pushed into slot B\n");
+			} else {
+				LOGERR("c_repack : Error occured while pushing Recovery into slot B\n");
+			}
+#else
 			LOGINFO("c_repack : Repacking Successful [boot_a]\n");
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_a");
 			LOGINFO("c_repack : boot_a pushed to the block\n");
@@ -2849,6 +2877,7 @@ int GUIAction::c_repack(std::string arg __unused){
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_b");
 			LOGINFO("c_repack : boot_b pushed to the block\n");
+#endif
 #else
 			LOGINFO("c_repack : Repacking Successful\n");
 			DataManager::SetValue("tw_flash_partition","/recovery;");
@@ -2938,12 +2967,18 @@ int GUIAction::themeInit(std::string arg __unused){
 	bool err=false;
 	ThemeManager::initialVarProcess();
 
-	if(TWFunc::Exec_Cmd("cp -r /twres /tmp/bak/;")!=0){err=true;}
+	if (TWFunc::Exec_Cmd("cp -r /twres /tmp/bak/;") != 0) {err = true;}
 #ifndef SHRP_EXPRESS
 #ifdef SHRP_AB
-	if(TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;")!=0){
+#ifdef TW_HAS_RECOVERY_PARTITION
+	if (TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB_REC.sh;") != 0) {
 		err=true;
 	}
+#else
+	if (TWFunc::Exec_Cmd("sh /twres/scripts/create_envAB.sh;") != 0) {
+		err=true;
+	}
+#endif
 #else
 	if(TWFunc::Exec_Cmd("export recoveryBlock="+DataManager::GetStrValue("shrp_rec")+";sh /twres/scripts/create_env.sh;")!=0){
 		err=true;
