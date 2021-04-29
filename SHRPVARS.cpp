@@ -141,6 +141,8 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 
 #ifdef SHRP_REC
 	mConst->SetValue("shrp_rec", EXPAND(SHRP_REC));
+#else
+    mConst->SetValue("shrp_rec", "N/A");
 #endif
 
 #ifdef SHRP_REC_TYPE
