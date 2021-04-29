@@ -2872,6 +2872,15 @@ int GUIAction::c_repack(std::string arg __unused){
 			string recBlock = DataManager::GetStrValue("shrp_rec");
 			recBlock = recBlock != "N/A" ? recBlock : "/dev/block/bootdevice/by-name/recovery";
 
+#ifndef SHRP_DEV_FLASH_BOTH_SLOTS
+			string current_slot = PartitionManager.Get_Active_Slot_Display() == "A" ? "a" : "b";
+
+			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_" + current_slot) == 0) {
+				LOGINFO("c_repack : Recovery successfully pushed into slot %s\n", current_slot.c_str());
+			} else {
+				LOGERR("c_repack : Error occured while pushing Recovery into slot %s\n", current_slot.c_str());
+			}	
+#else
 			if (TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=" + recBlock + "_a") == 0) {
 				LOGINFO("c_repack : Recovery successfully pushed into slot A\n");
 			} else {
@@ -2883,8 +2892,13 @@ int GUIAction::c_repack(std::string arg __unused){
 			} else {
 				LOGERR("c_repack : Error occured while pushing Recovery into slot B\n");
 			}
+#endif
 #else
-			LOGINFO("c_repack : Repacking Successful [boot_a]\n");
+#ifndef SHRP_DEV_FLASH_BOTH_SLOTS
+			string current_slot = PartitionManager.Get_Active_Slot_Display() == "A" ? "a" : "b";
+			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_" + current_slot);
+			LOGINFO("c_repack : boot_%s pushed to the block\n", current_slot.c_str());
+#else
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_a");
 			LOGINFO("c_repack : boot_a pushed to the block\n");
 
@@ -2895,6 +2909,7 @@ int GUIAction::c_repack(std::string arg __unused){
 			TWFunc::Exec_Cmd("sh /twres/scripts/repack.sh;");
 			TWFunc::Exec_Cmd("dd if=/tmp/work/newRec.img of=/dev/block/bootdevice/by-name/boot_b");
 			LOGINFO("c_repack : boot_b pushed to the block\n");
+#endif
 #endif
 #else
 			LOGINFO("c_repack : Repacking Successful\n");
