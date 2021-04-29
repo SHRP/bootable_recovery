@@ -268,6 +268,14 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DSHRP_EXCLUDE_MAGISK_FLASH")
 	}
 
+	if getMakeVars(ctx, "SHRP_DEV_USE_HEX") == "true" {
+		cflags = append(cflags, "-DSHRP_DEV_USE_HEX")
+	}
+
+	if getMakeVars(ctx, "SHRP_DEV_FLASH_BOTH_SLOTS") == "true" {
+		cflags = append(cflags, "-DSHRP_DEV_FLASH_BOTH_SLOTS")
+	}
+
 	if getMakeVars(ctx, "SHRP_EXPRESS") == "true" {
 		cflags = append(cflags, "-DSHRP_EXPRESS")
 	}
