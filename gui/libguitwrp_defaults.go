@@ -259,6 +259,7 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
 	}
 
+//SHRP flags
 	if getMakeVars(ctx, "SHRP_CUSTOM_FLASHLIGHT") == "true" {
 		cflags = append(cflags, "-DSHRP_CUSTOM_FLASHLIGHT")
 	}
@@ -278,6 +279,7 @@ func globalFlags(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "SHRP_BUILD_DATE") != "" {
 		cflags = append(cflags, "-DSHRP_BUILD_DATE="+getMakeVars(ctx, "SHRP_DATE"))
 	}
+//end of SHRP flags
 
 	return cflags
 }
