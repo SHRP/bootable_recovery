@@ -3435,6 +3435,7 @@ void TWPartitionManager::Setup_Super_Partition() {
         partitions = strtok(NULL, ",");
     }
 #endif
+    Update_System_Details();
 }
 
 bool TWPartitionManager::Get_Super_Status() {

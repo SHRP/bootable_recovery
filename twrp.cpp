@@ -130,7 +130,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 		LOGERR("Failing out of recovery due to problem with fstab.\n");
 		return;
 	}
-	PartitionManager.Output_Partition_Logging();
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
@@ -393,6 +392,8 @@ int main(int argc, char **argv) {
 
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
 	GUIConsole::Translate_Now();
+
+	TWFunc::checkforapp(); //Checking compatibility for TWRP app
 
 	// Launch the main GUI
 	gui_start();
