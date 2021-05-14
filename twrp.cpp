@@ -325,10 +325,10 @@ int main(int argc, char **argv) {
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
 		LOGINFO("Is encrypted, do decrypt page first\n");
-	if (DataManager::GetIntValue(TW_IS_FBE))
-		DataManager::SetValue("tw_crypto_user_id", "0");
-	if (gui_startPage("decrypt", 1, 1) != 0) {
-		LOGERR("Failed to start decrypt GUI page.\n");
+		if (DataManager::GetIntValue(TW_IS_FBE))
+			DataManager::SetValue("tw_crypto_user_id", "0");
+		if (gui_startPage("decrypt", 1, 1) != 0) {
+			LOGERR("Failed to start decrypt GUI page.\n");
 		} else {
 			// Check for and load custom theme if present
 			TWFunc::check_selinux_support();
