@@ -119,10 +119,10 @@ int main(int argc, char **argv) {
 
 	// Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
-#ifndef SHRP_EXPRESS
+
 	printf("Starting the UI...\n");
 	gui_init();
-#endif
+
 	printf("=> Linking mtab\n");
 	symlink("/proc/mounts", "/etc/mtab");
 	std::string fstab_filename = "/etc/twrp.fstab";
@@ -214,8 +214,6 @@ int main(int argc, char **argv) {
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
-	printf("Starting the UI...\n");
-	gui_init();
 #endif
 	// Load up all the resources
 	gui_loadResources();
@@ -334,6 +332,18 @@ int main(int argc, char **argv) {
 		} else {
 			// Check for and load custom theme if present
 			TWFunc::check_selinux_support();
+#ifdef SHRP_EXPRESS_USE_DATA
+			/*
+			Trying to fetch theme and other datas.
+			This is essential because if data is decrpyted then 
+			first init will not able to find shrp path.
+			*/
+			Express::updateSHRPBasePath();
+#ifdef SHRP_EXPRESS
+			Express::init();
+#endif
+#endif
+
 			gui_loadCustomResources();
 		}
 	} else if (datamedia) {
