@@ -84,19 +84,12 @@ void JSON::storeShrpInfo(){
 bool Express::shrpResExp(string inPath,string outPath,bool display){
 	LOGINFO("------------\nStarting Express\n");
 	bool opStatus;
-	//Assume that System is not mounted as default
-	bool mountStatus=false;
 
-	//To Check If the System is Mounted or not for a decision parameter which helpes us to back normal state of system mountation before Express call
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
-		mountStatus=true;
-	}else{
-		mountStatus=false;
-	}
-	//To decide should we remount the system as RW or not
-	if(!(mountStatus && minUtils::find(inPath,DataManager::GetStrValue("shrpBasePath")))){
-		minUtils::remountSystem(false);
-	}
+	// Creating Env for operation
+	envRet ret = Express::provideEnvironment(false, inPath);
+	if (!ret.envCreated) return false;
+
+
 	LOGINFO("Inpath - %s \nOutpath - %s \n",inPath.c_str(),outPath.c_str());
 	if(TWFunc::Path_Exists(inPath)){
 		LOGINFO("Inpath - Exists\n");
@@ -121,124 +114,86 @@ bool Express::shrpResExp(string inPath,string outPath,bool display){
 		LOGINFO("Inpath - Not Exists\nExiting....\n");
 		opStatus=true;
 	}
-	//Unmounting system partition if the partition was not mounted before express call
-	if(!mountStatus){
-		if(PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),display)){
-			LOGINFO("System Unmounted\n");
-		}else{
-			LOGINFO("System Unmount Failed \n");
-		}
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+
+	Express::cleanup(ret);
+
 	LOGINFO("Express Processing End\n------------\n");
 	return opStatus;
 }
+
 void Express::flushSHRP(){
-	bool mountStatus=false;
 	string basePath=DataManager::GetStrValue("shrpBasePath");
 
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
-		mountStatus=true;
-	}else{
-		mountStatus=false;
-	}
-	minUtils::remountSystem(false);
+	// Creating Env for operation
+	envRet ret = Express::provideEnvironment(true);
+	if (!ret.envCreated) return;
 
-	if(TWFunc::Path_Exists(basePath+"/etc/shrp")){
-		TWFunc::Exec_Cmd("cp -r "+basePath+"/etc/shrp/slts /tmp/",true,true);
-		TWFunc::Exec_Cmd("rm -r "+basePath+"/etc/shrp/*",true,true);
-		TWFunc::Exec_Cmd("cp -r /tmp/slts "+basePath+"/etc/shrp/",true,true);
+	if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
+		TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
+		TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
+		TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
 	}
 	if(TWFunc::Path_Exists("/tmp/shrp")){
 		TWFunc::Exec_Cmd("rm -rf /tmp/shrp",true,true);
 	}
-	if(!mountStatus){
-		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),false);
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+	
+	Express::cleanup(ret);
 }
 
 void Express::init(){
-	bool mountStatus=false;
 	uint64_t version=0;
 	unsigned long long buildNo=1;
 	string basePath = DataManager::GetStrValue("shrpBasePath");
 	DataManager::GetValue("buildNo",buildNo);
 	LOGINFO("Welcome to SHRP -----------\n");
-	if(PartitionManager.Is_Mounted_By_Path(basePath)){
-		mountStatus=true;
-	}else{
-		mountStatus=false;
-	}
-	if(mountStatus==true){
-		LOGINFO("System is already mounted\n");
-		if(TWFunc::Path_Exists(basePath+"/etc/shrp/version")){
-			TWFunc::read_file(basePath+"/etc/shrp/version", version);
-		}
-		if(version!=(uint64_t)buildNo){
-			LOGINFO("Resource Version Not Matched. Mounting System as RW for further modification\n");
-			minUtils::remountSystem(false);
-		}
-	}else{
-		LOGINFO("System is not mounted\nMounting....\n");
-		minUtils::remountSystem(false);
-		if(TWFunc::Path_Exists(basePath+"/etc/shrp/version")){
-			TWFunc::read_file(basePath+"/etc/shrp/version", version);
-		}
+	
+	// Creating Env for operation
+	envRet ret = Express::provideEnvironment(true);
+	if (!ret.envCreated) return;
+
+
+	if(TWFunc::Path_Exists(basePath+"/etc/shrp/version")){
+		TWFunc::read_file(basePath+"/etc/shrp/version", version);
 	}
 
-	if(version!=(uint64_t)buildNo){
-		//Cloned Flush Func()
-		if(TWFunc::Path_Exists(basePath+"/etc/shrp")){
+	if(version != (uint64_t)buildNo){
+		LOGINFO("Resource Version Not Matched\n");
+		
+		if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
 			LOGINFO("Deleting Old Resources\n");
-			TWFunc::Exec_Cmd("cp -r "+basePath+"/etc/shrp/slts /tmp/",true,true);
-			TWFunc::Exec_Cmd("rm -r "+basePath+"/etc/shrp/*",true,true);
-			TWFunc::Exec_Cmd("cp -r /tmp/slts "+basePath+"/etc/shrp/",true,true);
-			TWFunc::Exec_Cmd("cp -r /twres/version "+basePath+"/etc/shrp/",true,true);
+			TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
+			TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
+			TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
+			TWFunc::Exec_Cmd("cp -r /twres/version " + basePath + "/etc/shrp/", true, true);
 		}
 		if(TWFunc::Path_Exists("/tmp/shrp")){
-			TWFunc::Exec_Cmd("rm -rf /tmp/shrp",true,true);
+			TWFunc::Exec_Cmd("rm -rf /tmp/shrp", true, true);
 		}
 	}
+
 	//Fetching the saved resources if available
-	if(TWFunc::Path_Exists(basePath+"/etc/shrp")){
+	if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
 		LOGINFO("Fetching Saved Resources\n");
-		TWFunc::Exec_Cmd("cp -r "+basePath+"/etc/shrp/"+"* "+"/twres/",true,true);
+		TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/* /twres/", true, true);
 	}
 
-	if(!mountStatus){
-		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),false);
-		LOGINFO("System unmounted\n");
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+	Express::cleanup(ret);
+	return;
 }
 
 
 
 bool Express::expBackup(){
-	//Assume that System is not mounted as default
-	bool mountStatus=false;
-
 	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
 	string tmpPath = "/tmp/shrp";
 	string prevFolder = FileManager::getPrevFolderPath(tmpPath);
 
 	LOGINFO("ExpressBackup Func() Started --------\n");
-	LOGINFO("Mount status of system partition - ");
-	//To Check If the System is Mounted or not for a decision parameter which helpes us to back normal state of system mountation before Express call
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
-		LOGINFO("Mounted\n");
-		mountStatus=true;
-	}else{
-		LOGINFO("Not Mounted\n");
-		mountStatus=false;
-	}
-	//To decide should we remount the system as RW or not
-	LOGINFO("Remounting System\n");
-	minUtils::remountSystem(false);
+	
+	
+	// Creating Env for operation
+	envRet env_ret = Express::provideEnvironment(true);
+	if (!env_ret.envCreated) return false;
 
 	LOGINFO("StorePath - %s \nTmpPath - %s \n",storePath.c_str(),tmpPath.c_str());
 
@@ -265,47 +220,26 @@ bool Express::expBackup(){
 	}
 	
 
-	//Unmounting system partition if the partition was not mounted before express call
-	if(!mountStatus){
-		if(PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),true)){
-			LOGINFO("System Unmounted\n");
-		}else{
-			LOGINFO("System Unmount Failed \n");
-		}
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+	Express::cleanup(env_ret);
+
 	LOGINFO("ExpressBackup Func() Ended.--------\nExiting...\n");
 
 	return ret;
 }
 
 
-
-
-
 void Express::expRestore(bool f){
 	if(!f) return;
-	//Assume that System is not mounted as default
-	bool mountStatus=false;
 
 	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
 	string tmpPath = "/tmp/shrp";
 	string prevFolder = FileManager::getPrevFolderPath(storePath);
 
 	LOGINFO("ExpressRestore Func() Started --------\n");
-	LOGINFO("Mount status of system partition - ");
-	//To Check If the System is Mounted or not for a decision parameter which helpes us to back normal state of system mountation before Express call
-	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
-		LOGINFO("Mounted\n");
-		mountStatus=true;
-	}else{
-		LOGINFO("Not Mounted\n");
-		mountStatus=false;
-	}
-	//To decide should we remount the system as RW or not
-	LOGINFO("Remounting System\n");
-	minUtils::remountSystem(false);
+	
+	// Creating Env for operation
+	envRet env_ret = Express::provideEnvironment(true);
+	if (!env_ret.envCreated) return;
 
 
 	if(TWFunc::Path_Exists(storePath)){
@@ -319,20 +253,55 @@ void Express::expRestore(bool f){
 	
 	
 
-	//Unmounting system partition if the partition was not mounted before express call
-	if(!mountStatus){
-		if(PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),true)){
-			LOGINFO("System Unmounted\n");
-		}else{
-			LOGINFO("System Unmount Failed \n");
-		}
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+	Express::cleanup(env_ret);
 	LOGINFO("ExpressRestore Func() Ended.--------\nExiting...\n");
 }
 
 #endif
+
+envRet Express::provideEnvironment(bool forceMount, string inPath) {
+	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
+	envRet ret;
+#ifdef SHRP_EXPRESS_USE_DATA
+	bool data_mounted = PartitionManager.Is_Mounted_By_Path(storePath) ? true : false;
+	
+	if (!data_mounted) return ret;
+
+	ret.mountStatus = true;
+	ret.envCreated = true;
+#else
+	LOGINFO("Mount status of system partition - ");
+	//To Check If the System is Mounted or not for a decision parameter which helpes us to back normal state of system mountation before Express call
+	if(PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path())){
+		LOGINFO("Mounted\n");
+		ret.mountStatus = true;
+	}else{
+		LOGINFO("Not Mounted\n");
+		ret.mountStatus = false;
+	}
+
+	if (forceMount) {
+		minUtils::remountSystem(false);
+	} else if (!(ret.mountStatus && minUtils::find(inPath, DataManager::GetStrValue("shrpBasePath")))){
+		minUtils::remountSystem(false);
+	}
+
+	ret.envCreated = true;
+#endif
+	return ret;
+}
+
+
+void Express::cleanup(envRet ret) {
+#ifndef SHRP_EXPRESS_USE_DATA
+	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
+	if (!ret.mountStatus && ret.envCreated) {
+		PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(),false);
+		LOGINFO("System unmounted\n");
+	}
+#endif
+	return;
+}
 
 bool Express::is_backupped(){
 	string tmpPath = "/tmp/shrp";
@@ -342,25 +311,12 @@ bool Express::is_backupped(){
 
 
 void Express::updateSHRPBasePath(){
-	bool mountStatus = false;
+#ifdef SHRP_EXPRESS_USE_DATA
+	DataManager::SetValue("shrpBasePath", "/data/unencrypted");
+#else
 	string rootPath = PartitionManager.Get_Android_Root_Path();
-
-
-	if(!PartitionManager.Is_Mounted_By_Path(rootPath)){
-		TWFunc::Exec_Cmd("mount -w " + rootPath, true);
-	}else{
-		mountStatus = true;
-	}
-	if(TWFunc::Path_Exists(rootPath + "/system") || rootPath == "/system_root"){
-		DataManager::SetValue("shrpBasePath", rootPath + "/system");
-	}else{
-		DataManager::SetValue("shrpBasePath", rootPath);
-	}
-	if(!mountStatus){
-		PartitionManager.UnMount_By_Path(rootPath, false);
-		unlink("/system");
-		mkdir("/system", 0755);
-	}
+	DataManager::SetValue("shrpBasePath", rootPath + "/system");
+#endif
 	LOGINFO("SHRP CURRENT BASEPATH : %s\n", DataManager::GetStrValue("shrpBasePath").c_str());
 }
 
