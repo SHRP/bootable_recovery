@@ -259,6 +259,7 @@ void Express::expRestore(bool f){
 	Express::cleanup(env_ret);
 	LOGINFO("ExpressRestore Func() Ended.--------\nExiting...\n");
 }
+#endif
 
 envRet Express::provideEnvironment(bool forceMount, string inPath) {
 	string storePath = DataManager::GetStrValue("shrpBasePath") + "/etc/shrp";
@@ -305,8 +306,6 @@ void Express::cleanup(envRet ret) {
 #endif
 	return;
 }
-
-#endif
 
 bool Express::is_backupped(){
 	string tmpPath = "/tmp/shrp";
