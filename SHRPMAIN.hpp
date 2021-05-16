@@ -19,6 +19,12 @@ struct funcRet{
 	bool expressBACKUP_ret = false;
 };
 
+// For Express
+struct envRet {
+	bool mountStatus = false;
+	bool envCreated = false;
+};
+
 //JSON_Genarator
 class JSON{
 	public:
@@ -38,9 +44,11 @@ class Express{
 		static void init();
 		static bool expBackup();
 		static void expRestore(bool f);
-		
-		//static int funcInit(string funcName);
+		static int funcInit(string funcName);	
 #endif
+		static envRet provideEnvironment(bool forceMount = true, string inPath = "");
+		static void cleanup(envRet ret);
+
 		static bool is_backupped();
 		static void updateSHRPBasePath();
 };
