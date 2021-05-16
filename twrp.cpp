@@ -75,6 +75,21 @@ static void Print_Prop(const char *key, const char *name, void *cookie) {
 	printf("%s=%s\n", key, name);
 }
 
+static void Reload_Gui() {
+#ifdef SHRP_EXPRESS_USE_DATA
+	/*
+	Trying to fetch theme and other datas.
+	This is essential because if data is decrpyted then 
+	first init will not able to find shrp path.
+	*/
+	Express::updateSHRPBasePath();
+#ifdef SHRP_EXPRESS
+	Express::init();
+#endif
+#endif
+	gui_loadCustomResources();
+}
+
 static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
@@ -90,11 +105,15 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 			} else {
 				// Check for and load custom theme if present
 				TWFunc::check_selinux_support();
-				gui_loadCustomResources();
+
+				// Reloading Gui
+				Reload_Gui();
 			}
 		}
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
+		// Reloading Gui
+		Reload_Gui();
 		TWFunc::check_selinux_support();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
@@ -133,10 +152,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
-	printf("Starting the UI...\n");
-	gui_init();
-	// Load up all the resources
-	gui_loadResources();
 #endif
 	//SHRP_initial_funcs
 	SHRP::INIT();
@@ -357,12 +372,13 @@ int main(int argc, char **argv) {
 
     // Load default values to set DataManager constants and handle ifdefs
 	DataManager::SetDefaultValues();
-#ifndef SHRP_EXPRESS
+
+
 	printf("Starting the UI...\n");
 	gui_init();
+
 	// Load up all the resources
 	gui_loadResources();
-#endif
 
 	startupArgs startup;
 	startup.parse(&argc, &argv);
@@ -370,12 +386,6 @@ int main(int argc, char **argv) {
 	TWFunc::Clear_Bootloader_Message();
 
 	if (startup.Get_Fastboot_Mode()) {
-#ifdef SHRP_EXPRESS
-		printf("Starting the UI...\n");
-		gui_init();
-		// Load up all the resources
-		gui_loadResources();
-#endif
 		LOGINFO("starting fastboot\n");
 		gui_msg(Msg("fastboot_console_msg=Entered Fastboot mode..."));
 		if (gui_startPage("fastboot", 1, 1) != 0) {
