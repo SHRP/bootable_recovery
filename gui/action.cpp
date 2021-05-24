@@ -1129,12 +1129,12 @@ int GUIAction::flash(std::string arg)
 
 	reinject_after_flash();
 	PartitionManager.Update_System_Details();
-	operation_end(ret_val);
-	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
-	DataManager::SetValue(TW_ZIP_QUEUE_COUNT, zip_queue_index);
 	//SHRP
 	FlashManager::funcPost("flash", F);
 	//SHRP
+	operation_end(ret_val);
+	// This needs to be after the operation_end call so we change pages before we change variables that we display on the screen
+	DataManager::SetValue(TW_ZIP_QUEUE_COUNT, zip_queue_index);
 	return 0;
 }
 
