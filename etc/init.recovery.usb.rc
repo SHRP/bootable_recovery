@@ -17,13 +17,13 @@ on property:sys.usb.config=mass_storage,adb
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
 
-on property:sys.usb.config=mtp,adb
+on property:sys.usb.config=mtp,adb && property:shrp.lock=0
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     start adbd
 
-on property:sys.usb.config=adb
+on property:sys.usb.config=adb && property:shrp.lock=0
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable ${service.adb.root}
