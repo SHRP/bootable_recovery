@@ -141,11 +141,14 @@ on fs
     mkdir /dev/usb-ffs/fastboot 0770 system system
     mount functionfs fastboot /dev/usb-ffs/fastboot rmode=0770,fmode=0660,uid=1000,gid=1000
 
-on property:sys.usb.config=adb
+on property:sys.usb.config=adb && property:shrp.lock=0
     start adbd
 
 on property:sys.usb.config=fastboot
     start fastbootd
+
+on property:shrp.lock=1
+    stop adbd
 
 on property:sys.usb.config=none && property:sys.usb.configfs=0
     stop adbd
