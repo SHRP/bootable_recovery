@@ -155,6 +155,7 @@
 // version 5 adds File Manager options, nano & Flash Current TWRP
 #define TW_THEME_VERSION 5
 
+
 #define TW_HAS_DEVICEAB             "tw_has_deviceab"
 #define TW_ACTIVE_SLOT_INSTALL	    "tw_active_slot_install"
 #define TW_INJECT_AFTER_ZIP 		"tw_inject_after_zip"
