@@ -13,11 +13,18 @@
 				<text>{@copying_log=Copy Logs to SD Card}</text>
 			</text>
 
-			<checkbox>
-				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
-				<text>{@include_kernel_log=Include Kernel Log}</text>
-				<data variable="tw_include_kernel_log" value="1"/>
-			</checkbox>
+			<listbox style="scrolllist">
+				<placement x="%c_hawk_base_column%" y="%rPos19%" w="%file_selector_default_w%" h="%revPos100%"/>
+				<icon selected="checkbox_true" unselected="checkbox_false"/>
+				<listitem name="{@include_logcat=Include Logcat}">
+					<condition var1="tw_logcat_exists" var2="1"/>
+					<data variable="tw_include_logcat" value="1"/>
+				</listitem>
+				<listitem name="{@include_kernel_log=Include Kernel Log}">
+					<data variable="tw_include_kernel_log" value="1"/>
+				</listitem>
+			</listbox>
+
 			<button>
 				<placement x="860" y="%rndPos105%"/>
 				<image resource="c_ok"/>
