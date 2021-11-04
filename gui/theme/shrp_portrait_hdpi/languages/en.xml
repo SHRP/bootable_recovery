@@ -531,7 +531,6 @@
 		<string name="no_selinux">No SELinux support (no libselinux).</string>
 		<string name="mtp_enabled">MTP Enabled</string>
 		<string name="mtp_crash">MTP Crashed, not starting MTP on boot.</string>
-		<string name="mtp_base_path_missing">Media storage not found. Unable to enable MTP.</string>
 		<string name="decrypt_success">Successfully decrypted with default password.</string>
 		<string name="unable_to_decrypt">Unable to decrypt with default password. You may need to perform a Format Data.</string>
 		<string name="generating_digest1" version="2">Generating Digest</string>
