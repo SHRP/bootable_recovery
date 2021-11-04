@@ -723,6 +723,9 @@ void DataManager::SetDefaultValues()
 #ifdef PRODUCT_USE_DYNAMIC_PARTITIONS
 	printf("PRODUCT_USE_DYNAMIC_PARTITIONS := true\n");
 	mConst.SetValue(TW_FASTBOOT_MODE, "1");
+	mConst.SetValue(TW_IS_SUPER, "1");
+#else
+	mConst.SetValue(TW_IS_SUPER, "0");
 #endif
 //SHRP
 initSHRPVars(&mConst, &mData, &mPersist);
@@ -784,7 +787,6 @@ initSHRPVars(&mConst, &mData, &mPersist);
 	mData.SetValue("tw_background_thread_running", "0");
 	mData.SetValue(TW_RESTORE_FILE_DATE, "0");
 	mPersist.SetValue("tw_military_time", "0");
-	mData.SetValue(TW_IS_SUPER, "0");
 
 #ifdef TW_INCLUDE_CRYPTO
 	mPersist.SetValue(TW_USE_SHA2, "1");

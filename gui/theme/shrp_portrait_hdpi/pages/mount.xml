@@ -27,7 +27,10 @@
 				<text>{@options=Options:}</text>
 			</text>
 			<button>
-				<condition var1="tw_mount_system_ro" op="=" var2="0"/>
+				<conditions>
+					<condition var1="tw_mount_system_ro" op="=" var2="0"/>
+					<condition var1="tw_is_super" op="=" var2="0"/>
+				</conditions>
 				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
 				<font resource="small" color="%secondaryColor%"/>
 				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
@@ -37,7 +40,10 @@
 				</actions>
 			</button>
 			<button>
-				<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+				<conditions>
+					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+					<condition var1="tw_is_super" op="=" var2="0"/>
+				</conditions>
 				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
 				<font resource="small" color="%secondaryColor%"/>
 				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
