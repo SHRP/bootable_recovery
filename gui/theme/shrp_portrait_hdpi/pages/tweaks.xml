@@ -101,6 +101,30 @@
 						<action function="page">confirm_action</action>
 					</actions>
 				</listitem>
+				<listitem name="{@unmap_super_devices=Unmap Super Devices}">
+					<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
+					<actions>
+						<action function="set">tw_back=c_addons_native</action>
+						<action function="set">tw_action=unmapsuperdevices</action>
+						<action function="set">tw_text1={@unmap_super_devices_confirm=Unmap all Super Devices?}</action>
+						<action function="set">tw_action_text1={@unmapping_super_devices=Unmapping Super Devices...}</action>
+						<action function="set">tw_complete_text1={@unmap_super_devices_complete=Unmapped all Super Devices}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
+				<listitem name="{@merges_snapshots=Merge Snapshots}">
+					<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
+					<actions>
+						<action function="set">tw_back=c_addons_native</action>
+						<action function="set">tw_action=mergesnapshots</action>
+						<action function="set">tw_text1={@merge_snapshots_confirm=Merge Snapshots?}</action>
+						<action function="set">tw_action_text1={@merging_snapshots=Merging Snapshots...}</action>
+						<action function="set">tw_complete_text1={@merging_snapshots_complete=Merged Snapshots}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
 			</listbox>
 
 			
