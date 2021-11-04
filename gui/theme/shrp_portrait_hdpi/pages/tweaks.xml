@@ -85,6 +85,22 @@
 						<action function="page">confirm_action</action>
 						</actions>
 				</listitem>
+				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
+					<conditions>
+						<condition var1="tw_has_boot_slots" var2="1"/>
+						<condition var1="tw_has_repack_tools" var2="1"/>
+						<condition var1="tw_uses_initramfs" var2="1"/>
+					</conditions>
+					<actions>
+						<action function="set">tw_back=c_addons_native</action>
+						<action function="set">tw_action=fixabrecoverybootloop</action>
+						<action function="set">tw_text1={@fix_recovery_loop_confirm=Fix Recovery Bootloop?}</action>
+						<action function="set">tw_action_text1={@fixing_recovery_loop=Fixing Recovery Bootloop...}</action>
+						<action function="set">tw_complete_text1={@fix_recovery_loop_complete=Fix Recovery Bootloop Complete}</action>
+						<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
+						<action function="page">confirm_action</action>
+					</actions>
+				</listitem>
 			</listbox>
 
 			
