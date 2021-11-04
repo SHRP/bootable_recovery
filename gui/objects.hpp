@@ -333,6 +333,8 @@ protected:
 	int screenshot(std::string arg);
 	int setbrightness(std::string arg);
 	int checkforapp(std::string arg);
+	int unmapsuperdevices(std::string arg);
+	int removedynamicgroups(std:: string arg);
 
 	// (originally) threaded actions
 	int fileexists(std::string arg);
@@ -727,6 +729,7 @@ protected:
 		string name; //DisplayNameOfAddon
 		string info; //InfoAbout Addon
 		string fileName; //AddonFileName
+		string action = "queuezip"; //DefaultAction
 		string confirmBtnText; //ConfirmButtonText
 		string successfulText; //ConfirmButtonText
 	};
