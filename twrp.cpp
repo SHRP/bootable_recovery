@@ -103,10 +103,6 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 				DataManager::SetValue("tw_crypto_user_id", "0");
 			if (gui_startPage("decrypt", 1, 1) != 0) {
 				LOGERR("Failed to start decrypt GUI page.\n");
-			} else {
-				// Check for and load custom theme if present
-				TWFunc::check_selinux_support();
-
 				// Reloading Gui
 				Reload_Gui();
 			}
@@ -115,7 +111,6 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 		PartitionManager.Update_System_Details();
 		// Reloading Gui
 		Reload_Gui();
-		TWFunc::check_selinux_support();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
 		} else {
@@ -251,6 +246,9 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 */
 
 	Decrypt_Page(skip_decryption, datamedia);
+	// Check for and load custom theme if present
+	TWFunc::check_selinux_support();
+	gui_loadCustomResources();
 	PartitionManager.Output_Partition_Logging();
 
 	//Save JSON
