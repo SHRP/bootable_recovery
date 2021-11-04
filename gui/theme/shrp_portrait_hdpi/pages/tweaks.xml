@@ -32,6 +32,7 @@
 					<action function="set">shrpTweakName=</action>
 					<action function="set">shrpTweakInfo=</action>
 					<action function="set">shrpFileName=</action>
+					<action function="set">shrpTweakAction=</action>
 				</actions>
 			</action>
 			<action>
@@ -73,6 +74,7 @@
 			</textbox>
 
 			<button style="cnfrmBtn">
+				<condition var1="shrpTweakAction" op="=" var2="queuezip"/>
 				<placement x="700" y="%rndPos115%" w="310" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>%shrpTweakConfirm%</text>
@@ -85,6 +87,23 @@
 					<action function="set">tw_action2_param=flash_zip</action>
 					<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
 					<action function="set">tw_complete_text1=%shrpTweakFinish%</action>
+					<action function="overlay"/>
+					<action function="page">action_page</action>
+				</actions>
+			</button>
+
+			<button style="cnfrmBtn">
+				<condition var1="shrpTweakAction" op="!=" var2="queuezip"/>
+				<placement x="700" y="%rndPos115%" w="310" h="110"/>
+				<fill color="%subBackgroundColor%"/>
+				<text>%shrpTweakConfirm%</text>
+				<actions>
+					<action function="set">tw_back=c_addons</action>
+					<action function="set">tw_filename=%shrpTweakFileName%</action>
+					<action function="set">tw_action=%shrpTweakAction%</action>
+					<action function="set">tw_text1={@confirm_flash_hdr=Confirm Flash}</action>
+					<action function="set">tw_complete_text1=%shrpTweakFinish%</action>
+					<action function="set">tw_has_action2=0</action>
 					<action function="overlay"/>
 					<action function="page">action_page</action>
 				</actions>

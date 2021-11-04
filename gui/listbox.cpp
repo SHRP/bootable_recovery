@@ -111,6 +111,16 @@ GUIListBox::GUIListBox(xml_node<>* node) : GUIScrollList(node)
 		}
 				//<SHRP>
 		else if(mVariable == "shrpTweaks"){
+			{
+				addonInfo aItem;
+				aItem.name="Unmap Super Devices";
+				aItem.info="This will unmap all super devices.";
+				aItem.confirmBtnText="Unmap all";
+				aItem.successfulText="Unmapped";
+				aItem.fileName="NOFILE";
+				aItem.action="unmapsuperdevices";
+				addons.push_back(aItem);
+			}
 #ifndef SHRP_EXCLUDE_DEFAULT_ADDONS
 #ifndef SHRP_SKIP_DEFAULT_ADDON_1
 			{
@@ -699,6 +709,7 @@ void GUIListBox::NotifySelect(size_t item_selected)
 					DataManager::SetValue("shrpTweakInfo",ptr->info == "" ? "Confirm Flash" : ptr->info);
 					DataManager::SetValue("shrpTweakConfirm",ptr->confirmBtnText == "" ? "Flash" : ptr->confirmBtnText);
 					DataManager::SetValue("shrpTweakFinish",ptr->successfulText == "" ? "Successful" : ptr->successfulText);
+					DataManager::SetValue("shrpTweakAction",ptr->action);
 
 					if(TWFunc::Path_Exists("/sdcard/SHRP/addons/"+ptr->fileName)){
 						DataManager::SetValue("shrpTweakFileName","/sdcard/SHRP/addons/"+ptr->fileName);

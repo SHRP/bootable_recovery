@@ -213,6 +213,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(enableadb);
 		ADD_ACTION(enablefastboot);
 		ADD_ACTION(changeterminal);
+		ADD_ACTION(unmapsuperdevices);
 		ADD_ACTION(flashlight);
 		ADD_ACTION(shrp_magisk_um);
 		ADD_ACTION(unmapsuperdevices);

@@ -178,6 +178,7 @@ protected:
 	bool Has_Data_Media;                                                      // Indicates presence of /data/media, may affect wiping and backup methods
 	void Setup_Data_Media();                                                  // Sets up a partition as a /data/media emulated storage partition
 	void Set_Block_Device(std::string block_device);                          // Allow super partition setup to change block device
+	bool Check_Pending_Merges();                                              // Check and run pending merges on data for VAB devices
 
 private:
 	bool Process_Fstab_Line(const char *fstab_line, bool Display_Error, std::map<string, Flags_Map> *twrp_flags); // Processes a fstab line
@@ -403,7 +404,9 @@ public:
 	void Set_Crypto_State();                                                  // Sets encryption state for devices (ro.crypto.state)
 	int Set_Crypto_Type(const char* crypto_type);                             // Sets encryption type for FDE (block) and FBE (file) devices (ro.crypto.type)
 	void Unlock_Block_Partitions();                                           // Unlock all block devices after update_engine runs
+	bool Unmap_Cow_Devices();
 	bool Unmap_Super_Devices();                                               // Unmap super devices in TWRP
+	bool Remove_Dynamic_Groups(); // Remove dynmic groups from super partition
 	bool Check_Pending_Merges();                                              // Check and run pending merges on data for VAB devices
 
 private:

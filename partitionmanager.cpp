@@ -3608,7 +3608,6 @@ bool TWPartitionManager::Unmap_Super_Devices() {
 	return true;
 }
 
-
 bool TWPartitionManager::Check_Pending_Merges() {
 	auto sm = android::snapshot::SnapshotManager::NewForFirstStageMount();
 	if (!sm) {

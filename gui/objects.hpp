@@ -732,6 +732,7 @@ protected:
 		string name; //DisplayNameOfAddon
 		string info; //InfoAbout Addon
 		string fileName; //AddonFileName
+		string action = "queuezip"; //DefaultAction
 		string confirmBtnText; //ConfirmButtonText
 		string successfulText; //ConfirmButtonText
 	};
