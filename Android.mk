@@ -16,16 +16,20 @@ LOCAL_PATH := $(call my-dir)
 commands_TWRP_local_path := $(LOCAL_PATH)
 
 ###SHRP###
-OFFICIAL := $(hide) $(shell oc=0; \
-hello=$(shell curl -s https://raw.githubusercontent.com/SHRP-Devices/device_data/master/devices.raw); \
-IFS=','; \
-read -a devices <<< "$$hello"; \
-for device in "$${devices[@]}"; \
-do \
-if [ $$device == $(SHRP_DEVICE_CODE) ]; then \
+define check-offc
+$(shell \
+oc=0; \
+raw=`cat $(SHRPRAW) | tr "," " "`; \
+for device in $$raw;do \
+if [ "$$device" == "$(SHRP_DEVICE_CODE)" ]; then \
 oc=1; \
+break; \
 fi; \
-done;echo $$oc;)
+done;echo "$$oc")
+endef
+IS_OFFICIAL := $(call check-offc)
+
+SHRP_DATE := $(shell echo "$(DATE_FROM_FILE)" | cut -d "@" -f 2)
 ###/SHRP###
 
 ifneq ($(project-path-for),)
@@ -459,7 +463,7 @@ endif
 ifeq ($(SHRP_EXPRESS), true)
 	LOCAL_CFLAGS += -DSHRP_EXPRESS
 endif
-ifeq ($(SHRP_OFFICIAL)$(OFFICIAL), true@ 1)
+ifeq ($(SHRP_OFFICIAL)$(IS_OFFICIAL), true1)
 	LOCAL_CFLAGS += -DSHRP_OFFICIAL
 endif
 ifneq ($(SHRP_STATUSBAR_RIGHT_PADDING),)
