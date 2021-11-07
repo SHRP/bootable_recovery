@@ -1428,8 +1428,7 @@ int GUIAction::installhtcdumlock(std::string arg __unused)
 	operation_start("Install HTC Dumlock");
 	if (simulate) {
 		simulate_progress_bar();
-	} else
-		TWFunc::install_htc_dumlock();
+	}
 
 	operation_end(0);
 	return 0;
@@ -1440,8 +1439,7 @@ int GUIAction::htcdumlockrestoreboot(std::string arg __unused)
 	operation_start("HTC Dumlock Restore Boot");
 	if (simulate) {
 		simulate_progress_bar();
-	} else
-		TWFunc::htc_dumlock_restore_original_boot();
+	}
 
 	operation_end(0);
 	return 0;
@@ -1452,8 +1450,7 @@ int GUIAction::htcdumlockreflashrecovery(std::string arg __unused)
 	operation_start("HTC Dumlock Reflash Recovery");
 	if (simulate) {
 		simulate_progress_bar();
-	} else
-		TWFunc::htc_dumlock_reflash_recovery_to_boot();
+	}
 
 	operation_end(0);
 	return 0;
