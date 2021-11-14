@@ -254,6 +254,7 @@ GUIAction::GUIAction(xml_node<>* node)
 #ifndef TW_EXCLUDE_NANO
 		ADD_ACTION(editfile);
 #endif
+		ADD_ACTION(mergesnapshots);
 
 		ADD_ACTION(shrp_init);
 		ADD_ACTION(shrp_magisk_info);
@@ -2453,6 +2454,14 @@ int GUIAction::applycustomtwrpfolder(string arg __unused)
 	return 0;
 }
 
+int GUIAction::mergesnapshots(string arg __unused) {
+	int op_status = 1;
+	if (PartitionManager.Check_Pending_Merges()) {
+		op_status = 0;
+	}
+	operation_end(op_status);
+	return 0;
+}
 //SHRP_GUI_Funcs()
 int GUIAction::shrp_init(std::string arg __unused){
 	LOGINFO("Running GUI function : shrp_init\n");

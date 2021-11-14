@@ -748,6 +748,10 @@
 		<string name="restore_with_pattern1">Pattern is enabled</string>
 		<string name="restore_with_pattern2">Pattern should be disabled before restore</string>
 		<string name="reboot_after_restore">It is recommended to reboot Android once after first boot.</string>
+		<string name="merges_snapshots">Merge Snapshots</string>
+		<string name="merge_snapshots_confirm">Merge Snapshots?</string>
+		<string name="merging_snapshots">Merging Snapshots...</string>
+		<string name="merging_snapshots_complete">Merged Snapshots</string>
 		<!--Change All The strings from here-->
 		<string name="Tcredit">None</string>
 		<string name="c_enter_pass">Enter Password</string>

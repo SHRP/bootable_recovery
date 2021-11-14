@@ -1604,7 +1604,7 @@ int TWPartitionManager::Format_Data(void) {
 #endif
 			if (metadata != NULL)
 				metadata->Mount(true);
-			if (!dat->Check_Pending_Merges())
+			if (!Check_Pending_Merges())
 				return false;
 		}
 		return dat->Wipe_Encryption();
