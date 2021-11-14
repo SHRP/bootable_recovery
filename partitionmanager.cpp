@@ -3342,11 +3342,10 @@ bool TWPartitionManager::Prepare_Super_Volume(TWPartition* twrpPart) {
 	twrpPart->Update_Size(true);
 	twrpPart->Change_Mount_Read_Only(true);
 	twrpPart->Set_Can_Be_Backed_Up(false);
-#ifdef ALLOW_LOGICAL_PARTITION_WIPE
-    twrpPart->Set_Can_Be_Wiped(true);
-#else
-    twrpPart->Set_Can_Be_Wiped(false);
-#endif
+	twrpPart->Set_Can_Be_Wiped(false);
+	LOGINFO("Symlinking %s => /dev/block/bootdevice/by-name/%s \n", fstabEntry.blk_device.c_str(), bare_partition_name.c_str());
+	symlink(fstabEntry.blk_device.c_str(), ("/dev/block/bootdevice/by-name/" + bare_partition_name).c_str());
+
     return true;
 }
 
