@@ -930,6 +930,7 @@
 		<string name="c_stock_dashboard_ico">Stock</string>
 		<string name="ozip_decrypt_decryption">Starting Ozip Decryption...</string>
 		<string name="ozip_decrypt_finish">Ozip Decryption Finished!</string>
+		<string name="data_media_fbe_msg">TWRP will not recreate /data/media on an FBE device. Please reboot into your rom to create /data/media</string>
 		<!--2.3 Strings-->
 		<string name="c_failed_info_blocked">Something went wrong</string>
 		<string name="c_line">Line</string>
