@@ -21,6 +21,11 @@
 				<data name="shrpTweaks"/>
 			</listbox>
 
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_dashboard_addon"/>
+				<action function="page">c_addons_native</action>
+			</button>
 
 			<action>
 				<actions>
