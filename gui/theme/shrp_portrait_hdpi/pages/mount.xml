@@ -228,6 +228,11 @@
 				<action function="page">decrypt_pattern</action>
 			</action>
 
+			<action>
+				<condition var1="tw_crypto_pwtype" var2="3"/>
+				<action function="page">decrypt_pin</action>
+			</action>
+
 			<text style="pageTitle">
 				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
 				<text>{@mount_btn=Mount}</text>
@@ -357,6 +362,72 @@
 					<action function="page">button_check</action>
 				</actions>
 			</button>
+		</page>
+
+		<page name="decrypt_pin">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@mount_btn=Mount}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@decrypt_data_btn=Decrypt Data}</text>
+			</text>
+
+
+			<text style="subOptionTitle">
+				<conditions>
+					<condition var1="tw_password_fail" op="!=" var2="1"/>
+					<condition var1="tw_is_fbe" op="!=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@decrypt_data_enter_pass=Enter PIN:}</text>
+			</text>
+
+			<text style="subOptionTitle">
+				<conditions>
+					<condition var1="tw_password_fail" op="!=" var2="1"/>
+					<condition var1="tw_is_fbe" op="=" var2="1"/>
+				</conditions>
+				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
+				<text>{@decrypt_data_enter_pass_fbe=Enter PIN for User [%tw_crypto_user_id%]}</text>
+			</text>
+
+			<fill color="subBackgroundColor">
+				<placement x="50" y="%rPos24%" w="970" h="94"/>
+			</fill>
+
+			<input>
+				<placement x="80" y="%rPos25%" w="800" h="64"/>
+				<text>%tw_crypto_display%</text>
+				<data name="tw_crypto_password" mask="*" maskvariable="tw_crypto_display"/>
+				<restrict minlen="1" maxlen="254"/>
+				<action function="page">trydecrypt</action>
+			</input>
+			<button>
+				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
+				<image resource="c_clear_input"/>
+				<action function="clearInput">tw_crypto_password;decrypt_pin</action>
+			</button>
+
+			<text style="warnInfoText">
+				<condition var1="tw_password_fail" op="=" var2="1"/>
+				<placement x="60" y="100" yref="%rPos24%" yop="+"/>
+				<text>{@decrypt_data_failed=PIN failed, please try again!}</text>
+			</text>
+
+			<button>
+				<placement x="860" y="915"/>
+				<image resource="c_cancel"/>
+				<actions>
+					<action function="page">button_check</action>
+				</actions>
+			</button>
+			
+			<template name="keyboardnum"/>
 		</page>
 
 		<page name="trydecrypt">
