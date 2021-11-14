@@ -35,7 +35,72 @@
 				<selection name="tw_restore_name"/>
 			</fileselector>
 
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_storage"/>
+				<actions>
+					<action function="set">tw_back=restore</action>
+					<action function="overlay">select_storage</action>
+				</actions>
+			</button>
 
+			<action>
+				<condition var1="tw_crypto_pwtype" op="!=" var2="0"/>
+				<actions>
+					<action function="page">restore_keymaster</action>
+				</actions>
+			</action>
+			<action>
+				<condition var1="tw_restore" op="modified"/>
+				<actions>
+					<action function="readBackup"/>
+					<action function="page">restore_read</action>
+				</actions>
+			</action>
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<action function="page">c_refresh</action>
+			</action>
+		</page>
+
+		<page name="restore_force">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+			<template name="c_simple_sort"/>
+			<action>
+				<conditions>
+					<condition var1="tw_is_fbe" var2="1"/>
+					<condition var1="tw_all_users_decrypted" var2="0"/>
+					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
+				</conditions>
+				<actions>
+					<action function="set">tw_multiuser_warning_destination=restore</action>
+					<action function="page">multiuser_warning</action>
+				</actions>
+			</action>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@restore_hdr=Restore}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@restore_sel_store_hdr=Select Backup from %tw_storage_display_name% (%tw_storage_free_size% MB)}</text>
+			</text>
+
+			<fileselector style="c_restore">
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="%revPos97%"/>
+				<filter folders="1" files="1" nav="0" extn=".ab"/>
+				<path name="tw_backups_folder"/>
+				<data name="tw_restore" default=""/>
+				<sort name="tw_gui_sort_order"/>
+				<selection name="tw_restore_name"/>
+			</fileselector>
 
 			<button>
 				<placement x="860" y="%rndPos105%"/>
@@ -45,6 +110,8 @@
 					<action function="overlay">select_storage</action>
 				</actions>
 			</button>
+
+
 			<action>
 				<condition var1="tw_restore" op="modified"/>
 				<actions>
@@ -52,6 +119,7 @@
 					<action function="page">restore_read</action>
 				</actions>
 			</action>
+
 			<action>
 				<touch key="home"/>
 				<action function="page">c_refresh</action>
@@ -379,6 +447,62 @@
 
 			<action>
 				<action function="nandroid">restore</action>
+			</action>
+		</page>
+		<page name="restore_keymaster">
+			<template name="navCommon"/>
+			<template name="c_status_bar"/>
+
+			<text style="pageTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos3%"/>
+				<text>{@restore_hdr=Restore}</text>
+			</text>
+			<text style="pageSubTitle">
+				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
+				<text>{@restore_enc_backup_hdr=Encrypted Backup}</text>
+			</text>
+			
+			<textbox>
+				<condition var1="tw_crypto_pwtype" var2="1"/>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="500"/>
+				<text>{@restore_with_pin_password1=PIN/Password is enabled}</text>
+				<text>{@restore_with_pin_password2=PIN/Password should be disabled before restore}</text>
+				<text>{@restore_pin_password=Restore While PIN/Password Enabled?}</text>
+			</textbox>
+
+			<textbox>
+				<condition var1="tw_crypto_pwtype" var2="2"/>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="500"/>
+				<text>{@restore_with_pattern1=Pattern is enabled}</text>
+				<text>{@restore_with_pattern2=Pattern should be disabled before restore}</text>
+				<text>{@restore_pattern=Restore While Pattern Enabled?}</text>
+			</textbox>
+
+			<textbox>
+				<condition var1="tw_crypto_pwtype" var2="3"/>
+				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%c_console_width%" h="500"/>
+				<text>{@restore_with_pin1=PIN is enabled}</text>
+				<text>{@restore_with_pin2=PIN should be disabled before restore}</text>
+				<text>{@restore_pin=Restore While PIN Enabled?}</text>
+			</textbox>
+
+
+			<button>
+				<placement x="860" y="%rndPos105%"/>
+				<image resource="c_ok"/>
+				<action function="page">restore_force</action>
+			</button>
+
+			<action>
+				<touch key="home"/>
+				<action function="page">c_refresh</action>
+			</action>
+
+			<action>
+				<touch key="back"/>
+				<actions>
+					<action function="page">c_refresh</action>
+				</actions>
 			</action>
 		</page>
 	</pages>
