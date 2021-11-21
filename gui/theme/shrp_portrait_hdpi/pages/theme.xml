@@ -137,7 +137,7 @@
 				<text>{@ok_btn=OK}</text>
 				<actions>
 					<action function="set">themeProcessErr=0</action>
-					<action function="reload"/>
+					<action function="customReload">main2</action>
 				</actions>
 			</button>
 		</page>
@@ -245,7 +245,7 @@ cp -r /tmp/bak/* /twres/;
 rm -r /tmp/work;
 rm -r /tmp/bak;
 					</action>
-					<action function="reload"/>
+					<action function="customReload">main2</action>
 				</actions>
 			</action>
 			<action>
@@ -256,7 +256,7 @@ cp -r /tmp/bak/* /twres/;
 rm -r /tmp/work;
 rm -r /tmp/bak;
 					</action>
-					<action function="reload"/>
+					<action function="customReload">main2</action>
 				</actions>
 			</action>
 		</page>
