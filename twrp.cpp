@@ -332,18 +332,6 @@ int main(int argc, char **argv) {
 		} else {
 			// Check for and load custom theme if present
 			TWFunc::check_selinux_support();
-#ifdef SHRP_EXPRESS_USE_DATA
-			/*
-			Trying to fetch theme and other datas.
-			This is essential because if data is decrpyted then 
-			first init will not able to find shrp path.
-			*/
-			Express::updateSHRPBasePath();
-#ifdef SHRP_EXPRESS
-			Express::init();
-#endif
-#endif
-
 			gui_loadCustomResources();
 		}
 	} else if (datamedia) {

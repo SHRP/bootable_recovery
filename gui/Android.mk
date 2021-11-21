@@ -118,6 +118,9 @@ endif
 ifeq ($(SHRP_EXPRESS),true)
 	LOCAL_CFLAGS += -DSHRP_EXPRESS
 endif
+ifeq ($(SHRP_EXPRESS_USE_DATA),true)
+	LOCAL_CFLAGS += -DSHRP_EXPRESS_USE_DATA
+endif
 ifeq ($(SHRP_DEV_USE_HEX),true)
 	LOCAL_CFLAGS += -DSHRP_DEV_USE_HEX
 endif
