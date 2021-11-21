@@ -52,6 +52,7 @@
 #include "gui/gui.hpp"
 #include "progresstracking.hpp"
 #include "twrpDigestDriver.hpp"
+#include "twrpRepacker.hpp"
 #include "adbbu/libtwadbbu.hpp"
 
 #ifdef TW_HAS_MTP
@@ -112,9 +113,18 @@ TWPartitionManager::TWPartitionManager(void) {
 #endif
 }
 
-int TWPartitionManager::Set_FDE_Encrypt_Status(void) {
-	property_set("ro.crypto.state", "encrypted");
-	property_set("ro.crypto.type", "block");
+void TWPartitionManager::Set_Crypto_State() {
+	char crypto_state[PROPERTY_VALUE_MAX];
+	property_get("ro.crypto.state", crypto_state, "error");
+	if (strcmp(crypto_state, "error") == 0)
+		property_set("ro.crypto.state", "encrypted");
+}
+
+int TWPartitionManager::Set_Crypto_Type(const char* crypto_type) {
+	char type_prop[PROPERTY_VALUE_MAX];
+	property_get("ro.crypto.type", type_prop, "error");
+	if (strcmp(type_prop, "error") == 0)
+		property_set("ro.crypto.type", crypto_type);
 	// Sleep for a bit so that services can start if needed
 	sleep(1);
 	return 0;
@@ -302,9 +312,9 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 #ifdef TW_INCLUDE_CRYPTO
 	TWPartition* Decrypt_Data = Find_Partition_By_Path("/data");
 	if (Decrypt_Data && Decrypt_Data->Is_Encrypted && !Decrypt_Data->Is_Decrypted) {
-		property_set("ro.crypto.state", "encrypted");
+		Set_Crypto_State();
 		if (!Decrypt_Data->Key_Directory.empty() && Mount_By_Path(Decrypt_Data->Key_Directory, false)) {
-		property_set("ro.crypto.type", "file");
+		Set_Crypto_Type("file");
 #ifdef TW_INCLUDE_FBE_METADATA_DECRYPT
 			if (e4crypt_mount_metadata_encrypted(Decrypt_Data->Mount_Point, false, Decrypt_Data->Key_Directory, Decrypt_Data->Actual_Block_Device, &Decrypt_Data->Decrypted_Block_Device)) {
 				LOGINFO("Successfully decrypted metadata encrypted data partition with new block device: '%s'\n", Decrypt_Data->Decrypted_Block_Device.c_str());
@@ -348,7 +358,8 @@ int TWPartitionManager::Process_Fstab(string Fstab_Filename, bool Display_Error,
 				}
 			}
 		} else {
-			Set_FDE_Encrypt_Status();
+			Set_Crypto_State();
+			Set_Crypto_Type("block");
 			int password_type = cryptfs_get_password_type();
 			if (password_type == CRYPT_TYPE_DEFAULT) {
 				LOGINFO("Device is encrypted with the default password, attempting to decrypt.\n");
@@ -1724,22 +1735,30 @@ void TWPartitionManager::Parse_Users() {
 			user.userId = to_string(userId);
 
 			// Attempt to get name of user. Fallback to user ID if this fails.
-			char* userFile = PageManager::LoadFileToBuffer("/data/system/users/" + to_string(userId) + ".xml", NULL);
-			if (userFile == NULL) 
-				user.userName = to_string(userId);
-			else {
-				xml_document<> *userXml = new xml_document<>();
-				userXml->parse<0>(userFile);
-				xml_node<>* userNode = userXml->first_node("user");
-				if (userNode == nullptr) {
+			std::string path = "/data/system/users/" + to_string(userId) + ".xml";
+			if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path)) {
+				if(!TWFunc::Check_Xml_Format(path.c_str()))
 					user.userName = to_string(userId);
-				} else {
-					xml_node<>* nameNode = userNode->first_node("name");
-					if (nameNode == nullptr)
+			}
+			else {
+				char* userFile = PageManager::LoadFileToBuffer(path, NULL);
+				if (userFile == NULL) {
+					user.userName = to_string(userId);
+				}
+				else {
+					xml_document<> *userXml = new xml_document<>();
+					userXml->parse<0>(userFile);
+					xml_node<>* userNode = userXml->first_node("user");
+					if (userNode == nullptr) {
 						user.userName = to_string(userId);
-					else {
-						string userName = nameNode->value();
-						user.userName = userName + " (" + to_string(userId) + ")";
+					} else {
+						xml_node<>* nameNode = userNode->first_node("name");
+						if (nameNode == nullptr)
+							user.userName = to_string(userId);
+						else {
+							string userName = nameNode->value();
+							user.userName = userName + " (" + to_string(userId) + ")";
+						}
 					}
 				}
 			}
@@ -1798,7 +1817,7 @@ void TWPartitionManager::Check_Users_Decryption_Status() {
 
 int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 #ifdef TW_INCLUDE_CRYPTO
-	char crypto_state[PROPERTY_VALUE_MAX], crypto_blkdev[PROPERTY_VALUE_MAX];
+	char crypto_blkdev[PROPERTY_VALUE_MAX];
 	std::vector<TWPartition*>::iterator iter;
 
 	// Mount any partitions that need to be mounted for decrypt
@@ -1809,10 +1828,8 @@ int TWPartitionManager::Decrypt_Device(string Password, int user_id) {
 	}
 	property_set("twrp.mount_to_decrypt", "1");
 
-	property_get("ro.crypto.state", crypto_state, "error");
-	if (strcmp(crypto_state, "error") == 0) {
-		Set_FDE_Encrypt_Status();
-	}
+	Set_Crypto_State();
+	Set_Crypto_Type("block");
 
 	if (DataManager::GetIntValue(TW_IS_FBE)) {
 #ifdef TW_INCLUDE_FBE
@@ -2038,8 +2055,12 @@ int TWPartitionManager::usb_storage_enable(void) {
 			Mount2 = Find_Next_Storage(Mount1->Mount_Point, true);
 			if (Mount2 && Mount2->Mount_Point != Mount1->Mount_Point) {
 				Open_Lun_File(Mount2->Mount_Point, lun_file);
+			// Mimic single lun code: Mount CurrentStoragePath if it's not /data
+			} else if (TWFunc::Get_Root_Path(DataManager::GetCurrentStoragePath()) != "/data") {
+				Open_Lun_File(DataManager::GetCurrentStoragePath(), lun_file);
 			}
-		} else {
+		// Mimic single lun code: Mount CurrentStoragePath if it's not /data
+		} else if (TWFunc::Get_Root_Path(DataManager::GetCurrentStoragePath()) != "/data" && !Open_Lun_File(DataManager::GetCurrentStoragePath(), lun_file)) {
 			gui_err("unable_locate_storage=Unable to locate storage device.");
 			goto error_handle;
 		}
@@ -2693,6 +2714,7 @@ bool TWPartitionManager::Remove_MTP_Storage(unsigned int Storage_ID) {
 }
 
 bool TWPartitionManager::Flash_Image(string& path, string& filename) {
+	twrpRepacker repacker;
 	int partition_count = 0;
 	TWPartition* flash_part = NULL;
 	string Flash_List, flash_path, full_filename;
@@ -2726,7 +2748,7 @@ bool TWPartitionManager::Flash_Image(string& path, string& filename) {
 		Repack_Options.Disable_Verity = false;
 		Repack_Options.Disable_Force_Encrypt = false;
 		Repack_Options.Backup_First = DataManager::GetIntValue("tw_repack_backup_first") != 0;
-		return Repack_Images(full_filename, Repack_Options);
+		return repacker.Repack_Image_And_Flash(full_filename, Repack_Options);
 	}
 	PartitionSettings part_settings;
 	part_settings.Backup_Folder = path;
@@ -2866,6 +2888,16 @@ bool TWPartitionManager::Decrypt_Adopted() {
 		LOGERR("Cannot decrypt adopted storage because /data will not mount\n");
 		return false;
 	}
+
+	// In Android 12 xml format changed. Previously it was human-readable format with xml tags
+	// now it's ABX (Android Binary Xml). Sadly, rapidxml can't parse it, so check xml format firstly
+	std::string path = "/data/system/storage.xml";
+	if ((atoi(TWFunc::System_Property_Get("ro.build.version.sdk").c_str()) > 30) && TWFunc::Path_Exists(path))
+		if(!TWFunc::Check_Xml_Format(path.c_str())) {
+			LOGINFO("Android 12+: storage.xml is in ABX format. Skipping adopted storage decryption\n");
+			return false;
+		}
+
 	LOGINFO("Decrypt adopted storage starting\n");
 	char* xmlFile = PageManager::LoadFileToBuffer("/data/system/storage.xml", NULL);
 	xml_document<> *doc = NULL;
@@ -2969,6 +3001,12 @@ void TWPartitionManager::Remove_Partition_By_Path(string Path) {
 			return;
 		}
 	}
+}
+
+void TWPartitionManager::Override_Active_Slot(const string& Slot) {
+	LOGINFO("Overriding slot to '%s'\n", Slot.c_str());
+	Active_Slot_Display = Slot;
+	DataManager::SetValue("tw_active_slot", Slot);
 }
 
 void TWPartitionManager::Set_Active_Slot(const string& Slot) {
@@ -3223,160 +3261,4 @@ bool TWPartitionManager::Prepare_Empty_Folder(const std::string& Folder) {
 	if (TWFunc::Path_Exists(Folder))
 		TWFunc::removeDir(Folder, false);
 	return TWFunc::Recursive_Mkdir(Folder);
-}
-
-bool TWPartitionManager::Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination, const bool Create_Backup, const std::string& Backup_Name) {
-	if (!Part) {
-		LOGERR("Partition was null!\n");
-		return false;
-	}
-	if (!Prepare_Empty_Folder(Temp_Folder_Destination))
-		return false;
-	std::string target_image = Temp_Folder_Destination + "boot.img";
-	PartitionSettings part_settings;
-	part_settings.Part = Part;
-	if (Create_Backup) {
-		if (Check_Backup_Name(Backup_Name, true, false) != 0)
-			return false;
-		DataManager::GetValue(TW_BACKUPS_FOLDER_VAR, part_settings.Backup_Folder);
-		part_settings.Backup_Folder = part_settings.Backup_Folder + "/" + TWFunc::Get_Current_Date() + " " + Backup_Name + "/";
-		if (!TWFunc::Recursive_Mkdir(part_settings.Backup_Folder))
-			return false;
-	} else
-		part_settings.Backup_Folder = Temp_Folder_Destination;
-	part_settings.adbbackup = false;
-	part_settings.generate_digest = false;
-	part_settings.generate_md5 = false;
-	part_settings.PM_Method = PM_BACKUP;
-	part_settings.progress = NULL;
-	pid_t not_a_pid = 0;
-	if (!Part->Backup(&part_settings, &not_a_pid))
-		return false;
-	std::string backed_up_image = part_settings.Backup_Folder;
-	backed_up_image += Part->Backup_FileName;
-	target_image = Temp_Folder_Destination + "boot.img";
-	if (Create_Backup) {
-		std::string source = part_settings.Backup_Folder + Part->Backup_FileName;
-		if (TWFunc::copy_file(source, target_image, 0644) != 0) {
-			LOGERR("Failed to copy backup file '%s' to temp folder target '%s'\n", source.c_str(), target_image.c_str());
-			return false;
-		}
-	} else {
-		if (rename(backed_up_image.c_str(), target_image.c_str()) != 0) {
-			LOGERR("Failed to rename '%s' to '%s'\n", backed_up_image.c_str(), target_image.c_str());
-			return false;
-		}
-	}
-	return Prepare_Repack(target_image, Temp_Folder_Destination, false, false);
-}
-
-bool TWPartitionManager::Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, const bool Copy_Source, const bool Create_Destination) {
-	if (Create_Destination) {
-		if (!Prepare_Empty_Folder(Temp_Folder_Destination))
-			return false;
-	}
-	if (Copy_Source) {
-		std::string destination = Temp_Folder_Destination + "/boot.img";
-		if (TWFunc::copy_file(Source_Path, destination, 0644))
-			return false;
-	}
-	std::string command = "cd " + Temp_Folder_Destination + " && /sbin/magiskboot unpack -h '" + Source_Path +"'";
-	if (TWFunc::Exec_Cmd(command) != 0) {
-		LOGINFO("Error unpacking %s!\n", Source_Path.c_str());
-		gui_msg(Msg(msg::kError, "unpack_error=Error unpacking image."));
-		return false;
-	}
-	return true;
-}
-
-bool TWPartitionManager::Repack_Images(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options) {
-	if (!TWFunc::Path_Exists("/sbin/magiskboot")) {
-		LOGERR("Image repacking tool not present in this TWRP build!");
-		return false;
-	}
-	DataManager::SetProgress(0);
-	TWPartition* part = PartitionManager.Find_Partition_By_Path("/boot");
-	if (part)
-		gui_msg(Msg("unpacking_image=Unpacking {1}...")(part->Display_Name));
-	else {
-		gui_msg(Msg(msg::kError, "unable_to_locate=Unable to locate {1}.")("/boot"));
-		return false;
-	}
-	if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
-		return false;
-	DataManager::SetProgress(.25);
-	gui_msg(Msg("unpacking_image=Unpacking {1}...")(Target_Image));
-	if (!PartitionManager.Prepare_Repack(Target_Image, REPACK_NEW_DIR, true))
-		return false;
-	DataManager::SetProgress(.5);
-	gui_msg(Msg("repacking_image=Repacking {1}...")(part->Display_Name));
-	std::string path = REPACK_NEW_DIR;
-	if (Repack_Options.Type == REPLACE_KERNEL) {
-		// When we replace the kernel, what we really do is copy the boot partition ramdisk into the new image's folder
-		if (TWFunc::copy_file(REPACK_ORIG_DIR "ramdisk.cpio", REPACK_NEW_DIR "ramdisk.cpio", 0644)) {
-			LOGERR("Failed to copy ramdisk\n");
-			return false;
-		}
-	} else if (Repack_Options.Type == REPLACE_RAMDISK) {
-		// Repack the ramdisk
-		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
-			LOGERR("Failed to copy ramdisk\n");
-			return false;
-		}
-		path = REPACK_ORIG_DIR;
-	} else {
-		LOGERR("Invalid repacking options specified\n");
-		return false;
-	}
-	if (Repack_Options.Disable_Verity)
-		LOGERR("Disabling verity is not implemented yet\n");
-	if (Repack_Options.Disable_Force_Encrypt)
-		LOGERR("Disabling force encrypt is not implemented yet\n");
-	std::string command = "cd " + path + " && /sbin/magiskboot repack " + path + "boot.img";
-	if (TWFunc::Exec_Cmd(command) != 0) {
-		gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
-		return false;
-	}
-	DataManager::SetProgress(.75);
-	std::string file = "new-boot.img";
-	DataManager::SetValue("tw_flash_partition", "/boot;");
-	if (!PartitionManager.Flash_Image(path, file)) {
-		LOGINFO("Error flashing new image\n");
-		return false;
-	}
-	DataManager::SetProgress(1);
-	TWFunc::removeDir(REPACK_ORIG_DIR, false);
-	if (part->SlotSelect && Repack_Options.Type == REPLACE_RAMDISK) {
-		LOGINFO("Switching slots to flash ramdisk to both partitions\n");
-		string Current_Slot = Get_Active_Slot_Display();
-		if (Current_Slot == "A")
-			Set_Active_Slot("B");
-		else
-			Set_Active_Slot("A");
-		DataManager::SetProgress(.25);
-		if (!PartitionManager.Prepare_Repack(part, REPACK_ORIG_DIR, Repack_Options.Backup_First, gui_lookup("repack", "Repack")))
-			return false;
-		if (TWFunc::copy_file(REPACK_NEW_DIR "ramdisk.cpio", REPACK_ORIG_DIR "ramdisk.cpio", 0644)) {
-			LOGERR("Failed to copy ramdisk\n");
-			return false;
-		}
-		path = REPACK_ORIG_DIR;
-		command = "cd " + path + " && /sbin/magiskboot repack " + path + "boot.img";
-		if (TWFunc::Exec_Cmd(command) != 0) {
-			gui_msg(Msg(msg::kError, "repack_error=Error repacking image."));
-			return false;
-		}
-		DataManager::SetProgress(.75);
-		std::string file = "new-boot.img";
-		DataManager::SetValue("tw_flash_partition", "/boot;");
-		if (!PartitionManager.Flash_Image(path, file)) {
-			LOGINFO("Error flashing new image\n");
-			return false;
-		}
-		DataManager::SetProgress(1);
-		TWFunc::removeDir(REPACK_ORIG_DIR, false);
-		Set_Active_Slot(Current_Slot);
-	}
-	TWFunc::removeDir(REPACK_NEW_DIR, false);
-	return true;
 }

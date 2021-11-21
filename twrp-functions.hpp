@@ -24,7 +24,8 @@
 
 #ifdef USE_FSCRYPT
 #include <ext4_utils/ext4_crypt.h>
-#else
+#endif
+#ifdef USE_EXT4
 #include "ext4crypt_tar.h"
 #endif
 
@@ -66,7 +67,7 @@ public:
 	static string Get_Path(const string& Path);                                 // Trims everything after the last / in the string
 	static string Get_Filename(const string& Path);                             // Trims the path off of a filename
 
-	static int Exec_Cmd(const string& cmd, string &result);                     //execute a command and return the result as a string by reference
+ 	static int Exec_Cmd(const string& cmd, string &result, bool combine_stderr);     //execute a command and return the result as a string by reference, set combined_stderror to add stderr
 	static int Exec_Cmd(const string& cmd, bool Show_Errors = true, bool onlyLOGInfo = false);                      //execute a command, displays an error to the GUI if Show_Errors is true, Show_Errors is true by default
 	static int Wait_For_Child(pid_t pid, int *status, string Child_Name, bool Show_Errors = true, bool onlyLOGInfo = false);
 	static int Wait_For_Child_Timeout(pid_t pid, int *status, const string& Child_Name, int timeout); // Waits for a pid to exit until the timeout is hit. If timeout is hit, kill the chilld.
@@ -113,15 +114,19 @@ public:
 	static void Disable_Stock_Recovery_Replace(); // Disable stock ROMs from replacing TWRP with stock recovery
 	static unsigned long long IOCTL_Get_Block_Size(const char* block_device);
 	static void copy_kernel_log(string curr_storage); // Copy Kernel Log to Current Storage (PSTORE/KMSG)
+	static void copy_logcat(string curr_storage); // Copy Logcat to Current Storage
 	static bool isNumber(string strtocheck); // return true if number, false if not a number
 	static int stream_adb_backup(string &Restore_Name); // Tell ADB Backup to Stream to TWRP from GUI selection
 	static std::string get_log_dir(); // return recovery log storage directory
 	static void check_selinux_support(); // print whether selinux support is enabled to console
 	static bool Is_TWRP_App_In_System(); // Check if the TWRP app is installed in the system partition
 	static int Property_Override(string Prop_Name, string Prop_Value); // Override properties (including ro. properties)
+#ifdef USE_EXT4
 	static bool Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path); // return encryption policy for path
 	static bool Set_Encryption_Policy(std::string path, const ext4_encryption_policy &policy); // set encryption policy for path
+#endif
 	static string Check_For_TwrpFolder();
+	static bool Check_Xml_Format(const char* filename); // Return whether a xml is in plain xml or ABX format
 
 private:
 	static void Copy_Log(string Source, string Destination);

@@ -733,8 +733,8 @@ void TWPartition::Setup_Data_Partition(bool Display_Error) {
 bool TWPartition::Decrypt_FBE_DE() {
 if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 		DataManager::SetValue(TW_IS_FBE, 1);
-		property_set("ro.crypto.state", "encrypted");
-		property_set("ro.crypto.type", "file");
+		PartitionManager.Set_Crypto_State();
+		PartitionManager.Set_Crypto_Type("file");
 		LOGINFO("File Based Encryption is present\n");
 #ifdef TW_INCLUDE_FBE
 	Is_FBE = true;
@@ -755,7 +755,7 @@ if (TWFunc::Path_Exists("/data/unencrypted/key/version")) {
 	while (!Decrypt_DE() && --retry_count)
 		usleep(2000);
 	if (retry_count > 0) {
-		property_set("ro.crypto.state", "encrypted");
+		PartitionManager.Set_Crypto_State();
 		Is_Encrypted = true;
 		Is_Decrypted = false;
 		DataManager::SetValue(TW_IS_ENCRYPTED, 1);
@@ -1202,6 +1202,17 @@ void TWPartition::Setup_Data_Media() {
 		ExcludeAll(Mount_Point + "/.layout_version");
 		ExcludeAll(Mount_Point + "/system/storage.xml");
 	} else {
+		int i;
+		string path;
+		for (i = 2; i <= 9; i++) {
+			path = "/sdcard" + TWFunc::to_string(i);
+			if (!TWFunc::Path_Exists(path)) {
+				Make_Dir(path, false);
+				Symlink_Mount_Point = path;
+				LOGINFO("'%s' data/media emulated storage symlinked to %s.\n", Mount_Point.c_str(), Symlink_Mount_Point.c_str());
+				break;
+			}
+		}
 		if (Mount(true) && TWFunc::Path_Exists(Mount_Point + "/media/0")) {
 			Storage_Path = Mount_Point + "/media/0";
 			Symlink_Path = Storage_Path;
@@ -1478,7 +1489,7 @@ bool TWPartition::Mount(bool Display_Error) {
 		string cmd = "/sbin/exfat-fuse -o big_writes,max_read=131072,max_write=131072 " + Actual_Block_Device + " " + Mount_Point;
 		LOGINFO("cmd: %s\n", cmd.c_str());
 		string result;
-		if (TWFunc::Exec_Cmd(cmd, result) != 0) {
+		if (TWFunc::Exec_Cmd(cmd, result, false) != 0) {
 			LOGINFO("exfat-fuse failed to mount with result '%s', trying vfat\n", result.c_str());
 			Current_File_System = "vfat";
 		} else {
@@ -1749,10 +1760,7 @@ bool TWPartition::Wipe(string New_File_System) {
 			}
 		}
 
-		if (Has_Data_Media && recreate_media) {
-			Recreate_Media_Folder();
-		}
-		if (Is_Storage && Mount(false))
+		if (Is_Storage && Mount(false) && !Is_FBE)
 			PartitionManager.Add_MTP_Storage(MTP_Storage_ID);
 	}
 
@@ -2059,15 +2067,20 @@ bool TWPartition::Wipe_Encryption() {
 	Is_Encrypted = false;
 	if (Wipe(Fstab_File_System)) {
 		Has_Data_Media = Save_Data_Media;
-		if (Has_Data_Media && !Symlink_Mount_Point.empty()) {
-			Recreate_Media_Folder();
-			if (Mount(false))
-				PartitionManager.Add_MTP_Storage(MTP_Storage_ID);
-		}
 		DataManager::SetValue(TW_IS_ENCRYPTED, 0);
 #ifndef TW_OEM_BUILD
 		gui_msg("format_data_msg=You may need to reboot recovery to be able to use /data again.");
 #endif
+		if (Is_FBE) {
+			gui_msg(Msg(msg::kWarning, "data_media_fbe_msg=TWRP will not recreate /data/media on an FBE device. Please reboot into your rom to create /data/media."));
+		} else {
+			if (Has_Data_Media && !Symlink_Mount_Point.empty()) {
+				Recreate_Media_Folder();
+				if (Mount(false))
+					PartitionManager.Add_MTP_Storage(MTP_Storage_ID);
+			}
+		}
+
 		ret = true;
 		if (!Key_Directory.empty())
 			ret = PartitionManager.Wipe_By_Path(Key_Directory);
@@ -3342,7 +3355,14 @@ int TWPartition::Decrypt_Adopted() {
 	char type_guid[80];
 	char part_guid[80];
 
-	if (gpt_disk_get_partition_info(fd, 2, type_guid, part_guid) == 0) {
+	uint32_t p_num;
+	size_t last_digit = Primary_Block_Device.find_last_not_of("0123456789");
+	if ((last_digit != string::npos) && (last_digit != Primary_Block_Device.length()-1))
+		p_num = atoi(Primary_Block_Device.substr(last_digit + 1).c_str()) + 1;
+	else
+		p_num = 2;
+
+	if (gpt_disk_get_partition_info(fd, p_num, type_guid, part_guid) == 0) {
 		LOGINFO("type: '%s'\n", type_guid);
 		LOGINFO("part: '%s'\n", part_guid);
 		Adopted_GUID = part_guid;
@@ -3358,16 +3378,22 @@ int TWPartition::Decrypt_Adopted() {
 				 * to disable USB Mass Storage whenever adopted storage
 				 * is present.
 				 */
-				LOGINFO("Detected adopted storage, disabling USB mass storage mode\n");
-				DataManager::SetValue("tw_has_usb_storage", 0);
+				if (p_num == 2) {
+					// TODO: Properly detect mixed vs fully adopted storage. Maybe this
+					// should be moved to partitionmanager instead, and disable after
+					// checking all partitions. Also the presence of adopted storage does
+					// not necessarily mean it's being used as Internal Storage
+					LOGINFO("Detected adopted storage, disabling USB mass storage mode\n");
+					DataManager::SetValue("tw_has_usb_storage", 0);
+				}
 			}
 		}
 	}
 
 	if (Is_Adopted_Storage) {
-		string Adopted_Block_Device = Alternate_Block_Device + "p2";
+		string Adopted_Block_Device = Alternate_Block_Device + "p" + TWFunc::to_string(p_num);
 		if (!TWFunc::Path_Exists(Adopted_Block_Device)) {
-			Adopted_Block_Device = Alternate_Block_Device + "2";
+			Adopted_Block_Device = Alternate_Block_Device + TWFunc::to_string(p_num);
 			if (!TWFunc::Path_Exists(Adopted_Block_Device)) {
 				LOGINFO("Adopted block device does not exist\n");
 				goto exit;
@@ -3481,4 +3507,17 @@ void TWPartition::Set_Backup_FileName(string fname) {
 
 string TWPartition::Get_Backup_Name() {
 	return Backup_Name;
+}
+
+std::string TWPartition::Get_Backup_FileName() {
+	return Backup_FileName;
+}
+
+std::string TWPartition::Get_Display_Name() {
+	return Display_Name;
+}
+
+bool TWPartition::Is_SlotSelect() {
+	return SlotSelect;
+
 }

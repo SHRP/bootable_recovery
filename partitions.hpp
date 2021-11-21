@@ -26,7 +26,10 @@
 #include "exclude.hpp"
 #include "tw_atomic.hpp"
 #include "progresstracking.hpp"
+
+#ifdef USE_EXT4
 #include "ext4crypt_tar.h"
+#endif
 
 #define MAX_FSTAB_LINE_LENGTH 2048
 
@@ -74,19 +77,6 @@ struct Flags_Map {
 	std::string File_System;
 	std::string Flags;
 	char* fstab_line;
-};
-
-enum Repack_Type {
-	REPLACE_NONE = 0,
-	REPLACE_RAMDISK = 1,
-	REPLACE_KERNEL = 2,
-};
-
-struct Repack_Options_struct {
-	Repack_Type Type;
-	bool Backup_First;
-	bool Disable_Verity;
-	bool Disable_Force_Encrypt;
 };
 
 enum PartitionManager_Op {                                                    // PartitionManager Restore Mode for Raw_Read_Write()
@@ -160,9 +150,12 @@ public:
 	int Decrypt_Adopted();
 	void Revert_Adopted();
 	void Partition_Post_Processing(bool Display_Error);                       // Apply partition specific settings after fstab processed
-	void Set_Backup_FileName(string fname);                                   // Set Backup_FileName for partition
+	void Set_Backup_FileName(string fname);                                   // Set backup filename for partition
+	std::string Get_Backup_FileName();                                        // Get the backup filename for the partition
 	string Get_Backup_Name();                                                 // Get Backup_Name for partition
 	bool Decrypt_FBE_DE();                                                    // If FBE is present, backup exclusions are set up and DE decrypt is attempted
+	std::string Get_Display_Name();                                           // Get the display name in the gui for the partition
+	bool Is_SlotSelect();                                                     // Return whether the partition is a slot partition or not
 
 public:
 	string Current_File_System;                                               // Current file system
@@ -378,6 +371,7 @@ public:
 	bool Flash_Image(string& path, string& filename);                         // Flashes an image to a selected partition from the partition list
 	bool Restore_Partition(struct PartitionSettings *part_settings);          // Restore the partitions based on type
 	TWAtomicInt stop_backup;
+	void Override_Active_Slot(const string& Slot);                            // Override the active slot for repacking
 	void Set_Active_Slot(const string& Slot);                                 // Sets the active slot to A or B
 	string Get_Active_Slot_Suffix();                                          // Returns active slot _a or _b
 	string Get_Active_Slot_Display();                                         // Returns active slot A or B for display purposes
@@ -390,11 +384,9 @@ public:
 	void read_uevent();                                                       // Reads uevent data into a buffer
 	void close_uevent();                                                      // Closes the uevent netlink socket
 	void Add_Partition(TWPartition* Part);                                    // Adds a new partition to the Partitions vector
-	bool Prepare_Repack(TWPartition* Part, const std::string& Temp_Folder_Destination, const bool Create_Backup, const std::string& Backup_Name); // Prepares an image for repacking by unpacking it to the temp folder destination
-	bool Prepare_Repack(const std::string& Source_Path, const std::string& Temp_Folder_Destination, const bool Copy_Source, const bool Create_Destination = true); // Prepares an image for repacking by unpacking it to the temp folder destination
-	bool Repack_Images(const std::string& Target_Image, const struct Repack_Options_struct& Repack_Options); // Repacks the boot image with a new kernel or a new ramdisk
 	std::vector<users_struct>* Get_Users_List();                              // Returns pointer to list of users
-	int Set_FDE_Encrypt_Status();                                             // Sets encryption state for FDE devices (ro.crypto.state and ro.crypto.type)
+	void Set_Crypto_State();                                                  // Sets encryption state for devices (ro.crypto.state)
+	int Set_Crypto_Type(const char* crypto_type);                             // Sets encryption type for FDE (block) and FBE (file) devices (ro.crypto.type)
 
 private:
 	void Setup_Settings_Storage_Partition(TWPartition* Part);                 // Sets up settings storage
@@ -415,6 +407,8 @@ private:
 	Backup_Method_enum Backup_Method;                                         // Method used for backup
 	void Mark_User_Decrypted(int userID);                                     // Marks given user ID in Users_List as decrypted
 	void Check_Users_Decryption_Status();                                      // Checks to see if all users are decrypted
+	std::string original_ramdisk_format;                                      // Ramdisk format of boot partition
+	std::string repacked_ramdisk_format;                                      // Ramdisk format of boot image to repack from
 
 private:
 	std::vector<TWPartition*> Partitions;                                     // Vector list of all partitions

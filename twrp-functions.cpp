@@ -66,12 +66,15 @@ extern "C" {
 struct selabel_handle *selinux_handle;
 
 /* Execute a command */
-int TWFunc::Exec_Cmd(const string& cmd, string &result) {
+int TWFunc::Exec_Cmd(const string& cmd, string &result, bool combine_stderr) {
 	FILE* exec;
 	char buffer[130];
 	int ret = 0;
-	exec = __popen(cmd.c_str(), "r");
-	if (!exec) return -1;
+	std::string popen_cmd = cmd;
+	if (combine_stderr)
+		popen_cmd = cmd + " 2>&1";
+	exec = __popen(popen_cmd.c_str(), "r");
+
 	while (!feof(exec)) {
 		if (fgets(buffer, 128, exec) != NULL) {
 			result += buffer;
@@ -538,7 +541,7 @@ void TWFunc::Copy_Log(string Source, string Destination) {
 		if (type == COMPRESSED) {
 			std::string destFileBuffer;
 			std::string getCompressedContents = "pigz -c -d " + Destination;
-			if (Exec_Cmd(getCompressedContents, destFileBuffer) < 0) {
+			if (Exec_Cmd(getCompressedContents, destFileBuffer, false) < 0) {
 				LOGINFO("Unable to get destination logfile contents.\n");
 				return;
 			}
@@ -1239,10 +1242,21 @@ void TWFunc::copy_kernel_log(string curr_storage) {
 	std::string dmesgCmd = "/sbin/dmesg";
 
 	std::string result;
-	Exec_Cmd(dmesgCmd, result);
+	Exec_Cmd(dmesgCmd, result, false);
 	write_to_file(dmesgDst, result);
 	gui_msg(Msg("copy_kernel_log=Copied kernel log to {1}")(dmesgDst));
 	tw_set_default_metadata(dmesgDst.c_str());
+}
+
+void TWFunc::copy_logcat(string curr_storage) {
+	std::string logcatDst = curr_storage + "/logcat.txt";
+	std::string logcatCmd = "logcat -d";
+
+	std::string result;
+	Exec_Cmd(logcatCmd, result, false);
+	write_to_file(logcatDst, result);
+	gui_msg(Msg("copy_logcat=Copied logcat to {1}")(logcatDst));
+	tw_set_default_metadata(logcatDst.c_str());
 }
 
 bool TWFunc::isNumber(string strtocheck) {
@@ -1352,6 +1366,7 @@ int TWFunc::Property_Override(string Prop_Name, string Prop_Value) {
 #endif
 }
 
+#ifdef USE_EXT4
 bool TWFunc::Get_Encryption_Policy(ext4_encryption_policy &policy, std::string path) {
 #ifdef TW_INCLUDE_FBE
 	if (!TWFunc::Path_Exists(path)) {
@@ -1382,6 +1397,7 @@ bool TWFunc::Set_Encryption_Policy(std::string path, const ext4_encryption_polic
 #endif
 	return true;
 }
+#endif
 
 string TWFunc::Check_For_TwrpFolder(){
 	string oldFolder = "";
@@ -1475,4 +1491,20 @@ string TWFunc::Check_For_TwrpFolder(){
 exit:
 	return TW_DEFAULT_RECOVERY_FOLDER;
 }
+
+bool TWFunc::Check_Xml_Format(const char* filename) {
+	std::string buffer(' ', 4);
+	std::string abx_hdr("ABX\x00", 4);
+	std::ifstream File;
+	File.open(filename);
+	if (File.is_open()) {
+		File.get(&buffer[0], buffer.size());
+		File.close();
+		// Android Binary Xml start from these bytes
+		if(!buffer.compare(0, abx_hdr.size(), abx_hdr))
+			return false; // bad format, not possible to parse
+	}
+	return true; // good format, possible to parse
+}
+
 #endif // ndef BUILD_TWRPTAR_MAIN
