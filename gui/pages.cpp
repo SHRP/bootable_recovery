@@ -66,6 +66,8 @@ MouseCursor *PageManager::mMouseCursor = NULL;
 HardwareKeyboard *PageManager::mHardwareKeyboard = NULL;
 bool PageManager::mReloadTheme = false;
 std::string PageManager::mStartPage = "main";
+std::string PageManager::mCustomStartPage = "main2";
+bool PageManager::mUseCustomStartPage = false;
 std::vector<language_struct> Language_List;
 
 int tw_x_offset = 0;
@@ -1343,7 +1345,7 @@ int PageManager::LoadPackage(std::string name, std::string package, std::string 
 	int ret;
 
 	mReloadTheme = false;
-	mStartPage = startpage;
+	mStartPage = mUseCustomStartPage ? mStartPage : startpage;
 
 	// init the loading context
 	LoadingContext ctx;
@@ -1469,7 +1471,9 @@ int PageManager::ReloadPackage(std::string name, std::string package)
 	PageSet* set = (*iter).second;
 	mPageSets.erase(iter);
 
-	if (LoadPackage(name, package, mStartPage) != 0)
+	std::string startPage = mUseCustomStartPage ? mCustomStartPage : mStartPage;
+
+	if (LoadPackage(name, package, startPage) != 0)
 	{
 		LOGINFO("Failed to load package '%s'.\n", package.c_str());
 		mPageSets.insert(std::pair<std::string, PageSet*>(name, set));
@@ -1537,6 +1541,13 @@ int PageManager::RunReload() {
 }
 
 void PageManager::RequestReload() {
+	mUseCustomStartPage = false;
+	mReloadTheme = true;
+}
+
+void PageManager::RequestCustomReload(std::string startPage) {
+	mUseCustomStartPage = true;
+	mCustomStartPage = startPage;
 	mReloadTheme = true;
 }
 
