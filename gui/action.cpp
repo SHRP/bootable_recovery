@@ -3062,7 +3062,7 @@ int GUIAction::applyDefaultTheme(std::string arg __unused){
 		GUIAction::c_repack("theme");
 		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
 		if(TWFunc::Path_Exists("/tmp/work")){TWFunc::Exec_Cmd("rm -rf /tmp/work");}
-		GUIAction::reload("dummy");
+		GUIAction::customReload("main2");
 	}else{
 		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("cp -r /tmp/bak/ /twres/");}
 		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
@@ -3091,7 +3091,7 @@ int GUIAction::applyCustomTheme(std::string arg){
 
 	if(!err){
 		GUIAction::c_repack("dummy");
-		GUIAction::reload("dummy");
+		GUIAction::customReload("main2");
 	}else{
 		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("cp -r /tmp/bak/ /twres/");}
 		if(TWFunc::Path_Exists("/tmp/bak")){TWFunc::Exec_Cmd("rm -rf /tmp/bak");}
