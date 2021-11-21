@@ -17,8 +17,8 @@ class SHRP{
     public:
         static void INIT();
         static bool isOfficial(string target);
+        static void handleLock();
     private:
         static void printRecDetails();
         static void genarateDate();
-        static void handleLock();
 };
