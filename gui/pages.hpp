@@ -164,6 +164,7 @@ public:
 	static void ReleasePackage(std::string name);
 	static int RunReload();
 	static void RequestReload();
+	static void RequestCustomReload(std::string startPage = "main2");
 	static void SetStartPage(const std::string& page_name);
 
 	// Used for actions and pages
@@ -206,6 +207,8 @@ protected:
 	static HardwareKeyboard *mHardwareKeyboard;
 	static bool mReloadTheme;
 	static std::string mStartPage;
+	static std::string mCustomStartPage;
+	static bool mUseCustomStartPage;
 	static LoadingContext* currentLoadingContext;
 };
 
