@@ -2053,7 +2053,7 @@ int GUIAction::setlanguage(std::string arg __unused)
 
 	operation_start("Set Language");
 	PageManager::LoadLanguage(DataManager::GetStrValue("tw_language"));
-	PageManager::RequestReload();
+	PageManager::RequestCustomReload();
 	op_status = 0; // success
 
 	operation_end(op_status);
