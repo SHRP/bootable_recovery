@@ -171,6 +171,7 @@ GUIAction::GUIAction(xml_node<>* node)
 		ADD_ACTION(key);
 		ADD_ACTION(page);
 		ADD_ACTION(reload);
+		ADD_ACTION(customReload);
 		ADD_ACTION(readBackup);
 		ADD_ACTION(set);
 		ADD_ACTION(clear);
