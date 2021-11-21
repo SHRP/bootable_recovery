@@ -61,6 +61,7 @@ extern "C" {
 #include "objects.hpp"
 #include "tw_atomic.hpp"
 #include "../SHRPMAIN.hpp"
+#include "../SHRPINIT.hpp"
 #include "../SHRPTOOLS.hpp"
 #include "../SHRPTHEME.hpp"
 #include "../SHRPFILETOOLS.hpp"
@@ -1644,6 +1645,20 @@ int GUIAction::decrypt(std::string arg __unused)
 				}
 			}
 			PartitionManager.Decrypt_Adopted();
+#ifdef SHRP_EXPRESS_USE_DATA
+			/*
+			Trying to fetch theme and other datas.
+			This is essential because if data is decrpyted then 
+			first init will not able to find shrp path.
+			*/
+			Express::updateSHRPBasePath();
+
+#ifdef SHRP_EXPRESS
+			Express::init();
+			SHRP::handleLock();
+			reload("dummy");
+#endif
+#endif
 		}
 	}
 
