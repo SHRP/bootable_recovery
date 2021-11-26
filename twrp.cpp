@@ -85,21 +85,6 @@ static void Print_Prop(const char *key, const char *name, void *cookie) {
 	printf("%s=%s\n", key, name);
 }
 
-static void Reload_Gui() {
-#ifdef SHRP_EXPRESS_USE_DATA
-	/*
-	Trying to fetch theme and other datas.
-	This is essential because if data is decrpyted then 
-	first init will not able to find shrp path.
-	*/
-	Express::updateSHRPBasePath();
-#ifdef SHRP_EXPRESS
-	Express::init();
-#endif
-#endif
-	gui_loadCustomResources();
-}
-
 static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 	// Offer to decrypt if the device is encrypted
 	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) != 0) {
@@ -116,8 +101,6 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 		}
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
-		// Reloading Gui
-		Reload_Gui();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
 			LOGINFO("Failed to get default contexts and file mode for storage files.\n");
 		} else {
@@ -293,9 +276,7 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 
 	// Check for and load custom theme if present
 	TWFunc::check_selinux_support();
-	
-	// Reloading Gui
-	Reload_Gui();
+	gui_loadCustomResources();
 	PartitionManager.Output_Partition_Logging();
 	
 	//Save JSON
