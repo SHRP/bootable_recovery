@@ -187,6 +187,9 @@
 				<listitem name="BRock">
 					<data variable="dummy"/>
 				</listitem>
+				<listitem name="Aswin(dotA)">
+					<data variable="dummy"/>
+				</listitem>
 				<listitem name="{@Tcredit=None}">
 					<icon resource="globeIco"/>
 					<data variable="dummy"/>
