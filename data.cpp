@@ -783,6 +783,7 @@ initSHRPVars(&mConst, &mData, &mPersist);
 	mData.SetValue(TW_IS_ENCRYPTED, "0");
 	mData.SetValue(TW_IS_DECRYPTED, "0");
 	mData.SetValue(TW_CRYPTO_PASSWORD, "0");
+	mData.SetValue(TW_CRYPTO_PWTYPE, "0"); // Set initial value so that recovery will not be confused when using unencrypted data or failed to decrypt data
 	mData.SetValue("tw_terminal_state", "0");
 	mData.SetValue("tw_background_thread_running", "0");
 	mData.SetValue(TW_RESTORE_FILE_DATE, "0");
