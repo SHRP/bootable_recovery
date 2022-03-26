@@ -916,20 +916,20 @@ string TWFunc::Get_Current_Date() {
 }
 
 string TWFunc::System_Property_Get(string Prop_Name) {
-	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path());
+	return System_Property_Get(Prop_Name, PartitionManager, PartitionManager.Get_Android_Root_Path(), "build.prop");
 }
 
-string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point) {
+string TWFunc::System_Property_Get(string Prop_Name, TWPartitionManager &PartitionManager, string Mount_Point, string prop_file_name) {
 	bool mount_state = PartitionManager.Is_Mounted_By_Path(Mount_Point);
 	std::vector<string> buildprop;
 	string propvalue;
 	if (!PartitionManager.Mount_By_Path(Mount_Point, true))
 		return propvalue;
-	string prop_file = Mount_Point + "/build.prop";
+	string prop_file = Mount_Point + "/" + prop_file_name;
 	if (!TWFunc::Path_Exists(prop_file))
-		prop_file = Mount_Point + "/system/build.prop"; // for devices with system as a root file system (e.g. Pixel)
+		prop_file = Mount_Point + "/system/" + prop_file_name; // for devices with system as a root file system (e.g. Pixel)
 	if (TWFunc::read_file(prop_file, buildprop) != 0) {
-		LOGINFO("Unable to open build.prop for getting '%s'.\n", Prop_Name.c_str());
+		LOGINFO("Unable to open %s for getting '%s'.\n", prop_file_name.c_str(), Prop_Name.c_str());
 		DataManager::SetValue(TW_BACKUP_NAME, Get_Current_Date());
 		if (!mount_state)
 			PartitionManager.UnMount_By_Path(Mount_Point, false);
@@ -1085,6 +1085,16 @@ void TWFunc::Fixup_Time_On_Boot(const string& time_paths /* = "" */)
 	}
 
 	if (!fixed) {
+#ifdef TW_QCOM_ATS_OFFSET
+		// Offset is the difference between the current time and the time since_epoch
+		// To calculate the offset in Android, the following expression (from a root shell) can be used:
+		// echo "$(( ($(date +%s) - $(cat /sys/class/rtc/rtc0/since_epoch)) ))"
+		// Add 3 zeros to the output and use that in the TW_QCOM_ATS_OFFSET flag in your BoardConfig.mk
+		// For example, if the result of the calculation is 1642433544, use 1642433544000 as the offset
+		offset = (uint64_t) TW_QCOM_ATS_OFFSET;
+		DataManager::SetValue("tw_qcom_ats_offset", (unsigned long long) offset, 1);
+		LOGINFO("TWFunc::Fixup_Time: Setting time offset from TW_QCOM_ATS_OFFSET, offset %llu\n", (unsigned long long) offset);
+#else
 		// Failed to get offset from ats file, check twrp settings
 		unsigned long long value;
 		if (DataManager::GetValue("tw_qcom_ats_offset", value) < 0) {
@@ -1094,6 +1104,7 @@ void TWFunc::Fixup_Time_On_Boot(const string& time_paths /* = "" */)
 			LOGINFO("TWFunc::Fixup_Time: Setting time offset from twrp setting file, offset %llu\n", (unsigned long long) offset);
 			// Do not consider the settings file as a definitive answer, keep fixed=false so next run will try ats files again
 		}
+#endif
 	}
 
 	gettimeofday(&tv, NULL);
