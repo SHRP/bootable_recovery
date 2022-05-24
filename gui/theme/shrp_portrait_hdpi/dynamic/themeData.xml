@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <recovery>
-	<variables>
+    <variables>
         <!--Colors-->
-		<variable name="primaryColor" value="#0088ff"/>
-		<!--variable name="secondaryColor" value="#ffffff"/-->
+        <variable name="primaryColor" value="#0088ff"/>
         <variable name="secondaryColor" value="#010101"/>
-		<!--variable name="accentColor" value="#0088ff"/-->
         <variable name="accentColor" value="#010101"/>
         <variable name="backgroundColor" value="#ffffff"/>
         <variable name="subBackgroundColor" value="#fafafa"/>
@@ -28,5 +26,5 @@
         <variable name="batteryType" value="1"/>
         <variable name="dashboardIconType" value="1"/>
         <variable name="roundedcornerType" value="1"/>
-	</variables>
+    </variables>
 </recovery>
