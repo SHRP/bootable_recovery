@@ -267,6 +267,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DSHRP_EXPRESS_USE_DATA")
 	}
 
+	if getMakeVars(ctx, "SHRP_BUILD_DATE") != "" {
+		cflags = append(cflags, "-DSHRP_BUILD_DATE="+getMakeVars(ctx, "SHRP_DATE"))
+	}
+
 	return cflags
 }
 
