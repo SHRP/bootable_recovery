@@ -141,9 +141,10 @@ void Express::flushSHRP(){
 }
 
 void Express::init(){
-	uint64_t version=0;
 	unsigned long long buildNo=1;
 	string basePath = DataManager::GetStrValue("shrpBasePath");
+	string versionPath = basePath + "/etc/shrp/version";
+	string result;
 	DataManager::GetValue("buildNo",buildNo);
 	LOGINFO("Welcome to SHRP -----------\n");
 	
@@ -152,23 +153,24 @@ void Express::init(){
 	if (!ret.envCreated) return;
 
 
-	if(TWFunc::Path_Exists(basePath+"/etc/shrp/version")){
-		TWFunc::read_file(basePath+"/etc/shrp/version", version);
-	}
-
-	if(version != (uint64_t)buildNo){
-		LOGINFO("Resource Version Not Matched\n");
-		
-		if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
-			LOGINFO("Deleting Old Resources\n");
-			TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
-			TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
-			TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
-			TWFunc::Exec_Cmd("cp -r /twres/version " + basePath + "/etc/shrp/", true, true);
+	if(TWFunc::Path_Exists(versionPath)){
+		TWFunc::read_file(versionPath, result);
+		if(stoi(result) != (int)buildNo){
+			LOGINFO("Resource Version Not Matched\n");
+			
+			if(TWFunc::Path_Exists(basePath + "/etc/shrp")){
+				LOGINFO("Deleting Old Resources\n");
+				TWFunc::Exec_Cmd("cp -r " + basePath + "/etc/shrp/slts /tmp/", true, true);
+				TWFunc::Exec_Cmd("rm -r " + basePath + "/etc/shrp/*", true, true);
+				TWFunc::Exec_Cmd("cp -r /tmp/slts " + basePath + "/etc/shrp/", true, true);
+				TWFunc::Exec_Cmd("cp -r /twres/version " + basePath + "/etc/shrp/", true, true);
+			}
+			if(TWFunc::Path_Exists("/tmp/shrp")){
+				TWFunc::Exec_Cmd("rm -rf /tmp/shrp", true, true);
+			}
 		}
-		if(TWFunc::Path_Exists("/tmp/shrp")){
-			TWFunc::Exec_Cmd("rm -rf /tmp/shrp", true, true);
-		}
+	}else{
+		TWFunc::Exec_Cmd("cp -r /twres/version " + basePath + "/etc/shrp/", true, true);	
 	}
 
 	//Fetching the saved resources if available
