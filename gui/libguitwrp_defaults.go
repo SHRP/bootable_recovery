@@ -259,9 +259,7 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DSHRP_CUSTOM_FLASHLIGHT")
 	}
 
-	if getMakeVars(ctx, "SHRP_EXPRESS") == "true" {
-		cflags = append(cflags, "-DSHRP_EXPRESS")
-	}
+	cflags = append(cflags, "-DSHRP_EXPRESS")
 
 	if getMakeVars(ctx, "SHRP_EXPRESS_USE_DATA") == "true" {
 		cflags = append(cflags, "-DSHRP_EXPRESS_USE_DATA")
