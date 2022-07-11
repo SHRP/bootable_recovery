@@ -290,6 +290,17 @@ func globalFlags(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "SHRP_OFFICIAL") == "true" && getMakeVars(ctx, "IS_OFFICIAL") == "true" {
 		cflags = append(cflags, "-DSHRP_OFFICIAL")
 	}
+
+	if getMakeVars(ctx, "TW_CUSTOM_BATTERY_POS") != "" {
+		cflags = append(cflags, "-DTW_CUSTOM_BATTERY_POS="+getMakeVars(ctx, "TW_CUSTOM_BATTERY_POS"))
+	}
+
+	if getMakeVars(ctx, "TW_CUSTOM_CPU_POS") != "" {
+		cflags = append(cflags, "-DTW_CUSTOM_CPU_POS="+getMakeVars(ctx, "TW_CUSTOM_CPU_POS"))
+	}
+	if getMakeVars(ctx, "TW_CUSTOM_CLOCK_POS") != "" {
+		cflags = append(cflags, "-DTW_CUSTOM_CLOCK_POS="+getMakeVars(ctx, "TW_CUSTOM_CLOCK_POS"))
+	}
 //SHRP Addons
 	//Disable default addons
 	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_1") == "true" {

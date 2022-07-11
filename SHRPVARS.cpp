@@ -167,6 +167,22 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mConst->SetValue("shrp_ab", "0");
 #endif
 
+#ifdef TW_CUSTOM_CPU_POS
+    int cpu=0;
+	stringstream cpuu(EXPAND(TW_CUSTOM_CPU_POS));
+	cpuu>>cpu;
+    mConst->SetValue("c_temp_x", cpu);
+#else
+    mConst->SetValue("c_temp_x", 540);
+#endif
+
+
+#ifdef TW_CUSTOM_CLOCK_POS
+    int clock=0;
+	stringstream clockk(EXPAND(TW_CUSTOM_CLOCK_POS));
+	clockk>>clock;
+    mConst->SetValue("c_time_x", clock);
+#else
 #ifdef SHRP_STATUSBAR_LEFT_PADDING
 	int val=0;
 	stringstream guun(EXPAND(SHRP_STATUSBAR_LEFT_PADDING));
@@ -176,7 +192,17 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 #else
 	mConst->SetValue("c_time_x", 20);
 #endif
+#endif
 
+#ifdef TW_CUSTOM_BATTERY_POS
+    int cbatt=0;
+	stringstream bappa(EXPAND(TW_CUSTOM_BATTERY_POS));
+	bappa>>cbatt;
+	mConst->SetValue("c_batteryText1", cbatt);
+	mConst->SetValue("c_batteryText2", cbatt+15);
+	mConst->SetValue("c_batteryText3", cbatt+37);
+	mConst->SetValue("c_batteryIco", cbatt+107);
+#else
 #ifdef SHRP_STATUSBAR_RIGHT_PADDING
 	int valL=0;
 	stringstream bappa(EXPAND(SHRP_STATUSBAR_RIGHT_PADDING));
@@ -190,6 +216,7 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mConst->SetValue("c_batteryText2", 928);
 	mConst->SetValue("c_batteryText3", 950);
 	mConst->SetValue("c_batteryIco", 1020);
+#endif
 #endif
 
 #ifdef SHRP_EXPRESS
