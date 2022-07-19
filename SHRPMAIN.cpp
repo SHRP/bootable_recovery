@@ -315,10 +315,11 @@ bool Express::is_backupped(){
 
 
 void Express::updateSHRPBasePath(){
+	string rootPath = PartitionManager.Get_Android_Root_Path();
+	DataManager::SetValue("androidSystemPath", rootPath);
 #ifdef SHRP_EXPRESS_USE_DATA
 	DataManager::SetValue("shrpBasePath", "/data/unencrypted");
 #else
-	string rootPath = PartitionManager.Get_Android_Root_Path();
 	// Creating Env for operation
 	envRet env_ret = Express::provideEnvironment(true);
 	
