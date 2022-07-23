@@ -2742,7 +2742,7 @@ int GUIAction::sig(std::string arg __unused){
 	TWPartition* ptr;
 	vector<storageInfo> storage;
 	storageInfo sinfo;
-	sinfo.storageLocation="shrpBasePath";
+	sinfo.storageLocation="androidSystemPath";
 	sinfo.freePercentageVar="c_s_p";
 	sinfo.freeStrVar="c_s_status";
 	storage.push_back(sinfo);
