@@ -388,7 +388,6 @@ protected:
 #ifndef TW_EXCLUDE_NANO
 	int editfile(std::string arg);
 #endif
-	int applycustomtwrpfolder(std::string arg);
 
 	int shrp_init(std::string arg);
 	int shrp_magisk_info(std::string arg);
