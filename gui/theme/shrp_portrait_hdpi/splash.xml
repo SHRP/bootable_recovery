@@ -5,7 +5,7 @@
 		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
 		<title>SKY HAWK RECOVERY PROJECT</title>
 		<description>splash screen</description>
-		<themeversion>4</themeversion>
+		<themeversion>5</themeversion>
 	</details>
 	<resources>
 		<image name="c_logo" filename="c_logo" retainaspect="1"/>
