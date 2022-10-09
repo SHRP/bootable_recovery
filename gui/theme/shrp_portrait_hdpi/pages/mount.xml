@@ -276,7 +276,7 @@
 				<text>%tw_crypto_display%</text>
 				<data name="tw_crypto_password" mask="*" maskvariable="tw_crypto_display"/>
 				<restrict minlen="1" maxlen="254"/>
-				<action function="page">trydecrypt</action>
+				<action function="customReload">trydecrypt</action>
 			</input>
 			<button>
 				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
@@ -333,7 +333,7 @@
 				<dot color="%secondaryColor%" activecolor="%secondaryColor%" radius="%pattern_dot_dia%"/>
 				<line color="%secondaryColor%" width="%pattern_line_w%"/>
 				<data name="tw_crypto_password"/>
-				<action function="page">trydecrypt</action>
+				<action function="customReload">trydecrypt</action>
 			</patternpassword>
 
 
@@ -411,7 +411,7 @@
 				<text>%tw_crypto_display%</text>
 				<data name="tw_crypto_password" mask="*" maskvariable="tw_crypto_display"/>
 				<restrict minlen="1" maxlen="254"/>
-				<action function="page">trydecrypt</action>
+				<action function="customReload">trydecrypt</action>
 			</input>
 			<button>
 				<placement x="944" y="25" yref="%rPos24%" yop="+"/>
