@@ -295,7 +295,7 @@
 				<placement x="860" y="915"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="page">canceldecrypt</action>
+					<action function="customReload">canceldecrypt</action>
 				</actions>
 			</button>
 			<template name="keyboardtemplate"/>
@@ -365,7 +365,7 @@
 				<placement x="860" y="%rndPos105%"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="page">canceldecrypt</action>
+					<action function="customReload">canceldecrypt</action>
 				</actions>
 			</button>
 		</page>
@@ -429,7 +429,7 @@
 				<placement x="860" y="915"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="page">button_check</action>
+					<action function="customRealod">canceldecrypt</action>
 				</actions>
 			</button>
 			
