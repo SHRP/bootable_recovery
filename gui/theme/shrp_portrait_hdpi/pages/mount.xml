@@ -429,7 +429,7 @@
 				<placement x="860" y="915"/>
 				<image resource="c_cancel"/>
 				<actions>
-					<action function="customRealod">canceldecrypt</action>
+					<action function="customReload">canceldecrypt</action>
 				</actions>
 			</button>
 			
