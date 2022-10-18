@@ -258,14 +258,9 @@ func globalFlags(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "AB_OTA_UPDATER") == "true" {
 		cflags = append(cflags, "-DAB_OTA_UPDATER=1")
 	}
-
 //SHRP flags
 	if getMakeVars(ctx, "SHRP_CUSTOM_FLASHLIGHT") == "true" {
 		cflags = append(cflags, "-DSHRP_CUSTOM_FLASHLIGHT")
-	}
-
-	if getMakeVars(ctx, "SHRP_EXCLUDE_MAGISK_FLASH") == "true" {
-		cflags = append(cflags, "-DSHRP_EXCLUDE_MAGISK_FLASH")
 	}
 
 	if getMakeVars(ctx, "SHRP_DEV_USE_HEX") == "true" {
@@ -287,8 +282,157 @@ func globalFlags(ctx android.BaseContext) []string {
 	if getMakeVars(ctx, "SHRP_BUILD_DATE") != "" {
 		cflags = append(cflags, "-DSHRP_BUILD_DATE="+getMakeVars(ctx, "SHRP_DATE"))
 	}
-//end of SHRP flags
 
+	if getMakeVars(ctx, "SHRP_EXPRESS_USE_DATA") == "true" {
+		cflags = append(cflags, "-DSHRP_EXPRESS_USE_DATA")
+	}
+
+	if getMakeVars(ctx, "SHRP_OFFICIAL") == "true" && getMakeVars(ctx, "IS_OFFICIAL") == "true" {
+		cflags = append(cflags, "-DSHRP_OFFICIAL")
+	}
+//SHRP Addons
+	//Disable default addons
+	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_1") == "true" {
+		cflags = append(cflags, "-DSHRP_SKIP_DEFAULT_ADDON_1")
+	}
+
+	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_2") == "true" {
+		cflags = append(cflags, "-DSHRP_SKIP_DEFAULT_ADDON_2")
+	}
+
+	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_3") == "true" {
+		cflags = append(cflags, "-DSHRP_SKIP_DEFAULT_ADDON_3")
+	}
+
+	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_4") == "true" {
+		cflags = append(cflags, "-DSHRP_SKIP_DEFAULT_ADDON_4")
+	}
+	//Exclude magisk flash
+	if getMakeVars(ctx, "SHRP_EXCLUDE_MAGISK_FLASH") == "true" {
+		cflags = append(cflags, "-DSHRP_EXCLUDE_MAGISK_FLASH")
+	}
+	//Integrate external addons
+	//FirstAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_1_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_1_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_1_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_1_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT"))
+	}
+	//SecondAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_2_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_2_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_2_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_2_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT"))
+	}
+	//ThirdAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_3_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_3_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_3_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_3_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT"))
+	}
+	//ForthAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_4_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_4_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_4_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_4_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT"))
+	}
+	//FifthAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_5_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_5_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_5_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_5_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_5_SUCCESSFUL_TEXT"))
+	}
+	//SixthAddon
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_NAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_6_NAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_NAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_INFO") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_6_INFO="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_INFO"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_FILENAME") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_6_FILENAME="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_FILENAME"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_BTN_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_6_BTN_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_BTN_TEXT"))
+	}
+
+	if getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT") != "" {
+		cflags = append(cflags, "-DSHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT="+getMakeVars(ctx, "SHRP_EXTERNAL_ADDON_6_SUCCESSFUL_TEXT"))
+	}
+//End of SHRP Addons
 	return cflags
 }
 
