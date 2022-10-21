@@ -24,6 +24,7 @@
 			<checkbox>
 				<conditions>
 					<condition var1="shrpBuild" var2="0"/>
+					<condition var1="shrp_ver_status" op="=" var2="Stable"/>
 				</conditions>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="unofficialBuild" unchecked="unofficialBuild"/>
