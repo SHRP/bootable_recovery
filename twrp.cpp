@@ -177,6 +177,10 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
+	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+			LOGINFO("Request a reload to apply shrp theme");
+			PageManager::RequestReload();
+	}
 #endif
 	//SHRP_initial_funcs
 	SHRP::INIT();

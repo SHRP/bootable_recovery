@@ -1659,7 +1659,7 @@ int GUIAction::decrypt(std::string arg __unused)
 #ifdef SHRP_EXPRESS
 			Express::init();
 			SHRP::handleLock();
-			reload("dummy");
+			GUIAction::reload("dummy");
 #endif
 #endif
 		}
@@ -2787,13 +2787,13 @@ int GUIAction::unlock(std::string arg){
 	Hasher H;
 	if(!H.LockPassInit(arg)){
 		//PageManager::ChangePage("c_recBlocked");
-		GUIAction::customReload("c_recBlocked");
+		gui_changePage("c_recBlocked");
 		return 0;
 	}
 
 	if(H.lock_pass!="1" && H.lock_pass!="2"){
 		//PageManager::ChangePage("main2");
-		GUIAction::customReload("main2");
+		gui_changePage("main2");
 	}else{
 		if(H.isPassCorrect()){
 			property_set("shrp.lock", "0");
@@ -2802,7 +2802,7 @@ int GUIAction::unlock(std::string arg){
 			//PageManager Will Change The Page
 			DataManager::SetValue("passNotMatched","0");
 			//PageManager::ChangePage("main2");
-			GUIAction::customReload("main2");
+			gui_changePage("main2");
 		}else{
 			property_set("shrp.lock", "1");
 			LOGINFO("%s: Failed verifying the given password!\n", __func__);
@@ -2810,7 +2810,7 @@ int GUIAction::unlock(std::string arg){
 			DataManager::SetValue("passNotMatched","1");
 			DataManager::SetValue("password","");
 			//H.lock_pass=="1" ? PageManager::ChangePage("c_pass_capture") : PageManager::ChangePage("c_patt_capture");
-			H.lock_pass=="1" ? GUIAction::customReload("c_pass_capture") : GUIAction::customReload("c_patt_capture");
+			H.lock_pass=="1" ? gui_changePage("c_pass_capture") : gui_changePage("c_patt_capture");
 		}
 	}
 	return 0;
