@@ -276,16 +276,6 @@
 		</template>
 		<template name="c_status_bar">
 			<!-- Standart position for status bar items START-->
-			<button>
-					<conditions>
-					<condition var1="statusBarEnabled" op="=" var2="1"/>
-					</conditions>
-					<fill color="%transparent%"/>
-					<font resource="c_menu" color="%secondaryColor%"/>
-					<placement x="0" y="16" w="1080" h="28"/>
-					<text></text>
-			</button>
-
 			<text>
 				<conditions>
 					<condition var1="cpuTempEnabled" op="=" var2="1"/>
