@@ -99,6 +99,15 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 				LOGERR("Failed to start decrypt GUI page.\n");
 			}
 		}
+#ifdef SHRP_EXPRESS
+		else {
+			LOGINFO("Request a reload to apply shrp theme");
+			PageManager::RequestReload();
+		}
+	} if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+			LOGINFO("Request a reload to apply shrp theme");
+			PageManager::RequestReload();
+#endif
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
@@ -177,10 +186,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
-	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
-			LOGINFO("Request a reload to apply shrp theme");
-			PageManager::RequestReload();
-	}
 #endif
 	//SHRP_initial_funcs
 	SHRP::INIT();
