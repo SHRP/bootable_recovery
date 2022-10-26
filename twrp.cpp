@@ -98,6 +98,15 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 				gui_loadCustomResources();
 			}
 		}
+#ifdef SHRP_EXPRESS
+		else {
+			LOGINFO("Request a reload to apply shrp theme");
+			PageManager::RequestReload();
+		}
+	} if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
+			LOGINFO("Request a reload to apply shrp theme");
+			PageManager::RequestReload();
+#endif
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
 		TWFunc::check_selinux_support();
@@ -176,10 +185,6 @@ static void process_recovery_mode(twrpAdbBuFifo* adb_bu_fifo, bool skip_decrypti
 	Express::updateSHRPBasePath();
 #ifdef SHRP_EXPRESS
 	Express::init();
-	if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
-			LOGINFO("Request a reload to apply shrp theme");
-			PageManager::RequestReload();
-	}
 #endif
 	//SHRP_initial_funcs
 	SHRP::INIT();
