@@ -171,9 +171,11 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
     int cpu=0;
 	stringstream cpuu(EXPAND(TW_CUSTOM_CPU_POS));
 	cpuu>>cpu;
-    mConst->SetValue("c_temp_x", cpu);
+    mConst->SetValue("c_temp_x", cpu/2);
+    mConst->SetValue("c_temp_w", cpu);
 #else
-    mConst->SetValue("c_temp_x", 540);
+    mConst->SetValue("c_temp_x", 270);
+    mConst->SetValue("c_temp_w", 540);
 #endif
 
 
