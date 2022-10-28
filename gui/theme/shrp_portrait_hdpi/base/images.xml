@@ -46,6 +46,11 @@
 		<image name="c_dashboard_wipe" filename="c_dashboard_wipe" retainaspect="1"/>
 		<image name="c_dashboard_addon" filename="c_dashboard_addon" retainaspect="1"/>
 		<!-- For_dashboard_icon_end-->
+		<!-- For_advanced_icon_start-->
+		<image name="c_advanced_shrp" filename="c_advanced_shrp" retainaspect="1"/>
+		<image name="c_advanced_snapshot" filename="c_advanced_snapshot" retainaspect="1"/>
+		<image name="c_advanced_unmap" filename="c_advanced_unmap" retainaspect="1"/>
+		<!-- For_advanced_icon_end-->
 		<image name="c_dash_text_box" filename="c_dash_text_box" retainaspect="0"/>
 		<image name="c_storage" filename="c_storage" retainaspect="1"/>
 		<image name="c_flash" filename="c_flash" retainaspect="1"/>
