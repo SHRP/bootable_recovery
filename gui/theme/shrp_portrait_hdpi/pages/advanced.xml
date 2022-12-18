@@ -188,7 +188,7 @@
 			<button style="dashboardText2">
 				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
-				<text>{@flash_shrp_ramdisk=Flash SHRP}</text>
+				<text>{@reflash_twrp=Flash SHRP}</text>
 				<conditions>
 					<condition var1="tw_has_boot_slots" var2="1"/>
 					<condition var1="tw_has_repack_tools" var2="1"/>
