@@ -52,10 +52,11 @@
 				<listitem name="{@unmount_sys_install=Unmount System before installing a ZIP}">
 					<data variable="tw_unmount_system"/>
 				</listitem>
-				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash TWRP after flashing a ROM}">
+				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP after flashing a ROM}">
 					<conditions>
 						<condition var1="tw_has_boot_slots" var2="1"/>
 						<condition var1="tw_has_repack_tools" var2="1"/>
+						<condition var1="tw_no_flash_current_twrp" var2="0"/>
 					</conditions>
 					<data variable="tw_auto_reflashtwrp"/>
 				</listitem>
@@ -65,7 +66,7 @@
 				<condition var1="tw_is_decrypted" var2="1"/>
 				<placement x="300" y="1480" w="450" h="110"/>
 				<fill color="%subBackgroundColor%"/>
-				<text>{@change_twrp_folder_btn=Change TWRP folder}</text>
+				<text>{@change_twrp_folder_btn=Change SHRP folder}</text>
 				<action function="page">changeTwrpFolder</action>
 			</button>
 
