@@ -302,6 +302,10 @@ func globalFlags(ctx android.BaseContext) []string {
 		cflags = append(cflags, "-DTW_CUSTOM_CLOCK_POS="+getMakeVars(ctx, "TW_CUSTOM_CLOCK_POS"))
 	}
 //SHRP Addons
+	//Include magisk in ramdisk
+	if getMakeVars(ctx, "INC_IN_REC_MAGISK") == "true" {
+		cflags = append(cflags, "-DMAGISK_IN_REC")
+	}
 	//Disable default addons
 	if getMakeVars(ctx, "SHRP_SKIP_DEFAULT_ADDON_1") == "true" {
 		cflags = append(cflags, "-DSHRP_SKIP_DEFAULT_ADDON_1")
