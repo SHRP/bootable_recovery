@@ -1241,11 +1241,16 @@ void TWPartition::Setup_Data_Media() {
 		DataManager::SetValue("tw_has_internal", 1);
 		DataManager::SetValue("tw_has_data_media", 1);
 		backup_exclusions.add_absolute_dir("/data/data/com.google.android.music/files");
-		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
-		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys");
 		backup_exclusions.add_absolute_dir("/data/cache");
-        backup_exclusions.add_absolute_dir("/data/misc/apexdata/com.android.art"); // exclude this dir to prevent "error 255" on AOSP Android 12
-		backup_exclusions.add_absolute_dir("/data/extm"); //exclude this dir to prevent "error 255" on MIUI
+		// -- extra excludes, to address various causes of "error 255"
+		backup_exclusions.add_absolute_dir("/data/per_boot"); // DJ9,14Jan2020 - exclude this dir to prevent "error 255" on AOSP ROMs that create and lock it
+		backup_exclusions.add_absolute_dir("/data/extm"); // DJ9,5July2020 - exclude this dir to prevent "error 255" on MIUI 12 ROMs
+		backup_exclusions.add_absolute_dir("/data/bootchart"); // DJ9,3Aug2020 - exclude this dir to error 255
+		backup_exclusions.add_absolute_dir("/data/vendor/dumpsys"); // DJ9,3Aug2020 - exclude this dir to error 255
+		backup_exclusions.add_absolute_dir("/data/misc/apexdata/com.android.art"); // exclude this dir to prevent "error 255" on AOSP Android 12
+		backup_exclusions.add_absolute_dir("/data/fonts");
+		backup_exclusions.add_absolute_dir("/data/nandswap");
+
 		wipe_exclusions.add_absolute_dir(Mount_Point + "/misc/vold"); // adopted storage keys
 		ExcludeAll(Mount_Point + "/system/storage.xml");
 
