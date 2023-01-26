@@ -46,8 +46,8 @@
 		<string name="adopted_data">Adopted Data</string>
 		<string name="adopted_storage">Adopted Storage</string>
 		<!-- GUI XML strings -->
-		<string name="twrp_header">Team Win Recovery Project</string>
-		<string name="twrp_watch_header">TWRP %tw_version%</string>
+		<string name="twrp_header">Sky Hawk Recovery Project</string>
+		<string name="twrp_watch_header">SHRP %tw_version%</string>
 		<string name="cpu_temp">ЦП: %tw_cpu_temp% °C</string>
 		<string name="battery_pct">Батарея: %tw_battery%</string>
 		<string name="sort_by_name">Сорт.по имени</string>
@@ -95,7 +95,7 @@
 		<string name="folder">Папка:</string>
 		<string name="file">Файл:</string>
 		<string name="zip_sig_chk">Проверка подписи Zip</string>
-		<string name="inject_twrp_chk">Интегрировать TWRP после установки</string>
+		<string name="inject_twrp_chk">Интегрировать SHRP после установки</string>
 		<string name="install_reboot_chk">Автоматическая перезагрузка после установки</string>
 		<string name="options_hdr">Опции</string>
 		<string name="confirm_flash_hdr">Подтвердите установку</string>
@@ -128,13 +128,13 @@
 		<string name="rebooting">Перезагрузка...</string>
 		<string name="swipe_reboot">Свайп для перезагрузки</string>
 		<string name="swipe_reboot_s">   Перезагрузка</string>
-		<string name="reboot_install_app_hdr">Установить TWRP App?</string>
-		<string name="reboot_install_app1">Вы хотите установить официальное приложение TWRP?</string>
-		<string name="reboot_install_app2">Оно позволит вам проверять наличие новой версии TWRP.</string>
-		<string name="reboot_install_app_prompt_install">Предлагать установку TWRP App при его отсутствии</string>
+		<string name="reboot_install_app_hdr">Установить SHRP App?</string>
+		<string name="reboot_install_app1">Вы хотите установить официальное приложение SHRP?</string>
+		<string name="reboot_install_app2">Оно позволит вам проверять наличие новой версии SHRP.</string>
+		<string name="reboot_install_app_prompt_install">Предлагать установку SHRP App при его отсутствии</string>
 		<string name="reboot_install_app_system">Установить как системное приложение</string>
-		<string name="reboot_installing_app">Установка TWRP приложения...</string>
-		<string name="swipe_to_install_app">Свайп для установки TWRP App</string>
+		<string name="reboot_installing_app">Установка SHRP приложения...</string>
+		<string name="swipe_to_install_app">Свайп для установки SHRP App</string>
 		<string name="swipe_flash">Свайп для прошивки</string>
 		<string name="confirm_action">Подтвердить действие</string>
 		<string name="back_cancel">Нажмите назад для отмены.</string>
@@ -301,14 +301,14 @@
 		<string name="swipe_power_off_s">Выключение</string>
 		<string name="sys_ro_hdr">Модификация системного раздела</string>
 		<string name="sys_ro_keep">Оставить системный раздел только для чтения?</string>
-		<string name="sys_rop1">TWRP может оставить системный раздел неизменным,</string>
+		<string name="sys_rop1">SHRP может оставить системный раздел неизменным,</string>
 		<string name="sys_rop2">чтобы сохранить возможность официальных обновлений.</string>
 		<string name="sys_rop3">При этом система сможет вернуть обратно стоковый</string>
-		<string name="sys_rop4">рекавери, а TWRP не будет предлагать установку root.</string>
+		<string name="sys_rop4">рекавери, а SHRP не будет предлагать установку root.</string>
 		<string name="sys_rop5">Установка zip или работа adb все равно смогут изменять</string>
 		<string name="sys_rop6">системный раздел.</string>
-		<string name="sys_rol1">TWRP может оставить системный раздел неизменным, чтобы сохранить возможность официальних обновлений.</string>
-		<string name="sys_rol2">При этом система сможет вернуть обратно стоковый рекавери, а TWRP не будет предлагать установку root.</string>
+		<string name="sys_rol1">SHRP может оставить системный раздел неизменным, чтобы сохранить возможность официальних обновлений.</string>
+		<string name="sys_rol2">При этом система сможет вернуть обратно стоковый рекавери, а SHRP не будет предлагать установку root.</string>
 		<string name="sys_rol3">Установка zip или работа adb все равно смогут изменять системный раздел.</string>
 		<string name="sys_ro_never_show_chk">Больше не показывать это при загрузке</string>
 		<string name="sys_ro_keep_ro_btn">Только для чтения</string>
@@ -400,10 +400,10 @@
 		<string name="terminal_btn">Терминал</string>
 		<string name="reload_theme_btn">Перезагрузить тему</string>
 		<string name="dumlock_btn">HTC Dumlock</string>
-		<string name="inject_twrp_btn">Интегрировать TWRP</string>
-		<string name="inject_twrp_confirm">Интегрировать TWRP заново?</string>
-		<string name="injecting_twrp">Интегрирование TWRP...</string>
-		<string name="inject_twrp_complete">Интегрирование TWRP завершено</string>
+		<string name="inject_twrp_btn">Интегрировать SHRP</string>
+		<string name="inject_twrp_confirm">Интегрировать SHRP заново?</string>
+		<string name="injecting_twrp">Интегрирование SHRP...</string>
+		<string name="inject_twrp_complete">Интегрирование SHRP завершено</string>
 		<string name="swipe_to_confirm">Свайп для подтверждения</string>
 		<string name="part_sd_hdr">Разметка SD-карты</string>
 		<string name="invalid_partsd_sel">Вы должны выбрать съемное устройство</string>
@@ -629,7 +629,7 @@
 		<string name="need_new_adb">Вам необходим adb 1.0.32 или новее для выполнения sideload на этом устр-ве.</string>
 		<string name="no_pwd">Не предоставлен пароль.</string>
 		<string name="done_ors">Завершено выполнение файла сценария</string>
-		<string name="injecttwrp">Введение TWRP в образ boot...</string>
+		<string name="injecttwrp">Введение SHRP в образ boot...</string>
 		<string name="zip_err">Ошибка при установке zip файла '{1}'</string>
 		<string name="installing_zip">Установка zip файла '{1}'</string>
 		<string name="select_backup_opt">Установка опций резервного копирования:</string>
@@ -657,7 +657,7 @@
 		<string name="dumlock_restore">Восстановление оригинального boot...</string>
 		<string name="dumlock_reflash">Перепрошивка recovery в boot...</string>
 		<string name="run_script">Запуск сценария {1}...</string>
-		<string name="rename_stock">Переименование файла стокового рекавери в /system для предотвращения возврата на стоковое рекавери вместо TWRP.</string>
+		<string name="rename_stock">Переименование файла стокового рекавери в /system для предотвращения возврата на стоковое рекавери вместо SHRP.</string>
 		<string name="split_backup">Разделение резервной копии на несколько архивов...</string>
 		<string name="backup_error">Ошибка создания резервной копии.</string>
 		<string name="restore_error">Ошибка восстановления резервной копии.</string>
@@ -669,8 +669,8 @@
 		<string name="base_pkg_err">Неудача при загрузке базовых пакетов.</string>
 		<string name="simulating">Имитация действий...</string>
 		<string name="backup_cancel">Резервное копирование отменено</string>
-		<string name="config_twrp">Конфигурирование TWRP...</string>
-		<string name="config_twrp_err">Невозможно сконфигурировать TWRP с этим ядром.</string>
+		<string name="config_twrp">Конфигурирование SHRP...</string>
+		<string name="config_twrp_err">Невозможно сконфигурировать SHRP с этим ядром.</string>
 		<string name="copy_log">recovery.log скопирован в {1}.</string>
 		<string name="max_queue">Максимум zip в очереди достигнут!</string>
 		<string name="min_queue">Минимум zip в очереди достигнут!</string>
@@ -686,7 +686,7 @@
 		<string name="no_real_sdcard">Отмена, т.к. в устройстве отсутствует реальная SD-карта!</string>
 		<string name="cancel_sideload">Отмена ADB Sideload...</string>
 		<string name="change_fs_err">Ошибка при изменении файловой системы.</string>
-		<string name="theme_ver_err">Версия темы не соответствует версии TWRP. Используется тема по умолчанию.</string>
+		<string name="theme_ver_err">Версия темы не соответствует версии SHRP. Используется тема по умолчанию.</string>
 		<string name="up_a_level">(в родительский каталог)</string>
 		<string name="install_reboot" version="2">Устройство будет перезагружено через %tw_sleep% сек.</string>
 		<string name="adbbackup_error">Ошибка резервного копирования по ADB. Выход...</string>
@@ -696,9 +696,9 @@
 		<string name="copy_kernel_log">Kernel Log скопирован в {1}</string>
 		<string name="include_kernel_log">Добавить Kernel Log</string>
 		<string name="unable_set_boot_slot">Ошибка смены слота загрузки bootloader на {1}</string>
-		<string name="change_twrp_folder_btn">Изменить папку TWRP</string>
-		<string name="change_twrp_folder_on_process">Изменение папки TWRP</string>
-		<string name="change_twrp_folder_after_process">Папка TWRP изменена на</string>
+		<string name="change_twrp_folder_btn">Изменить папку SHRP</string>
+		<string name="change_twrp_folder_on_process">Изменение папки SHRP</string>
+		<string name="change_twrp_folder_after_process">Папка SHRP изменена на</string>
 		<string name="tw_folder_exists">Папка с таким именем уже существует!</string>
 		<string name="fm_open_terminal_btn">Открыть терминал здесь</string>
 		<string name="fm_edit_file">Изменить файл</string>
@@ -830,7 +830,7 @@
 		<string name="c_spec_thanks">Особые благодарности</string>
 		<string name="c_credits">Благодартности</string>
 		<string name="c_device">Устройство</string>
-		<string name="c_twrp_ver">TWRP версия</string>
+		<string name="c_twrp_ver">SHRP версия</string>
 		<string name="c_maintainer">Сопровождающий -</string>
 		<string name="c_shrp_about">SHRP</string>
 		<string name="c_edl_mode">Edl режим</string>

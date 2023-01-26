@@ -29,8 +29,8 @@
 		<string name="autostorage">Almacenamiento</string>
 
 		<!-- GUI XML strings -->
-		<string name="twrp_header">Team Win Recovery Project</string>
-		<string name="twrp_watch_header">TWRP %tw_version%</string>
+		<string name="twrp_header">Sky Hawk Recovery Project</string>
+		<string name="twrp_watch_header">SHRP %tw_version%</string>
 		<string name="cpu_temp">CPU: %tw_cpu_temp% &#xB0;C</string>
 		<string name="battery_pct">Batería: %tw_battery%</string>
 		<string name="sort_by_name">Ordenar por Nombre</string>
@@ -113,13 +113,13 @@
 		<string name="rebooting">Reiniciando...</string>
 		<string name="swipe_reboot">Desliza para Reiniciar</string>
 		<string name="swipe_reboot_s">   Reiniciar</string>
-		<string name="reboot_install_app_hdr">Instalar app TWRP?</string>
-		<string name="reboot_install_app1">¿Desea instalar la aplicación oficial TWRP?</string>
-		<string name="reboot_install_app2">La aplicación puede buscar nuevas versiones de TWRP.</string>
-		<string name="reboot_install_app_prompt_install">Aviso para instalar la aplicación TWRP si no está instalada</string>
+		<string name="reboot_install_app_hdr">Instalar app SHRP?</string>
+		<string name="reboot_install_app1">¿Desea instalar la aplicación oficial SHRP?</string>
+		<string name="reboot_install_app2">La aplicación puede buscar nuevas versiones de SHRP.</string>
+		<string name="reboot_install_app_prompt_install">Aviso para instalar la aplicación SHRP si no está instalada</string>
 		<string name="reboot_install_app_system">Instalar como App de Sistema</string>
 		<string name="reboot_installing_app">Instalando App...</string>
-		<string name="swipe_to_install_app">Desliza para Instalar App TWRP</string>
+		<string name="swipe_to_install_app">Desliza para Instalar App SHRP</string>
 		<string name="swipe_flash">Desliza para confirmar Flasheo</string>
 		<string name="confirm_action">Confirmar Acción</string>
 		<string name="back_cancel">Pulsa botón Atrás para Cancelar.</string>
@@ -286,14 +286,14 @@
 		<string name="swipe_power_off_s">Apagar</string>
 		<string name="sys_ro_hdr">Particion de sistema sin modificar</string>
 		<string name="sys_ro_keep">¿Mantener Sitema solo lectura?</string>
-		<string name="sys_rop1">TWRP puede dejar sin modificar la partición del sistema</string>
+		<string name="sys_rop1">SHRP puede dejar sin modificar la partición del sistema</string>
 		<string name="sys_rop2">para que sea más fácil para usted instalar actualizaciones oficiales.</string>
-		<string name="sys_rop3">TWRP será incapaz de impedir que la stock ROM</string>
-		<string name="sys_rop4">sustituya TWRP y no ofrecerá rootear su dispositivo.</string>
+		<string name="sys_rop3">SHRP será incapaz de impedir que la stock ROM</string>
+		<string name="sys_rop4">sustituya SHRP y no ofrecerá rootear su dispositivo.</string>
 		<string name="sys_rop5">Instalación de zips o la realización de operaciones adb aún puede</string>
 		<string name="sys_rop6">modificar la partición del sistema.</string>
-		<string name="sys_rol1">TWRP puede dejar sin modificar la partición del sistema para que sea más fácil para usted instalar actualizaciones oficiales.</string>
-		<string name="sys_rol2">TWRP será incapaz de impedir que la stock ROM sustituya TWRP y no ofrecerá rootear su dispositivo.</string>
+		<string name="sys_rol1">SHRP puede dejar sin modificar la partición del sistema para que sea más fácil para usted instalar actualizaciones oficiales.</string>
+		<string name="sys_rol2">SHRP será incapaz de impedir que la stock ROM sustituya SHRP y no ofrecerá rootear su dispositivo.</string>
 		<string name="sys_rol3">Instalación de zips o la realización de operaciones adb aún puede modificar la partición del sistema.</string>
 		<string name="sys_ro_never_show_chk">No mostrar nunca más esta pantalla durante el inicio</string>
 		<string name="sys_ro_keep_ro_btn">Mantener modo lectura</string>
@@ -385,10 +385,10 @@
 		<string name="terminal_btn">Terminal</string>
 		<string name="reload_theme_btn">Recargar Tema</string>
 		<string name="dumlock_btn">HTC Dumlock</string>
-		<string name="inject_twrp_btn">Injectar TWRP</string>
-		<string name="inject_twrp_confirm">Re-Injectar TWRP?</string>
-		<string name="injecting_twrp">Re-Injectando TWRP...</string>
-		<string name="inject_twrp_complete">Injección de TWRP Completa</string>
+		<string name="inject_twrp_btn">Injectar SHRP</string>
+		<string name="inject_twrp_confirm">Re-Injectar SHRP?</string>
+		<string name="injecting_twrp">Re-Injectando SHRP...</string>
+		<string name="inject_twrp_complete">Injección de SHRP Completa</string>
 		<string name="swipe_to_confirm">Desliza para Confirmar</string>
 		<string name="part_sd_hdr">Partición Tarjeta SD</string>
 		<string name="invalid_partsd_sel">Debes seleccionar un dispositivo extraíble</string>
@@ -616,7 +616,7 @@
 		<string name="need_new_adb">Necesitas adb 1.0.32 or superior para cargar archivo a este dispositivo.</string>
 		<string name="no_pwd">No se ha proporcionado contraseña.</string>
 		<string name="done_ors">Procesamiento de script hecho</string>
-		<string name="injecttwrp">Injectando TWRP en imagen boot...</string>
+		<string name="injecttwrp">Injectando SHRP en imagen boot...</string>
 		<string name="zip_err">Error instalando archivo zip '{1}'</string>
 		<string name="installing_zip">Instalando archivo zip '{1}'</string>
 		<string name="select_backup_opt">Ajustando opciones de copia de seguridad:</string>
@@ -644,7 +644,7 @@
 		<string name="dumlock_restore">Restaurando boot original...</string>
 		<string name="dumlock_reflash">Reflasheando recovery a boot...</string>
 		<string name="run_script">Ejecutando script {1}...</string>
-		<string name="rename_stock">Renombrado recovery stock en /system para prevenir que la rom stock reemplace TWRP.</string>
+		<string name="rename_stock">Renombrado recovery stock en /system para prevenir que la rom stock reemplace SHRP.</string>
 		<string name="split_backup">Dividiendo copia de seguridad en múltiples archivos...</string>
 		<string name="backup_error">Error creando copia de seguridad.</string>
 		<string name="restore_error">Error durante el proceso de restauración.</string>
@@ -656,8 +656,8 @@
 		<string name="base_pkg_err">Error al cargar paquetes base.</string>
 		<string name="simulating">Simulando acciones...</string>
 		<string name="backup_cancel">Copia de seguridad Cancelada</string>
-		<string name="config_twrp">Configurando TWRP...</string>
-		<string name="config_twrp_err">No se ha podido configurar TWRP con este kernel.</string>
+		<string name="config_twrp">Configurando SHRP...</string>
+		<string name="config_twrp_err">No se ha podido configurar SHRP con este kernel.</string>
 		<string name="copy_log">Copiado recovery log a {1}.</string>
 		<string name="max_queue">¡Alcanzado el máximo de archivos zip en cola!</string>
 		<string name="min_queue">1Alcanzado el mínimo de archivos zip en cola!</string>
@@ -673,7 +673,7 @@
 		<string name="no_real_sdcard">¡Este dispositivo no tiene una tarjeta SD real! ¡Abortando!</string>
 		<string name="cancel_sideload">Cancelando ADB sideload...</string>
 		<string name="change_fs_err">Error cambiando sistema de archivos.</string>
-		<string name="theme_ver_err">Tema personalizado no coincide con la versión de TWRP. Usando tema stock.</string>
+		<string name="theme_ver_err">Tema personalizado no coincide con la versión de SHRP. Usando tema stock.</string>
 		<string name="up_a_level">(Subir Un Nivel)</string>
 		<string name="install_reboot" version="2">Reiniciando en %tw_sleep% segundo(s)</string>
 		<string name="adbbackup_error">Error con Copia de seguridad ADB. Quitando..."</string>
@@ -809,7 +809,7 @@
 		<string name="c_spec_thanks">Agradeciminetos Especiales</string>
 		<string name="c_credits">Creditos</string>
 		<string name="c_device">Dispositivo</string>
-		<string name="c_twrp_ver">TWRP Version</string>
+		<string name="c_twrp_ver">SHRP Version</string>
 		<string name="c_maintainer">Mantenimiento -</string>
 		<string name="c_shrp_about">S H R P</string>
 		<string name="c_edl_mode">Modo Edl</string>

@@ -22,8 +22,8 @@
 		<string name="sdext">SD-EXT</string>
 		<string name="adopted_data">Dados adotados</string>
 		<string name="adopted_storage">Armazenamento adotado</string>
-		<string name="twrp_header">Team Win Recovery Project</string>
-		<string name="twrp_watch_header">TWRP %tw_version%</string>
+		<string name="twrp_header">Sky Hawk Recovery Project</string>
+		<string name="twrp_watch_header">SHRP %tw_version%</string>
 		<string name="cpu_temp">CPU: %tw_cpu_temp% ° C</string>
 		<string name="battery_pct">Bateria: %tw_battery%</string>
 		<string name="sort_by_name">Ordenar por nome</string>
@@ -71,7 +71,7 @@
 		<string name="folder">Pasta:</string>
 		<string name="file">Arquivo:</string>
 		<string name="zip_sig_chk">Verificação de assinatura do arquivo zipado</string>
-		<string name="inject_twrp_chk">Injetar TWRP após a instalação</string>
+		<string name="inject_twrp_chk">Injetar SHRP após a instalação</string>
 		<string name="options_hdr">Opções</string>
 		<string name="confirm_flash_hdr">Confirmar o Flash</string>
 		<string name="zip_queue">Lista:</string>
@@ -263,14 +263,14 @@
 		<string name="swipe_power_off_s">Desligar</string>
 		<string name="sys_ro_hdr">Partição do sistema não modificado</string>
 		<string name="sys_ro_keep">Manter o sistema apenas leitura?</string>
-		<string name="sys_rop1">TWRP pode deixar sua partição do sistema não modificada</string>
+		<string name="sys_rop1">SHRP pode deixar sua partição do sistema não modificada</string>
 		<string name="sys_rop2">para tornar mais fácil para você tomar atualizações oficiais.</string>
-		<string name="sys_rop3">TWRP será incapaz de impedir o stock ROM de</string>
-		<string name="sys_rop4">substituindo TWRP e não oferecerá a raiz do seu dispositivo.</string>
+		<string name="sys_rop3">SHRP será incapaz de impedir o stock ROM de</string>
+		<string name="sys_rop4">substituindo SHRP e não oferecerá a raiz do seu dispositivo.</string>
 		<string name="sys_rop5">Instalar zips ou executar operações adb pode ainda</string>
 		<string name="sys_rop6">modifica a partição do sistema.</string>
-		<string name="sys_rol1">TWRP pode deixar sua partição do sistema não-modificada para torná-lo mais fácil para você tomar atualizações oficiais.</string>
-		<string name="sys_rol2">TWRP será incapaz de impedir que o stock ROM substituindo TWRP e não oferecerá a raiz do seu dispositivo.</string>
+		<string name="sys_rol1">SHRP pode deixar sua partição do sistema não-modificada para torná-lo mais fácil para você tomar atualizações oficiais.</string>
+		<string name="sys_rol2">SHRP será incapaz de impedir que o stock ROM substituindo SHRP e não oferecerá a raiz do seu dispositivo.</string>
 		<string name="sys_rol3">Instalar zips ou executar operações adb ainda pode modificar a partição do sistema.</string>
 		<string name="sys_ro_never_show_chk">Nunca mostrar esta tela durante a inicialização de novo</string>
 		<string name="sys_ro_keep_ro_btn">Manter apenas leitura</string>
@@ -359,10 +359,10 @@
 		<string name="terminal_btn">Terminal</string>
 		<string name="reload_theme_btn">Tema carregado</string>
 		<string name="dumlock_btn">HTC Dumlock</string>
-		<string name="inject_twrp_btn">Injetar TWRP</string>
-		<string name="inject_twrp_confirm">Re-injetar TWRP?</string>
-		<string name="injecting_twrp">Re-injetar TWRP...</string>
-		<string name="inject_twrp_complete">TWRP injeção completa</string>
+		<string name="inject_twrp_btn">Injetar SHRP</string>
+		<string name="inject_twrp_confirm">Re-injetar SHRP?</string>
+		<string name="injecting_twrp">Re-injetar SHRP...</string>
+		<string name="inject_twrp_complete">SHRP injeção completa</string>
 		<string name="swipe_to_confirm">Deslize para confirmar</string>
 		<string name="part_sd_hdr">Cartão SD de partição</string>
 		<string name="invalid_partsd_sel">Você deve selecionar um dispositivo removível</string>
@@ -568,7 +568,7 @@
 		<string name="need_new_adb">Você precisa adb 1.0.32 ou mais recente para sideload para este dispositivo.</string>
 		<string name="no_pwd">Nenhuma senha fornecida.</string>
 		<string name="done_ors">Arquivo de script de processamento feito</string>
-		<string name="injecttwrp">Injetando TWRP na imagem de inicialização...</string>
+		<string name="injecttwrp">Injetando SHRP na imagem de inicialização...</string>
 		<string name="zip_err">Erro ao instalar o arquivo zip \'{1}\'</string>
 		<string name="installing_zip">Instalando o arquivo zip \'{1}\'</string>
 		<string name="select_backup_opt">Definir opções da cópia de segurança:</string>
@@ -596,7 +596,7 @@
 		<string name="dumlock_restore">Restauração de inicialização Original...</string>
 		<string name="dumlock_reflash">Regravando recuperação para arrancar...</string>
 		<string name="run_script">Executando o script {1}...</string>
-		<string name="rename_stock">Renomeado o arquivo de recuperação das ações em / / sistema para impedir que o stock ROM substituindo TWRP.</string>
+		<string name="rename_stock">Renomeado o arquivo de recuperação das ações em / / sistema para impedir que o stock ROM substituindo SHRP.</string>
 		<string name="split_backup">Quebrando o arquivo de cópia de segurança em vários arquivos...</string>
 		<string name="backup_error">Erro ao criar a cópia de segurança.</string>
 		<string name="restore_error">Erro durante o processo de restauração.</string>
@@ -607,8 +607,8 @@
 		<string name="base_pkg_err">Falha ao carregar pacotes base.</string>
 		<string name="simulating">Simulando ações...</string>
 		<string name="backup_cancel">Cópia de segurança cancelado</string>
-		<string name="config_twrp">Configurando TWRP...</string>
-		<string name="config_twrp_err">Não é possível configurar TWRP com este kernel.</string>
+		<string name="config_twrp">Configurando SHRP...</string>
+		<string name="config_twrp_err">Não é possível configurar SHRP com este kernel.</string>
 		<string name="copy_log">Copiado o registro de recuperação para {1}.</string>
 		<string name="max_queue">Arquivo zip máximo alcançado!</string>
 		<string name="min_queue">Arquivo zip mínimo alcançado!</string>
@@ -624,7 +624,7 @@
 		<string name="no_real_sdcard">Este dispositivo não tem um cartão SD real! Abortando!</string>
 		<string name="cancel_sideload">Cancelamento de sideload ADB...</string>
 		<string name="change_fs_err">Sistema de arquivo erro em mudança.</string>
-		<string name="theme_ver_err">Versão personalizada do tema não coincide com a versão TWRP. Usando o tema conservado em estoque.</string>
+		<string name="theme_ver_err">Versão personalizada do tema não coincide com a versão SHRP. Usando o tema conservado em estoque.</string>
 
 
 		<!--Translated by ZJRDroid-->
@@ -745,7 +745,7 @@
 		<string name="c_adb_side_load">Sideload</string>
 		<string name="c_credits">Créditos</string>
 		<string name="c_device">Dispositivo</string>
-		<string name="c_twrp_ver">Versão do TWRP</string>
+		<string name="c_twrp_ver">Versão do SHRP</string>
 		<string name="c_shrp_about">S H R P</string>
 		<string name="c_edl_mode">Modo Edl</string>
 		<string name="c_appling">Aplicando</string>

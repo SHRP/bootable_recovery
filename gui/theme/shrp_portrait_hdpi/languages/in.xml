@@ -29,8 +29,8 @@
               <string name = "autostorage">Penyimpanan</string>
 
        <!-- GUI XML string -->
-              <string name = "twrp_header">Proyek Pemulihan Menang Tim</string>
-              <string name = "twrp_watch_header">TWRP% tw_version%</string>
+              <string name = "twrp_header">Sky Hawk Recovery Project</string>
+              <string name = "twrp_watch_header">SHRP% tw_version%</string>
               <string name = "cpu_temp">CPU:% tw_cpu_temp% &   xB0; C</string>
               <string name = "battery_pct">Baterai:% tw_battery%</string>
               <string name = "sort_by_name">Urutkan berdasarkan Nama</string>
@@ -79,7 +79,7 @@
               <string name = "folder">Folder:</string>
               <string name = "file">File:</string>
               <string name = "zip_sig_chk">Verifikasi tanda tangan zip</string>
-              <string name = "inject_twrp_chk">Suntikkan TWRP setelah menginstal</string>
+              <string name = "inject_twrp_chk">Suntikkan SHRP setelah menginstal</string>
               <string name = "install_reboot_chk">Reboot setelah instalasi selesai</string>
               <string name = "options_hdr">Opsi</string>
               <string name = "confirm_flash_hdr">Konfirmasikan Flash</string>
@@ -112,13 +112,13 @@
               <string name = "rebooting">Rebooting ...</string>
               <string name = "swipe_reboot">Swipe to Reboot</string>
               <string name = "swipe_reboot_s">Reboot</string>
-              <string name = "reboot_install_app_hdr">Instal Aplikasi TWRP?</string>
-              <string name = "reboot_install_app1">Apakah Anda ingin menginstal Aplikasi TWRP Resmi?</string>
-              <string name = "reboot_install_app2">Aplikasi dapat memeriksa versi TWRP baru.</string>
-              <string name = "reboot_install_app_prompt_install">Prompt untuk menginstal aplikasi TWRP jika tidak diinstal</string>
+              <string name = "reboot_install_app_hdr">Instal Aplikasi SHRP?</string>
+              <string name = "reboot_install_app1">Apakah Anda ingin menginstal Aplikasi SHRP Resmi?</string>
+              <string name = "reboot_install_app2">Aplikasi dapat memeriksa versi SHRP baru.</string>
+              <string name = "reboot_install_app_prompt_install">Prompt untuk menginstal aplikasi SHRP jika tidak diinstal</string>
               <string name = "reboot_install_app_system">Instal sebagai Aplikasi Sistem</string>
               <string name = "reboot_installing_app">Menginstal Aplikasi ...</string>
-              <string name = "swipe_to_install_app">Gesek untuk Memasang Aplikasi TWRP</string>
+              <string name = "swipe_to_install_app">Gesek untuk Memasang Aplikasi SHRP</string>
               <string name = "swipe_flash">Gesek untuk mengonfirmasi Flash</string>
               <string name = "confirm_action">Konfirmasikan Aksi</string>
               <string name = "back_cancel">Tekan tombol kembali untuk membatalkan.</string>
@@ -285,14 +285,14 @@
               <string name = "swipe_power_off_s">Matikan</string>
               <string name = "sys_ro_hdr">Partisi Sistem Tidak Dimodifikasi</string>
               <string name = "sys_ro_keep">Pertahankan Hanya Sistem Baca?</string>
-              <string name = "sys_rop1">TWRP dapat membuat partisi sistem Anda tidak dimodifikasi</string>
+              <string name = "sys_rop1">SHRP dapat membuat partisi sistem Anda tidak dimodifikasi</string>
               <string name = "sys_rop2">untuk membuatnya lebih mudah bagi Anda untuk mengambil pembaruan resmi.</string>
-              <string name = "sys_rop3">TWRP tidak akan dapat mencegah ROM stok dari</string>
-              <string name = "sys_rop4">mengganti TWRP dan tidak akan menawarkan untuk me-rooting perangkat Anda.</string>
+              <string name = "sys_rop3">SHRP tidak akan dapat mencegah ROM stok dari</string>
+              <string name = "sys_rop4">mengganti SHRP dan tidak akan menawarkan untuk me-rooting perangkat Anda.</string>
               <string name = "sys_rop5">Memasang ritsleting atau melakukan operasi adb mungkin masih</string>
               <string name = "sys_rop6">memodifikasi partisi sistem.</string>
-              <string name = "sys_rol1">TWRP dapat membuat partisi sistem Anda tidak dimodifikasi untuk memudahkan Anda mengambil pembaruan resmi.</string>
-              <string name = "sys_rol2">TWRP tidak akan dapat mencegah ROM stok mengganti TWRP dan tidak akan menawarkan untuk me-rooting perangkat Anda.</string>
+              <string name = "sys_rol1">SHRP dapat membuat partisi sistem Anda tidak dimodifikasi untuk memudahkan Anda mengambil pembaruan resmi.</string>
+              <string name = "sys_rol2">SHRP tidak akan dapat mencegah ROM stok mengganti SHRP dan tidak akan menawarkan untuk me-rooting perangkat Anda.</string>
               <string name = "sys_rol3">Menginstal ritsleting atau melakukan operasi adb masih dapat memodifikasi partisi sistem.</string>
               <string name = "sys_ro_never_show_chk">Jangan tampilkan layar ini saat boot lagi</string>
               <string name = "sys_ro_keep_ro_btn">Keep Read Only</string>
@@ -384,10 +384,10 @@
               <string name = "terminal_btn">Terminal</string>
               <string name = "reload_theme_btn">Muat Ulang Tema</string>
               <string name = "dumlock_btn">HTC Dumlock</string>
-              <string name = "inject_twrp_btn">Suntikkan TWRP</string>
-              <string name = "inject_twrp_confirm">Suntikkan Ulang TWRP?</string>
-              <string name = "injecting_twrp">Menyuntikkan Ulang TWRP ...</string>
-              <string name = "inject_twrp_complete">TWRP Injection Complete</string>
+              <string name = "inject_twrp_btn">Suntikkan SHRP</string>
+              <string name = "inject_twrp_confirm">Suntikkan Ulang SHRP?</string>
+              <string name = "injecting_twrp">Menyuntikkan Ulang SHRP ...</string>
+              <string name = "inject_twrp_complete">SHRP Injection Complete</string>
               <string name = "swipe_to_confirm">Gesek ke Konfirmasi</string>
               <string name = "part_sd_hdr">Partisi kartu SD</string>
               <string name = "invalid_partsd_sel">Anda harus memilih perangkat yang dapat dilepas</string>
@@ -615,7 +615,7 @@
               <string name = "need_new_adb">Anda perlu adb 1.0.32 atau lebih baru untuk melakukan sideload ke perangkat ini.</string>
               <string name = "no_pwd">Tidak ada kata sandi yang diberikan.</string>
               <string name = "done_ors">Selesai memproses file skrip</string>
-              <string name = "injecttwrp">Menyuntikkan TWRP ke image boot ...</string>
+              <string name = "injecttwrp">Menyuntikkan SHRP ke image boot ...</string>
               <string name = "zip_err">Kesalahan menginstal file zip '{1}'</string>
               <string name = "install_zip">Memasang file zip '{1}'</string>
               <string name = "select_backup_opt">Menyetel opsi cadangan:</string>
@@ -643,7 +643,7 @@
               <string name = "dumlock_restore">Memulihkan boot asli ...</string>
               <string name = "dumlock_reflash">Mencerminkan pemulihan untuk mem-boot ...</string>
               <string name = "run_script">Menjalankan {1} script ...</string>
-              <string name = "rename_stock">Mengganti nama file pemulihan stok di / sistem untuk mencegah ROM stok mengganti TWRP.</string>
+              <string name = "rename_stock">Mengganti nama file pemulihan stok di / sistem untuk mencegah ROM stok mengganti SHRP.</string>
               <string name = "split_backup">Memecah file cadangan menjadi beberapa arsip ...</string>
               <string name = "backup_error">Kesalahan membuat cadangan.</string>
               <string name = "restore_error">Kesalahan selama proses pemulihan.</string>
@@ -655,8 +655,8 @@
               <string name = "base_pkg_err">Gagal memuat paket basis.</string>
               <string name = "simulasi">Simulasi tindakan ...</string>
               <string name = "backup_cancel">Cadangan Dibatalkan</string>
-              <string name = "config_twrp">Mengkonfigurasi TWRP ...</string>
-              <string name = "config_twrp_err">Tidak dapat mengkonfigurasi TWRP dengan kernel ini.</string>
+              <string name = "config_twrp">Mengkonfigurasi SHRP ...</string>
+              <string name = "config_twrp_err">Tidak dapat mengkonfigurasi SHRP dengan kernel ini.</string>
               <string name = "copy_log">Log pemulihan disalin ke {1}.</string>
               <string name = "max_queue">Antrian zip maksimum tercapai!</string>
               <string name = "min_queue">Antrian zip minimum tercapai!</string>
@@ -672,7 +672,7 @@
               <string name = "no_real_sdcard">Perangkat ini tidak memiliki kartu SD asli! Batalkan!</string>
               <string name = "cancel_sideload">Membatalkan sideload ADB ...</string>
               <string name = "change_fs_err">Kesalahan saat mengubah sistem file.</string>
-              <string name = "theme_ver_err">Versi tema khusus tidak cocok dengan versi TWRP. Menggunakan tema stok.</string>
+              <string name = "theme_ver_err">Versi tema khusus tidak cocok dengan versi SHRP. Menggunakan tema stok.</string>
               <string name = "up_a_level">(Tingkat Atas)</string>
               <string name = "install_reboot" version = "2">Reboot di% tw_sleep% detik</string>
               <string name = "adbbackup_error">Kesalahan dengan Cadangan ADB. Berhenti ... "</string>
@@ -808,7 +808,7 @@
               <string name = "c_spec_thanks">Terima kasih khusus</string>
               <string name = "c_credits">Kredit</string>
               <string name = "c_device">Perangkat</string>
-              <string name = "c_twrp_ver">Versi TWRP</string>
+              <string name = "c_twrp_ver">Versi SHRP</string>
               <string name = "c_maintainer">Maintainer -</string>
               <string name = "c_shrp_about">S H R P</string>
               <string name = "c_edl_mode">Mode Edl</string>

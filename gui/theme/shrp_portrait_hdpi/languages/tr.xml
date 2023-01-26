@@ -48,8 +48,8 @@
 		<string name="autostorage">Depolama</string>
 
 		<!-- GUI XML strings -->
-		<string name="twrp_header">Team Win Recovery Project</string>
-		<string name="twrp_watch_header">TWRP %tw_version%</string>
+		<string name="twrp_header">Sky Hawk Recovery Project</string>
+		<string name="twrp_watch_header">SHRP %tw_version%</string>
 		<string name="cpu_temp">İşlemci: %tw_cpu_temp% °C</string>
 		<string name="battery_pct">Pil: %tw_battery%</string>
 		<string name="sort_by_name">Ada göre sırala</string>
@@ -98,7 +98,7 @@
 		<string name="folder">Klasör:</string>
 		<string name="file">Dosya:</string>
 		<string name="zip_sig_chk">Zip imza doğrulaması</string>
-		<string name="inject_twrp_chk">Yükledikten sonra TWRP ekle</string>
+		<string name="inject_twrp_chk">Yükledikten sonra SHRP ekle</string>
 		<string name="install_reboot_chk">Yükleme tamamlandıktan sonra yeniden başlat</string>
 		<string name="options_hdr">Seçenekler</string>
 		<string name="confirm_flash_hdr">Flashlamayı Onayla</string>
@@ -131,13 +131,13 @@
 		<string name="rebooting">Yeniden Başlatılıyor...</string>
 		<string name="swipe_reboot">Yeniden Başlatmak için Kaydır</string>
 		<string name="swipe_reboot_s">   Yeniden başlat</string>
-		<string name="reboot_install_app_hdr">TWRP Uygulaması yüklensin mi?</string>
-		<string name="reboot_install_app1">Resmi TWRP Uygulamasını yüklemek ister misiniz?</string>
-		<string name="reboot_install_app2">Uygulama, yeni TWRP sürümlerini kontrol edebilir.</string>
-		<string name="reboot_install_app_prompt_install">Yüklü değilse, TWRP uygulamasını yüklemek için sor</string>
+		<string name="reboot_install_app_hdr">SHRP Uygulaması yüklensin mi?</string>
+		<string name="reboot_install_app1">Resmi SHRP Uygulamasını yüklemek ister misiniz?</string>
+		<string name="reboot_install_app2">Uygulama, yeni SHRP sürümlerini kontrol edebilir.</string>
+		<string name="reboot_install_app_prompt_install">Yüklü değilse, SHRP uygulamasını yüklemek için sor</string>
 		<string name="reboot_install_app_system">Sistem Uygulaması olarak yükle</string>
 		<string name="reboot_installing_app">Uygulama yükleniyor...</string>
-		<string name="swipe_to_install_app">TWRP Uygulamasını yüklemek için kaydır</string>
+		<string name="swipe_to_install_app">SHRP Uygulamasını yüklemek için kaydır</string>
 		<string name="swipe_flash">Flashlamayı onaylamak için kaydır</string>
 		<string name="confirm_action">Eylemi Onayla</string>
 		<string name="back_cancel">İptal etmek için geri düğmesine basın.</string>
@@ -304,14 +304,14 @@
 		<string name="swipe_power_off_s">Kapat</string>
 		<string name="sys_ro_hdr">Değiştirilmemiş Sistem Bölümü</string>
 		<string name="sys_ro_keep">Sistem bölümü salt okunur kalsın mı?</string>
-		<string name="sys_rop1">TWRP resmi güncellemeleri almanızı kolaylaştırmak</string>
+		<string name="sys_rop1">SHRP resmi güncellemeleri almanızı kolaylaştırmak</string>
 		<string name="sys_rop2">için sistem bölümünüzü değiştirmeyebilir.</string>
-		<string name="sys_rop3">TWRP stock ROM'un kendisini değiştirmesini</string>
+		<string name="sys_rop3">SHRP stock ROM'un kendisini değiştirmesini</string>
 		<string name="sys_rop4">engelleyemeyecek ve cihazınızı rootlamanızı istemeyecek.</string>
 		<string name="sys_rop5">Zip yüklemek veya adb işlemleri gerçekleştirmek</string>
 		<string name="sys_rop6">sistem bölümünü değiştirebilir.</string>
-		<string name="sys_rol1">TWRP resmi güncellemeleri almanızı kolaylaştırmak için sistem bölümünüzü değiştirmeyebilir.</string>
-		<string name="sys_rol2">TWRP stock ROM'un kendisini değiştirmesini engelleyemeyecek ve cihazınızı rootlamanızı istemeyecek.</string>
+		<string name="sys_rol1">SHRP resmi güncellemeleri almanızı kolaylaştırmak için sistem bölümünüzü değiştirmeyebilir.</string>
+		<string name="sys_rol2">SHRP stock ROM'un kendisini değiştirmesini engelleyemeyecek ve cihazınızı rootlamanızı istemeyecek.</string>
 		<string name="sys_rol3">Zip yüklemek veya adb işlemleri gerçekleştirmek sistem bölümünü değiştirebilir.</string>
 		<string name="sys_ro_never_show_chk">Bu ekranı açılış sırasında tekrar gösterme</string>
 		<string name="sys_ro_keep_ro_btn">Salt Okunur Bırak</string>
@@ -403,10 +403,10 @@
 		<string name="terminal_btn">Terminal</string>
 		<string name="reload_theme_btn">Temayı Yeniden Yükle</string>
 		<string name="dumlock_btn">HTC Dumlock</string>
-		<string name="inject_twrp_btn">TWRP Ekle</string>
-		<string name="inject_twrp_confirm">TWRP yeniden eklensin mi?</string>
-		<string name="injecting_twrp">TWRP yeniden ekleniyor...</string>
-		<string name="inject_twrp_complete">TWRP Ekleme Tamamlandı</string>
+		<string name="inject_twrp_btn">SHRP Ekle</string>
+		<string name="inject_twrp_confirm">SHRP yeniden eklensin mi?</string>
+		<string name="injecting_twrp">SHRP yeniden ekleniyor...</string>
+		<string name="inject_twrp_complete">SHRP Ekleme Tamamlandı</string>
 		<string name="swipe_to_confirm">Onaylamak için Kaydır</string>
 		<string name="part_sd_hdr">SD Kartı Bölümle</string>
 		<string name="invalid_partsd_sel">Çıkarılabilir bir cihaz seçmelisiniz</string>
@@ -633,7 +633,7 @@
 		<string name="need_new_adb">Bu cihaza sideload eklemek için adb 1.0.32 veya daha yenisine ihtiyacınız var.</string>
 		<string name="no_pwd">Parola sağlanmadı.</string>
 		<string name="done_ors">Komut dosyası işleme tamamlandı</string>
-		<string name="injecttwrp">TWRP boot imajına ekleniyor...</string>
+		<string name="injecttwrp">SHRP boot imajına ekleniyor...</string>
 		<string name="zip_err">'{1}' zip dosyası yüklenemiyor</string>
 		<string name="installing_zip">'{1}' zip dosyası yükleniyor</string>
 		<string name="select_backup_opt">Yedekleme seçeneklerini ayarlama:</string>
@@ -661,7 +661,7 @@
 		<string name="dumlock_restore">Boot geri yükleniyor...</string>
 		<string name="dumlock_reflash">Boot için recovery yeniden flashlanıyor...</string>
 		<string name="run_script">{1} komut dosyası çalıştırılıyor...</string>
-		<string name="rename_stock">Stok ROM'un TWRP'yi değiştirmesini önlemek için /systemde stok kurtarma dosyası yeniden adlandırıldı.</string>
+		<string name="rename_stock">Stok ROM'un SHRP'yi değiştirmesini önlemek için /systemde stok kurtarma dosyası yeniden adlandırıldı.</string>
 		<string name="split_backup">Yedek dosyayı birden fazla arşiv haline getirme...</string>
 		<string name="backup_error">Yedekleme hatası oluştu.</string>
 		<string name="restore_error">Geri yükleme işlemi sırasında hata oluştu.</string>
@@ -673,8 +673,8 @@
 		<string name="base_pkg_err">Temel paketler yüklenemedi.</string>
 		<string name="simulating">Eylemler taklit ediliyor...</string>
 		<string name="backup_cancel">Yedekleme İptal Edildi</string>
-		<string name="config_twrp">TWRP'yi yapılandırma...</string>
-		<string name="config_twrp_err">Bu kernel ile TWRP yapılandırılamadı.</string>
+		<string name="config_twrp">SHRP'yi yapılandırma...</string>
+		<string name="config_twrp_err">Bu kernel ile SHRP yapılandırılamadı.</string>
 		<string name="copy_log">Recovery kaydı şuraya kopyalandı: {1}.</string>
 		<string name="max_queue">Maksimum zip kuyruğuna ulaşıldı!</string>
 		<string name="min_queue">Minimum zip kuyruğuna ulaşıldı!</string>
@@ -690,7 +690,7 @@
 		<string name="no_real_sdcard">Bu cihazın gerçek bir SD kartı yok! İptal ediliyor!</string>
 		<string name="cancel_sideload">ADB sideload iptal ediliyor...</string>
 		<string name="change_fs_err">Dosya sistemi değiştirilemiyor.</string>
-		<string name="theme_ver_err">Özel tema sürümü TWRP sürümü ile eşleşmiyor. Stok tema kullanılıyor.</string>
+		<string name="theme_ver_err">Özel tema sürümü SHRP sürümü ile eşleşmiyor. Stok tema kullanılıyor.</string>
 		<string name="up_a_level">(Üst Dizin)</string>
 		<string name="install_reboot" version="2">%tw_sleep% saniye içinde yeniden başlatılıyor</string>
 		<string name="adbbackup_error">ADB Yedekleme Hatası. Çıkılıyor..."</string>
@@ -828,7 +828,7 @@
 		<string name="c_spec_thanks">Özel Teşekkürler</string>
 		<string name="c_credits">Emeği Geçenler</string>
 		<string name="c_device">Cihaz</string>
-		<string name="c_twrp_ver">TWRP Sürümü</string>
+		<string name="c_twrp_ver">SHRP Sürümü</string>
 		<string name="c_maintainer">Cihaz Sorumlusu -</string>
 		<string name="c_shrp_about">S H R P</string>
 		<string name="c_edl_mode">Edl Modu</string>
