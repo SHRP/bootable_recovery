@@ -189,10 +189,6 @@
 			<font resource="dashboardText" color="%dashboardTextColor%"/>
 			<fill color="%transparent%"/>
 		</style>
-		<style name="dashboardText2">
-			<font resource="dashboardText" color="%secondaryColor%"/>
-			<fill color="%transparent%"/>
-		</style>
 		<style name="dashboardHeader">
 			<font resource="largeBold" color="%accentColor%"/>
 		</style>

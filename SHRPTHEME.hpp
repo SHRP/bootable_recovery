@@ -32,7 +32,6 @@ class ThemeManager{
         bool isColorDark(string str);
         string getColor(string str);
         string get_subBackgroundColor();
-        string get_DashboardColor();
         bool syncDyanmicVar();
         static void initialVarProcess();
         bool applyThemeResouces();

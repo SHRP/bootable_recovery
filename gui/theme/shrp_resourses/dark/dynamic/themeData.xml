@@ -2,10 +2,8 @@
 <recovery>
 	<variables>
         <!--Colors-->
-		<variable name="primaryColor" value="#0088ff"/>
-		<!--variable name="secondaryColor" value="#ffffff"/-->
+        <variable name="primaryColor" value="#0088ff"/>
         <variable name="secondaryColor" value="#ffffff"/>
-		<!--variable name="accentColor" value="#0088ff"/-->
         <variable name="accentColor" value="#ffffff"/>
         <variable name="backgroundColor" value="#010101"/>
         <variable name="subBackgroundColor" value="#0E0E0E"/>
@@ -22,7 +20,6 @@
         <variable name="roundedCornerEnabled" value="0"/>
         <variable name="navbarBackgroundEnabled" value="0"/>
         <variable name="dashboardSubTintEnabled" value="0"/>
-        <variable name="dashboardTextColorEnabled" value="0"/>
         <!--ComponentTypes-->
         <variable name="navbarType" value="1"/>
         <variable name="batteryType" value="1"/>

@@ -71,14 +71,6 @@ string ThemeManager::getColor(string str){
     return tmp == "NULL" ? tmp : str == "navbarColor" ? "c_"+ tmp : tmp;
 }
 
-string ThemeManager::get_DashboardColor(){
-    if(DataManager::GetIntValue("dashboardTextColorEnabled")){
-        return DataManager::GetStrValue("dashboardTextColor");
-    }else{
-        return DataManager::GetStrValue("secondaryColor");
-    }
-}
-
 string ThemeManager::get_subBackgroundColor(){
     string bgColor = DataManager::GetStrValue("backgroundColor");
     if(bgColor == DataManager::GetStrValue("clrBlack")){
@@ -111,7 +103,7 @@ bool ThemeManager::syncDyanmicVar(){
         "export backgroundColor="+DataManager::GetStrValue("backgroundColor")+";"+ \
         "export subBackgroundColor="+get_subBackgroundColor()+";"+ \
         "export navbarColor="+DataManager::GetStrValue("navbarColor")+";"+ \
-        "export dashboardTextColor="+get_DashboardColor()+";"+ \
+        "export dashboardTextColor="+DataManager::GetStrValue("dashboardTextColor")+";"+ \
         "export batteryBarEnabled="+DataManager::GetStrValue("batteryBarEnabled")+";"+ \
         "export statusBarEnabled="+DataManager::GetStrValue("statusBarEnabled")+";"+ \
         "export batteryIconEnabled="+DataManager::GetStrValue("batteryIconEnabled")+";"+ \
@@ -122,7 +114,6 @@ bool ThemeManager::syncDyanmicVar(){
         "export roundedCornerEnabled="+DataManager::GetStrValue("roundedCornerEnabled")+";"+ \
         "export navbarBackgroundEnabled="+DataManager::GetStrValue("navbarBackgroundEnabled")+";"+ \
         "export dashboardSubTintEnabled="+DataManager::GetStrValue("dashboardSubTintEnabled")+";"+ \
-        "export dashboardTextColorEnabled="+DataManager::GetStrValue("dashboardTextColorEnabled")+";"+ \
         "export navbarType="+DataManager::GetStrValue("navbarType")+";"+ \
         "export batteryType="+DataManager::GetStrValue("batteryType")+";"+ \
         "export dashboardIconType="+DataManager::GetStrValue("dashboardIconType")+";"+ \

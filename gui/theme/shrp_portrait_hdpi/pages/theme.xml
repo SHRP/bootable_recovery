@@ -826,27 +826,21 @@ rm -r /tmp/bak;
 				<placement x="%c_hawk_base_column%" y="%rPos9%"/>
 				<text>{@dashboardTxt=Dashboard}</text>
 			</text>
-			<checkbox>
-				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
-				<image checked="toggleOn" unchecked="toggleOff"/>
-				<text>{@dashboardTextClr=Dashboard text color}</text>
-				<data variable="dashboardTextColorEnabled"/>
-			</checkbox>
 
 			<checkbox>
-				<placement x="%c_hawk_base_column%" y="%rPos22%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="toggleOn" unchecked="toggleOff"/>
 				<text>{@dashboardSubTint=Dashboard sub tint}</text>
 				<data variable="dashboardSubTintEnabled"/>
 			</checkbox>
 
 			<text style="subOptionTitle">
-				<placement x="%c_hawk_base_column%" y="%rPos31%"/>
+				<placement x="%c_hawk_base_column%" y="%rPos27%"/>
 				<text>{@c_dashboard_icon=Dashboard icon}</text>
 			</text>
 
 			<listbox style="scrolllist">
-				<placement x="%c_hawk_base_column%" y="%rPos36%" w="%file_selector_default_w%" h="670"/>
+				<placement x="%c_hawk_base_column%" y="%rPos31%" w="%file_selector_default_w%" h="670"/>
 				<icon selected="radio_true" unselected="radio_true"/>
 				<listitem name="{@c_dc_default=Default}">
 					<condition var1="dashboardIconType" var2="1"/>

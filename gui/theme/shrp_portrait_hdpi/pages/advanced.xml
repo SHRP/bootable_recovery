@@ -32,13 +32,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos35%" w="205" h="70"/>
-				<text>{@copy_log_btn=Copy Log}</text>
-				<action function="page">copylog</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos35%" w="205" h="70"/>
 				<text>{@copy_log_btn=Copy Log}</text>
 				<action function="page">copylog</action>
@@ -62,14 +55,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<condition var1="tw_has_data_media" var2="1"/>
-				<placement x="313" y="%rPos35%" w="205" h="70"/>
-				<text>{@fix_context_btn=Fix Contexts}</text>
-				<action function="page">fixcontexts</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<condition var1="tw_has_data_media" var2="1"/>
 				<placement x="313" y="%rPos35%" w="205" h="70"/>
 				<text>{@fix_context_btn=Fix Contexts}</text>
@@ -91,13 +76,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos35%" w="205" h="70"/>
-				<text>{@c_adb_side_load=Sideload}</text>
-				<action function="page">sideload</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos35%" w="205" h="70"/>
 				<text>{@c_adb_side_load=Sideload}</text>
 				<action function="page">sideload</action>
@@ -121,7 +99,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
 				<placement x="801" y="%rPos35%" w="205" h="70"/>
 				<text>{@swipe_part_sd_s=Partition}</text>
 				<actions>
@@ -130,15 +107,7 @@
 				</actions>
 			</button>
 
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
-				<placement x="801" y="%rPos35%" w="205" h="70"/>
-				<text>{@swipe_part_sd_s=Partition}</text>
-				<actions>
-					<action function="set">partitionlisterror=0</action>
-					<action function="page">partsdcardsel</action>
-				</actions>
-			</button>
+
 
 
 			<!-- Flash SHRP TO ramdisk-->
@@ -168,27 +137,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos53%" w="205" h="70"/>
-				<text>{@reflash_twrp=Flash SHRP}</text>
-				<conditions>
-					<condition var1="tw_has_boot_slots" var2="1"/>
-					<condition var1="tw_has_repack_tools" var2="1"/>
-					<condition var1="tw_no_flash_current_twrp" var2="0"/>
-				</conditions>
-				<actions>
-					<action function="set">tw_repack_kernel=0</action>
-					<action function="set">tw_back=advanced</action>
-					<action function="set">tw_action=reflashtwrp</action>
-					<action function="set">tw_text1={@reflash_twrp_confirm=Flash Current SHRP?}</action>
-					<action function="set">tw_action_text1={@reflashing_twrp=Flashing SHRP...}</action>
-					<action function="set">tw_complete_text1={@reflash_twrp_complete=Done Flashing SHRP}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@reflash_twrp=Flash SHRP}</text>
 				<conditions>
@@ -232,22 +180,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="313" y="%rPos53%" w="205" h="70"/>
-				<text>{@merges_snapshots=Merge Snapshots}</text>
-				<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
-				<actions>
-					<action function="set">tw_back=advanced</action>
-					<action function="set">tw_action=mergesnapshots</action>
-					<action function="set">tw_text1={@merge_snapshots_confirm=Merge Snapshots?}</action>
-					<action function="set">tw_action_text1={@merging_snapshots=Merging Snapshots...}</action>
-					<action function="set">tw_complete_text1={@merging_snapshots_complete=Merged Snapshots}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="313" y="%rPos53%" w="205" h="70"/>
 				<text>{@merges_snapshots=Merge Snapshots}</text>
 				<condition var1="tw_virtual_ab.enabled" op="=" var2="1"/>
@@ -286,22 +218,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos53%" w="205" h="70"/>
-				<text>{@unmap_super_devices=Unmap Super Devices}</text>
-				<condition var1="tw_is_super" op="=" var2="1"/>
-				<actions>
-					<action function="set">tw_back=advanced</action>
-					<action function="set">tw_action=unmapsuperdevices</action>
-					<action function="set">tw_text1={@unmap_super_devices_confirm=Unmap all Super Devices?}</action>
-					<action function="set">tw_action_text1={@unmapping_super_devices=Unmapping Super Devices...}</action>
-					<action function="set">tw_complete_text1={@unmap_super_devices_complete=Unmapped all Super Devices}</action>
-					<action function="set">tw_slider_text={@swipe_to_confirm=Swipe to Confirm}</action>
-					<action function="page">confirm_action</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos53%" w="205" h="70"/>
 				<text>{@unmap_super_devices=Unmap Super Devices}</text>
 				<condition var1="tw_is_super" op="=" var2="1"/>
@@ -341,20 +257,6 @@
 			</button>
 			<button style="dashboardText">
 				<conditions>
-					<condition var1="dashboardTextColorEnabled" var2="1"/>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
-				<placement x="69" y="%rPos53%" w="205" h="70"/>
-				<text>{@decrypt_users=Decrypt Users}</text>
-				<actions>
-					<action function="set">tw_crypto_user_id=</action>
-					<action function="page">decrypt_users</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<conditions>
-					<condition var1="dashboardTextColorEnabled" var2="0"/>
 					<condition var1="tw_is_fbe" var2="1"/>
 					<condition var1="tw_all_users_decrypted" var2="0"/>
 				</conditions>

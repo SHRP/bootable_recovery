@@ -37,18 +37,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos35%" w="205" h="70"/>
-				<text>{@c_flash=Flash}</text>
-				<actions>
-					<action function="queueclear"/>
-					<action function="set">tw_selectimage=0</action>
-					<action function="set">c_queue_enabled=0</action>
-					<action function="page">install</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos35%" w="205" h="70"/>
 				<text>{@c_flash=Flash}</text>
 				<actions>
@@ -75,13 +63,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="313" y="%rPos35%" w="205" h="70"/>
-				<text>{@wipe_btn=Wipe}</text>
-				<action function="page">wipe</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="313" y="%rPos35%" w="205" h="70"/>
 				<text>{@wipe_btn=Wipe}</text>
 				<action function="page">wipe</action>
@@ -102,13 +83,6 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos35%" w="205" h="70"/>
-				<text>{@backup_btn=Backup}</text>
-				<action function="page">backup</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos35%" w="205" h="70"/>
 				<text>{@backup_btn=Backup}</text>
 				<action function="page">backup</action>
@@ -130,18 +104,11 @@
 			</button>
 
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
 				<placement x="801" y="%rPos35%" w="205" h="70"/>
 				<text>{@restore_btn=Restore}</text>
 				<action function="page">restore</action>
 			</button>
 
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
-				<placement x="801" y="%rPos35%" w="205" h="70"/>
-				<text>{@restore_btn=Restore}</text>
-				<action function="page">restore</action>
-			</button>
 
 
 
@@ -157,13 +124,6 @@
 				<action function="page">mount</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos53%" w="205" h="70"/>
-				<text>{@mount_btn=Mount}</text>
-				<action function="page">mount</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@mount_btn=Mount}</text>
 				<action function="page">mount</action>
@@ -183,13 +143,6 @@
 				<action function="page">fileManager</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="313" y="%rPos53%" w="205" h="70"/>
-				<text>{@files_btn=Files}</text>
-				<action function="page">fileManager</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="313" y="%rPos53%" w="205" h="70"/>
 				<text>{@files_btn=Files}</text>
 				<action function="page">fileManager</action>
@@ -208,13 +161,6 @@
 				<action function="page">terminalcommand</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos53%" w="205" h="70"/>
-				<text>{@terminal_btn=Terminal}</text>
-				<action function="page">terminalcommand</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos53%" w="205" h="70"/>
 				<text>{@terminal_btn=Terminal}</text>
 				<action function="page">terminalcommand</action>
@@ -233,13 +179,6 @@
 				<action function="page">advanced</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="801" y="%rPos53%" w="205" h="70"/>
-				<text>{@advanced_hdr=Advanced}</text>
-				<action function="page">advanced</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="801" y="%rPos53%" w="205" h="70"/>
 				<text>{@advanced_hdr=Advanced}</text>
 				<action function="page">advanced</action>
@@ -273,16 +212,6 @@
 				</actions>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos78%" w="205" h="70"/>
-				<text>{@c_magisk=Magisk}</text>
-				<actions>
-					<action function="shrp_init"/>
-					<action function="page">c_splash_magisk</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos78%" w="205" h="70"/>
 				<text>{@c_magisk=Magisk}</text>
 				<actions>
@@ -307,16 +236,6 @@
 				</actions>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="313" y="%rPos78%" w="205" h="70"/>
-				<text>{@c_theme=Theme}</text>
-				<actions>
-					<action function="shrp_init"/>
-					<action function="page">c_splash_theme</action>
-				</actions>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="313" y="%rPos78%" w="205" h="70"/>
 				<text>{@c_theme=Theme}</text>
 				<actions>
@@ -338,13 +257,6 @@
 				<action function="page">c_addons</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos78%" w="205" h="70"/>
-				<text>{@c_tweaks=Tweaks}</text>
-				<action function="page">c_addons</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos78%" w="205" h="70"/>
 				<text>{@c_tweaks=Tweaks}</text>
 				<action function="page">c_addons</action>
@@ -363,13 +275,6 @@
 				<action function="page">settings</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="801" y="%rPos78%" w="205" h="70"/>
-				<text>{@settings_btn=Settings}</text>
-				<action function="page">settings</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="801" y="%rPos78%" w="205" h="70"/>
 				<text>{@settings_btn=Settings}</text>
 				<action function="page">settings</action>
@@ -389,13 +294,6 @@
 				<action function="page">securityDashboard</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="69" y="%rPos96%" w="205" h="70"/>
-				<text>{@c_security=Security}</text>
-				<action function="page">c_lock_ui</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="69" y="%rPos96%" w="205" h="70"/>
 				<text>{@c_security=Security}</text>
 				<action function="page">c_lock_ui</action>
@@ -413,13 +311,6 @@
 				<action function="page">settings_language</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="313" y="%rPos96%" w="205" h="70"/>
-				<text>{@settings_language_btn=Language}</text>
-				<action function="page">settings_language</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="313" y="%rPos96%" w="205" h="70"/>
 				<text>{@settings_language_btn=Language}</text>
 				<action function="page">settings_language</action>
@@ -437,13 +328,6 @@
 				<action function="overlay">reboot</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="557" y="%rPos96%" w="205" h="70"/>
-				<text>{@reboot_btn=Reboot}</text>
-				<action function="overlay">reboot</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="557" y="%rPos96%" w="205" h="70"/>
 				<text>{@reboot_btn=Reboot}</text>
 				<action function="overlay">reboot</action>
@@ -461,13 +345,6 @@
 				<action function="page">my_info</action>
 			</button>
 			<button style="dashboardText">
-				<condition var1="dashboardTextColorEnabled" var2="1"/>
-				<placement x="801" y="%rPos96%" w="205" h="70"/>
-				<text>{@c_about=About}</text>
-				<action function="page">my_info</action>
-			</button>
-			<button style="dashboardText2">
-				<condition var1="dashboardTextColorEnabled" var2="0"/>
 				<placement x="801" y="%rPos96%" w="205" h="70"/>
 				<text>{@c_about=About}</text>
 				<action function="page">my_info</action>

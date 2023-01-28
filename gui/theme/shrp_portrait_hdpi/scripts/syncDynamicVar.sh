@@ -21,7 +21,6 @@ theme="<?xml version=\"1.0\"?>
         <variable name=\"roundedCornerEnabled\" value=\"$roundedCornerEnabled\"/>
         <variable name=\"navbarBackgroundEnabled\" value=\"$navbarBackgroundEnabled\"/>
         <variable name=\"dashboardSubTintEnabled\" value=\"$dashboardSubTintEnabled\"/>
-        <variable name=\"dashboardTextColorEnabled\" value=\"$dashboardTextColorEnabled\"/>
         <!--ComponentTypes-->
         <variable name=\"navbarType\" value=\"$navbarType\"/>
         <variable name=\"batteryType\" value=\"$batteryType\"/>

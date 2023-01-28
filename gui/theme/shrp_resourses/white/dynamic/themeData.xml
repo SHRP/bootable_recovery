@@ -20,7 +20,6 @@
         <variable name="roundedCornerEnabled" value="0"/>
         <variable name="navbarBackgroundEnabled" value="0"/>
         <variable name="dashboardSubTintEnabled" value="0"/>
-        <variable name="dashboardTextColorEnabled" value="0"/>
         <!--ComponentTypes-->
         <variable name="navbarType" value="1"/>
         <variable name="batteryType" value="1"/>
