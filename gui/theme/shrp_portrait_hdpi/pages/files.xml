@@ -1555,7 +1555,7 @@
 			<button>
 				<placement x="59" y="363" w="590" h="100" yop="+" yref="160"/>
 				<fill color="%transparent%"/>
-				<action function="fTools">setDestination;%sideBarDes%;%shrpBasePath%</action>
+				<action function="fTools">setDestination;%sideBarDes%;/system_root</action>
 				<action function="overlay"/>
 			</button>
 
