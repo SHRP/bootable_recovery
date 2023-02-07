@@ -2,11 +2,11 @@
 <recovery>
     <details>
 		<resolution width="1080" height="1920"/>
-		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
+		<author>TeamWin & Team SHRP</author>
 		<title>Explict Variables</title>
 		<description>None</description>
 		<preview>preview.png</preview>
-		<themeversion>4</themeversion>
+		<themeversion>{themeversion}</themeversion>
 	</details>
     <variables>
 		<variable name="c_status" value=""/>

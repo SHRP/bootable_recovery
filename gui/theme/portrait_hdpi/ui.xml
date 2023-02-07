@@ -2,19 +2,15 @@
 <recovery>
 	<details>
 		<resolution width="1080" height="1920"/>
-		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
-		<title>SKY HAWK RECOVERY PROJECT</title>
+		<author>TeamWin & Team SHRP</author>
+		<title>Sky Hawk Recovery Project</title>
 		<description>MainUi</description>
 		<preview>preview.png</preview>
-		<themeversion>5</themeversion>
+		<themeversion>{themeversion}</themeversion>
 	</details>
 
 	<include>
 		<xmlfile name="dynamic/themeData.xml"/>
-		<!--xmlfile name="txt_res.xml"/>
-		<xmlfile name="notch_handled_var.xml"/>
-		<xmlfile name="c_status_bar_h.xml"/>
-		<xmlfile name="bg_res.xml"/-->
 		<xmlfile name="base/variables.xml"/>
 		<xmlfile name="base/images.xml"/>
 		<xmlfile name="base/fonts.xml"/>
@@ -39,7 +35,6 @@
 		<xmlfile name="pages/restore.xml"/>
 		<xmlfile name="pages/security.xml"/>
 		<xmlfile name="pages/settings.xml"/>
-		<!--xmlfile name="pages/textEditor.xml"/-->
 		<xmlfile name="pages/theme.xml"/>
 		<xmlfile name="pages/tweaks.xml"/>
 		<xmlfile name="pages/wipe.xml"/>

@@ -2,10 +2,10 @@
 <recovery>
 	<details>
 		<resolution width="1080" height="1920"/>
-		<author>TEAM SHRP & All Dev related with TWRP and SHRP</author>
-		<title>SKY HAWK RECOVERY PROJECT</title>
+		<author>TeamWin & Team SHRP</author>
+		<title>Sky Hawk Recovery Project</title>
 		<description>splash screen</description>
-		<themeversion>5</themeversion>
+		<themeversion>{themeversion}</themeversion>
 	</details>
 	<resources>
 		<image name="c_logo" filename="c_logo" retainaspect="1"/>

@@ -148,7 +148,7 @@ func determineTheme(ctx android.BaseContext) string {
 		}
 	}
 
-	return "shrp_portrait_hdpi"
+	return getMakeVars(ctx, "TW_THEME")
 }
 
 func copyTheme(ctx android.BaseContext) bool {
