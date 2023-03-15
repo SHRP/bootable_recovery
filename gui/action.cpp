@@ -1660,7 +1660,6 @@ int GUIAction::decrypt(std::string arg __unused)
 #ifdef SHRP_EXPRESS
 			Express::init();
 			SHRP::handleLock();
-			GUIAction::reload("dummy");
 #endif
 #endif
 		}
