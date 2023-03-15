@@ -99,15 +99,6 @@ static void Decrypt_Page(bool SkipDecryption, bool datamedia) {
 				LOGERR("Failed to start decrypt GUI page.\n");
 			}
 		}
-#ifdef SHRP_EXPRESS
-		else {
-			LOGINFO("Request a reload to apply shrp theme");
-			PageManager::RequestReload();
-		}
-	} if (DataManager::GetIntValue(TW_IS_ENCRYPTED) == 0) {
-			LOGINFO("Request a reload to apply shrp theme");
-			PageManager::RequestReload();
-#endif
 	} else if (datamedia) {
 		PartitionManager.Update_System_Details();
 		if (tw_get_default_metadata(DataManager::GetSettingsStoragePath().c_str()) != 0) {
@@ -478,7 +469,9 @@ int main(int argc, char **argv) {
 	TWFunc::checkforapp(); //Checking compatibility for TWRP app
 
 	// Launch the main GUI
-	gui_start();
+	PageManager::RequestCustomReload("main");
+	gui_startPage("dasboard", 1, 0);
+	//gui_start();
 	delete adb_bu_fifo;
 	TWFunc::Update_Intent_File(startup.Get_Intent());
 	reboot();
