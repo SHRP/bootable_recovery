@@ -416,18 +416,14 @@
 				<text>{@successful=Successful}</text>
 			</text>
 			<text style="pageSubTitle">
-				<conditions>
-					<condition var1="lockType" op="=" var2="1"/>
-					<condition var1="lockReset" op="=" var2="0"/>
-				</conditions>
+				<condition var1="lockType" op="=" var2="1"/>
+				<condition var1="lockReset" op="=" var2="0"/>
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_passed_info=You have successfully set your password}</text>
 			</text>
 			<text style="pageSubTitle">
-				<conditions>
-					<condition var1="lockType" op="=" var2="2"/>
-					<condition var1="lockReset" op="=" var2="0"/>
-				</conditions>
+				<condition var1="lockType" op="=" var2="2"/>
+				<condition var1="lockReset" op="=" var2="0"/>
 				<placement x="%c_hawk_base_column%" y="%rPos12%"/>
 				<text>{@c_passed_patt_info=You have successfully set your pattern}</text>
 			</text>

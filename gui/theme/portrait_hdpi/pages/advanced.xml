@@ -119,11 +119,9 @@
 			<button>
 				<placement x="99" y="%rPos43%"/>
 				<image resource="c_advanced_shrp"/>
-				<conditions>
-					<condition var1="tw_has_boot_slots" var2="1"/>
-					<condition var1="tw_has_repack_tools" var2="1"/>
-					<condition var1="tw_no_flash_current_twrp" var2="0"/>
-				</conditions>
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<condition var1="tw_has_repack_tools" var2="1"/>
+				<condition var1="tw_no_flash_current_twrp" var2="0"/>
 				<actions>
 					<action function="set">tw_repack_kernel=0</action>
 					<action function="set">tw_back=advanced</action>
@@ -139,11 +137,9 @@
 			<button style="dashboardText">
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@reflash_twrp=Flash SHRP}</text>
-				<conditions>
-					<condition var1="tw_has_boot_slots" var2="1"/>
-					<condition var1="tw_has_repack_tools" var2="1"/>
-					<condition var1="tw_no_flash_current_twrp" var2="0"/>
-				</conditions>
+				<condition var1="tw_has_boot_slots" var2="1"/>
+				<condition var1="tw_has_repack_tools" var2="1"/>
+				<condition var1="tw_no_flash_current_twrp" var2="0"/>
 				<actions>
 					<action function="set">tw_repack_kernel=0</action>
 					<action function="set">tw_back=advanced</action>
@@ -235,19 +231,15 @@
 
 
 			<button>
-				<conditions>
-					<condition var1="dashboardSubTintEnabled" var2="1"/>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
+				<condition var1="dashboardSubTintEnabled" var2="1"/>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
 				<placement x="99" y="%rPos43%"/>
 				<image resource="dashboardBackground"/>
 			</button>
 			<button>
-				<conditions>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
 				<placement x="99" y="%rPos43%"/>
 				<image resource="c_dashboard_userFbe"/>
 				<actions>
@@ -256,10 +248,8 @@
 				</actions>
 			</button>
 			<button style="dashboardText">
-				<conditions>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-				</conditions>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
 				<placement x="69" y="%rPos53%" w="205" h="70"/>
 				<text>{@decrypt_users=Decrypt Users}</text>
 				<actions>

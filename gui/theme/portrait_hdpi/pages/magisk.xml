@@ -56,10 +56,8 @@ sh init;
 				<text>{@c_magisk_m=Magisk Manager}</text>
 			</text>
 			<checkbox>
-				<conditions>
-					<condition var1="c_magisk_status" op="!=" var2="1"/>
-					<condition var1="core" op="=" var2="1"/>
-				</conditions>
+				<condition var1="c_magisk_status" op="!=" var2="1"/>
+				<condition var1="core" op="=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="warningSign" unchecked="warningSign"/>
 				<text>{@c_module_core_only_mode=Core Only Mode} {@c_enabled=Enabled}</text>
@@ -73,10 +71,8 @@ sh c_core_only_disabler;
 				</actions>
 			</checkbox>
 			<checkbox>
-				<conditions>
-					<condition var1="c_magisk_status" op="!=" var2="1"/>
-					<condition var1="core" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="c_magisk_status" op="!=" var2="1"/>
+				<condition var1="core" op="!=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="goodSign" unchecked="goodSign"/>
 				<text>{@c_module_core_only_mode=Core Only Mode} {@c_disabled=Disabled}</text>
@@ -135,11 +131,9 @@ sh c_core_only_enabler;
 				<placement x="%c_hawk_base_column%" y="%rPos67%" w="%file_selector_default_w%" h="600"/>
 				<icon selected="installSign" unselected="installSign"/>
 				<listitem name="{@c_module_core_only_mode=Core Only Mode}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="c_magisk_status" op="!=" var2="1"/>
-						<condition var1="core" op="=" var2="1"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="c_magisk_status" op="!=" var2="1"/>
+					<condition var1="core" op="=" var2="1"/>
 					<icon resource="toggleOn"/>
 					<data variable="dummy"/>
 					<actions>
@@ -151,10 +145,8 @@ sh c_core_only_disabler;
 					</actions>
 				</listitem>
 				<listitem name="{@c_module_core_only_mode=Core Only Mode}">
-					<conditions>
-						<condition var1="c_magisk_status" op="!=" var2="1"/>
-						<condition var1="core" op="!=" var2="1"/>
-					</conditions>
+					<condition var1="c_magisk_status" op="!=" var2="1"/>
+					<condition var1="core" op="!=" var2="1"/>
 					<icon resource="toggleOff"/>
 					<data variable="dummy"/>
 					<actions>
@@ -168,11 +160,9 @@ sh c_core_only_enabler;
 
 
 				<listitem name="{@installMagisk=Install Magisk}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="1"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="1"/>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
@@ -190,11 +180,9 @@ sh c_core_only_enabler;
 					</actions>
 				</listitem>
 				<listitem name="{@installMagisk=Install Magisk}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskRoot" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="0"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskRoot" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="0"/>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
@@ -214,11 +202,9 @@ sh c_core_only_enabler;
 
 
 				<listitem name="{@updateMagisk=Update Magisk}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="1"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="1"/>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
@@ -236,11 +222,9 @@ sh c_core_only_enabler;
 					</actions>
 				</listitem>
 				<listitem name="{@updateMagisk=Update Magisk}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="0"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskUpdate" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="0"/>
 					<icon resource="installSign"/>
 					<data variable="dummy"/>
 					<actions>
@@ -260,11 +244,9 @@ sh c_core_only_enabler;
 
 
 				<listitem name="{@c_unroot=Unroot}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="1"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="1"/>
 					<icon resource="uninstallSign"/>
 					<data variable="dummy"/>
 					<actions>
@@ -282,11 +264,9 @@ sh c_core_only_enabler;
 					</actions>
 				</listitem>
 				<listitem name="{@c_unroot=Unroot}">
-					<conditions>
-					    <condition var1="exclude_magisk_flash" var2="1"/>
-						<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
-						<condition var1="magisk_in_rec" op="=" var2="0"/>
-					</conditions>
+					<condition var1="exclude_magisk_flash" var2="1"/>
+					<condition var1="shrpMagiskUnroot" op="=" var2="1"/>
+					<condition var1="magisk_in_rec" op="=" var2="0"/>
 					<icon resource="uninstallSign"/>
 					<data variable="dummy"/>
 					<actions>

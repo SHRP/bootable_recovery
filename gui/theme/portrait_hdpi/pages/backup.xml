@@ -5,11 +5,9 @@
 			<template name="navCommon"/>
 			<template name="c_status_bar"/>
 			<action>
-				<conditions>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
+				<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
 				<actions>
 					<action function="set">tw_multiuser_warning_destination=backup</action>
 					<action function="page">multiuser_warning</action>
@@ -74,11 +72,9 @@
 
 			<button>
 			  <placement x="860" y="%rndPos69%"/>
-				<conditions>
-					<condition var1="tw_include_encrypted_backup" var2="1"/>
-					<condition var1="tw_encrypt_backup" var2="0"/>
-					<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_include_encrypted_backup" var2="1"/>
+				<condition var1="tw_encrypt_backup" var2="0"/>
+				<condition var1="tw_enable_adb_backup" op="!=" var2="1"/>
 			  <image resource="c_backup_encryption"/>
 			  <actions>
 			    <action function="set">tw_password_not_match=0</action>

@@ -7,10 +7,8 @@
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" var2="0"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" var2="0"/>
 				<actions>
 					<action function="set">tw_fileexists=1</action>
 					<action function="page">%tw_existpage%</action>
@@ -18,10 +16,8 @@
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" var2="1"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" var2="1"/>
 				<actions>
 					<action function="set">tw_fileexists=0</action>
 					<action function="page">%tw_notexistpage%</action>

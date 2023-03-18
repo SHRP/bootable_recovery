@@ -36,9 +36,7 @@
 				</actions>
 			</action>
 			<action>
-				<conditions>
-					<condition var1="shrpTweakName" op="modified"/>
-				</conditions>
+				<condition var1="shrpTweakName" op="modified"/>
 				<actions>
 					<action function="overlay">tweakConfirm</action>
 				</actions>
@@ -75,11 +73,9 @@
 				<placement x="%c_hawk_base_column%" y="%rPos18%" w="%file_selector_default_w%" h="1100"/>
 				<icon selected="fileImg2" unselected="fileImg2"/>
 				<listitem name="{@fix_recovery_loop=Fix Recovery Bootloop}">
-					<conditions>
-						<condition var1="tw_has_boot_slots" var2="1"/>
-						<condition var1="tw_has_repack_tools" var2="1"/>
-						<condition var1="tw_uses_initramfs" var2="1"/>
-					</conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_has_repack_tools" var2="1"/>
+					<condition var1="tw_uses_initramfs" var2="1"/>
 					<actions>
 						<action function="set">tw_back=c_addons_native</action>
 						<action function="set">tw_action=fixabrecoverybootloop</action>

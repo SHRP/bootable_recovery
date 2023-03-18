@@ -11,10 +11,8 @@
 			</text>
 
 			<checkbox>
-				<conditions>
-					<condition var1="shrpBuild" var2="1"/>
-					<condition var1="shrp_ver_status" op="=" var2="Stable"/>
-				</conditions>
+				<condition var1="shrpBuild" var2="1"/>
+				<condition var1="shrp_ver_status" op="=" var2="Stable"/>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="officialBuild" unchecked="officialBuild"/>
 				<text>{@offcialBuild=Official build}</text>
@@ -22,10 +20,8 @@
 			</checkbox>
 
 			<checkbox>
-				<conditions>
-					<condition var1="shrpBuild" var2="0"/>
-					<condition var1="shrp_ver_status" op="=" var2="Stable"/>
-				</conditions>
+				<condition var1="shrpBuild" var2="0"/>
+				<condition var1="shrp_ver_status" op="=" var2="Stable"/>
 				<placement x="%c_hawk_base_column%" y="%rPos17%"/>
 				<image checked="unofficialBuild" unchecked="unofficialBuild"/>
 				<text>{@unoffcialBuild=Unofficial build}</text>

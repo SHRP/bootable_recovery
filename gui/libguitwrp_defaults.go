@@ -76,14 +76,70 @@ func copyThemeResources(ctx android.BaseContext, dirs []string, files []string) 
 			version = strings.Split(line, " ")[2]
 		}
 	}
-	_files := [2]string{"splash.xml", "ui.xml"}
+
+	_props := [3]string{"TW_CUSTOM_BATTERY_POS", "TW_CUSTOM_CPU_POS", "TW_CUSTOM_CLOCK_POS" }
+	props := [3]string{"0", "0", "0"}
+	for i, item := range _props {
+		if getMakeVars(ctx, item) != "" {
+			props[i] = strings.Trim(getMakeVars(ctx, item), "\"")
+		}
+	}
+	_files := [7]string{"splash.xml", "ui.xml", "base/variables.xml", "base/fonts.xml", "base/images.xml", "base/powerPanel.xml", "base/styles.xml"}
 	for _, i := range _files {
+		var fontsize int = 35
+		var width int = 1080
+
 		data, err = ioutil.ReadFile(twRes + i)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+
 		newFile := strings.Replace(string(data), "{themeversion}", version, -1)
+
+		// Custom position for status bar items - start
+
+		if i == "base/variables.xml" {
+
+			var cpusize int = (fontsize * 5) + (width/100)
+			var clocksize int = (fontsize * 4) + (width/100)
+			var batterysize int = (fontsize * 6) - (width/100)
+			var pos_clock_24 string = props[2]
+			for j := 0; j < len(props); j++ {
+				if props[j] == "left" {
+					props[j] = strconv.Itoa(width/50)
+					if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						pos_clock_24 = props[j]
+					}
+				} else if props[j] == "center" {
+					if _props[j] == "TW_CUSTOM_BATTERY_POS" {
+						props[j] = strconv.Itoa( (width/2) - (batterysize*43/100) )
+					} else if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						pos := (width/2) - (clocksize*45/100)
+						props[j] = strconv.Itoa(pos)
+						pos_clock_24 = strconv.Itoa( pos * 31/30 )
+					} else if _props[j] == "TW_CUSTOM_CPU_POS" {
+						props[j] = strconv.Itoa( (width/2) - (cpusize*41/100) )
+					}
+				} else if props[j] == "right" {
+					if _props[j] == "TW_CUSTOM_BATTERY_POS" {
+						props[j] = strconv.Itoa( width - batterysize )
+					} else if _props[j] == "TW_CUSTOM_CLOCK_POS" {
+						props[j] = strconv.Itoa(width - clocksize)
+						pos_clock_24 = props[j]
+					} else if _props[j] == "TW_CUSTOM_CPU_POS" {
+						props[j] = strconv.Itoa( width - cpusize )
+					}
+				}
+			}
+
+			newFile = strings.Replace(newFile, "{battery_pos}", props[0], -1)
+			newFile = strings.Replace(newFile, "{cpu_pos}", props[1], -1)
+			newFile = strings.Replace(newFile, "{clock_12_pos}", props[2], -1)
+			newFile = strings.Replace(newFile, "{clock_24_pos}", pos_clock_24, -1)
+		}
+		// Custom position for status bar items - end
+
 		err = ioutil.WriteFile(twRes + i, []byte(newFile), 0)
 		if err != nil {
 			fmt.Println(err)
@@ -156,15 +212,15 @@ func copyTheme(ctx android.BaseContext) bool {
 	var files []string
 	var customThemeLoc string
 	localPath := ctx.ModuleDir()
-	directories = append(directories, "gui/theme/common/fonts/")
-	directories = append(directories, "gui/theme/common/languages/")
+	directories = append(directories, "gui/theme/portrait_hdpi/fonts/")
+	directories = append(directories, "gui/theme/portrait_hdpi/languages/")
 	if getMakeVars(ctx, "TW_EXTRA_LANGUAGES") == "true" {
 		directories = append(directories, "gui/theme/extra-languages/fonts/")
 		directories = append(directories, "gui/theme/extra-languages/languages/")
 	}
 	var theme = determineTheme(ctx)
 	directories = append(directories, "gui/theme/"+theme)
-	themeXML := fmt.Sprintf("gui/theme/common/%s.xml", strings.Split(theme, "_")[0])
+	themeXML := fmt.Sprintf("gui/theme/portrait_hdpi/%s.xml", strings.Split(theme, "_")[0])
 	files = append(files, themeXML)
 	if getMakeVars(ctx, "TW_CUSTOM_THEME") == "" {
 		defaultTheme := fmt.Sprintf("%s/theme/%s/ui.xml", localPath, theme)

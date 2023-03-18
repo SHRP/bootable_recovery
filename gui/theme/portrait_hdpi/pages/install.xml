@@ -36,9 +36,7 @@
 			</button>
 
 			<action>
-				<conditions>
-					<condition var1="tw_filename" op="modified"/>
-				</conditions>
+				<condition var1="tw_filename" op="modified"/>
 				<actions>
 					<action function="set">tw_is_slot_part=0</action>
 					<action function="set">tw_flash_both_slots=0</action>
@@ -123,11 +121,9 @@
 					<data variable="tw_skip_digest_check_zip"/>
 				</listitem>
 				<listitem name="{@auto_reflashtwrp_chk=Automatically Reflash SHRP after flashing a ROM}">
-					<conditions>
-						<condition var1="tw_has_boot_slots" var2="1"/>
-						<condition var1="tw_has_repack_tools" var2="1"/>
-						<condition var1="tw_no_flash_current_twrp" var2="0"/>
-					</conditions>
+					<condition var1="tw_has_boot_slots" var2="1"/>
+					<condition var1="tw_has_repack_tools" var2="1"/>
+					<condition var1="tw_no_flash_current_twrp" var2="0"/>
 					<data variable="tw_auto_reflashtwrp"/>
 				</listitem>
 			</listbox>
@@ -265,19 +261,15 @@
 			</partitionlist>
 
 			<text style="subOptionTitle">
-				<conditions>
-					<condition var1="tw_is_slot_part" op="=" var2="1"/>
-					<condition var1="tw_has_boot_slots" var2="1"/>
-				</conditions>
+				<condition var1="tw_is_slot_part" op="=" var2="1"/>
+				<condition var1="tw_has_boot_slots" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos68%"/>
 				<text>{@c_flash=Flash} {@options_hdr=Options}:</text>
 			</text>
 
 			<listbox style="scrolllist">
-				<conditions>
-					<condition var1="tw_is_slot_part" op="=" var2="1"/>
-					<condition var1="tw_has_boot_slots" var2="1"/>
-				</conditions>
+				<condition var1="tw_is_slot_part" op="=" var2="1"/>
+				<condition var1="tw_has_boot_slots" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos73%" w="%file_selector_default_w%" h="600"/>
 				<icon selected="checkbox_true" unselected="checkbox_false"/>
 				<listitem name="{@flash_ab_both_slots=Flash to both slots}">
@@ -388,11 +380,9 @@
 			</button>
 
 			<action>
-				<conditions>
-					<condition var1="tw_install_reboot" var2="1"/>
-					<condition var1="tw_operation_status" var2="0"/>
-					<condition var1="tw_reboot_system" var2="1"/>
-				</conditions>
+				<condition var1="tw_install_reboot" var2="1"/>
+				<condition var1="tw_operation_status" var2="0"/>
+				<condition var1="tw_reboot_system" var2="1"/>
 				<actions>
 					<action function="set">tw_sleep=%tw_sleep_total%</action>
 					<action function="page">flash_sleep_and_reboot</action>
@@ -424,18 +414,14 @@
 			</button>
 
 			<action>
-				<conditions>
-					<condition var1="tw_sleep" var2="tw_sleep_total"/>
-					<condition var1="tw_install_reboot" var2="1"/>
-				</conditions>
+				<condition var1="tw_sleep" var2="tw_sleep_total"/>
+				<condition var1="tw_install_reboot" var2="1"/>
 				<action function="sleepcounter">%tw_sleep_total%</action>
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_sleep" var2="0"/>
-					<condition var1="tw_install_reboot" var2="1"/>
-				</conditions>
+				<condition var1="tw_sleep" var2="0"/>
+				<condition var1="tw_install_reboot" var2="1"/>
 				<actions>
 					<action function="sleep">50000</action>
 					<action function="set">tw_back=main2</action>

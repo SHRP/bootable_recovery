@@ -167,13 +167,9 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mConst->SetValue("shrp_ab", "0");
 #endif
 
-    int cbatt=950;
-#ifdef TW_CUSTOM_BATTERY_POS
-	cbatt = DataManager::GetIntValue("tw_battery_pos_x",cbatt);
+#ifndef TW_CUSTOM_BATTERY_POS
+    mConst->SetValue("tw_baterry_pos_x", 950);
 #endif
-	mConst->SetValue("tw_battery_pos_x2", cbatt-22);
-	mConst->SetValue("tw_battery_pos_x3", cbatt-37);
-	mConst->SetValue("tw_batteryico_pos_x", cbatt+70);
 
 #ifdef SHRP_EXPRESS
 	mConst->SetValue("av_express", 1);

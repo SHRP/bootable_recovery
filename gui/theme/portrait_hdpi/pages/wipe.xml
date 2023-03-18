@@ -24,10 +24,8 @@
 
 
 			<button>
-				<conditions>
-					<condition var1="tw_is_encrypted" var2="1"/>
-					<condition var1="tw_has_data_media" var2="0"/>
-				</conditions>
+				<condition var1="tw_is_encrypted" var2="1"/>
+				<condition var1="tw_has_data_media" var2="0"/>
 				<placement x="55" y="%rPos37%" w="340" h="115"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@c_format_data2=Remove Encryption}</text>

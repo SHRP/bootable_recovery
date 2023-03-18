@@ -252,6 +252,7 @@ bool LoadPlacement(xml_node<>* node, int* x, int* y, int* w /* = NULL */, int* h
 
 	//<SHRP>
   	int yref = 0;
+	int xref = 0;
   	if (node->first_attribute("yref")) {
     	yref = LoadAttrIntScaleY(node, "yref");
     	bool isPlus = true;
@@ -262,9 +263,20 @@ bool LoadPlacement(xml_node<>* node, int* x, int* y, int* w /* = NULL */, int* h
       		yref = (yref * -1);
     	}
   	}
+  	if (node->first_attribute("xref")) {
+    	xref = LoadAttrIntScaleY(node, "xref");
+    	bool isPlus = true;
+    	if (node->first_attribute("xop")) {
+      		isPlus = (LoadAttrString(node, "xop", "") == "+");
+    	}
+    	if (!isPlus) {
+      		xref = (xref * -1);
+    	}
+  	}
   	//</SHRP>
 	if (node->first_attribute("x"))
-		*x = LoadAttrIntScaleX(node, "x") + tw_x_offset;
+		//*x = LoadAttrIntScaleX(node, "x") + tw_x_offset;
+		*x = LoadAttrIntScaleX(node, "x") + tw_x_offset + xref;//SHRP
 
 	if (node->first_attribute("y"))
 		//*y = LoadAttrIntScaleY(node, "y") + tw_y_offset;

@@ -327,7 +327,7 @@
 				<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x%" y="24"/>
+				<placement x="950" y="24" xref="20" xop="+"/>
 				<text>%tw_battery%</text>
 			</text>
 
@@ -339,7 +339,7 @@
 				<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x2%" y="24"/>
+				<placement x="950" y="24"/>
 				<text>%tw_battery%</text>
 			</text>
 
@@ -351,7 +351,7 @@
 				<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x3%" y="24"/>
+				<placement x="950" y="24" xref="20" xop="-"/>
 				<text>%tw_battery%</text>
 			</text>
 
@@ -362,7 +362,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="20"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_low"/>
 			</image>
 			<image>
@@ -372,7 +372,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="30"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_20"/>
 			</image>
 			<image>
@@ -382,7 +382,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="50"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_30"/>
 			</image>
 			<image>
@@ -392,7 +392,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="60"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_50"/>
 			</image>
 			<image>
@@ -402,7 +402,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="80"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_60"/>
 			</image>
 			<image>
@@ -412,7 +412,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="90"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_80"/>
 			</image>
 			<image>
@@ -422,7 +422,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="96"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_90"/>
 			</image>
 			<image>
@@ -432,7 +432,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="101"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_full"/>
 			</image>
 			<!-- Standart position for status bar items END-->
@@ -536,7 +536,7 @@
 				<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_battery_pos_x2%" y="24"/>
+				<placement x="%tw_baterry_pos_x%" y="24" xref="22" xop="-"/>
 				<text>%tw_battery%</text>
 			</text>
 
@@ -548,7 +548,7 @@
 				<condition var1="batteryPercentageEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_battery_pos_x3%" y="24"/>
+				<placement x="%tw_baterry_pos_x%" y="24" xref="37" xop="-"/>
 				<text>%tw_battery%</text>
 			</text>
 
@@ -559,7 +559,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="20"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_low"/>
 			</image>
 			<image>
@@ -569,7 +569,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="30"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_20"/>
 			</image>
 			<image>
@@ -579,7 +579,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="50"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_30"/>
 			</image>
 			<image>
@@ -589,7 +589,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="60"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_50"/>
 			</image>
 			<image>
@@ -599,7 +599,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="80"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_60"/>
 			</image>
 			<image>
@@ -609,7 +609,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="90"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_80"/>
 			</image>
 			<image>
@@ -619,7 +619,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="96"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_90"/>
 			</image>
 			<image>
@@ -629,7 +629,7 @@
 				<condition var1="tw_battery" op="&lt;" var2="101"/>
 				<condition var1="batteryIconEnabled" op="=" var2="1"/>
 				<condition var1="statusBarEnabled" op="=" var2="1"/>
-				<placement x="%tw_batteryico_pos_x%" y="26"/>
+				<placement x="%tw_battery_pos_x%" y="26" xref="70" xop="+"/>
 				<image resource="battery_full"/>
 			</image>
 			<!-- Custom position for status bar items if defined END -->
@@ -829,106 +829,118 @@
 		</template>
 
 		<template name="dashBatt">
+
 			<text color="%secondaryColor%">
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="99"/>
 				<condition var1="tw_battery" op="&lt;" var2="101"/>
 				<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x%" y="8"/>
+				<placement x="950" y="24" xref="20" xop="-"/>
 				<text>%tw_battery%</text>
 			</text>
 			<text color="%secondaryColor%">
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="9"/>
 				<condition var1="tw_battery" op="&lt;" var2="100"/>
 				<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x2%" y="8"/>
+				<placement x="950" y="24"/>
 				<text>%tw_battery%</text>
 			</text>
 			<text color="%secondaryColor%">
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="0"/>
 				<condition var1="tw_battery" op="&lt;" var2="10"/>
 				<condition var1="batteryPercentageEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
 				<font resource="c_menu"/>
-				<placement x="%tw_baterry_pos_x3%" y="8"/>
+				<placement x="950" y="24" xref="20" xop="+"/>
 				<text>%tw_battery%</text>
 			</text>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="0"/>
 				<condition var1="tw_battery" op="&lt;" var2="20"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_low"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="19"/>
 				<condition var1="tw_battery" op="&lt;" var2="30"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_20"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="29"/>
 				<condition var1="tw_battery" op="&lt;" var2="50"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_30"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="49"/>
 				<condition var1="tw_battery" op="&lt;" var2="60"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_50"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="59"/>
 				<condition var1="tw_battery" op="&lt;" var2="80"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_60"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="79"/>
 				<condition var1="tw_battery" op="&lt;" var2="90"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_80"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="89"/>
 				<condition var1="tw_battery" op="&lt;" var2="96"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_90"/>
 			</image>
 			<image>
+				<condition var1="tw_battery_pos_x" var2="0"/>
 				<condition var1="tw_no_battery_percent" var2="0"/>
 				<condition var1="tw_battery" op="&gt;" var2="95"/>
 				<condition var1="tw_battery" op="&lt;" var2="101"/>
 				<condition var1="batteryIconEnabled" op="=" var2="0"/>
 				<condition var1="statusBarEnabled" op="=" var2="0"/>
-				<placement x="%tw_batteryico_pos_x%" y="15"/>
+				<placement x="950" y="26" xref="70" xop="+"/>
 				<image resource="c_battery_full"/>
 			</image>
 		</template>

@@ -27,10 +27,8 @@
 				<text>{@options=Options:}</text>
 			</text>
 			<button>
-				<conditions>
-					<condition var1="tw_mount_system_ro" op="=" var2="0"/>
-					<condition var1="tw_is_super" op="=" var2="0"/>
-				</conditions>
+				<condition var1="tw_mount_system_ro" op="=" var2="0"/>
+				<condition var1="tw_is_super" op="=" var2="0"/>
 				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
 				<font resource="small" color="%secondaryColor%"/>
 				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
@@ -40,10 +38,8 @@
 				</actions>
 			</button>
 			<button>
-				<conditions>
-					<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
-					<condition var1="tw_is_super" op="=" var2="0"/>
-				</conditions>
+				<condition var1="tw_mount_system_ro" op="!=" var2="0"/>
+				<condition var1="tw_is_super" op="=" var2="0"/>
 				<placement x="%c_hawk_base_column%" y="%rPos82%" textplacement="6"/>
 				<font resource="small" color="%secondaryColor%"/>
 				<text>{@mount_sys_ro_chk=Mount system partition read-only}</text>
@@ -56,10 +52,8 @@
 
 			<button>
 			  <placement x="860" y="%rndPos69%"/>
-				<conditions>
-					<condition var1="tw_is_encrypted" var2="1"/>
-					<condition var1="tw_is_decrypted" var2="0"/>
-				</conditions>
+			  <condition var1="tw_is_encrypted" var2="1"/>
+			  <condition var1="tw_is_decrypted" var2="0"/>
 			  <image resource="c_backup_encryption"/>
 			  <actions>
 			    <action function="set">tw_crypto_user_id=0</action>
@@ -79,20 +73,16 @@
 
 
 			<button>
-				<conditions>
-					<condition var1="tw_has_mtp" var2="1"/>
-					<condition var1="tw_mtp_enabled" var2="0"/>
-				</conditions>
+				<condition var1="tw_has_mtp" var2="1"/>
+				<condition var1="tw_mtp_enabled" var2="0"/>
 				<placement x="860" y="%rndPos93%"/>
 				<image resource="c_mtp_disabled"/>
 				<action function="startmtp"/>
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="tw_has_mtp" var2="1"/>
-					<condition var1="tw_mtp_enabled" var2="1"/>
-				</conditions>
+				<condition var1="tw_has_mtp" var2="1"/>
+				<condition var1="tw_mtp_enabled" var2="1"/>
 				<placement x="860" y="%rndPos93%"/>
 				<image resource="c_mtp_enabled"/>
 				<action function="stopmtp"/>
@@ -250,19 +240,15 @@
 
 
 			<text style="subOptionTitle">
-				<conditions>
-					<condition var1="tw_password_fail" op="!=" var2="1"/>
-					<condition var1="tw_is_fbe" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_password_fail" op="!=" var2="1"/>
+				<condition var1="tw_is_fbe" op="!=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@c_enter_pass=Enter Password}</text>
 			</text>
 
 			<text style="subOptionTitle">
-				<conditions>
-					<condition var1="tw_password_fail" op="!=" var2="1"/>
-					<condition var1="tw_is_fbe" op="=" var2="1"/>
-				</conditions>
+				<condition var1="tw_password_fail" op="!=" var2="1"/>
+				<condition var1="tw_is_fbe" op="=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@decrypt_data_enter_pass_fbe=Enter Password for User [%tw_crypto_user_id%]}</text>
 			</text>
@@ -385,19 +371,15 @@
 
 
 			<text style="subOptionTitle">
-				<conditions>
-					<condition var1="tw_password_fail" op="!=" var2="1"/>
-					<condition var1="tw_is_fbe" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_password_fail" op="!=" var2="1"/>
+				<condition var1="tw_is_fbe" op="!=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@decrypt_data_enter_pass=Enter PIN:}</text>
 			</text>
 
 			<text style="subOptionTitle">
-				<conditions>
-					<condition var1="tw_password_fail" op="!=" var2="1"/>
-					<condition var1="tw_is_fbe" op="=" var2="1"/>
-				</conditions>
+				<condition var1="tw_password_fail" op="!=" var2="1"/>
+				<condition var1="tw_is_fbe" op="=" var2="1"/>
 				<placement x="%c_hawk_base_column%" y="%rPos19%"/>
 				<text>{@decrypt_data_enter_pass_fbe=Enter PIN for User [%tw_crypto_user_id%]}</text>
 			</text>
@@ -456,10 +438,8 @@
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" op="!=" var2="0"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" op="!=" var2="0"/>
 				<actions>
 					<action function="set">tw_password_fail=1</action>
 					<action function="page">decrypt</action>
@@ -467,10 +447,8 @@
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" op="=" var2="0"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" op="=" var2="0"/>
 				<actions>
 					<action function="set">tw_page_done=1</action>
 					<action function="page">c_refresh</action>
@@ -499,9 +477,7 @@
 			</action>
 
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
 				<actions>
 					<action function="set">tw_page_done=1</action>
 					<action function="customReload">button_check</action>

@@ -123,20 +123,16 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="selectEnabled" op="=" var2="1"/>
-					<condition var1="selectionHandle" op="&lt;" var2="1"/>
-				</conditions>
+				<condition var1="selectEnabled" op="=" var2="1"/>
+				<condition var1="selectionHandle" op="&lt;" var2="1"/>
 				<placement x="900" y="1610"/>
 				<image resource="actionUnselectMultipleFile"/>
 				<action function="set">selectionHandle=1</action>
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="selectEnabled" op="=" var2="1"/>
-					<condition var1="selectionHandle" op="=" var2="1"/>
-				</conditions>
+				<condition var1="selectEnabled" op="=" var2="1"/>
+				<condition var1="selectionHandle" op="=" var2="1"/>
 				<placement x="900" y="1610"/>
 				<image resource="actionSelectMultipleFile"/>
 				<action function="set">selectionHandle=-1</action>
@@ -223,7 +219,7 @@
 				<placement x="%c_hawk_base_column%" y="%rPos50%" w="%file_selector_default_w%" h="650"/>
 				<icon selected="installSign" unselected="installSign"/>
 				<listitem name="{@fm_open_terminal_btn=Open Terminal Here}">
-					<condition var1="isFile" op="=" var2="0"/>
+				<condition var1="isFile" op="=" var2="0"/>
 					<icon resource="shrpCredits"/>
 					<data variable="dummy"/>
 					<actions>
@@ -231,11 +227,9 @@
 					</actions>
 				</listitem>
 				<listitem name="{@fm_edit_file=Edit File by Nano}">
-					<conditions>
 						<condition var1="isTextFile" op="=" var2="1"/>
-						<condition var1="tw_include_nano" var2="1"/>
-					</conditions>
-					<icon resource="editFile"/>
+					<condition var1="tw_include_nano" var2="1"/>
+						<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
 						<action function="set">refresh=1</action>
@@ -244,7 +238,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@editFile=Edit file}">
-					<condition var1="isTextFile" op="=" var2="1"/>
+				<condition var1="isTextFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
@@ -254,7 +248,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@md5CheckSum=Verify MD5 checksum}">
-					<condition var1="isFile" op="=" var2="1"/>
+				<condition var1="isFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
@@ -264,7 +258,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@sha1CheckSum=Verify SHA1 checksum}">
-					<condition var1="isFile" op="=" var2="1"/>
+				<condition var1="isFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
@@ -274,7 +268,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@sha256CheckSum=Verify SHA256 checksum}">
-					<condition var1="isFile" op="=" var2="1"/>
+				<condition var1="isFile" op="=" var2="1"/>
 					<icon resource="editFile"/>
 					<data variable="dummy"/>
 					<actions>
@@ -291,7 +285,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@compress=Compress}">
-					<condition var1="isFile" op="=" var2="0"/>
+				<condition var1="isFile" op="=" var2="0"/>
 					<icon resource="actionArchive"/>
 					<data variable="dummy"/>
 					<actions>
@@ -302,7 +296,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@compressDiff=Compress in different location}">
-					<condition var1="isFile" op="=" var2="0"/>
+				<condition var1="isFile" op="=" var2="0"/>
 					<icon resource="actionArchive"/>
 					<data variable="dummy"/>
 					<actions>
@@ -311,7 +305,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@extract=Extract}">
-					<condition var1="isZip" op="=" var2="1"/>
+				<condition var1="isZip" op="=" var2="1"/>
 					<icon resource="actionArchive"/>
 					<data variable="dummy"/>
 					<actions>
@@ -320,7 +314,7 @@
 					</actions>
 				</listitem>
 				<listitem name="{@extractDiff=Extract in different location}">
-					<condition var1="isZip" op="=" var2="1"/>
+				<condition var1="isZip" op="=" var2="1"/>
 					<icon resource="actionArchive"/>
 					<data variable="dummy"/>
 					<actions>
@@ -329,11 +323,9 @@
 					</actions>
 				</listitem>
 				<listitem name="{@c_apply_theme=Apply theme}">
-					<conditions>
 						<condition var1="isTheme" op="=" var2="1"/>
-						<condition var1="shrp_lite" op="=" var2="0"/>
-					</conditions>
-					<icon resource="actionApplyTheme"/>
+					<condition var1="shrp_lite" op="=" var2="0"/>
+						<icon resource="actionApplyTheme"/>
 					<data variable="dummy"/>
 					<actions>
 						<action function="set">fManagerAction=applyCustomTheme</action>
@@ -443,10 +435,8 @@
 			</image>
 
 			<button>
-				<conditions>
-					<condition var1="fManagerAction" op="!=" var2="extractByLocation"/>
-					<condition var1="fManagerAction" op="!=" var2="compressByLocation"/>
-				</conditions>
+				<condition var1="fManagerAction" op="!=" var2="extractByLocation"/>
+				<condition var1="fManagerAction" op="!=" var2="compressByLocation"/>
 				<placement x="0" y="1610"/>
 				<image resource="actionPaste"/>
 				<action function="set">fAction=0</action>
@@ -455,11 +445,9 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="fManagerAction" op="!=" var2="copy"/>
-					<condition var1="fManagerAction" op="!=" var2="move"/>
-					<condition var1="fManagerAction" op="=" var2="extractByLocation"/>
-				</conditions>
+				<condition var1="fManagerAction" op="!=" var2="copy"/>
+				<condition var1="fManagerAction" op="!=" var2="move"/>
+				<condition var1="fManagerAction" op="=" var2="extractByLocation"/>
 				<placement x="0" y="1610"/>
 				<image resource="actionZipOperation"/>
 				<action function="set">fAction=0</action>
@@ -468,11 +456,9 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="fManagerAction" op="!=" var2="copy"/>
-					<condition var1="fManagerAction" op="!=" var2="move"/>
-					<condition var1="fManagerAction" op="=" var2="compressByLocation"/>
-				</conditions>
+				<condition var1="fManagerAction" op="!=" var2="copy"/>
+				<condition var1="fManagerAction" op="!=" var2="move"/>
+				<condition var1="fManagerAction" op="=" var2="compressByLocation"/>
 				<placement x="0" y="1610"/>
 				<image resource="actionZipOperation"/>
 				<action function="set">fAction=0</action>
@@ -1064,10 +1050,8 @@
 
 
 			<button style="cnfrmBtn">
-				<conditions>
-					<condition var1="permChanged" var2="1"/>
-					<condition var1="isFile" var2="1"/>
-				</conditions>
+				<condition var1="permChanged" var2="1"/>
+				<condition var1="isFile" var2="1"/>
 				<placement x="400" y="%rPos74%" w="350" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@apply=Apply} %fPerm%</text>
@@ -1076,10 +1060,8 @@
 			</button>
 
 			<button style="cnfrmBtn">
-				<conditions>
-					<condition var1="permChanged" var2="1"/>
-					<condition var1="isFile" var2="0"/>
-				</conditions>
+				<condition var1="permChanged" var2="1"/>
+				<condition var1="isFile" var2="0"/>
 				<placement x="400" y="%rPos74%" w="350" h="110"/>
 				<fill color="%subBackgroundColor%"/>
 				<text>{@apply=Apply} %fPerm%</text>

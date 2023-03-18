@@ -6,11 +6,9 @@
 			<template name="c_status_bar"/>
 			<template name="c_simple_sort"/>
 			<action>
-				<conditions>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
+				<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
 				<actions>
 					<action function="set">tw_multiuser_warning_destination=restore</action>
 					<action function="page">multiuser_warning</action>
@@ -73,11 +71,9 @@
 			<template name="c_status_bar"/>
 			<template name="c_simple_sort"/>
 			<action>
-				<conditions>
-					<condition var1="tw_is_fbe" var2="1"/>
-					<condition var1="tw_all_users_decrypted" var2="0"/>
-					<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
-				</conditions>
+				<condition var1="tw_is_fbe" var2="1"/>
+				<condition var1="tw_all_users_decrypted" var2="0"/>
+				<condition var1="tw_multiuser_warning_accepted" op="!=" var2="1"/>
 				<actions>
 					<action function="set">tw_multiuser_warning_destination=restore</action>
 					<action function="page">multiuser_warning</action>
@@ -238,20 +234,16 @@
 				<action function="decrypt_backup"/>
 			</action>
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" op="!=" var2="0"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" op="!=" var2="0"/>
 				<actions>
 					<action function="set">tw_password_fail=1</action>
 					<action function="page">restore_decrypt</action>
 				</actions>
 			</action>
 			<action>
-				<conditions>
-					<condition var1="tw_operation_state" var2="1"/>
-					<condition var1="tw_operation_status" op="=" var2="0"/>
-				</conditions>
+				<condition var1="tw_operation_state" var2="1"/>
+				<condition var1="tw_operation_status" op="=" var2="0"/>
 				<actions>
 					<action function="set">tw_page_done=1</action>
 					<action function="page">restore_select</action>

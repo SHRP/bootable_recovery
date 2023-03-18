@@ -34,10 +34,8 @@
 
 			<!--FlashLight Icon-->
 			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="0"/>
-				</conditions>
+				<condition var1="has_flashlight" op="=" var2="1"/>
+				<condition var1="c_flashlight_status" op="=" var2="0"/>
 				<placement x="914" y="1754"/>
 				<image resource="c_flashlight_off"/>
 				<actions>
@@ -45,10 +43,8 @@
 				</actions>
 			</button>
 			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="1"/>
-				</conditions>
+				<condition var1="has_flashlight" op="=" var2="1"/>
+				<condition var1="c_flashlight_status" op="=" var2="1"/>
 				<placement x="914" y="1754"/>
 				<image resource="c_flashlight_on"/>
 				<actions>

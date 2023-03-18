@@ -54,10 +54,8 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="tw_has_mtp" var2="1"/>
-					<condition var1="tw_mtp_enabled" var2="0"/>
-				</conditions>
+				<condition var1="tw_has_mtp" var2="1"/>
+				<condition var1="tw_mtp_enabled" var2="0"/>
 				<placement x="417" y="1327" h="240" w="240"/>
 				<fill color="%subBackgroundColor%"/>
 				<font resource="extraLargeBold" color="%secondaryColor%"/>
@@ -66,10 +64,8 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="tw_has_mtp" var2="1"/>
-					<condition var1="tw_mtp_enabled" var2="1"/>
-				</conditions>
+				<condition var1="tw_has_mtp" var2="1"/>
+				<condition var1="tw_mtp_enabled" var2="1"/>
 				<placement x="417" y="1327" h="240" w="240"/>
 				<fill color="%subBackgroundColor%"/>
 				<font resource="extraLargeBold" color="%accentColor%"/>
@@ -78,19 +74,15 @@
 			</button>
 
 			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="1"/>
-				</conditions>
+				<condition var1="has_flashlight" op="=" var2="1"/>
+				<condition var1="c_flashlight_status" op="=" var2="1"/>
 				<placement x="717" y="1327"/>
 				<image resource="controlFlashOn"/>
 				<action function="flashlight"/>
 			</button>
 			<button>
-				<conditions>
-					<condition var1="has_flashlight" op="=" var2="1"/>
-					<condition var1="c_flashlight_status" op="=" var2="0"/>
-				</conditions>
+				<condition var1="has_flashlight" op="=" var2="1"/>
+				<condition var1="c_flashlight_status" op="=" var2="0"/>
 				<placement x="717" y="1327"/>
 				<image resource="controlFlashOff"/>
 				<action function="flashlight"/>
