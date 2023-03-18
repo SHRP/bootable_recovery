@@ -167,41 +167,13 @@ void initSHRPVars(InfoManager* mConst, InfoManager* mData, InfoManager* mPersist
 	mConst->SetValue("shrp_ab", "0");
 #endif
 
-#ifdef TW_CUSTOM_CPU_POS
-    int cpu=0;
-	stringstream cpuu(EXPAND(TW_CUSTOM_CPU_POS));
-	cpuu>>cpu;
-    mConst->SetValue("c_temp_x", cpu/2);
-    mConst->SetValue("c_temp_w", cpu);
-#else
-    mConst->SetValue("c_temp_x", 270);
-    mConst->SetValue("c_temp_w", 540);
-#endif
-
-
-#ifdef TW_CUSTOM_CLOCK_POS
-    int clock=0;
-	stringstream clockk(EXPAND(TW_CUSTOM_CLOCK_POS));
-	clockk>>clock;
-    mConst->SetValue("c_time_x", clock);
-#else
-	mConst->SetValue("c_time_x", 20);
-#endif
-
+    int cbatt=950;
 #ifdef TW_CUSTOM_BATTERY_POS
-    int cbatt=0;
-	stringstream bappa(EXPAND(TW_CUSTOM_BATTERY_POS));
-	bappa>>cbatt;
-	mConst->SetValue("c_batteryText1", cbatt);
-	mConst->SetValue("c_batteryText2", cbatt+15);
-	mConst->SetValue("c_batteryText3", cbatt+37);
-	mConst->SetValue("c_batteryIco", cbatt+107);
-#else
-	mConst->SetValue("c_batteryText1", 913);
-	mConst->SetValue("c_batteryText2", 928);
-	mConst->SetValue("c_batteryText3", 950);
-	mConst->SetValue("c_batteryIco", 1020);
+	cbatt = DataManager::GetIntValue("tw_battery_pos_x",cbatt);
 #endif
+	mConst->SetValue("tw_battery_pos_x2", cbatt-22);
+	mConst->SetValue("tw_battery_pos_x3", cbatt-37);
+	mConst->SetValue("tw_batteryico_pos_x", cbatt+70);
 
 #ifdef SHRP_EXPRESS
 	mConst->SetValue("av_express", 1);

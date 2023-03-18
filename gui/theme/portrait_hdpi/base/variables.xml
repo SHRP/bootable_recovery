@@ -79,7 +79,10 @@
 		<variable name="pattern_dot_dia" value="20"/>
 		<variable name="pattern_line_w" value="8"/>
 		<variable name="pattern_size" value="600"/>
-
+		<variable name="tw_clock_12_pos_x" value="{clock_12_pos}"/>
+		<variable name="tw_clock_24_pos_x" value="{clock_24_pos}"/>
+		<variable name="tw_cpu_pos_x" value="{cpu_pos}"/>
+		<variable name="tw_battery_pos_x" value="{battery_pos}"/>
 
 		<variable name="file_selector_default_w" value="980"/>
 		<variable name="c_console_width" value="970"/>
