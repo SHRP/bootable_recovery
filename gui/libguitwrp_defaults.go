@@ -220,8 +220,18 @@ func copyTheme(ctx android.BaseContext) bool {
 	}
 	var theme = determineTheme(ctx)
 	directories = append(directories, "gui/theme/"+theme)
-	themeXML := fmt.Sprintf("gui/theme/portrait_hdpi/%s.xml", strings.Split(theme, "_")[0])
+	themeXML := fmt.Sprintf("gui/theme/common/%s.xml", strings.Split(theme, "_")[0])
 	files = append(files, themeXML)
+	if getMakeVars(ctx, "SHRP_DARK") == "true" {
+		directories = append(directories, "gui/theme/shrp_resources/dark/dynamic")
+		directories = append(directories, "gui/theme/shrp_resources/dark/images")
+	} else {
+		directories = append(directories, "gui/theme/shrp_resources/light/dynamic")
+		directories = append(directories, "gui/theme/shrp_resources/light/images")
+	}
+	if getMakeVars(ctx, "SHRP_LITE") != "true" {
+		directories = append(directories, "gui/theme/shrp_resources/themeResources")
+	}
 	if getMakeVars(ctx, "TW_CUSTOM_THEME") == "" {
 		defaultTheme := fmt.Sprintf("%s/theme/%s/ui.xml", localPath, theme)
 		if android.ExistentPathForSource(ctx, defaultTheme).Valid() {

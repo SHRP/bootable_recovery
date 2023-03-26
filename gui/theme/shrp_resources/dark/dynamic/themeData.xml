@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<recovery>
+	<variables>
+        <!--Colors-->
+        <variable name="primaryColor" value="#0088ff"/>
+        <variable name="secondaryColor" value="#ffffff"/>
+        <variable name="accentColor" value="#ffffff"/>
+        <variable name="backgroundColor" value="#010101"/>
+        <variable name="subBackgroundColor" value="#0E0E0E"/>
+        <variable name="navbarColor" value="#ffffff"/>
+        <variable name="dashboardTextColor" value="#ffffff"/>
+        <!--Toggles-->
+        <variable name="batteryBarEnabled" value="0"/>
+        <variable name="statusBarEnabled" value="0"/>
+        <variable name="batteryIconEnabled" value="0"/>
+        <variable name="batteryPercentageEnabled" value="0"/>
+        <variable name="clockEnabled" value="0"/>
+        <variable name="centeredClockEnabled" value="0"/>
+        <variable name="cpuTempEnabled" value="0"/>
+        <variable name="roundedCornerEnabled" value="0"/>
+        <variable name="navbarBackgroundEnabled" value="0"/>
+        <variable name="dashboardSubTintEnabled" value="0"/>
+        <!--ComponentTypes-->
+        <variable name="navbarType" value="1"/>
+        <variable name="batteryType" value="1"/>
+        <variable name="dashboardIconType" value="1"/>
+        <variable name="roundedcornerType" value="1"/>
+	</variables>
+</recovery>
